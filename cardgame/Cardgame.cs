@@ -171,6 +171,7 @@ public partial class Cardgame : Control
 
     private void AddCardToArena(Card card, ArenaPosition position)
     {
+        card.SetNumberLabelVisible(false);
         playerHand.RemoveChild(card);
         arena.AddChild(card);
         card.Position = arenaPositions[position];
