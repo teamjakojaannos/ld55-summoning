@@ -19,15 +19,15 @@ layer_0/tile_data = PackedInt32Array(-589835, 1, 0, -524299, 1, 0, -458763, 1, 0
 [node name="EncounterTrigger" parent="World" instance=ExtResource("3_rpfxf")]
 position = Vector2(80, 8)
 
-[node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(-24, -24)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="Cardgame" parent="CanvasLayer" instance=ExtResource("4_wotui")]
-
-[node name="DialogueTrigger" parent="." instance=ExtResource("5_6x2e7")]
+[node name="DialogueTrigger" parent="World" instance=ExtResource("5_6x2e7")]
 position = Vector2(-112, -48)
 Lines = ["Mjäyy", "Oon kissa"]
 Who = 0
+
+[node name="PlayerStart" type="Marker2D" parent="."]
+position = Vector2(-24, -24)
+
+[node name="CardGameLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Cardgame" parent="CardGameLayer" instance=ExtResource("4_wotui")]

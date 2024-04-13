@@ -9,7 +9,7 @@ void fragment() {
 		1.0 / SCREEN_PIXEL_SIZE.y
 	);
 
-	float dist = distance(vec4(0.5 * screen_size.x, 0.5 * screen_size.y, 0.0, 0.0), FRAGCOORD);
+	float dist = distance(vec4(0.5 * screen_size.x, 0.425 * screen_size.y, 0.0, 0.0), FRAGCOORD);
 	dist = dist * dist;
 	
 	float timescale = 30.0;

@@ -28,12 +28,6 @@ public partial class Player : CharacterBody2D {
     public float MaxFactor = 10.0f;
 
     [Export]
-    public CanvasLayer CardGame;
-
-    [Export]
-    public Node2D World;
-
-    [Export]
     public AudioStreamPlayer CombatMusic;
 
     [Export]
@@ -155,8 +149,15 @@ public partial class Player : CharacterBody2D {
                 ExplocationMusic.Stop();
                 CombatMusic.Play();
 
-                CardGame.Visible = true;
-                World.Visible = false;
+                var cardGameNode = GetTree().Root.FindChild("CardGameLayer", true, false);
+                if (cardGameNode is not CanvasLayer cardGame) {
+                    GD.PushError("Could not find card game layer");
+                    return;
+                }
+
+                cardGame.Visible = true;
+                // FIXME: assumes all level scene roots are called "World"
+                GetNode<Node2D>("/root/Root/World").Visible = false;
                 Sprite.Visible = false;
             }
 
