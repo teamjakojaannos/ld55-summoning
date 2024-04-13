@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Godot;
 
 public partial class Cardgame : Control
@@ -23,6 +24,7 @@ public partial class Cardgame : Control
     private Control arena;
 
     private readonly List<Card> playerCards = new();
+    private readonly List<Card> enemyCards = new();
 
     private CardDeck playerDeck;
     private CardDeck enemyDeck;
@@ -38,6 +40,8 @@ public partial class Cardgame : Control
     public Color dimmedFontColor;
 
     private readonly FightClub fight = new();
+
+    private readonly IEnemyAI enemyAI = new RandomAI();
 
     public override void _Ready()
     {
@@ -85,6 +89,7 @@ public partial class Cardgame : Control
         PlaceCardsInHands();
         UpdateCardLabels();
         SwitchMode(Mode.SelectingCard);
+        PlayAITurn();
     }
 
     private static void HideDebug(Node node)
@@ -132,6 +137,7 @@ public partial class Cardgame : Control
             var card = enemyDrawnCards[i];
             var position = startPos + offset * i;
             card.Position = position;
+            enemyCards.Add(card);
             enemyHand.AddChild(card);
         }
     }
@@ -236,17 +242,17 @@ public partial class Cardgame : Control
         var card = playerCards[cardIndex];
         playerCards.RemoveAt(cardIndex);
 
-        AddCardToArena(card, position);
+        AddCardToArena(card, position, playerHand);
 
         UpdateCardLabels();
 
         SwitchMode(Mode.SelectingCard);
     }
 
-    private void AddCardToArena(Card card, ArenaPosition position)
+    private void AddCardToArena(Card card, ArenaPosition position, Control previousParent)
     {
         card.SetNumberLabelVisible(false);
-        playerHand.RemoveChild(card);
+        previousParent.RemoveChild(card);
         arena.AddChild(card);
         card.Position = arenaPositions[position];
         cardsOnArena[position] = card;
@@ -310,5 +316,22 @@ public partial class Cardgame : Control
     private void StartButtonPressed()
     {
         fight.StartFight(cardsOnArena);
+    }
+
+    private void PlayAITurn()
+    {
+        var newList = new List<Card>(enemyCards);
+
+        var enemyMoves = enemyAI.GetCardsPlacement(
+            cardsOnArena.ToImmutableDictionary(),
+            newList,
+            new() { ArenaPosition.TopLeft, ArenaPosition.TopMid, ArenaPosition.TopRight }
+        );
+
+        foreach (var (position, card) in enemyMoves)
+        {
+            AddCardToArena(card, position, enemyHand);
+            enemyCards.Remove(card);
+        }
     }
 }

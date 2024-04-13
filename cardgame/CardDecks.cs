@@ -26,6 +26,11 @@ public class CardDecks
             CreateCard(cardScene, 12, 7),
             CreateCard(cardScene, 34, 8),
             CreateCard(cardScene, 56, 9),
+            CreateCard(cardScene, 78, 1),
+            CreateCard(cardScene, 99, 2),
+            CreateCard(cardScene, 87, 3),
+            CreateCard(cardScene, 65, 2),
+            CreateCard(cardScene, 43, 1),
         };
         return new CardDeck(cards);
     }
