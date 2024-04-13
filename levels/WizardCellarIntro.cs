@@ -5,16 +5,14 @@ public partial class WizardCellarIntro : Node2D {
     [Export]
     public AnimationPlayer Animation;
 
-    [Export]
-    public Player Player;
+    private Player Player {
+		get => GetNode<Player>("/root/Player");
+	}
 
     [Export]
     public AnimatedSprite2D Ritual;
 	[Export]
     public AnimatedSprite2D Pentagrammi;
-
-    [Export]
-    public DialogueBox Dialogue;
 
 
     public override void _Ready() {
@@ -29,6 +27,10 @@ public partial class WizardCellarIntro : Node2D {
 		};
     }
 
+	private DialogueBox Dialogue {
+		get => GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
+	}
+
     public void StartIntro() {
 		Player.IsInCinematic = true;
         Player.Sprite.Visible = false;
@@ -37,7 +39,7 @@ public partial class WizardCellarIntro : Node2D {
 		Animation.Play("kitty_idle");
 
 		Dialogue.Start(WhoIsSpeaking.OldWiz, new string[] {
-			"foo",
+			"foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo",
 			"bar",
 			"baz"
 		});

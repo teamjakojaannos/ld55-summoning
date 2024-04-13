@@ -1,13 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://k14qken2ftqt"]
+[gd_scene load_steps=27 format=3 uid="uid://k14qken2ftqt"]
 
 [ext_resource type="Texture2D" uid="uid://ca6oyteg4v0cr" path="res://characters/player/paju_cat.png" id="1_7sev4"]
 [ext_resource type="Script" path="res://levels/WizardCellarIntro.cs" id="1_dg2sj"]
 [ext_resource type="TileSet" uid="uid://deyetstqvid75" path="res://levels/interior.tres" id="2_c6kni"]
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="2_wg7nh"]
-[ext_resource type="PackedScene" uid="uid://bab4b1iwllcyj" path="res://characters/player/player.tscn" id="4_5486b"]
-[ext_resource type="Texture2D" uid="uid://biu4fdq50ba8s" path="res://characters/player/paju.png" id="6_058cq"]
-[ext_resource type="Script" path="res://ui/DialogueBox.cs" id="6_jsnkp"]
-[ext_resource type="Texture2D" uid="uid://cxsnnw763sb0a" path="res://characters/oldwiz/portrait.png" id="8_5dyin"]
 [ext_resource type="Texture2D" uid="uid://cldw4n30xxyni" path="res://characters/oldwiz/ded.png" id="9_1n014"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnr3e"]
@@ -162,18 +158,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Player/Sprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_wo1g2"]
 length = 0.666667
@@ -241,18 +225,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Player/Sprite:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 11),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ux4k"]
 _data = {
@@ -261,16 +233,11 @@ _data = {
 "transformation": SubResource("Animation_cidmi")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_ibpn2"]
-font_color = Color(0, 0, 0, 1)
-
-[node name="WizardCellar" type="Node2D" node_paths=PackedStringArray("Animation", "Player", "Ritual", "Pentagrammi", "Dialogue")]
+[node name="WizardCellar" type="Node2D" node_paths=PackedStringArray("Animation", "Ritual", "Pentagrammi")]
 script = ExtResource("1_dg2sj")
 Animation = NodePath("Sequence")
-Player = NodePath("Player")
 Ritual = NodePath("KittyTransform")
 Pentagrammi = NodePath("Pentagrammi")
-Dialogue = NodePath("Dialogue/DialogueBox")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_c6kni")
@@ -288,86 +255,16 @@ frame = 3
 position = Vector2(-37, 11)
 sprite_frames = SubResource("SpriteFrames_56lg1")
 animation = &"transformation"
-frame = 8
 
-[node name="Player" parent="." instance=ExtResource("4_5486b")]
+[node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-37, 31)
-
-[node name="Camera" parent="Player" index="0"]
-zoom = Vector2(6, 6)
-
-[node name="Sprite" parent="Player" index="1"]
-visible = false
 
 [node name="Sequence" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_7ux4k")
 }
 
-[node name="Dialogue" type="CanvasLayer" parent="."]
-
-[node name="DialogueBox" type="HBoxContainer" parent="Dialogue" node_paths=PackedStringArray("Text", "Paju", "OldWiz")]
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.95
-anchor_right = 0.9
-anchor_bottom = 0.95
-grow_horizontal = 2
-grow_vertical = 0
-script = ExtResource("6_jsnkp")
-Text = NodePath("ColorRect2/Label")
-Paju = NodePath("ColorRect/Paju")
-OldWiz = NodePath("ColorRect/OldWiz")
-
-[node name="ColorRect" type="ColorRect" parent="Dialogue/DialogueBox"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-
-[node name="Paju" type="TextureRect" parent="Dialogue/DialogueBox/ColorRect"]
-clip_contents = true
-layout_mode = 0
-offset_left = -45.2
-offset_top = -8.59998
-offset_right = 142.8
-offset_bottom = 179.4
-texture = ExtResource("6_058cq")
-
-[node name="OldWiz" type="TextureRect" parent="Dialogue/DialogueBox/ColorRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 6.0
-offset_bottom = 6.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_5dyin")
-
-[node name="ColorRect2" type="ColorRect" parent="Dialogue/DialogueBox"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Dialogue/DialogueBox/ColorRect2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 22.0
-offset_top = 3.0
-offset_right = -14.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet cursus dolor vitae semper. Ut non vulputate leo. In feugiat vitae odio non dictum. Phasellus eget sapien at magna tristique egestas. "
-label_settings = SubResource("LabelSettings_ibpn2")
-vertical_alignment = 1
-autowrap_mode = 2
-
 [node name="Ded" type="Sprite2D" parent="."]
 position = Vector2(34, 5)
 texture = ExtResource("9_1n014")
 flip_h = true
-
-[editable path="Player"]

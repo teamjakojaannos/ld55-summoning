@@ -43,7 +43,14 @@ public partial class Player : CharacterBody2D {
     [Export]
     public AudioStreamPlayer ExplocationMusic;
 
-    public bool IsInCinematic = false;
+    private bool _isInCinematic = false;
+    public bool IsInCinematic {
+        get => _isInCinematic;
+        set {
+            _isInCinematic = value;
+            inputStack.Clear();
+        }
+    }
 
     private List<InputDirection> inputStack = new();
 
@@ -69,6 +76,15 @@ public partial class Player : CharacterBody2D {
         CombatMusic.Stop();
     }
 
+    public override void _EnterTree() {
+        var startNode = GetTree().Root.FindChild("PlayerStart", true, false);
+        if (startNode is Marker2D startMarker) {
+            GlobalPosition = startMarker.GlobalPosition;
+        } else {
+            GD.PushError("Could not find PlayerStart");
+        }
+    }
+
     public override void _Process(double delta) {
         if (Blackout != null) {
             fadeDistance = Mathf.Lerp(fadeDistance, targetFade, fadeSmoothness);
@@ -79,16 +95,18 @@ public partial class Player : CharacterBody2D {
             (Blackout.Material as ShaderMaterial)?.SetShaderParameter("darkness_dist_factor", darkDistanceFactor);
         }
 
-        if (isTransitioning || IsInCinematic) {
-            return;
-        }
-
         Vector2I inputDirection = inputStack.Count == 0 ? Vector2I.Zero : InputDirectionAsVector(inputStack[0]);
 
         CheckInput("move_left", InputDirection.Left);
         CheckInput("move_right", InputDirection.Right);
         CheckInput("move_up", InputDirection.Up);
         CheckInput("move_down", InputDirection.Down);
+
+        if (isTransitioning || IsInCinematic) {
+            Velocity = Vector2.Zero;
+            Sprite.Play("idle");
+            return;
+        }
 
         Velocity = MoveSpeed * new Vector2(inputDirection.X, inputDirection.Y);
 

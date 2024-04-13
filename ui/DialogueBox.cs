@@ -7,7 +7,7 @@ public enum WhoIsSpeaking {
 	OldWiz,
 }
 
-public partial class DialogueBox : HBoxContainer {
+public partial class DialogueBox : Control {
 	public List<string> Lines = new();
 
 	[Export]

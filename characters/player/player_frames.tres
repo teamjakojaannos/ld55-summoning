@@ -1,8 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=45 format=3 uid="uid://drw3rmjddgl1i"]
+[gd_resource type="SpriteFrames" load_steps=46 format=3 uid="uid://drw3rmjddgl1i"]
 
 [ext_resource type="Texture2D" uid="uid://cmmv7fykek5tw" path="res://characters/player/player_walkside.png" id="1_855so"]
 [ext_resource type="Texture2D" uid="uid://biu4fdq50ba8s" path="res://characters/player/paju.png" id="1_ewseb"]
 [ext_resource type="Texture2D" uid="uid://ba7wspi71ecnu" path="res://characters/player/player_idle.png" id="2_j0d02"]
+[ext_resource type="Texture2D" uid="uid://7efbuq8hm2ge" path="res://characters/player/player_holdingItem.png" id="2_yi61m"]
 [ext_resource type="Texture2D" uid="uid://blsknoshcdh7v" path="res://characters/player/player_walkfront.png" id="3_yddg7"]
 [ext_resource type="Texture2D" uid="uid://cad0xysx3dnix" path="res://characters/player/player_walkback.png" id="5_5hhwd"]
 
@@ -171,6 +172,14 @@ animations = [{
 "loop": true,
 "name": &"blink",
 "speed": 50.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yi61m")
+}],
+"loop": true,
+"name": &"hold_item",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 15.0,

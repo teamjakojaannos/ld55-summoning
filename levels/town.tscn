@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5uxib0tkhldl"]
 
-[ext_resource type="PackedScene" uid="uid://bab4b1iwllcyj" path="res://characters/player/player.tscn" id="2_0j7dw"]
 [ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="3_rpfxf"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
 [ext_resource type="PackedScene" uid="uid://dkuq61u6l4jg6" path="res://cardgame/cardgame.tscn" id="4_wotui"]
+[ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="5_6x2e7"]
 
 [node name="Root" type="Node2D"]
 y_sort_enabled = true
@@ -19,11 +19,15 @@ layer_0/tile_data = PackedInt32Array(-589835, 1, 0, -524299, 1, 0, -458763, 1, 0
 [node name="EncounterTrigger" parent="World" instance=ExtResource("3_rpfxf")]
 position = Vector2(80, 8)
 
-[node name="Player" parent="." node_paths=PackedStringArray("CardGame", "World") instance=ExtResource("2_0j7dw")]
-CardGame = NodePath("../CanvasLayer")
-World = NodePath("../World")
+[node name="PlayerStart" type="Marker2D" parent="."]
+position = Vector2(-24, -24)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
 
 [node name="Cardgame" parent="CanvasLayer" instance=ExtResource("4_wotui")]
+
+[node name="DialogueTrigger" parent="." instance=ExtResource("5_6x2e7")]
+position = Vector2(-112, -48)
+Lines = ["Mjäyy", "Oon kissa"]
+Who = 0

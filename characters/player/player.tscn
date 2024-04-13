@@ -20,6 +20,7 @@ shader_parameter/bright_dist = 75.0
 shader_parameter/darkness_dist_factor = 0.33
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic")]
+z_index = 1
 script = ExtResource("1_5bvc4")
 MoveSpeed = 48.0
 Sprite = NodePath("Sprite")
@@ -37,8 +38,8 @@ zoom = Vector2(4, 4)
 texture_filter = 1
 position = Vector2(0, -20)
 sprite_frames = ExtResource("2_i5gad")
-animation = &"walk_down"
-frame_progress = 0.432605
+animation = &"hold_item"
+frame_progress = 0.623709
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
@@ -52,6 +53,7 @@ debug_color = Color(0.588235, 0.54902, 0.0431373, 0.207843)
 [node name="BlackoutOverlay" type="Polygon2D" parent="."]
 visible = false
 top_level = true
+z_index = 2
 material = SubResource("ShaderMaterial_82o1f")
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-4000, -4000, 4000, -4000, 4000, 4000, -4000, 4000)
