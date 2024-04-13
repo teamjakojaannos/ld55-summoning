@@ -37,6 +37,8 @@ public partial class Cardgame : Control
     private CardDeck playerDeck;
     private CardDeck enemyDeck;
 
+    private Dictionary<ArenaPosition, Card> cardsOnArena = new();
+
     public override void _Ready()
     {
         playerDeck = CardDecks.PlayerDeck(cardScene);
@@ -183,9 +185,15 @@ public partial class Cardgame : Control
 
         var wrongMode = currentMode != Mode.SelectingPosition;
         var tooHighIndex = positionIndex >= positions.Count;
-        var positionTaken = false; // TODO
 
-        if (wrongMode || tooHighIndex || positionTaken)
+        if (wrongMode || tooHighIndex)
+        {
+            return;
+        }
+
+        var position = positions[positionIndex];
+        var positionTaken = cardsOnArena.ContainsKey(position);
+        if (positionTaken)
         {
             return;
         }
@@ -202,7 +210,6 @@ public partial class Cardgame : Control
         var card = playerCards[cardIndex];
         playerCards.RemoveAt(cardIndex);
 
-        var position = positions[positionIndex];
         AddCardToArena(card, position);
 
         UpdateCardLabels();
@@ -217,6 +224,7 @@ public partial class Cardgame : Control
         playerHand.RemoveChild(card);
         arena.AddChild(card);
         card.Position = arenaPositions[position];
+        cardsOnArena[position] = card;
     }
 
     private void SetHighlights(bool toCards, bool toPositions)
