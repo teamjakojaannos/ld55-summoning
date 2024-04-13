@@ -1,6 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbkof1h8cra7f"]
+[gd_scene load_steps=3 format=3 uid="uid://cbkof1h8cra7f"]
 
 [ext_resource type="Texture2D" uid="uid://ck346sgan4pna" path="res://ui/placeholder-card.png" id="1_g85s3"]
+[ext_resource type="Script" path="res://cardgame/Card.cs" id="2_3uajd"]
 
-[node name="Card" type="TextureRect"]
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_3uajd")
+
+[node name="Card" type="TextureRect" parent="."]
+layout_mode = 2
 texture = ExtResource("1_g85s3")
+
+[node name="HpLabel" type="Label" parent="Card"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -55.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 24.0
+grow_horizontal = 0
+text = "HP
+"
+
+[node name="DamageLabel" type="Label" parent="Card"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -44.0
+offset_right = 70.0
+offset_bottom = -21.0
+grow_vertical = 0
+text = "Damage"
+
+[node name="NumberKey" type="Label" parent="."]
+layout_mode = 2
+text = "0
+"
+horizontal_alignment = 1
