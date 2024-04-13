@@ -1,9 +1,77 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=17 format=3 uid="uid://c5uxib0tkhldl"]
 
 [ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="3_rpfxf"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
 [ext_resource type="PackedScene" uid="uid://dkuq61u6l4jg6" path="res://cardgame/cardgame.tscn" id="4_wotui"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="5_6x2e7"]
+[ext_resource type="Texture2D" uid="uid://c0k6gpop4ph3m" path="res://characters/whyisthishere/ruohonleikkuriBATTLE.png" id="5_hh6cj"]
+[ext_resource type="Script" path="res://characters/whyisthishere/esjonnejaujookulmaa.cs" id="6_qxphv"]
+[ext_resource type="Texture2D" uid="uid://cp6u7acwpqojm" path="res://characters/player/placeholder.png" id="7_japg0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6thvd"]
+atlas = ExtResource("5_hh6cj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eld1t"]
+atlas = ExtResource("5_hh6cj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocit1"]
+atlas = ExtResource("5_hh6cj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oq01"]
+atlas = ExtResource("5_hh6cj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqta2"]
+atlas = ExtResource("5_hh6cj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x73ki"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6thvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eld1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocit1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oq01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqta2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_270ch"]
+atlas = ExtResource("7_japg0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekgh3"]
+atlas = ExtResource("7_japg0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_objm1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_270ch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekgh3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
 
 [node name="Root" type="Node2D"]
 y_sort_enabled = true
@@ -31,3 +99,20 @@ position = Vector2(-24, -24)
 visible = false
 
 [node name="Cardgame" parent="CardGameLayer" instance=ExtResource("4_wotui")]
+
+[node name="Placeholder2" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("jonne", "leikkuri")]
+visible = false
+position = Vector2(72, -104)
+rotation = 0.812286
+sprite_frames = SubResource("SpriteFrames_x73ki")
+frame_progress = 0.0959475
+script = ExtResource("6_qxphv")
+jonne = NodePath("Placeholder")
+leikkuri = NodePath(".")
+
+[node name="Placeholder" type="AnimatedSprite2D" parent="Placeholder2"]
+z_index = 1
+position = Vector2(0, -40)
+sprite_frames = SubResource("SpriteFrames_objm1")
+frame_progress = 0.377978
+flip_h = true

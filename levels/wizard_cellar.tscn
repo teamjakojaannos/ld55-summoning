@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://k14qken2ftqt"]
+[gd_scene load_steps=32 format=3 uid="uid://k14qken2ftqt"]
 
 [ext_resource type="Texture2D" uid="uid://ca6oyteg4v0cr" path="res://characters/player/paju_cat.png" id="1_7sev4"]
 [ext_resource type="Script" path="res://levels/WizardCellarIntro.cs" id="1_dg2sj"]
 [ext_resource type="TileSet" uid="uid://deyetstqvid75" path="res://levels/interior.tres" id="2_c6kni"]
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="2_wg7nh"]
+[ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="6_o2b5j"]
 [ext_resource type="Texture2D" uid="uid://cldw4n30xxyni" path="res://characters/oldwiz/ded.png" id="9_1n014"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnr3e"]
@@ -233,6 +234,18 @@ _data = {
 "transformation": SubResource("Animation_cidmi")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tux86"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bde75"]
+radius = 1.0
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_wkk14"]
+points = PackedVector2Array(0, 0, 1, 2, 2, 0)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_4s5ro"]
+points = PackedVector2Array(0, 0, 1, 2, 2, 0)
+
 [node name="WizardCellar" type="Node2D" node_paths=PackedStringArray("Animation", "Ritual", "Pentagrammi")]
 script = ExtResource("1_dg2sj")
 Animation = NodePath("Sequence")
@@ -254,7 +267,8 @@ frame = 3
 [node name="KittyTransform" type="AnimatedSprite2D" parent="."]
 position = Vector2(-37, 11)
 sprite_frames = SubResource("SpriteFrames_56lg1")
-animation = &"transformation"
+animation = &"kitty_idle"
+frame_progress = 0.459664
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-37, 31)
@@ -265,6 +279,58 @@ libraries = {
 }
 
 [node name="Ded" type="Sprite2D" parent="."]
-position = Vector2(34, 5)
+position = Vector2(34, 5.25)
 texture = ExtResource("9_1n014")
 flip_h = true
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+position = Vector2(5, -8)
+shape = SubResource("CircleShape2D_tux86")
+debug_color = Color(1, 1, 1, 1)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Node2D"]
+position = Vector2(8, -8)
+shape = SubResource("CircleShape2D_tux86")
+debug_color = Color(1, 1, 1, 1)
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Node2D"]
+position = Vector2(5.4088, -7.83427)
+scale = Vector2(0.56, 0.56)
+shape = SubResource("CircleShape2D_bde75")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Node2D"]
+position = Vector2(8.4088, -7.83427)
+scale = Vector2(0.56, 0.56)
+shape = SubResource("CircleShape2D_bde75")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Node2D"]
+position = Vector2(6.43089, -9.45862)
+rotation = -3.14159
+shape = SubResource("ConvexPolygonShape2D_wkk14")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Node2D"]
+position = Vector2(8.65165, -9.50282)
+rotation = -3.14159
+shape = SubResource("ConvexPolygonShape2D_wkk14")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Node2D"]
+position = Vector2(6.09944, -9.44757)
+rotation = -3.14159
+scale = Vector2(0.665, 0.665)
+shape = SubResource("ConvexPolygonShape2D_4s5ro")
+debug_color = Color(0.839216, 0.25098, 1, 1)
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Node2D"]
+position = Vector2(8.32019, -9.49177)
+rotation = -3.14159
+scale = Vector2(0.665, 0.665)
+shape = SubResource("ConvexPolygonShape2D_4s5ro")
+debug_color = Color(0.839216, 0.25098, 1, 1)
+
+[node name="Placeholder" type="Sprite2D" parent="Node2D"]
+position = Vector2(93.9791, -36.672)
+scale = Vector2(1.37981, 1.58809)
+texture = ExtResource("6_o2b5j")
