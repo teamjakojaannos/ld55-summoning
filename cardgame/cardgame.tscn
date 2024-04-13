@@ -74,9 +74,9 @@ alignment = 1
 [node name="Arena" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 424.0
-offset_top = 201.0
+offset_top = 174.0
 offset_right = 733.0
-offset_bottom = 503.0
+offset_bottom = 476.0
 
 [node name="Debug" type="Panel" parent="Arena"]
 layout_mode = 1
@@ -182,3 +182,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tldo4")
+
+[node name="NumberLabels" type="Control" parent="Arena"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NumberLeft" type="Label" parent="Arena/NumberLabels"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 5.0
+offset_right = 80.0
+offset_bottom = 28.0
+text = "1"
+horizontal_alignment = 1
+
+[node name="NumberMid" type="Label" parent="Arena/NumberLabels"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 5.0
+offset_right = 168.0
+offset_bottom = 28.0
+text = "2"
+horizontal_alignment = 1
+
+[node name="NumberRight" type="Label" parent="Arena/NumberLabels"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 5.0
+offset_right = 270.0
+offset_bottom = 28.0
+text = "3"
+horizontal_alignment = 1

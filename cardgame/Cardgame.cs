@@ -17,6 +17,15 @@ public partial class Cardgame : Control
 
     private readonly Dictionary<ArenaPosition, Vector2> arenaPositions = new();
 
+    enum Mode
+    {
+        SelectingCard,
+        SelectingPosition
+    }
+
+    private Mode currentMode = Mode.SelectingCard;
+    private int? selectedCardIndex = null;
+
     private PackedScene cardScene = GD.Load<PackedScene>("res://cardgame/card.tscn");
     private HBoxContainer playerHand;
     private HBoxContainer enemyHand;
@@ -137,36 +146,69 @@ public partial class Cardgame : Control
 
             if (inputEvent.IsActionPressed(key))
             {
-                PlayCard(i);
+                if (currentMode == Mode.SelectingCard)
+                {
+                    TrySelectCard(i);
+                }
+                else if (currentMode == Mode.SelectingPosition)
+                {
+                    TryPlayCard(i);
+                }
+
                 return;
             }
         }
     }
 
-    private int temp = 0;
-
-    private void PlayCard(int index)
+    private void TrySelectCard(int cardIndex)
     {
-        if (index >= playerCards.Count)
+        if (cardIndex >= playerCards.Count)
         {
             return;
         }
 
-        var card = playerCards[index];
-        playerCards.RemoveAt(index);
+        selectedCardIndex = cardIndex;
+        currentMode = Mode.SelectingPosition;
+        SetHighlights(toCards: false, toPositions: true);
+    }
 
-        // TODO: figure out what slot is free
-        var pos = new List<ArenaPosition>()
+    private void TryPlayCard(int positionIndex)
+    {
+        var positions = new List<ArenaPosition>()
         {
             ArenaPosition.BotLeft,
             ArenaPosition.BotMid,
             ArenaPosition.BotRight
         };
 
-        AddCardToArena(card, pos[temp % pos.Count]);
-        temp++;
+        var wrongMode = currentMode != Mode.SelectingPosition;
+        var tooHighIndex = positionIndex >= positions.Count;
+        var positionTaken = false; // TODO
+
+        if (wrongMode || tooHighIndex || positionTaken)
+        {
+            return;
+        }
+
+        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count)
+        {
+            // we should never end up in here
+            currentMode = Mode.SelectingCard;
+            SetHighlights(toCards: true, toPositions: false);
+            return;
+        }
+
+        var cardIndex = selectedCardIndex.Value;
+        var card = playerCards[cardIndex];
+        playerCards.RemoveAt(cardIndex);
+
+        var position = positions[positionIndex];
+        AddCardToArena(card, position);
 
         UpdateCardLabels();
+
+        currentMode = Mode.SelectingCard;
+        SetHighlights(toCards: true, toPositions: false);
     }
 
     private void AddCardToArena(Card card, ArenaPosition position)
@@ -175,5 +217,10 @@ public partial class Cardgame : Control
         playerHand.RemoveChild(card);
         arena.AddChild(card);
         card.Position = arenaPositions[position];
+    }
+
+    private void SetHighlights(bool toCards, bool toPositions)
+    {
+        // TODO:
     }
 }
