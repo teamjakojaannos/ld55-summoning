@@ -54,7 +54,7 @@ grow_vertical = 2
 texture = SubResource("CompressedTexture2D_y58rh")
 flip_h = true
 
-[node name="Hand" type="HBoxContainer" parent="."]
+[node name="Hand" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -63,9 +63,8 @@ anchor_bottom = 1.0
 offset_top = -155.0
 grow_horizontal = 2
 grow_vertical = 0
-alignment = 1
 
-[node name="EnemyHand" type="HBoxContainer" parent="."]
+[node name="EnemyHand" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -75,7 +74,6 @@ offset_top = 40.0
 offset_right = 576.0
 offset_bottom = 168.0
 grow_horizontal = 2
-alignment = 1
 
 [node name="Arena" type="Control" parent="."]
 anchors_preset = 0
@@ -228,3 +226,13 @@ offset_bottom = 28.0
 text = "3"
 label_settings = SubResource("LabelSettings_16sem")
 horizontal_alignment = 1
+
+[node name="ButtonStart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 953.0
+offset_top = 503.0
+offset_right = 1112.0
+offset_bottom = 565.0
+text = "Start round"
+
+[connection signal="pressed" from="ButtonStart" to="." method="StartButtonPressed"]

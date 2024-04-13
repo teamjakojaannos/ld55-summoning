@@ -27,8 +27,8 @@ public partial class Cardgame : Control
     private int? selectedCardIndex = null;
 
     private PackedScene cardScene = GD.Load<PackedScene>("res://cardgame/card.tscn");
-    private HBoxContainer playerHand;
-    private HBoxContainer enemyHand;
+    private Control playerHand;
+    private Control enemyHand;
 
     private Control arena;
 
@@ -52,8 +52,8 @@ public partial class Cardgame : Control
         playerDeck = CardDecks.PlayerDeck(cardScene);
         enemyDeck = CardDecks.EnemyDeck(cardScene);
 
-        playerHand = GetNode<HBoxContainer>("Hand");
-        enemyHand = GetNode<HBoxContainer>("EnemyHand");
+        playerHand = GetNode<Control>("Hand");
+        enemyHand = GetNode<Control>("EnemyHand");
         arena = GetNode<Control>("Arena");
 
         var list = new List<(ArenaPosition, string)>()
@@ -116,11 +116,18 @@ public partial class Cardgame : Control
     {
         var playerCardsCount = 5;
         var enemyCardsCount = 5;
+        var startPos = new Vector2(400.0f, 0);
+        var offset = new Vector2(100.0f, 0.0f);
 
         var playerDrawnCards = playerDeck.Draw(playerCardsCount);
 
-        foreach (var card in playerDrawnCards)
+        for (int i = 0; i < playerDrawnCards.Count; i++)
         {
+            var card = playerDrawnCards[i];
+
+            var position = startPos + offset * i;
+            card.Position = position;
+
             playerHand.AddChild(card);
             playerCards.Add(card);
             card.SetNumberLabelVisible(true);
@@ -128,8 +135,11 @@ public partial class Cardgame : Control
 
         var enemyDrawnCards = enemyDeck.Draw(enemyCardsCount);
 
-        foreach (var card in enemyDrawnCards)
+        for (int i = 0; i < enemyDrawnCards.Count; i++)
         {
+            var card = enemyDrawnCards[i];
+            var position = startPos + offset * i;
+            card.Position = position;
             enemyHand.AddChild(card);
         }
     }
@@ -303,5 +313,12 @@ public partial class Cardgame : Control
             var positionColor = useHighlight ? normalFontColor : dimmedFontColor;
             label.LabelSettings.FontColor = positionColor;
         }
+    }
+
+    private void StartButtonPressed()
+    {
+        GD.Print("Starting round!");
+        var card = playerCards[0];
+        card.animation.Play("attack_animation");
     }
 }

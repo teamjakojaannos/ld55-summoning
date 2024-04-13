@@ -1,20 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbkof1h8cra7f"]
+[gd_scene load_steps=7 format=3 uid="uid://cbkof1h8cra7f"]
 
 [ext_resource type="Texture2D" uid="uid://ck346sgan4pna" path="res://ui/placeholder-card.png" id="1_g85s3"]
 [ext_resource type="Script" path="res://cardgame/Card.cs" id="2_3uajd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c6hs3"]
 
-[node name="VBoxContainer" type="VBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[sub_resource type="Animation" id="Animation_0xyqm"]
+resource_name = "attack_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_esm7l"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ls1"]
+_data = {
+"RESET": SubResource("Animation_esm7l"),
+"attack_animation": SubResource("Animation_0xyqm")
+}
+
+[node name="Card" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 96.0
+offset_bottom = 155.0
 script = ExtResource("2_3uajd")
 
-[node name="Card" type="TextureRect" parent="."]
+[node name="Sprite" type="TextureRect" parent="."]
 layout_mode = 2
+offset_right = 96.0
+offset_bottom = 128.0
 texture = ExtResource("1_g85s3")
 
-[node name="HpLabel" type="Label" parent="Card"]
+[node name="HpLabel" type="Label" parent="Sprite"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -27,7 +55,7 @@ grow_horizontal = 0
 text = "HP
 "
 
-[node name="DamageLabel" type="Label" parent="Card"]
+[node name="DamageLabel" type="Label" parent="Sprite"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -41,7 +69,15 @@ text = "DMG:"
 
 [node name="NumberKey" type="Label" parent="."]
 layout_mode = 2
+offset_top = 132.0
+offset_right = 96.0
+offset_bottom = 155.0
 text = "0
 "
 label_settings = SubResource("LabelSettings_c6hs3")
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b5ls1")
+}

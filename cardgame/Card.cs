@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Card : VBoxContainer
+public partial class Card : Control
 {
     private int _MaxHp = 1;
 
@@ -51,13 +51,16 @@ public partial class Card : VBoxContainer
 
     private bool highlighted = false;
 
+    public AnimationPlayer animation;
+
     public override void _Ready()
     {
-        hpLabel = GetNode<Label>("Card/HpLabel");
-        dmgLabel = GetNode<Label>("Card/DamageLabel");
+        hpLabel = GetNode<Label>("Sprite/HpLabel");
+        dmgLabel = GetNode<Label>("Sprite/DamageLabel");
         numberLabel = GetNode<Label>("NumberKey");
         numberLabel.Visible = false;
-        image = GetNode<TextureRect>("Card");
+        image = GetNode<TextureRect>("Sprite");
+        animation = GetNode<AnimationPlayer>("AnimationPlayer");
 
         UpdateLabels();
     }
