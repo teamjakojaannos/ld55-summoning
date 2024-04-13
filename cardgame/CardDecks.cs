@@ -5,22 +5,17 @@ public class CardDecks
 {
     public static CardDeck PlayerDeck(PackedScene cardScene)
     {
-        var stats = new List<(int hp, int damage)>();
+        var cards = new List<Card>();
         for (int i = 0; i < 4; i++)
         {
-            stats.Add((hp: 10, damage: 3));
+            cards.Add(CreateCard(cardScene, 10, 3));
         }
         for (int i = 0; i < 2; i++)
         {
-            stats.Add((hp: 2, damage: 5));
+            cards.Add(CreateCard(cardScene, 2, 5));
         }
-        stats.Add((hp: 20, damage: 10));
+        cards.Add(CreateCard(cardScene, 200, 500));
 
-        var cards = new List<Card>();
-        foreach (var (hp, dmg) in stats)
-        {
-            cards.Add(CreateCard(cardScene, hp, dmg));
-        }
         return new CardDeck(cards);
     }
 

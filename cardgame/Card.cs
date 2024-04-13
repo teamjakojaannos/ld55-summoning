@@ -65,7 +65,7 @@ public partial class Card : VBoxContainer
         }
 
         hpLabel.Text = $"HP: {CurrentHp} / {MaxHp}";
-        dmgLabel.Text = $"Damage: {Damage}";
+        dmgLabel.Text = $"DMG: {Damage}";
     }
 
     public void SetNumberLabelText(string text)

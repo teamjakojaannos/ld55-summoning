@@ -35,7 +35,7 @@ offset_top = -44.0
 offset_right = 70.0
 offset_bottom = -21.0
 grow_vertical = 0
-text = "Damage"
+text = "DMG:"
 
 [node name="NumberKey" type="Label" parent="."]
 layout_mode = 2
