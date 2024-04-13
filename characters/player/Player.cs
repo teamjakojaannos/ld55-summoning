@@ -156,7 +156,7 @@ public partial class Player : CharacterBody2D {
                 }
 
                 cardGame.Visible = true;
-                // FIXME: assumes all level scene roots are called "World"
+                // FIXME: assumes all level scene roots are called "Root/World"
                 GetNode<Node2D>("/root/Root/World").Visible = false;
                 Sprite.Visible = false;
             }

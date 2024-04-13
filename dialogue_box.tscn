@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cxsnnw763sb0a" path="res://characters/oldwiz/portrait.png" id="3_g73vp"]
 [ext_resource type="Texture2D" uid="uid://buubtqg2r3j5c" path="res://ui/portraitframeidk.png" id="4_ln6t8"]
 [ext_resource type="Texture2D" uid="uid://dns7biallgvii" path="res://ui/dialogiboxi.png" id="4_rlmk0"]
-[ext_resource type="FontFile" uid="uid://c4mu6ad8db5c6" path="res://fonts/ancient-modern-tales/Ancient Modern Tales.otf" id="6_idtfq"]
+[ext_resource type="FontFile" uid="uid://b1fn2ohqk5gyo" path="res://fonts/pixel/Pixel NES.otf" id="6_ccr13"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ibpn2"]
-font = ExtResource("6_idtfq")
+font = ExtResource("6_ccr13")
 font_size = 24
 font_color = Color(0, 0, 0, 1)
 

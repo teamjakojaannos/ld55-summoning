@@ -87,8 +87,8 @@ public partial class Card : Control
             return;
         }
 
-        hpLabel.Text = $"HP: {CurrentHp} / {MaxHp}";
-        dmgLabel.Text = $"DMG: {Damage}";
+        hpLabel.Text = $"HP {CurrentHp}";
+        dmgLabel.Text = $"D {Damage}";
     }
 
     public void SetHighlighted(bool highlighted)

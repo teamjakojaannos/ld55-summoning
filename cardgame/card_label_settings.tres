@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://d4i6c4p5ov570"]
+
+[ext_resource type="FontFile" uid="uid://cov5tkyibn826" path="res://fonts/karma-future/KarmaFuture.ttf" id="1_kv2m7"]
+
+[resource]
+font = ExtResource("1_kv2m7")
+font_color = Color(0.2, 0.121569, 0.0313726, 1)
+outline_color = Color(0.545098, 0.545098, 0.545098, 1)

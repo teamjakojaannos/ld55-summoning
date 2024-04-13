@@ -1,9 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbkof1h8cra7f"]
+[gd_scene load_steps=12 format=3 uid="uid://cbkof1h8cra7f"]
 
-[ext_resource type="Texture2D" uid="uid://ck346sgan4pna" path="res://ui/placeholder-card.png" id="1_g85s3"]
 [ext_resource type="Script" path="res://cardgame/Card.cs" id="2_3uajd"]
+[ext_resource type="Texture2D" uid="uid://cegsh6sctctnl" path="res://cardgame/scroll.png" id="2_kefqs"]
+[ext_resource type="LabelSettings" uid="uid://d4i6c4p5ov570" path="res://cardgame/card_label_settings.tres" id="3_55x7t"]
+[ext_resource type="FontFile" uid="uid://c4mu6ad8db5c6" path="res://fonts/ancient-modern-tales/Ancient Modern Tales.otf" id="3_abhoh"]
+[ext_resource type="Texture2D" uid="uid://bvig3hpq14s0v" path="res://cardgame/airsymbol.png" id="5_yf3yf"]
+[ext_resource type="Texture2D" uid="uid://cuehij7c7hxu5" path="res://characters/monster/airmonster1idlestatic.png" id="6_b54ei"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qk7eb"]
+font = ExtResource("3_abhoh")
+font_size = 12
+font_color = Color(0.2, 0.121569, 0.0313726, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_c6hs3"]
+
+[sub_resource type="Animation" id="Animation_esm7l"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_0xyqm"]
 resource_name = "attack_animation"
@@ -34,9 +46,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_esm7l"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ls1"]
 _data = {
 "RESET": SubResource("Animation_esm7l"),
@@ -54,32 +63,80 @@ script = ExtResource("2_3uajd")
 layout_mode = 2
 offset_right = 96.0
 offset_bottom = 128.0
-texture = ExtResource("1_g85s3")
+texture = ExtResource("2_kefqs")
+
+[node name="ÖllinNimi" type="Label" parent="Sprite"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.124
+anchor_top = 0.563
+anchor_right = 0.83
+anchor_bottom = 0.563
+offset_left = 7.096
+offset_top = -4.064
+offset_right = -2.68001
+offset_bottom = 9.936
+grow_vertical = 0
+text = "Taivaankauhu"
+label_settings = SubResource("LabelSettings_qk7eb")
+horizontal_alignment = 1
 
 [node name="HpLabel" type="Label" parent="Sprite"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -55.0
-offset_top = 1.0
-offset_right = -1.0
-offset_bottom = 24.0
-grow_horizontal = 0
-text = "HP
-"
+anchors_preset = -1
+anchor_left = 0.127
+anchor_top = 0.742
+anchor_right = 0.127
+anchor_bottom = 0.742
+offset_left = 6.808
+offset_top = -12.976
+offset_right = 29.808
+offset_bottom = 9.02399
+grow_vertical = 0
+text = "H3"
+label_settings = ExtResource("3_55x7t")
 
 [node name="DamageLabel" type="Label" parent="Sprite"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -44.0
-offset_right = 70.0
-offset_bottom = -21.0
+anchors_preset = -1
+anchor_left = 0.833
+anchor_top = 0.727
+anchor_right = 0.833
+anchor_bottom = 0.727
+offset_left = -27.968
+offset_top = -11.056
+offset_right = -2.968
+offset_bottom = 10.944
+grow_horizontal = 0
 grow_vertical = 0
-text = "DMG:"
+text = "D2"
+label_settings = ExtResource("3_55x7t")
+
+[node name="Elememtpi" type="TextureRect" parent="Sprite"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.135
+anchor_top = 0.25
+anchor_right = 0.135
+anchor_bottom = 0.25
+offset_left = 6.04
+offset_top = -1.0
+offset_right = 36.04
+offset_bottom = 29.0
+texture = ExtResource("5_yf3yf")
+
+[node name="Ölli" type="TextureRect" parent="Sprite"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.445
+anchor_right = 0.5
+anchor_bottom = 0.445
+offset_left = -16.0
+offset_top = -15.96
+offset_right = 16.0
+offset_bottom = 16.04
+texture = ExtResource("6_b54ei")
 
 [node name="NumberKey" type="Label" parent="."]
 layout_mode = 2
