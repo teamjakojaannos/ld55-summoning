@@ -96,6 +96,11 @@ public partial class Card : VBoxContainer
         }
     }
 
+    public void SetNumberLabelColor(Color color)
+    {
+        numberLabel.LabelSettings.FontColor = color;
+    }
+
     public void SetNumberLabelText(string text)
     {
         numberLabel.Text = text;

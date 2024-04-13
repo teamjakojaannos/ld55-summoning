@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=7 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 
@@ -13,6 +13,12 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0.929412, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ptddr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_brand"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_16sem"]
+
 [node name="Cardgame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -21,6 +27,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f1vsu")
+normalFontColor = Color(1, 1, 1, 1)
+dimmedFontColor = Color(0.443137, 0.443137, 0.443137, 1)
 
 [node name="Player" type="TextureRect" parent="."]
 layout_mode = 1
@@ -200,6 +208,7 @@ offset_top = 5.0
 offset_right = 80.0
 offset_bottom = 28.0
 text = "1"
+label_settings = SubResource("LabelSettings_ptddr")
 horizontal_alignment = 1
 
 [node name="NumberMid" type="Label" parent="Arena/NumberLabels"]
@@ -209,6 +218,7 @@ offset_top = 5.0
 offset_right = 168.0
 offset_bottom = 28.0
 text = "2"
+label_settings = SubResource("LabelSettings_brand")
 horizontal_alignment = 1
 
 [node name="NumberRight" type="Label" parent="Arena/NumberLabels"]
@@ -218,4 +228,5 @@ offset_top = 5.0
 offset_right = 270.0
 offset_bottom = 28.0
 text = "3"
+label_settings = SubResource("LabelSettings_16sem")
 horizontal_alignment = 1

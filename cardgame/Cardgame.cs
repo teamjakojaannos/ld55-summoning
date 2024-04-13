@@ -39,6 +39,14 @@ public partial class Cardgame : Control
 
     private Dictionary<ArenaPosition, Card> cardsOnArena = new();
 
+    private readonly Dictionary<ArenaPosition, Label> arenaPositionLabels = new();
+
+    [Export]
+    public Color normalFontColor;
+
+    [Export]
+    public Color dimmedFontColor;
+
     public override void _Ready()
     {
         playerDeck = CardDecks.PlayerDeck(cardScene);
@@ -74,8 +82,17 @@ public partial class Cardgame : Control
             HideDebug(this);
         }
 
+        arenaPositionLabels[ArenaPosition.BotLeft] = GetNode<Label>(
+            "Arena/NumberLabels/NumberLeft"
+        );
+        arenaPositionLabels[ArenaPosition.BotMid] = GetNode<Label>("Arena/NumberLabels/NumberMid");
+        arenaPositionLabels[ArenaPosition.BotRight] = GetNode<Label>(
+            "Arena/NumberLabels/NumberRight"
+        );
+
         PlaceCardsInHands();
         UpdateCardLabels();
+        SwitchMode(Mode.SelectingCard);
     }
 
     private static void HideDebug(Node node)
@@ -273,6 +290,18 @@ public partial class Cardgame : Control
 
     private void SetHighlights(bool toCards, bool toPositions)
     {
-        // TODO:
+        var cardFontColor = toCards ? normalFontColor : dimmedFontColor;
+        foreach (var card in playerCards)
+        {
+            card.SetNumberLabelColor(cardFontColor);
+        }
+
+        foreach (var (position, label) in arenaPositionLabels)
+        {
+            var positionTaken = cardsOnArena.ContainsKey(position);
+            var useHighlight = toPositions && !positionTaken;
+            var positionColor = useHighlight ? normalFontColor : dimmedFontColor;
+            label.LabelSettings.FontColor = positionColor;
+        }
     }
 }
