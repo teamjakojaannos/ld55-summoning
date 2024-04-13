@@ -4,12 +4,13 @@
 [ext_resource type="SpriteFrames" uid="uid://drw3rmjddgl1i" path="res://characters/player/player_frames.tres" id="2_oydgc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qekse"]
-radius = 16.0
+radius = 8.0
 
 [node name="EncounterTrigger" type="Area2D"]
 script = ExtResource("1_2tnhf")
 
 [node name="Placeholder" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -19)
 sprite_frames = ExtResource("2_oydgc")
 animation = &"idle"
 

@@ -33,6 +33,16 @@ public partial class Player : CharacterBody2D {
     [Export]
     public Node2D World;
 
+    [Export]
+    public AudioStreamPlayer CombatMusic;
+
+    [Export]
+    public AudioStreamPlayer EnterCombatMusic;
+
+
+    [Export]
+    public AudioStreamPlayer ExplocationMusic;
+
     private List<InputDirection> inputStack = new();
 
 
@@ -52,6 +62,9 @@ public partial class Player : CharacterBody2D {
 
         fadeSmoothness = FadeSmoothIn;
         isTransitioning = false;
+        EnterCombatMusic.Stop();
+        ExplocationMusic.Play();
+        CombatMusic.Stop();
     }
 
     public override void _Process(double delta) {
@@ -80,6 +93,21 @@ public partial class Player : CharacterBody2D {
         if (Mathf.Abs(Velocity.X) > 0.001f && Sprite != null) {
             Sprite.FlipH = Velocity.X < 0.0f;
         }
+
+        if (Mathf.Abs(Velocity.LengthSquared()) > 0.001f) {
+            if (Mathf.Abs(Velocity.X) > Mathf.Abs(Velocity.Y)) {
+                Sprite.Play("walk_side");
+            } else if (Velocity.Y > 0.0f) {
+                Sprite.Play("walk_side");
+                // Sprite.Play("walk_up");
+            } else {
+                Sprite.Play("walk_side");
+                // Sprite.Play("walk_down");
+            }
+        } else {
+            Sprite.Play("idle");
+        }
+
         MoveAndSlide();
     }
 
@@ -90,6 +118,9 @@ public partial class Player : CharacterBody2D {
         fadeSmoothness = FadeSmoothIn;
         inputStack.Clear();
         Velocity = Vector2.Zero;
+        EnterCombatMusic.Play();
+        ExplocationMusic.Stop();
+        CombatMusic.Stop();
 
         isTransitioning = true; // trans rights are human rights
 
@@ -97,6 +128,9 @@ public partial class Player : CharacterBody2D {
             targetFade = MaxFade;
             targetDarkDistanceFactor = MaxFactor;
             fadeSmoothness = FadeSmoothOut;
+
+            ExplocationMusic.Stop();
+            CombatMusic.Play();
 
             CardGame.Visible = true;
             World.Visible = false;
