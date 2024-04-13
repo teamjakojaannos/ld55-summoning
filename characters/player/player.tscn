@@ -37,7 +37,8 @@ zoom = Vector2(4, 4)
 texture_filter = 1
 position = Vector2(0, -20)
 sprite_frames = ExtResource("2_i5gad")
-animation = &"idle"
+animation = &"walk_down"
+frame_progress = 0.768439
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)

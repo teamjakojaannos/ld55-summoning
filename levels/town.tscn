@@ -27,5 +27,3 @@ World = NodePath("../World")
 visible = false
 
 [node name="Cardgame" parent="CanvasLayer" instance=ExtResource("4_wotui")]
-normalFontColor = Color(0, 0, 0, 0)
-dimmedFontColor = Color(0, 0, 0, 0)
