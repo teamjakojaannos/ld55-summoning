@@ -3,6 +3,8 @@ using Godot;
 
 public partial class Cardgame : Control
 {
+    private readonly bool DEBUG_MODE = true;
+
     enum ArenaPosition
     {
         TopLeft,
@@ -46,8 +48,36 @@ public partial class Cardgame : Control
             arenaPositions[key] = GetNode<Control>(name).Position;
         }
 
+        if (DEBUG_MODE)
+        {
+            GD.Print("*********************");
+            GD.Print("* Debug mode is ON! *");
+            GD.Print("*********************");
+        }
+        else
+        {
+            HideDebug(this);
+        }
+
         PlaceCardsInHands();
         UpdateCardLabels();
+    }
+
+    private static void HideDebug(Node node)
+    {
+        var children = node.GetChildren(true);
+
+        foreach (var child in children)
+        {
+            var name = child.Name.ToString();
+
+            if (name.StartsWith("Debug") && child is CanvasItem item)
+            {
+                item.Visible = false;
+            }
+
+            HideDebug(child);
+        }
     }
 
     private void PlaceCardsInHands()
