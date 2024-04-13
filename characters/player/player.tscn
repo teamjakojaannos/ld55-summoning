@@ -38,7 +38,7 @@ texture_filter = 1
 position = Vector2(0, -20)
 sprite_frames = ExtResource("2_i5gad")
 animation = &"walk_down"
-frame_progress = 0.768439
+frame_progress = 0.432605
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)

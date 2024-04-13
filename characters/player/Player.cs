@@ -100,8 +100,7 @@ public partial class Player : CharacterBody2D {
             if (Mathf.Abs(Velocity.X) > Mathf.Abs(Velocity.Y)) {
                 Sprite.Play("walk_side");
             } else if (Velocity.Y < 0.0f) {
-                Sprite.Play("walk_side");
-                // Sprite.Play("walk_up");
+                Sprite.Play("walk_up");
             } else {
                 Sprite.Play("walk_down");
             }
