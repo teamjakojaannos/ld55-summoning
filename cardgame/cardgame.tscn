@@ -27,8 +27,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f1vsu")
-normalFontColor = Color(1, 1, 1, 1)
-dimmedFontColor = Color(0.443137, 0.443137, 0.443137, 1)
 
 [node name="Player" type="TextureRect" parent="."]
 layout_mode = 1

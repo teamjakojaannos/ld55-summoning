@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://k14qken2ftqt"]
+[gd_scene load_steps=32 format=3 uid="uid://k14qken2ftqt"]
 
 [ext_resource type="Texture2D" uid="uid://ca6oyteg4v0cr" path="res://characters/player/paju_cat.png" id="1_7sev4"]
 [ext_resource type="Script" path="res://levels/WizardCellarIntro.cs" id="1_dg2sj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://biu4fdq50ba8s" path="res://characters/player/paju.png" id="6_058cq"]
 [ext_resource type="Script" path="res://ui/DialogueBox.cs" id="6_jsnkp"]
 [ext_resource type="Texture2D" uid="uid://cxsnnw763sb0a" path="res://characters/oldwiz/portrait.png" id="8_5dyin"]
+[ext_resource type="Texture2D" uid="uid://cldw4n30xxyni" path="res://characters/oldwiz/ded.png" id="9_1n014"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnr3e"]
 atlas = ExtResource("2_wg7nh")
@@ -292,6 +293,9 @@ frame = 8
 [node name="Player" parent="." instance=ExtResource("4_5486b")]
 position = Vector2(-37, 31)
 
+[node name="Camera" parent="Player" index="0"]
+zoom = Vector2(6, 6)
+
 [node name="Sprite" parent="Player" index="1"]
 visible = false
 
@@ -360,5 +364,10 @@ text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet c
 label_settings = SubResource("LabelSettings_ibpn2")
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Ded" type="Sprite2D" parent="."]
+position = Vector2(34, 5)
+texture = ExtResource("9_1n014")
+flip_h = true
 
 [editable path="Player"]
