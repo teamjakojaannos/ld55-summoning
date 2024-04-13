@@ -113,6 +113,7 @@ public partial class Player : CharacterBody2D {
         MoveAndSlide();
     }
 
+    // Pass null target to perform only the fade-in-out without any music or level transitions
     public void StartEncounter(EncounterTrigger target) {
         Sprite?.Play("blink");
         targetFade = 0.0f;
@@ -120,9 +121,12 @@ public partial class Player : CharacterBody2D {
         fadeSmoothness = FadeSmoothIn;
         inputStack.Clear();
         Velocity = Vector2.Zero;
-        EnterCombatMusic.Play();
-        ExplocationMusic.Stop();
-        CombatMusic.Stop();
+
+        if (target != null) {
+            EnterCombatMusic.Play();
+            ExplocationMusic.Stop();
+            CombatMusic.Stop();
+        }
 
         isTransitioning = true; // trans rights are human rights
 
@@ -131,12 +135,14 @@ public partial class Player : CharacterBody2D {
             targetDarkDistanceFactor = MaxFactor;
             fadeSmoothness = FadeSmoothOut;
 
-            ExplocationMusic.Stop();
-            CombatMusic.Play();
+            if (target != null) {
+                ExplocationMusic.Stop();
+                CombatMusic.Play();
 
-            CardGame.Visible = true;
-            World.Visible = false;
-            Sprite.Visible = false;
+                CardGame.Visible = true;
+                World.Visible = false;
+                Sprite.Visible = false;
+            }
 
             GetTree().CreateTimer(FadeSmoothInTime / 2.0f).Timeout += () => {
                 isTransitioning = false;

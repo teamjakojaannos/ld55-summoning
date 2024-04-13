@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="LD55"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
+
 [input]
 
 move_left={
