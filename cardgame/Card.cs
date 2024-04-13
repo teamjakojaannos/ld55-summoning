@@ -2,6 +2,9 @@ using Godot;
 
 public partial class Card : Control
 {
+    [Signal]
+    public delegate void AttackAnimationFinishedEventHandler();
+
     private int _MaxHp = 1;
 
     public int MaxHp
@@ -51,7 +54,11 @@ public partial class Card : Control
 
     private bool highlighted = false;
 
-    public AnimationPlayer animation;
+    private AnimationPlayer animation;
+
+    private string attackAnimation = "attack_animation";
+
+    private AttackInfo attackInfo;
 
     public override void _Ready()
     {
@@ -61,6 +68,14 @@ public partial class Card : Control
         numberLabel.Visible = false;
         image = GetNode<TextureRect>("Sprite");
         animation = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        animation.AnimationFinished += (name) =>
+        {
+            if (name == attackAnimation)
+            {
+                EmitSignal(SignalName.AttackAnimationFinished);
+            }
+        };
 
         UpdateLabels();
     }
@@ -112,5 +127,22 @@ public partial class Card : Control
     public void SetNumberLabelVisible(bool visible)
     {
         numberLabel.Visible = visible;
+    }
+
+    public void StartAttack(AttackInfo info)
+    {
+        attackInfo = info;
+        animation.Play(attackAnimation);
+    }
+
+    public void CardAttacks()
+    {
+        if (attackInfo == null)
+        {
+            return;
+        }
+
+        attackInfo.fightManager.CardAttacksTarget(this, attackInfo.target);
+        attackInfo = null;
     }
 }

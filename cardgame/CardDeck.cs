@@ -5,11 +5,11 @@ public class CardDeck
 {
     public List<Card> cards;
 
-    private RandomNumberGenerator rng;
+    private readonly RandomNumberGenerator rng;
 
     public CardDeck(List<Card> cards)
     {
-        this.rng = new RandomNumberGenerator();
+        rng = new RandomNumberGenerator();
         this.cards = cards;
     }
 

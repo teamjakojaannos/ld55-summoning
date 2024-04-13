@@ -37,6 +37,8 @@ public partial class Cardgame : Control
     [Export]
     public Color dimmedFontColor;
 
+    private readonly FightClub fight = new();
+
     public override void _Ready()
     {
         playerDeck = CardDecks.PlayerDeck(cardScene);
@@ -307,8 +309,6 @@ public partial class Cardgame : Control
 
     private void StartButtonPressed()
     {
-        GD.Print("Starting round!");
-        var card = playerCards[0];
-        card.animation.Play("attack_animation");
+        fight.StartFight(cardsOnArena);
     }
 }
