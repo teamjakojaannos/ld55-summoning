@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5uxib0tkhldl"]
 
-[ext_resource type="PackedScene" uid="uid://bab4b1iwllcyj" path="res://characters/player/player.tscn" id="2_0j7dw"]
+[ext_resource type="PackedScene" path="res://characters/player/player.tscn" id="2_0j7dw"]
 [ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="3_rpfxf"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
 [ext_resource type="PackedScene" uid="uid://dkuq61u6l4jg6" path="res://cardgame/cardgame.tscn" id="4_wotui"]
