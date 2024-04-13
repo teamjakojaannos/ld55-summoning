@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5uxib0tkhldl"]
+
+[ext_resource type="Script" path="res://characters/player/Player.cs" id="2_0rqpo"]
+[ext_resource type="Texture2D" uid="uid://tlcx8c808g5q" path="res://characters/player/placeholder.png" id="2_2g1p5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5oc5c"]
+radius = 12.0
+
+[node name="World" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("2_0rqpo")
+
+[node name="Camera" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+texture_filter = 1
+texture = ExtResource("2_2g1p5")
+
+[node name="Collider" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_5oc5c")
+
+[node name="Placeholder" type="Sprite2D" parent="."]
+position = Vector2(-88, 38)
+texture = ExtResource("2_2g1p5")
+
+[node name="Placeholder2" type="Sprite2D" parent="."]
+position = Vector2(104, 44)
+texture = ExtResource("2_2g1p5")
+
+[node name="Placeholder3" type="Sprite2D" parent="."]
+position = Vector2(89, -53)
+texture = ExtResource("2_2g1p5")
