@@ -43,6 +43,8 @@ public partial class Player : CharacterBody2D {
     [Export]
     public AudioStreamPlayer ExplocationMusic;
 
+    public bool IsInCinematic = false;
+
     private List<InputDirection> inputStack = new();
 
 
@@ -77,7 +79,7 @@ public partial class Player : CharacterBody2D {
             (Blackout.Material as ShaderMaterial)?.SetShaderParameter("darkness_dist_factor", darkDistanceFactor);
         }
 
-        if (isTransitioning) {
+        if (isTransitioning || IsInCinematic) {
             return;
         }
 
