@@ -1,12 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bp54mqr1xevpj"]
+[gd_scene load_steps=8 format=3 uid="uid://bp54mqr1xevpj"]
 
 [ext_resource type="Script" path="res://ui/DialogueBox.cs" id="1_jcw2h"]
 [ext_resource type="Texture2D" uid="uid://biu4fdq50ba8s" path="res://characters/player/paju.png" id="2_jeau3"]
 [ext_resource type="Texture2D" uid="uid://cxsnnw763sb0a" path="res://characters/oldwiz/portrait.png" id="3_g73vp"]
 [ext_resource type="Texture2D" uid="uid://buubtqg2r3j5c" path="res://ui/portraitframeidk.png" id="4_ln6t8"]
 [ext_resource type="Texture2D" uid="uid://dns7biallgvii" path="res://ui/dialogiboxi.png" id="4_rlmk0"]
+[ext_resource type="FontFile" uid="uid://c4mu6ad8db5c6" path="res://fonts/ancient-modern-tales/Ancient Modern Tales.otf" id="6_idtfq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ibpn2"]
+font = ExtResource("6_idtfq")
+font_size = 24
 font_color = Color(0, 0, 0, 1)
 
 [node name="DialogueBox" type="CanvasLayer"]
@@ -94,10 +97,12 @@ texture_filter = 6
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 8.0
-offset_bottom = 79.0
+offset_left = 7.79999
+offset_top = 9.40002
+offset_right = -0.200012
+offset_bottom = 88.4
 grow_horizontal = 2
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet cursus dolor vitae semper. Ut non vulputate leo. In feugiat vitae odio non dictum. Phasellus eget sapien at magna tristique egestas. "
+text = "Onko kalia tehtaalla? -Antakkee."
 label_settings = SubResource("LabelSettings_ibpn2")
 vertical_alignment = 1
 autowrap_mode = 2
