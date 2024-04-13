@@ -1,7 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
-[ext_resource type="Texture2D" uid="uid://tlcx8c808g5q" path="res://characters/player/placeholder.png" id="2_65xeo"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y58rh"]
+load_path = "res://.godot/imported/placeholder.png-a9138d498dab4b0497017c3f706370aa.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tldo4"]
 draw_center = false
@@ -29,7 +31,7 @@ offset_top = -100.0
 offset_right = 200.0
 offset_bottom = 100.0
 grow_vertical = 2
-texture = ExtResource("2_65xeo")
+texture = SubResource("CompressedTexture2D_y58rh")
 
 [node name="Opponent" type="TextureRect" parent="."]
 layout_mode = 1
@@ -43,7 +45,7 @@ offset_top = -100.0
 offset_bottom = 100.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("2_65xeo")
+texture = SubResource("CompressedTexture2D_y58rh")
 flip_h = true
 
 [node name="Hand" type="HBoxContainer" parent="."]

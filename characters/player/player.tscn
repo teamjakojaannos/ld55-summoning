@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bab4b1iwllcyj"]
+
+[ext_resource type="Script" path="res://characters/player/Player.cs" id="1_5bvc4"]
+[ext_resource type="SpriteFrames" uid="uid://drw3rmjddgl1i" path="res://characters/player/player_frames.tres" id="2_i5gad"]
+[ext_resource type="Shader" path="res://fadeout.gdshader" id="3_xv0ck"]
+[ext_resource type="Script" path="res://Overlay.cs" id="4_vkyin"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5oc5c"]
+radius = 12.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_82o1f"]
+shader = ExtResource("3_xv0ck")
+shader_parameter/bright_dist = 75.0
+shader_parameter/darkness_dist_factor = 0.33
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout")]
+script = ExtResource("1_5bvc4")
+Sprite = NodePath("Sprite")
+Blackout = NodePath("BlackoutOverlay")
+FadeSmoothOut = 0.01
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_i5gad")
+animation = &"walk_up"
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5oc5c")
+
+[node name="BlackoutOverlay" type="Polygon2D" parent="."]
+visible = false
+top_level = true
+material = SubResource("ShaderMaterial_82o1f")
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4000, -4000, 4000, -4000, 4000, 4000, -4000, 4000)
+script = ExtResource("4_vkyin")
