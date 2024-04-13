@@ -5,16 +5,6 @@ public partial class Cardgame : Control
 {
     private readonly bool DEBUG_MODE = false;
 
-    enum ArenaPosition
-    {
-        TopLeft,
-        TopMid,
-        TopRight,
-        BotLeft,
-        BotMid,
-        BotRight,
-    }
-
     private readonly Dictionary<ArenaPosition, Vector2> arenaPositions = new();
 
     enum Mode
