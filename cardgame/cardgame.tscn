@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dkuq61u6l4jg6"]
 
-[ext_resource type="Texture2D" uid="uid://ck346sgan4pna" path="res://ui/placeholder-card.png" id="1_e314s"]
+[ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Texture2D" uid="uid://tlcx8c808g5q" path="res://characters/player/placeholder.png" id="2_65xeo"]
 
 [node name="Cardgame" type="Control"]
@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_f1vsu")
 
 [node name="Player" type="TextureRect" parent="."]
 layout_mode = 1
@@ -39,31 +40,72 @@ flip_h = true
 
 [node name="Hand" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -20.0
+offset_top = -155.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="Card" type="TextureRect" parent="Hand"]
-layout_mode = 2
-texture = ExtResource("1_e314s")
+[node name="EnemyHand" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_top = 40.0
+offset_right = 576.0
+offset_bottom = 168.0
+grow_horizontal = 2
+alignment = 1
 
-[node name="Card2" type="TextureRect" parent="Hand"]
-layout_mode = 2
-texture = ExtResource("1_e314s")
+[node name="Arena" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 424.0
+offset_top = 201.0
+offset_right = 728.0
+offset_bottom = 464.0
 
-[node name="Card3" type="TextureRect" parent="Hand"]
-layout_mode = 2
-texture = ExtResource("1_e314s")
+[node name="TopLeft" type="Control" parent="Arena"]
+anchors_preset = 0
+offset_right = 96.0
+offset_bottom = 128.0
 
-[node name="Card4" type="TextureRect" parent="Hand"]
-layout_mode = 2
-texture = ExtResource("1_e314s")
+[node name="TopMid" type="Control" parent="Arena"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 106.0
+offset_right = 202.0
+offset_bottom = 128.0
 
-[node name="Card5" type="TextureRect" parent="Hand"]
-layout_mode = 2
-texture = ExtResource("1_e314s")
+[node name="TopRight" type="Control" parent="Arena"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 212.0
+offset_right = 308.0
+offset_bottom = 128.0
+
+[node name="BotLeft" type="Control" parent="Arena"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 140.0
+offset_right = 96.0
+offset_bottom = 268.0
+
+[node name="BotMid" type="Control" parent="Arena"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 106.0
+offset_top = 140.0
+offset_right = 202.0
+offset_bottom = 268.0
+
+[node name="BotRight" type="Control" parent="Arena"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 212.0
+offset_top = 140.0
+offset_right = 308.0
+offset_bottom = 268.0

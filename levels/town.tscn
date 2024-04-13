@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=6 format=3 uid="uid://c5uxib0tkhldl"]
 
 [ext_resource type="Script" path="res://characters/player/Player.cs" id="2_0rqpo"]
 [ext_resource type="Texture2D" uid="uid://tlcx8c808g5q" path="res://characters/player/placeholder.png" id="2_2g1p5"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
+[ext_resource type="PackedScene" uid="uid://dkuq61u6l4jg6" path="res://cardgame/cardgame.tscn" id="4_wotui"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5oc5c"]
 radius = 12.0
@@ -38,3 +39,7 @@ texture = ExtResource("2_2g1p5")
 [node name="Placeholder3" type="Sprite2D" parent="."]
 position = Vector2(89, -53)
 texture = ExtResource("2_2g1p5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Cardgame" parent="CanvasLayer" instance=ExtResource("4_wotui")]

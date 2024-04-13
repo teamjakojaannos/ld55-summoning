@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbkof1h8cra7f"]
+
+[ext_resource type="Texture2D" uid="uid://ck346sgan4pna" path="res://ui/placeholder-card.png" id="1_g85s3"]
+
+[node name="Card" type="TextureRect"]
+texture = ExtResource("1_g85s3")
