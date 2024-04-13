@@ -129,6 +129,12 @@ public partial class Cardgame : Control
 
     public override void _Input(InputEvent inputEvent)
     {
+        if (inputEvent.IsActionPressed("esc"))
+        {
+            SwitchMode(Mode.SelectingCard);
+            return;
+        }
+
         var num_keys = new List<string>()
         {
             "num_1",
@@ -169,9 +175,10 @@ public partial class Cardgame : Control
             return;
         }
 
+        SwitchMode(Mode.SelectingPosition);
+
         selectedCardIndex = cardIndex;
-        currentMode = Mode.SelectingPosition;
-        SetHighlights(toCards: false, toPositions: true);
+        HighlightSelectedCard();
     }
 
     private void TryPlayCard(int positionIndex)
@@ -201,11 +208,11 @@ public partial class Cardgame : Control
         if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count)
         {
             // we should never end up in here
-            currentMode = Mode.SelectingCard;
-            SetHighlights(toCards: true, toPositions: false);
+            SwitchMode(Mode.SelectingCard);
             return;
         }
 
+        ClearSelectedCardHighlight();
         var cardIndex = selectedCardIndex.Value;
         var card = playerCards[cardIndex];
         playerCards.RemoveAt(cardIndex);
@@ -214,8 +221,7 @@ public partial class Cardgame : Control
 
         UpdateCardLabels();
 
-        currentMode = Mode.SelectingCard;
-        SetHighlights(toCards: true, toPositions: false);
+        SwitchMode(Mode.SelectingCard);
     }
 
     private void AddCardToArena(Card card, ArenaPosition position)
@@ -225,6 +231,44 @@ public partial class Cardgame : Control
         arena.AddChild(card);
         card.Position = arenaPositions[position];
         cardsOnArena[position] = card;
+    }
+
+    private void SwitchMode(Mode newMode)
+    {
+        ClearSelectedCardHighlight();
+        currentMode = newMode;
+
+        switch (newMode)
+        {
+            case Mode.SelectingCard:
+                SetHighlights(toCards: true, toPositions: false);
+                break;
+            case Mode.SelectingPosition:
+                SetHighlights(toCards: false, toPositions: true);
+                break;
+        }
+    }
+
+    private void HighlightSelectedCard()
+    {
+        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count)
+        {
+            return;
+        }
+
+        var card = playerCards[selectedCardIndex.Value];
+        card.SetHighlighted(true);
+    }
+
+    private void ClearSelectedCardHighlight()
+    {
+        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count)
+        {
+            return;
+        }
+
+        var card = playerCards[selectedCardIndex.Value];
+        card.SetHighlighted(false);
     }
 
     private void SetHighlights(bool toCards, bool toPositions)

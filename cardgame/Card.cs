@@ -47,12 +47,17 @@ public partial class Card : VBoxContainer
     private Label dmgLabel;
     private Label numberLabel;
 
+    private TextureRect image;
+
+    private bool highlighted = false;
+
     public override void _Ready()
     {
         hpLabel = GetNode<Label>("Card/HpLabel");
         dmgLabel = GetNode<Label>("Card/DamageLabel");
         numberLabel = GetNode<Label>("NumberKey");
         numberLabel.Visible = false;
+        image = GetNode<TextureRect>("Card");
 
         UpdateLabels();
     }
@@ -66,6 +71,29 @@ public partial class Card : VBoxContainer
 
         hpLabel.Text = $"HP: {CurrentHp} / {MaxHp}";
         dmgLabel.Text = $"DMG: {Damage}";
+    }
+
+    public void SetHighlighted(bool highlighted)
+    {
+        var noChange = this.highlighted == highlighted;
+        if (noChange)
+        {
+            return;
+        }
+
+        var highlightOffset = new Vector2(0, -10.0f);
+
+        this.highlighted = highlighted;
+        if (highlighted)
+        {
+            // add highlight
+            image.Position += highlightOffset;
+        }
+        else
+        {
+            // remove highlight
+            image.Position -= highlightOffset;
+        }
     }
 
     public void SetNumberLabelText(string text)
