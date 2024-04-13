@@ -25,8 +25,14 @@ public partial class Cardgame : Control
 
     private readonly List<Card> playerCards = new();
 
+    private CardDeck playerDeck;
+    private CardDeck enemyDeck;
+
     public override void _Ready()
     {
+        playerDeck = CardDecks.PlayerDeck(cardScene);
+        enemyDeck = CardDecks.EnemyDeck(cardScene);
+
         playerHand = GetNode<HBoxContainer>("Hand");
         enemyHand = GetNode<HBoxContainer>("EnemyHand");
         arena = GetNode<Control>("Arena");
@@ -80,38 +86,10 @@ public partial class Cardgame : Control
 
     private void PlaceCardsInHands()
     {
-        var playerDrawnCards = new List<Card>();
-        {
-            var c1 = cardScene.Instantiate<Card>();
-            c1.MaxHp = 42;
-            c1.CurrentHp = 42;
-            c1.Damage = 10;
-            playerDrawnCards.Add(c1);
+        var playerCardsCount = 5;
+        var enemyCardsCount = 5;
 
-            var c2 = cardScene.Instantiate<Card>();
-            c2.MaxHp = 420;
-            c2.CurrentHp = 420;
-            c2.Damage = 100;
-            playerDrawnCards.Add(c2);
-
-            var c3 = cardScene.Instantiate<Card>();
-            c3.MaxHp = 69;
-            c3.CurrentHp = 69;
-            c3.Damage = 6;
-            playerDrawnCards.Add(c3);
-
-            var c4 = cardScene.Instantiate<Card>();
-            c4.MaxHp = 666;
-            c4.CurrentHp = 666;
-            c4.Damage = 666;
-            playerDrawnCards.Add(c4);
-
-            var c5 = cardScene.Instantiate<Card>();
-            c5.MaxHp = 1;
-            c5.CurrentHp = 1;
-            c5.Damage = 1;
-            playerDrawnCards.Add(c5);
-        }
+        var playerDrawnCards = playerDeck.Draw(playerCardsCount);
 
         foreach (var card in playerDrawnCards)
         {
@@ -120,38 +98,7 @@ public partial class Cardgame : Control
             card.SetNumberLabelVisible(true);
         }
 
-        var enemyDrawnCards = new List<Card>();
-        {
-            var c1 = cardScene.Instantiate<Card>();
-            c1.MaxHp = 2;
-            c1.CurrentHp = 2;
-            c1.Damage = 2;
-            enemyDrawnCards.Add(c1);
-
-            var c2 = cardScene.Instantiate<Card>();
-            c2.MaxHp = 4;
-            c2.CurrentHp = 4;
-            c2.Damage = 4;
-            enemyDrawnCards.Add(c2);
-
-            var c3 = cardScene.Instantiate<Card>();
-            c3.MaxHp = 6;
-            c3.CurrentHp = 6;
-            c3.Damage = 6;
-            enemyDrawnCards.Add(c3);
-
-            var c4 = cardScene.Instantiate<Card>();
-            c4.MaxHp = 8;
-            c4.CurrentHp = 8;
-            c4.Damage = 8;
-            enemyDrawnCards.Add(c4);
-
-            var c5 = cardScene.Instantiate<Card>();
-            c5.MaxHp = 10;
-            c5.CurrentHp = 10;
-            c5.Damage = 10;
-            enemyDrawnCards.Add(c5);
-        }
+        var enemyDrawnCards = enemyDeck.Draw(enemyCardsCount);
 
         foreach (var card in enemyDrawnCards)
         {
