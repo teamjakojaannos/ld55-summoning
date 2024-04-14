@@ -22,7 +22,7 @@ shader_parameter/darkness_dist_factor = 0.33
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic")]
 z_index = 1
 script = ExtResource("1_5bvc4")
-MoveSpeed = 64.0
+MoveSpeed = 120.0
 Sprite = NodePath("Sprite")
 Blackout = NodePath("BlackoutOverlay")
 FadeSmoothOut = 0.01
