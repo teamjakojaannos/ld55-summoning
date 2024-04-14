@@ -6,6 +6,9 @@ public partial class FightClub : Control
     [Signal]
     public delegate void FightRoundEndedEventHandler();
 
+    [Signal]
+    public delegate void CardAttacksCharacterEventHandler(bool attackerIsPlayer, int damage);
+
     private readonly List<ArenaPosition> fightOrder =
         new()
         {
@@ -65,13 +68,14 @@ public partial class FightClub : Control
     {
         fightInProgress = false;
         EmitSignal(SignalName.FightRoundEnded);
+        cardsOnArena = null;
     }
 
-    public void CardAttacksTarget(Card attacker, Card target)
+    public void CardAttacksTarget(Card attacker, Card target, bool IsPlayersCard)
     {
         if (target == null)
         {
-            GD.Print("Boom!");
+            EmitSignal(SignalName.CardAttacksCharacter, IsPlayersCard, attacker.Damage);
         }
         else
         {

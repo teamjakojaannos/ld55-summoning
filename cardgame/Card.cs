@@ -64,6 +64,8 @@ public partial class Card : Control
 
     private AttackInfo attackInfo;
 
+    public bool IsPlayersCard = false;
+
     public override void _Ready()
     {
         hpLabel = GetNode<Label>("Sprite/HpLabel");
@@ -146,7 +148,7 @@ public partial class Card : Control
             return;
         }
 
-        attackInfo.fightManager.CardAttacksTarget(this, attackInfo.target);
+        attackInfo.fightManager.CardAttacksTarget(this, attackInfo.target, IsPlayersCard);
         attackInfo = null;
     }
 

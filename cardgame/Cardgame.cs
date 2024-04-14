@@ -46,6 +46,9 @@ public partial class Cardgame : Control
 
     private Button startFightButton;
 
+    private HpBar playerHp;
+    private HpBar enemyHp;
+
     public override void _Ready()
     {
         playerPiles = GetNode<CardPiles>("PlayerPiles");
@@ -58,6 +61,16 @@ public partial class Cardgame : Control
         arena = GetNode<Control>("Arena");
 
         startFightButton = GetNode<Button>("ButtonStart");
+
+        var playerHitpoints = 20;
+        playerHp = GetNode<HpBar>("PlayerHp");
+        playerHp.MaxHp = playerHitpoints;
+        playerHp.CurrentHp = playerHitpoints;
+
+        var enemyHitpoints = 20;
+        enemyHp = GetNode<HpBar>("EnemyHp");
+        enemyHp.MaxHp = enemyHitpoints;
+        enemyHp.CurrentHp = enemyHitpoints;
 
         var list = new List<(ArenaPosition, string)>()
         {
@@ -93,8 +106,8 @@ public partial class Cardgame : Control
             "Arena/NumberLabels/NumberRight"
         );
 
-        // tried connecting this in editor, didn't work for some reason. Let's do it manually then
         fight.FightRoundEnded += FightRoundEnded;
+        fight.CardAttacksCharacter += DamageCharacter;
 
         DrawCardsToHands();
         SwitchMode(Mode.SelectingCard);
@@ -137,6 +150,7 @@ public partial class Cardgame : Control
             playerHand.AddChild(card);
             playerCards.Add(card);
             card.SetNumberLabelVisible(true);
+            card.IsPlayersCard = true;
         }
 
         var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
@@ -374,6 +388,18 @@ public partial class Cardgame : Control
         {
             AddCardToArena(card, position, enemyHand);
             enemyCards.Remove(card);
+        }
+    }
+
+    private void DamageCharacter(bool isPlayersCard, int damage)
+    {
+        if (isPlayersCard)
+        {
+            enemyHp.CurrentHp -= damage;
+        }
+        else
+        {
+            playerHp.CurrentHp -= damage;
         }
     }
 }
