@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://c3xalr8g64d1t"]
+[gd_scene load_steps=30 format=3 uid="uid://c3xalr8g64d1t"]
 
 [ext_resource type="Texture2D" uid="uid://dryobx1h7r14w" path="res://environment/tileset2.png" id="1_2nt7k"]
+[ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="1_8m7yw"]
 [ext_resource type="Texture2D" uid="uid://b7x6ay4f8qio6" path="res://environment/bushA.png" id="2_x0lmx"]
 [ext_resource type="Texture2D" uid="uid://brll1ljnrs4x1" path="res://environment/stoneA.png" id="3_mavkx"]
 [ext_resource type="Texture2D" uid="uid://bsyb1a152l3ut" path="res://environment/mushroomsA.png" id="4_80rf8"]
@@ -1033,6 +1034,14 @@ y_sort_enabled = true
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-146, 310)
+
+[node name="WizardExit" type="Marker2D" parent="."]
+position = Vector2(-440, -235)
+
+[node name="LevelTransition" parent="." instance=ExtResource("1_8m7yw")]
+position = Vector2(-441, -297)
+levelName = "res://levels/wizard_cellar.tscn"
+spawnPointName = "DoorSpawn"
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true

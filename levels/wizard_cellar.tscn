@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://k14qken2ftqt"]
+[gd_scene load_steps=33 format=3 uid="uid://k14qken2ftqt"]
 
 [ext_resource type="Texture2D" uid="uid://ca6oyteg4v0cr" path="res://characters/player/paju_cat.png" id="1_7sev4"]
 [ext_resource type="Script" path="res://levels/WizardCellarIntro.cs" id="1_dg2sj"]
 [ext_resource type="TileSet" uid="uid://deyetstqvid75" path="res://levels/interior.tres" id="2_c6kni"]
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="2_wg7nh"]
 [ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="6_o2b5j"]
+[ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="7_qs3lo"]
 [ext_resource type="Texture2D" uid="uid://cldw4n30xxyni" path="res://characters/oldwiz/ded.png" id="9_1n014"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnr3e"]
@@ -272,6 +273,9 @@ animation = &"kitty_idle"
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-37, 31)
 
+[node name="DoorSpawn" type="Marker2D" parent="."]
+position = Vector2(140, 48)
+
 [node name="Sequence" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_7ux4k")
@@ -333,3 +337,8 @@ debug_color = Color(0.839216, 0.25098, 1, 1)
 position = Vector2(93.9791, -36.672)
 scale = Vector2(1.37981, 1.58809)
 texture = ExtResource("6_o2b5j")
+
+[node name="LevelTransition" parent="." instance=ExtResource("7_qs3lo")]
+position = Vector2(147, 84)
+levelName = "res://levels/forest.tscn"
+spawnPointName = "WizardExit"
