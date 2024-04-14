@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=25 format=3 uid="uid://c5uxib0tkhldl"]
 
 [ext_resource type="Texture2D" uid="uid://bmg7yairwg68" path="res://characters/monster/airmonster1/airmonster1idle.png" id="3_1fktf"]
 [ext_resource type="Script" path="res://characters/monster/Monster.cs" id="3_ekxxi"]
@@ -45,6 +45,8 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cniv6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6thvd"]
 atlas = ExtResource("5_hh6cj")
@@ -127,9 +129,14 @@ position = Vector2(-112, -48)
 Lines = ["Mjäyy", "Oon kissa"]
 Who = 0
 
-[node name="Monster" type="Node2D" parent="World"]
-position = Vector2(88, 16)
+[node name="Monster" type="CharacterBody2D" parent="World" node_paths=PackedStringArray("MoveTimer")]
+position = Vector2(64, 16)
 script = ExtResource("3_ekxxi")
+MoveTimer = NodePath("MoveTimer")
+
+[node name="MoveTimer" type="Timer" parent="World/Monster"]
+wait_time = 5.0
+autostart = true
 
 [node name="EncounterTrigger" parent="World/Monster" instance=ExtResource("3_rpfxf")]
 
@@ -137,6 +144,10 @@ script = ExtResource("3_ekxxi")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_r4hc4")
 autoplay = "default"
+frame_progress = 0.486833
+
+[node name="Collider" type="CollisionShape2D" parent="World/Monster"]
+shape = SubResource("CircleShape2D_cniv6")
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)
