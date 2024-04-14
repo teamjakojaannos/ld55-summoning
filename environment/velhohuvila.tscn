@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://es6qmyql0xh"]
+
+[ext_resource type="Texture2D" uid="uid://dv8aomkwolf63" path="res://environment/mokkivielaenemmapilkottu.png" id="1_p7815"]
+[ext_resource type="Texture2D" uid="uid://bi864adap3yla" path="res://environment/mokkivarjo.png" id="3_kce36"]
+[ext_resource type="Texture2D" uid="uid://b13yhaeo1hgcv" path="res://environment/mokkikatos.png" id="4_mtwut"]
+
+[node name="Velhohuvila" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(13, -56)
+texture = ExtResource("1_p7815")
+offset = Vector2(16.885, -54.445)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-14, -27)
+texture = ExtResource("3_kce36")
+offset = Vector2(43.6, -82.845)
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-14, -27)
+texture = ExtResource("4_mtwut")
+offset = Vector2(43.915, -83.435)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(35, -41, 61, -51, 62, -99, 8, -101, -41, -100, -44, -70, -56, -61, -39, -47, -35, -47, -32, -27, -29, -27, -29, -66, -3, -66, 2, -66, 0, -26, 14, -31)
