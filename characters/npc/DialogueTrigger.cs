@@ -9,10 +9,12 @@ public partial class DialogueTrigger : Area2D {
 	public WhoIsSpeaking Who = WhoIsSpeaking.OldWiz;
 
     public override void _Ready() {
-        BodyEntered += (other) => {
-            if (other is not Player player) {
+        AreaEntered += (other) => {
+            if (other is not InteractArea interactArea) {
                 return;
             }
+
+            var player = interactArea.Player;
 
             var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
 			dialogue.Start(Who, Lines.ToArray());

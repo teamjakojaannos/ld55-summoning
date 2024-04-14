@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bab4b1iwllcyj"]
+[gd_scene load_steps=12 format=3 uid="uid://bab4b1iwllcyj"]
 
 [ext_resource type="Script" path="res://characters/player/Player.cs" id="1_5bvc4"]
 [ext_resource type="SpriteFrames" uid="uid://drw3rmjddgl1i" path="res://characters/player/player_frames.tres" id="2_i5gad"]
@@ -7,17 +7,18 @@
 [ext_resource type="AudioStream" uid="uid://6xjllywvyi6x" path="res://muzak/combattiin.ogg" id="5_cqvfs"]
 [ext_resource type="AudioStream" uid="uid://vyjdtfu2x8u7" path="res://muzak/seikkailu.ogg" id="6_r4xdn"]
 [ext_resource type="AudioStream" uid="uid://dd128wv6pmpug" path="res://muzak/combatjyta.ogg" id="7_6k6bx"]
+[ext_resource type="Script" path="res://characters/player/InteractArea.cs" id="8_b1013"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5oc5c"]
 radius = 6.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ay31u"]
-radius = 15.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_82o1f"]
 shader = ExtResource("3_xv0ck")
 shader_parameter/bright_dist = 75.0
 shader_parameter/darkness_dist_factor = 0.33
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ay31u"]
+radius = 16.0312
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic")]
 z_index = 1
@@ -45,11 +46,6 @@ frame_progress = 0.375473
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_5oc5c")
 
-[node name="InteractCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
-shape = SubResource("CircleShape2D_ay31u")
-debug_color = Color(0.588235, 0.54902, 0.0431373, 0.207843)
-
 [node name="BlackoutOverlay" type="Polygon2D" parent="."]
 visible = false
 top_level = true
@@ -70,3 +66,14 @@ bus = &"Music"
 [node name="CombatMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6k6bx")
 bus = &"Music"
+
+[node name="InteractArea" type="Area2D" parent="." node_paths=PackedStringArray("Player")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("8_b1013")
+Player = NodePath("..")
+
+[node name="InteractCollider" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_ay31u")
+debug_color = Color(0.588235, 0.54902, 0.0431373, 0.207843)

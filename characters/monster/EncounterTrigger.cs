@@ -1,13 +1,13 @@
 using Godot;
-using System;
 
 public partial class EncounterTrigger : Area2D {
     public override void _Ready() {
-        BodyEntered += (other) => {
-            if (other is not Player player) {
+        AreaEntered += (other) => {
+            if (other is not InteractArea interactArea) {
                 return;
             }
 
+            var player = interactArea.Player;
             player.StartEncounter(this);
         };
     }
