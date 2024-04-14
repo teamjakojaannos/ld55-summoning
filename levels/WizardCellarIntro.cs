@@ -1,12 +1,11 @@
 using Godot;
-using System;
 
 public partial class WizardCellarIntro : Node2D {
     [Export]
     public AnimationPlayer Animation;
 
     private Player Player {
-		get => GetNode<Player>("/root/Player");
+		get => GetNode<GameManager>("/root/GameManager").Player;
 	}
 
     [Export]

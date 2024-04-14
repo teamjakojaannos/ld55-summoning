@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://t2q6s7oiiali"]
+
+[ext_resource type="Script" path="res://GameManager.cs" id="1_212tw"]
+[ext_resource type="PackedScene" uid="uid://bab4b1iwllcyj" path="res://characters/player/player.tscn" id="2_epksi"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_212tw")
+PlayerTemplate = ExtResource("2_epksi")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuehij7c7hxu5"
-path="res://.godot/imported/airmonster1idlestatic.png-554b8d12d34802d4f6080d2d027f2a95.ctex"
+uid="uid://bmg7yairwg68"
+path="res://.godot/imported/airmonster1idle.png-b1a66569df995bf9ac8f046e641955ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/monster/airmonster1idlestatic.png"
-dest_files=["res://.godot/imported/airmonster1idlestatic.png-554b8d12d34802d4f6080d2d027f2a95.ctex"]
+source_file="res://characters/monster/airmonster1/airmonster1idle.png"
+dest_files=["res://.godot/imported/airmonster1idle.png-b1a66569df995bf9ac8f046e641955ad.ctex"]
 
 [params]
 

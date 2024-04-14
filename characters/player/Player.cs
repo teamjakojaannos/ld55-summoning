@@ -49,7 +49,7 @@ public partial class Player : CharacterBody2D {
     private List<InputDirection> inputStack = new();
 
 
-    private float fadeSmoothness  = 1.0f;
+    private float fadeSmoothness = 1.0f;
     private float fadeDistance = 25.0f;
     private float darkDistanceFactor = 25.0f;
     private float targetFade = 25.0f;
@@ -71,12 +71,11 @@ public partial class Player : CharacterBody2D {
     }
 
     public override void _EnterTree() {
-        var startNode = GetTree().Root.FindChild("PlayerStart", true, false);
-        if (startNode is Marker2D startMarker) {
-            GlobalPosition = startMarker.GlobalPosition;
-        } else {
-            GD.PushError("Could not find PlayerStart");
-        }
+    }
+
+    private void SwapParent(Node newParent) {
+        GetParent().RemoveChild(this);
+        newParent.AddChild(this);
     }
 
     public override void _Process(double delta) {

@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DialogueBox="*res://dialogue_box.tscn"
-Player="*res://characters/player/player.tscn"
+GameManager="*res://GameManager.tscn"
 
 [dotnet]
 

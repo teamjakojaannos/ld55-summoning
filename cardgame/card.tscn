@@ -5,7 +5,7 @@
 [ext_resource type="LabelSettings" uid="uid://d4i6c4p5ov570" path="res://cardgame/card_label_settings.tres" id="3_55x7t"]
 [ext_resource type="FontFile" uid="uid://c4mu6ad8db5c6" path="res://fonts/ancient-modern-tales/Ancient Modern Tales.otf" id="3_abhoh"]
 [ext_resource type="Texture2D" uid="uid://bvig3hpq14s0v" path="res://cardgame/airsymbol.png" id="5_yf3yf"]
-[ext_resource type="Texture2D" uid="uid://cuehij7c7hxu5" path="res://characters/monster/airmonster1idlestatic.png" id="6_b54ei"]
+[ext_resource type="Texture2D" uid="uid://cuehij7c7hxu5" path="res://characters/monster/airmonster1/airmonster1idlestatic.png" id="6_b54ei"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qk7eb"]
 font = ExtResource("3_abhoh")

@@ -6,12 +6,13 @@
 size = Vector2(14, 4)
 
 [node name="TreeObject" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_as_relative = false
 y_sort_enabled = true
 texture = ExtResource("1_qgs2v")
-offset = Vector2(0, -23.365)
+offset = Vector2(0, -16.01)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 y_sort_enabled = true

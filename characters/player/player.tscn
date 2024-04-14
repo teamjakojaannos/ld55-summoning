@@ -37,10 +37,10 @@ zoom = Vector2(4, 4)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -20)
 sprite_frames = ExtResource("2_i5gad")
 animation = &"hold_item"
 frame_progress = 0.375473
+offset = Vector2(0, -21.09)
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)

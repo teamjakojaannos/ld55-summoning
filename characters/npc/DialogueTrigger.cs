@@ -29,7 +29,7 @@ public partial class DialogueTrigger : Area2D {
 		var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
 		dialogue.DialogueFinished += DialogueFinished;
 
-		var player = GetNode<Player>("/root/Player");
+		var player = GetNode<GameManager>("/root/GameManager").Player;
 		player.IsInCinematic = false;
 	}
 }
