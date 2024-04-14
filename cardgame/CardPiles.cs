@@ -6,6 +6,9 @@ public partial class CardPiles : Control
     private Label labelDrawPile;
     private Label labelDiscardPile;
 
+    private Vector2 positionDrawPile;
+    private Vector2 positionDiscardPile;
+
     private CardDeck drawPile = new();
 
     private readonly List<Card> discardPile = new();
@@ -14,6 +17,9 @@ public partial class CardPiles : Control
     {
         labelDrawPile = GetNode<Label>("LabelDrawPile");
         labelDiscardPile = GetNode<Label>("LabelDiscardPile");
+
+        positionDrawPile = GetNode<Marker2D>("DrawPilePosition").Position;
+        positionDiscardPile = GetNode<Marker2D>("DiscardPilePosition").Position;
 
         UpdateLabels();
     }
@@ -38,18 +44,26 @@ public partial class CardPiles : Control
         return result;
     }
 
-    public void DiscardCards(List<Card> cards)
+    public void DiscardCards(List<Card> cards, float animationTime)
     {
         foreach (var card in cards)
         {
             discardPile.Add(card);
-
-            card.Position = new(0, 0);
-            card.Visible = false;
+            // TODO: play animation on card
+            card.StartMovingTo(DiscardPilePosition(), animationTime);
         }
 
         cards.Clear();
         UpdateLabels();
+    }
+
+    public void EndDiscardAnimation()
+    {
+        foreach (var card in discardPile)
+        {
+            card.StopMovement();
+            card.Visible = false;
+        }
     }
 
     public void AddCardsAsChildren(Node parentNode)
@@ -78,5 +92,20 @@ public partial class CardPiles : Control
         drawPile.Shuffle();
 
         UpdateLabels();
+    }
+
+    public Vector2 DrawPilePosition()
+    {
+        return Position + positionDrawPile;
+    }
+
+    public Vector2 DiscardPilePosition()
+    {
+        return Position + positionDiscardPile;
+    }
+
+    public void PlayRecycleAnimation()
+    {
+        // TODO:
     }
 }

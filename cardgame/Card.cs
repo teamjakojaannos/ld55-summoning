@@ -67,6 +67,12 @@ public partial class Card : Control
 
     public bool IsPlayersCard = false;
 
+    private Vector2 oldPosition;
+    private Vector2 targetPosition;
+
+    private float movementTime = 1.0f;
+    private float moveProgress = 0.0f;
+
     public override void _Ready()
     {
         hpLabel = GetNode<Label>("Sprite/HpLabel");
@@ -84,7 +90,18 @@ public partial class Card : Control
             }
         };
 
+        oldPosition = Position;
+        targetPosition = Position;
+
         UpdateLabels();
+    }
+
+    public override void _Process(double delta)
+    {
+        moveProgress += (float)delta;
+        var t = Mathf.Clamp(moveProgress / movementTime, 0.0f, 1.0f);
+
+        Position = oldPosition.Lerp(targetPosition, t);
     }
 
     public void UpdateLabels()
@@ -162,5 +179,27 @@ public partial class Card : Control
     public void PlayDieAnimation()
     {
         animation.Play("die");
+    }
+
+    public void MoveInstantlyTo(Vector2 position)
+    {
+        Position = position;
+        targetPosition = Position;
+        oldPosition = Position;
+        moveProgress = 1.0f;
+    }
+
+    public void StartMovingTo(Vector2 target, float movementTime)
+    {
+        targetPosition = target;
+        oldPosition = Position;
+        this.movementTime = movementTime;
+        moveProgress = 0.0f;
+    }
+
+    public void StopMovement()
+    {
+        moveProgress = 1.0f;
+        Position = targetPosition;
     }
 }

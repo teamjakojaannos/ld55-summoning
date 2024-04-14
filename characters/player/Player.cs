@@ -162,6 +162,9 @@ public partial class Player : CharacterBody2D {
 
             GetTree().CreateTimer(FadeSmoothInTime / 2.0f).Timeout += () => {
                 isTransitioning = false;
+                var cardGameLayer = GetTree().Root.FindChild("CardGameLayer", true, false);
+                var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
+                cardGame.StartCombat();
             };
         };
     }

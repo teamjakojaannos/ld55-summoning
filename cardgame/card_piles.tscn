@@ -43,3 +43,9 @@ offset_top = 96.0
 offset_right = 251.0
 offset_bottom = 119.0
 text = "Discard pile"
+
+[node name="DrawPilePosition" type="Marker2D" parent="."]
+position = Vector2(34, 55)
+
+[node name="DiscardPilePosition" type="Marker2D" parent="."]
+position = Vector2(194, 55)

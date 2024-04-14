@@ -8,12 +8,14 @@ public partial class Cardgame : Control
 
     enum Mode
     {
+        WaitingForAnimation,
+        WaitingForAIMoves,
         SelectingCard,
         SelectingPosition,
         WatchingBattle,
     }
 
-    private Mode currentMode = Mode.SelectingCard;
+    private Mode currentMode = Mode.WaitingForAnimation;
     private int? selectedCardIndex = null;
 
     private PackedScene cardScene = GD.Load<PackedScene>("res://cardgame/card.tscn");
@@ -44,6 +46,10 @@ public partial class Cardgame : Control
 
     private HpBar playerHp;
     private HpBar enemyHp;
+
+    private Timer cardDealTimer;
+    private Timer aiMoveTimer;
+    private Timer cardDiscardTimer;
 
     public override void _Ready()
     {
@@ -96,61 +102,92 @@ public partial class Cardgame : Control
         fight.FightRoundEnded += FightRoundEnded;
         fight.SomebodyDied += FightEnded;
 
-        DrawCardsToHands();
-        SwitchMode(Mode.SelectingCard);
-        PlayAITurn();
+        cardDealTimer = GetNode<Timer>("CardDealTimer");
+        cardDealTimer.Timeout += CardDealingDone;
+
+        aiMoveTimer = GetNode<Timer>("AIMoveTimer");
+        aiMoveTimer.Timeout += AIMovesDone;
+
+        cardDiscardTimer = GetNode<Timer>("CardDiscardTimer");
+        cardDiscardTimer.Timeout += CardDiscardDone;
+
+        SwitchMode(Mode.WaitingForAnimation);
     }
 
-    private void DrawCardsToHands()
+    public void StartCombat()
     {
+        // TODO: check if already started?
+        DealCards();
+    }
+
+    private void DealCards()
+    {
+        cardDealTimer.Start();
+
         var playerCardsCount = 5;
         var enemyCardsCount = 5;
+        var movementTime = (float)cardDealTimer.WaitTime;
 
         var offset = new Vector2(100.0f, 0.0f);
+        var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
+
+        for (int i = 0; i < playerDrawnCards.Count; i++)
         {
-            var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
+            var card = playerDrawnCards[i];
+            card.MoveInstantlyTo(playerPiles.DrawPilePosition());
+            var targetPosition = playerHandPosition + offset * i;
+            card.StartMovingTo(targetPosition, movementTime);
 
-            var startPos = playerHandPosition;
-            for (int i = 0; i < playerDrawnCards.Count; i++)
-            {
-                var card = playerDrawnCards[i];
-                card.Position = startPos + offset * i;
+            playerCards.Add(card);
 
-                playerCards.Add(card);
+            card.SetNumberLabelVisible(true);
+            card.IsPlayersCard = true;
 
-                card.SetNumberLabelVisible(true);
-                card.IsPlayersCard = true;
-
-                card.Visible = true;
-            }
+            card.Visible = true;
         }
 
+        var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
+
+        for (int i = 0; i < enemyDrawnCards.Count; i++)
         {
-            var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
+            var card = enemyDrawnCards[i];
+            card.MoveInstantlyTo(enemyPiles.DrawPilePosition());
+            var targetPosition = enemyHandPosition + offset * i;
+            card.StartMovingTo(targetPosition, movementTime);
 
-            var startPos = enemyHandPosition;
-            for (int i = 0; i < enemyDrawnCards.Count; i++)
-            {
-                var card = enemyDrawnCards[i];
-                card.Position = startPos + offset * i;
+            enemyCards.Add(card);
 
-                enemyCards.Add(card);
+            card.Visible = true;
+        }
 
-                card.Visible = true;
-            }
+        UpdateCardLabels();
+    }
+
+    private void CardDealingDone()
+    {
+        foreach (var card in playerCards)
+        {
+            card.StopMovement();
+        }
+
+        foreach (var card in enemyCards)
+        {
+            card.StopMovement();
         }
 
         if (playerPiles.DrawPileEmpty())
         {
             playerPiles.RecycleDiscardPile();
+            playerPiles.PlayRecycleAnimation();
         }
 
         if (enemyPiles.DrawPileEmpty())
         {
             enemyPiles.RecycleDiscardPile();
+            enemyPiles.PlayRecycleAnimation();
         }
 
-        UpdateCardLabels();
+        PlayAITurn();
     }
 
     private void UpdateCardLabels()
@@ -265,8 +302,9 @@ public partial class Cardgame : Control
 
     private void AddCardToArena(Card card, ArenaPosition position)
     {
+        var cardMoveTime = 0.5f;
         card.SetNumberLabelVisible(false);
-        card.Position = arenaPositions[position];
+        card.StartMovingTo(arenaPositions[position], cardMoveTime);
         cardsOnArena[position] = card;
     }
 
@@ -284,6 +322,8 @@ public partial class Cardgame : Control
                 SetHighlights(toCards: false, toPositions: true);
                 break;
             case Mode.WatchingBattle:
+            case Mode.WaitingForAnimation:
+            case Mode.WaitingForAIMoves:
                 SetHighlights(toCards: false, toPositions: false);
                 break;
         }
@@ -336,30 +376,41 @@ public partial class Cardgame : Control
     private void StartRound()
     {
         startFightButton.Disabled = true;
-        SwitchMode(Mode.WatchingBattle);
-        fight.StartFight(cardsOnArena, playerHp, enemyHp);
+        SwitchMode(Mode.WaitingForAnimation);
 
-        DiscardCardsInHand();
+        // force cards into place if still in transit
+        foreach (var (_, card) in cardsOnArena)
+        {
+            card.StopMovement();
+        }
+
+        var time = (float)cardDiscardTimer.WaitTime;
+
+        playerPiles.DiscardCards(playerCards, time);
+        enemyPiles.DiscardCards(enemyCards, time);
+
+        cardDiscardTimer.Start();
     }
 
-    private void DiscardCardsInHand()
+    private void CardDiscardDone()
     {
-        playerPiles.DiscardCards(playerCards);
-        enemyPiles.DiscardCards(enemyCards);
+        // stop movement if they are still in transit
+        playerPiles.EndDiscardAnimation();
+        enemyPiles.EndDiscardAnimation();
+
+        fight.StartFight(cardsOnArena, playerHp, enemyHp);
+        SwitchMode(Mode.WatchingBattle);
     }
 
     public void FightRoundEnded()
     {
-        SwitchMode(Mode.SelectingCard);
-        startFightButton.Disabled = false;
-
-        DrawCardsToHands();
-
-        PlayAITurn();
+        DealCards();
     }
 
     private void PlayAITurn()
     {
+        SwitchMode(Mode.WaitingForAIMoves);
+
         var newList = new List<Card>(enemyCards);
 
         var enemyMoves = enemyAI.GetCardsPlacement(
@@ -373,6 +424,14 @@ public partial class Cardgame : Control
             AddCardToArena(card, position);
             enemyCards.Remove(card);
         }
+
+        aiMoveTimer.Start();
+    }
+
+    private void AIMovesDone()
+    {
+        SwitchMode(Mode.SelectingCard);
+        startFightButton.Disabled = false;
     }
 
     private void FightEnded(bool playerDied)
