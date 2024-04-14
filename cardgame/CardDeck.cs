@@ -7,6 +7,12 @@ public class CardDeck
 
     private readonly RandomNumberGenerator rng;
 
+    public CardDeck()
+    {
+        rng = new RandomNumberGenerator();
+        cards = new();
+    }
+
     public CardDeck(List<Card> cards)
     {
         rng = new RandomNumberGenerator();

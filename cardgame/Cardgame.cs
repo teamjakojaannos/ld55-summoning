@@ -27,8 +27,8 @@ public partial class Cardgame : Control
     private readonly List<Card> playerCards = new();
     private readonly List<Card> enemyCards = new();
 
-    private CardDeck playerDeck;
-    private CardDeck enemyDeck;
+    private CardPiles playerPiles;
+    private CardPiles enemyPiles;
 
     private Dictionary<ArenaPosition, Card> cardsOnArena = new();
 
@@ -48,8 +48,10 @@ public partial class Cardgame : Control
 
     public override void _Ready()
     {
-        playerDeck = CardDecks.PlayerDeck(cardScene);
-        enemyDeck = CardDecks.EnemyDeck(cardScene);
+        playerPiles = GetNode<CardPiles>("PlayerPiles");
+        playerPiles.SetDeck(CardDecks.PlayerDeck(cardScene));
+        enemyPiles = GetNode<CardPiles>("EnemyPiles");
+        enemyPiles.SetDeck(CardDecks.EnemyDeck(cardScene));
 
         playerHand = GetNode<Control>("Hand");
         enemyHand = GetNode<Control>("EnemyHand");
@@ -123,7 +125,7 @@ public partial class Cardgame : Control
         var startPos = new Vector2(400.0f, 0);
         var offset = new Vector2(100.0f, 0.0f);
 
-        var playerDrawnCards = playerDeck.Draw(playerCardsCount);
+        var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
 
         for (int i = 0; i < playerDrawnCards.Count; i++)
         {
@@ -137,7 +139,7 @@ public partial class Cardgame : Control
             card.SetNumberLabelVisible(true);
         }
 
-        var enemyDrawnCards = enemyDeck.Draw(enemyCardsCount);
+        var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
 
         for (int i = 0; i < enemyDrawnCards.Count; i++)
         {
@@ -344,7 +346,8 @@ public partial class Cardgame : Control
 
     private void DiscardCardsInHand()
     {
-        // TODO
+        playerPiles.DiscardCards(playerCards, playerHand);
+        enemyPiles.DiscardCards(enemyCards, enemyHand);
     }
 
     public void FightRoundEnded()
