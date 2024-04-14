@@ -33,7 +33,7 @@ public partial class CardPiles : Control
 
     public List<Card> DrawCards(int amount)
     {
-        var result = drawPile.Draw(amount);
+        var result = drawPile.DrawFromTopOfDeck(amount);
         UpdateLabels();
         return result;
     }

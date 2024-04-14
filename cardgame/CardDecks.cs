@@ -6,15 +6,10 @@ public class CardDecks
     public static CardDeck PlayerDeck(PackedScene cardScene)
     {
         var cards = new List<Card>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 8; i++)
         {
-            cards.Add(CreateCard(cardScene, 10, 3));
+            cards.Add(CreateCard(cardScene, i + 1, i + 1));
         }
-        for (int i = 0; i < 2; i++)
-        {
-            cards.Add(CreateCard(cardScene, 2, 5));
-        }
-        cards.Add(CreateCard(cardScene, 200, 500));
 
         return new CardDeck(cards);
     }

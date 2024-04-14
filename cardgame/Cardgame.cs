@@ -51,9 +51,13 @@ public partial class Cardgame : Control
         enemyHandPosition = GetNode<Marker2D>("Markers/EnemyHandPosition").Position;
 
         playerPiles = GetNode<CardPiles>("PlayerPiles");
-        playerPiles.SetDeck(CardDecks.PlayerDeck(cardScene));
+        var pDeck = CardDecks.PlayerDeck(cardScene);
+        pDeck.Shuffle();
+        playerPiles.SetDeck(pDeck);
         enemyPiles = GetNode<CardPiles>("EnemyPiles");
-        enemyPiles.SetDeck(CardDecks.EnemyDeck(cardScene));
+        var eDeck = CardDecks.EnemyDeck(cardScene);
+        eDeck.Shuffle();
+        enemyPiles.SetDeck(eDeck);
 
         startFightButton = GetNode<Button>("ButtonStart");
 
