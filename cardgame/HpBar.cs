@@ -41,6 +41,11 @@ public partial class HpBar : Control
         }
     }
 
+    public bool IsDead
+    {
+        get => CurrentHp <= 0;
+    }
+
     public override void _Ready()
     {
         label = GetNode<Label>("Label");

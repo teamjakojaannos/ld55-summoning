@@ -107,7 +107,7 @@ public partial class Cardgame : Control
         );
 
         fight.FightRoundEnded += FightRoundEnded;
-        fight.CardAttacksCharacter += DamageCharacter;
+        fight.SomebodyDied += FightEnded;
 
         DrawCardsToHands();
         SwitchMode(Mode.SelectingCard);
@@ -353,7 +353,7 @@ public partial class Cardgame : Control
     {
         startFightButton.Disabled = true;
         SwitchMode(Mode.WatchingBattle);
-        fight.StartFight(cardsOnArena);
+        fight.StartFight(cardsOnArena, playerHp, enemyHp);
 
         DiscardCardsInHand();
     }
@@ -391,15 +391,15 @@ public partial class Cardgame : Control
         }
     }
 
-    private void DamageCharacter(bool isPlayersCard, int damage)
+    private void FightEnded(bool playerDied)
     {
-        if (isPlayersCard)
+        if (playerDied)
         {
-            enemyHp.CurrentHp -= damage;
+            GD.Print("Player had died! Oh nooooo");
         }
         else
         {
-            playerHp.CurrentHp -= damage;
+            GD.Print("You killed the enemy, good job!");
         }
     }
 }

@@ -3,11 +3,18 @@ using Godot;
 
 public partial class FightClub : Control
 {
+    enum Who
+    {
+        Nobody,
+        Player,
+        Enemy,
+    }
+
     [Signal]
     public delegate void FightRoundEndedEventHandler();
 
     [Signal]
-    public delegate void CardAttacksCharacterEventHandler(bool attackerIsPlayer, int damage);
+    public delegate void SomebodyDiedEventHandler(bool playerDied);
 
     private readonly List<ArenaPosition> fightOrder =
         new()
@@ -23,19 +30,29 @@ public partial class FightClub : Control
 
     private bool fightInProgress = false;
     private Dictionary<ArenaPosition, Card> cardsOnArena;
+    private Who hasDied = Who.Nobody;
 
+    private HpBar playerHp;
+    private HpBar enemyHp;
     private Card previousCard;
 
-    public void StartFight(Dictionary<ArenaPosition, Card> cardsOnArena)
+    public void StartFight(
+        Dictionary<ArenaPosition, Card> cardsOnArena,
+        HpBar playerHp,
+        HpBar enemyHp
+    )
     {
         if (fightInProgress)
         {
             return;
         }
 
+        ResetStuff();
         fightInProgress = true;
         turnIndex = 0;
         this.cardsOnArena = cardsOnArena;
+        this.playerHp = playerHp;
+        this.enemyHp = enemyHp;
 
         PlayNextTurn();
     }
@@ -45,10 +62,16 @@ public partial class FightClub : Control
         UnregisterPreviousCard();
         CleanupDeadCards();
 
+        if (hasDied != Who.Nobody)
+        {
+            SomeoneDied();
+            return;
+        }
+
         var nextTurn = FindNextCardInTurn(cardsOnArena);
         if (nextTurn == null)
         {
-            FightOver();
+            RoundOver();
 
             return;
         }
@@ -64,18 +87,40 @@ public partial class FightClub : Control
         attackingCard.StartAttack(new(targetCard, this));
     }
 
-    private void FightOver()
+    private void RoundOver()
+    {
+        ResetStuff();
+        EmitSignal(SignalName.FightRoundEnded);
+    }
+
+    private void SomeoneDied()
+    {
+        var playerDead = hasDied == Who.Player;
+        ResetStuff();
+        EmitSignal(SignalName.SomebodyDied, playerDead);
+    }
+
+    private void ResetStuff()
     {
         fightInProgress = false;
-        EmitSignal(SignalName.FightRoundEnded);
         cardsOnArena = null;
+        playerHp = null;
+        enemyHp = null;
+        hasDied = Who.Nobody;
     }
 
     public void CardAttacksTarget(Card attacker, Card target, bool IsPlayersCard)
     {
         if (target == null)
         {
-            EmitSignal(SignalName.CardAttacksCharacter, IsPlayersCard, attacker.Damage);
+            var damage = attacker.Damage;
+            var character = IsPlayersCard ? enemyHp : playerHp;
+            character.CurrentHp -= damage;
+
+            if (character.IsDead)
+            {
+                hasDied = IsPlayersCard ? Who.Enemy : Who.Player;
+            }
         }
         else
         {
