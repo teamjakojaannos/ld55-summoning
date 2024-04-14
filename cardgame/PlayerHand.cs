@@ -6,11 +6,17 @@ public partial class PlayerHand : Control {
 	[ExportCategory("Prewire")]
     public Cardgame Cardgame;
 
+	[Export]
+	public PackedScene SlotTemplate;
+
 	public List<Card> Cards = new();
 
-	public void TakeCards(List<Card> cards, float movementTime) {
-		// TODO: create "card in hand" slots instead of storing the actual cards
-		// -> allows separating the key labels etc.
+	public void TakeCards(List<Card> cards, float cardMoveSpeed) {
+		while (GetChildCount() > 0) {
+			var child = GetChild(0);
+			child.QueueFree();
+			RemoveChild(child);
+		}
 
 		var totalWidth = 0.0f;
 		foreach (var card in cards) {
@@ -18,16 +24,20 @@ public partial class PlayerHand : Control {
 		}
 
 		var offsetX = 0.0f;
-		var startX = Position.X - totalWidth / 2.0f;
+		var startX = -totalWidth / 2.0f;
 		for (int i = 0; i < cards.Count; i++) {
             var card = cards[i];
-            card.MoveInstantlyTo(Cardgame.DrawPilePosition);
+
+            var targetPositionX = startX + offsetX;
+			var targetPosition = new Vector2(targetPositionX, 0.0f);
+
+			var slot = SlotTemplate.Instantiate<InHandSlot>();
+			slot.Position = targetPosition;
+			AddChild(slot);
+			slot.AddCardAsChild(card, cardMoveSpeed);
 
 			var cardWidth = card.Size.X;
-            var targetPosition = startX + offsetX;
 			offsetX += cardWidth;
-
-            card.StartMovingTo(new(targetPosition, Position.Y), movementTime);
 
             Cards.Add(card);
 

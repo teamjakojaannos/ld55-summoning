@@ -6,20 +6,19 @@ public partial class CardPiles : Control
     private Label labelDrawPile;
     private Label labelDiscardPile;
 
-    private Vector2 positionDrawPile;
-    private Vector2 positionDiscardPile;
+    private Control drawPilePosition;
 
     private CardDeck drawPile = new();
 
-    private readonly List<Card> discardPile = new();
+    [Export]
+    public DiscardPile discardPile;
 
     public override void _Ready()
     {
-        labelDrawPile = GetNode<Label>("LabelDrawPile");
-        labelDiscardPile = GetNode<Label>("LabelDiscardPile");
+        labelDrawPile = GetNode<Label>("DrawPile/Label");
+        labelDiscardPile = GetNode<Label>("DiscardPile/Label");
 
-        positionDrawPile = GetNode<Marker2D>("DrawPilePosition").Position;
-        positionDiscardPile = GetNode<Marker2D>("DiscardPilePosition").Position;
+        drawPilePosition = GetNode<Control>("DrawPile");
 
         UpdateLabels();
     }
@@ -27,7 +26,7 @@ public partial class CardPiles : Control
     public void UpdateLabels()
     {
         labelDrawPile.Text = $"Draw pile: {drawPile.cards.Count}";
-        labelDiscardPile.Text = $"Discard pile: {discardPile.Count}";
+        labelDiscardPile.Text = $"Discard pile: {discardPile.Cards.Count}";
     }
 
     public void SetDeck(CardDeck deck)
@@ -44,13 +43,10 @@ public partial class CardPiles : Control
         return result;
     }
 
-    public void DiscardCards(List<Card> cards, float animationTime)
+    public void DiscardCards(List<Card> cards, float lerpSpeed)
     {
-        foreach (var card in cards)
-        {
-            discardPile.Add(card);
-            // TODO: play animation on card
-            card.StartMovingTo(DiscardPilePosition(), animationTime);
+        foreach (var card in cards) {
+            discardPile.AddCardAsChild(card, lerpSpeed);
         }
 
         cards.Clear();
@@ -59,7 +55,7 @@ public partial class CardPiles : Control
 
     public void EndDiscardAnimation()
     {
-        foreach (var card in discardPile)
+        foreach (var card in discardPile.Cards)
         {
             card.StopMovement();
             card.Visible = false;
@@ -82,12 +78,9 @@ public partial class CardPiles : Control
 
     public void RecycleDiscardPile()
     {
-        foreach (var card in discardPile)
-        {
-            drawPile.cards.Add(card);
-        }
-
-        discardPile.Clear();
+        // FIXME: reparent to draw pile
+        drawPile.cards.AddRange(discardPile.Cards);
+        discardPile.Cards.Clear();
 
         drawPile.Shuffle();
 
@@ -96,12 +89,12 @@ public partial class CardPiles : Control
 
     public Vector2 DrawPilePosition()
     {
-        return Position + positionDrawPile;
+        return drawPilePosition.GlobalPosition;
     }
 
     public Vector2 DiscardPilePosition()
     {
-        return Position + positionDiscardPile;
+        return discardPile.GlobalPosition;
     }
 
     public void PlayRecycleAnimation()

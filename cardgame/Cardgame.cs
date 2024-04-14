@@ -36,6 +36,15 @@ public partial class Cardgame : Control {
     [Export]
     public Color dimmedFontColor;
 
+    [Export]
+    public float CardDiscardSpeed = 20.0f;
+
+    [Export]
+    public float PlayedCardSpeed = 15.0f;
+
+    [Export]
+    public float CardDealSpeed = 15.0f;
+
     private readonly FightClub fight = new();
 
     private readonly IEnemyAI enemyAI = new RandomAI();
@@ -130,12 +139,11 @@ public partial class Cardgame : Control {
 
         var playerCardsCount = 5;
         var enemyCardsCount = 5;
-        var movementTime = (float)cardDealTimer.WaitTime;
 
         var offset = new Vector2(100.0f, 0.0f);
         var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
 
-        playerHand.TakeCards(playerDrawnCards, movementTime);
+        playerHand.TakeCards(playerDrawnCards, CardDealSpeed);
 
         var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
 
@@ -143,7 +151,7 @@ public partial class Cardgame : Control {
             var card = enemyDrawnCards[i];
             card.MoveInstantlyTo(enemyPiles.DrawPilePosition());
             var targetPosition = enemyHand.Position + offset * i;
-            card.StartMovingTo(targetPosition, movementTime);
+            card.StartMovingTo(targetPosition, CardDealSpeed);
 
             enemyCards.Add(card);
 
@@ -276,12 +284,10 @@ public partial class Cardgame : Control {
     }
 
     private void AddCardToArena(Card card, ArenaPosition position) {
-        var cardMoveTime = 0.5f;
         card.SetNumberLabelVisible(false);
 
         var arenaSlot = arenaSlots[position];
-        card.StartMovingTo(arenaSlot.GlobalPosition, cardMoveTime);
-        arenaSlot.Card = card;
+        arenaSlot.AddCardAsChild(card, PlayedCardSpeed);
     }
 
     private void SwitchMode(Mode newMode) {
@@ -348,10 +354,8 @@ public partial class Cardgame : Control {
             slot.Card?.StopMovement();
         }
 
-        var time = (float)cardDiscardTimer.WaitTime;
-
-        playerPiles.DiscardCards(PlayerCards, time);
-        enemyPiles.DiscardCards(enemyCards, time);
+        playerPiles.DiscardCards(PlayerCards, CardDiscardSpeed);
+        enemyPiles.DiscardCards(enemyCards, CardDiscardSpeed);
 
         cardDiscardTimer.Start();
     }

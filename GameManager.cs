@@ -14,7 +14,7 @@ public partial class GameManager : Node2D {
     public override void _EnterTree() {
         var playerNode = GetTree().Root.FindChild("Player", true, false);
 
-		var cardgameNode = GetNode("/root/Cardgame");
+		var cardgameNode = GetNodeOrNull("/root/Cardgame");
         if (cardgameNode is Cardgame cardgame) {
 			GetTree().CreateTimer(1.5f).Timeout += () => {
 				cardgame.StartCombat();

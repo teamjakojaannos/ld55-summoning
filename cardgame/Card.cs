@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Card : Control
@@ -67,11 +68,9 @@ public partial class Card : Control
 
     public bool IsPlayersCard = false;
 
-    private Vector2 oldPosition;
     private Vector2 targetPosition;
 
-    private float movementTime = 1.0f;
-    private float moveProgress = 0.0f;
+    private float posLerpFactor = 10.0f;
 
     public override void _Ready()
     {
@@ -90,18 +89,13 @@ public partial class Card : Control
             }
         };
 
-        oldPosition = Position;
-        targetPosition = Position;
+        targetPosition = Vector2.Zero;
 
         UpdateLabels();
     }
 
-    public override void _Process(double delta)
-    {
-        moveProgress += (float)delta;
-        var t = Mathf.Clamp(moveProgress / movementTime, 0.0f, 1.0f);
-
-        Position = oldPosition.Lerp(targetPosition, t);
+    public override void _Process(double delta) {
+        Position = Position.Lerp(targetPosition, (float)delta * posLerpFactor);
     }
 
     public void UpdateLabels()
@@ -181,25 +175,25 @@ public partial class Card : Control
         animation.Play("die");
     }
 
-    public void MoveInstantlyTo(Vector2 position)
-    {
-        Position = position;
-        targetPosition = Position;
-        oldPosition = Position;
-        moveProgress = 1.0f;
+    public void MoveInstantlyTo(Vector2 position) {
+        GlobalPosition = position;
+        targetPosition = position;
+        posLerpFactor = 99999f;
     }
 
-    public void StartMovingTo(Vector2 target, float movementTime)
-    {
-        targetPosition = target;
-        oldPosition = Position;
-        this.movementTime = movementTime;
-        moveProgress = 0.0f;
+    public void StartMovingTo(Vector2 target, float moveSpeed) {
+        targetPosition = target - GlobalPosition;
+        posLerpFactor = moveSpeed;
     }
 
-    public void StopMovement()
-    {
-        moveProgress = 1.0f;
-        Position = targetPosition;
+    public void StopMovement() {
+        posLerpFactor = 0.0f;
+        Position = Vector2.Zero;
+    }
+
+    internal void MoveToNewParent(Vector2 oldPosition, float cardMoveSpeed) {
+        GlobalPosition = oldPosition;
+        targetPosition = Vector2.Zero;
+        posLerpFactor = cardMoveSpeed;
     }
 }

@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://b750di4b0lclc"]
+[gd_scene load_steps=5 format=3 uid="uid://b750di4b0lclc"]
 
 [ext_resource type="Texture2D" uid="uid://cegsh6sctctnl" path="res://cardgame/scroll.png" id="1_70sph"]
+[ext_resource type="Script" path="res://cardgame/InHandSlot.cs" id="1_ep2xi"]
+[ext_resource type="Texture2D" uid="uid://mleebdkytht4" path="res://ui/keycap.png" id="2_2w3xk"]
+[ext_resource type="LabelSettings" uid="uid://us8h47dt3oab" path="res://ui/keycap_label_settings.tres" id="4_l6jxu"]
 
 [node name="InHandSlot" type="TextureRect"]
+self_modulate = Color(0, 0, 0, 0.145098)
 texture = ExtResource("1_70sph")
+script = ExtResource("1_ep2xi")
+
+[node name="Key" type="TextureRect" parent="."]
+offset_left = 15.0
+offset_top = -25.0
+offset_right = 47.0
+offset_bottom = 7.0
+texture = ExtResource("2_2w3xk")
+
+[node name="Label" type="Label" parent="Key"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = ExtResource("4_l6jxu")
+horizontal_alignment = 1

@@ -148,9 +148,13 @@ public partial class FightClub : Control {
 
     private void CleanupDeadCards() {
         foreach (var (position, slot) in arenaSlots) {
+            if (slot.IsFree) {
+                continue;
+            }
+
             var card = slot.Card;
             if ((bool)(card?.IsDead)) {
-                arenaSlots.Remove(position);
+                arenaSlots[position].Clear();
                 card.QueueFree();
             }
         }
