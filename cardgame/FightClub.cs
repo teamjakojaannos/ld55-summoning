@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 
-public partial class FightClub : Control
-{
-    enum Who
-    {
+public partial class FightClub : Control {
+    enum Who {
         Nobody,
         Player,
         Enemy,
@@ -19,17 +17,17 @@ public partial class FightClub : Control
     private readonly List<ArenaPosition> fightOrder =
         new()
         {
-            ArenaPosition.OpponentLeft,
-            ArenaPosition.OpponentMid,
-            ArenaPosition.OpponentRight,
             ArenaPosition.PlayerLeft,
             ArenaPosition.PlayerMid,
             ArenaPosition.PlayerRight,
+            ArenaPosition.OpponentLeft,
+            ArenaPosition.OpponentMid,
+            ArenaPosition.OpponentRight,
         };
     private int turnIndex = 0;
 
     private bool fightInProgress = false;
-    private Dictionary<ArenaPosition, Card> cardsOnArena;
+    private Dictionary<ArenaPosition, InPlaySlot> arenaSlots;
     private Who hasDied = Who.Nobody;
 
     private HpBar playerHp;
@@ -37,40 +35,35 @@ public partial class FightClub : Control
     private Card previousCard;
 
     public void StartFight(
-        Dictionary<ArenaPosition, Card> cardsOnArena,
+        Dictionary<ArenaPosition, InPlaySlot> arenaSlots,
         HpBar playerHp,
         HpBar enemyHp
-    )
-    {
-        if (fightInProgress)
-        {
+    ) {
+        if (fightInProgress) {
             return;
         }
 
         ResetStuff();
         fightInProgress = true;
         turnIndex = 0;
-        this.cardsOnArena = cardsOnArena;
+        this.arenaSlots = arenaSlots;
         this.playerHp = playerHp;
         this.enemyHp = enemyHp;
 
         PlayNextTurn();
     }
 
-    private void PlayNextTurn()
-    {
+    private void PlayNextTurn() {
         UnregisterPreviousCard();
         CleanupDeadCards();
 
-        if (hasDied != Who.Nobody)
-        {
+        if (hasDied != Who.Nobody) {
             SomeoneDied();
             return;
         }
 
-        var nextTurn = FindNextCardInTurn(cardsOnArena);
-        if (nextTurn == null)
-        {
+        var nextTurn = FindNextCardInTurn(arenaSlots);
+        if (nextTurn == null) {
             RoundOver();
 
             return;
@@ -79,76 +72,61 @@ public partial class FightClub : Control
         var (attackingCard, position) = nextTurn.Value;
 
         var oppositePosition = position.Opposite();
-        cardsOnArena.TryGetValue(oppositePosition, out Card targetCard);
+        arenaSlots.TryGetValue(oppositePosition, out InPlaySlot targetSlot);
 
         attackingCard.AttackAnimationFinished += CardFinishedAttackAnimation;
         previousCard = attackingCard;
 
-        attackingCard.StartAttack(new(targetCard, this));
+        attackingCard.StartAttack(new(targetSlot.Card, this));
     }
 
-    private void RoundOver()
-    {
+    private void RoundOver() {
         ResetStuff();
         EmitSignal(SignalName.FightRoundEnded);
     }
 
-    private void SomeoneDied()
-    {
+    private void SomeoneDied() {
         var playerDead = hasDied == Who.Player;
         ResetStuff();
         EmitSignal(SignalName.SomebodyDied, playerDead);
     }
 
-    private void ResetStuff()
-    {
+    private void ResetStuff() {
         fightInProgress = false;
-        cardsOnArena = null;
+        arenaSlots = null;
         playerHp = null;
         enemyHp = null;
         hasDied = Who.Nobody;
     }
 
-    public void CardAttacksTarget(Card attacker, Card target, bool IsPlayersCard)
-    {
-        if (target == null)
-        {
+    public void CardAttacksTarget(Card attacker, Card target, bool IsPlayersCard) {
+        if (target == null) {
             var damage = attacker.Damage;
             var character = IsPlayersCard ? enemyHp : playerHp;
             character.CurrentHp -= damage;
 
-            if (character.IsDead)
-            {
+            if (character.IsDead) {
                 hasDied = IsPlayersCard ? Who.Enemy : Who.Player;
             }
-        }
-        else
-        {
+        } else {
             target.CurrentHp -= attacker.Damage;
-            if (target.IsDead)
-            {
+            if (target.IsDead) {
                 target.PlayDieAnimation();
-            }
-            else
-            {
+            } else {
                 target.PlayHurtAnimation();
             }
         }
     }
 
-    private (Card, ArenaPosition)? FindNextCardInTurn(Dictionary<ArenaPosition, Card> cardsOnArena)
-    {
-        while (true)
-        {
-            if (turnIndex >= fightOrder.Count)
-            {
+    private (Card, ArenaPosition)? FindNextCardInTurn(Dictionary<ArenaPosition, InPlaySlot> arenaSlots) {
+        while (true) {
+            if (turnIndex >= fightOrder.Count) {
                 return null;
             }
 
             var position = fightOrder[turnIndex];
-            if (cardsOnArena.ContainsKey(position))
-            {
-                return (cardsOnArena[position], position);
+            if (arenaSlots[position].IsTaken) {
+                return (arenaSlots[position].Card, position);
             }
 
             // no-one on this square, check if the next square in turn has a card
@@ -156,28 +134,23 @@ public partial class FightClub : Control
         }
     }
 
-    private void UnregisterPreviousCard()
-    {
-        if (previousCard != null)
-        {
+    private void UnregisterPreviousCard() {
+        if (previousCard != null) {
             previousCard.AttackAnimationFinished -= CardFinishedAttackAnimation;
             previousCard = null;
         }
     }
 
-    public void CardFinishedAttackAnimation()
-    {
+    public void CardFinishedAttackAnimation() {
         turnIndex++;
         PlayNextTurn();
     }
 
-    private void CleanupDeadCards()
-    {
-        foreach (var (position, card) in cardsOnArena)
-        {
-            if (card.IsDead)
-            {
-                cardsOnArena.Remove(position);
+    private void CleanupDeadCards() {
+        foreach (var (position, slot) in arenaSlots) {
+            var card = slot.Card;
+            if ((bool)(card?.IsDead)) {
+                arenaSlots.Remove(position);
                 card.QueueFree();
             }
         }

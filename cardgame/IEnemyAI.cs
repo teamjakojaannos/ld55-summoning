@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 public interface IEnemyAI
 {
     public Dictionary<ArenaPosition, Card> GetCardsPlacement(
-        ImmutableDictionary<ArenaPosition, Card> cardsOnArena,
+        ImmutableDictionary<ArenaPosition, InPlaySlot> cardsOnArena,
         List<Card> myHand,
         List<ArenaPosition> mySquares
     );

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b750di4b0lclc"]
+
+[ext_resource type="Texture2D" uid="uid://cegsh6sctctnl" path="res://cardgame/scroll.png" id="1_70sph"]
+
+[node name="InHandSlot" type="TextureRect"]
+texture = ExtResource("1_70sph")

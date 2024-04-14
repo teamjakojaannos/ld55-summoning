@@ -7,7 +7,7 @@ public class RandomAI : IEnemyAI
     private readonly RandomNumberGenerator rng = new();
 
     public Dictionary<ArenaPosition, Card> GetCardsPlacement(
-        ImmutableDictionary<ArenaPosition, Card> cardsOnArena,
+        ImmutableDictionary<ArenaPosition, InPlaySlot> arenaSlots,
         List<Card> myHand,
         List<ArenaPosition> mySquares
     )
@@ -17,7 +17,7 @@ public class RandomAI : IEnemyAI
         var freeSquares = new List<ArenaPosition>();
         foreach (var square in mySquares)
         {
-            if (!cardsOnArena.ContainsKey(square))
+            if (arenaSlots[square].IsFree)
             {
                 freeSquares.Add(square);
             }

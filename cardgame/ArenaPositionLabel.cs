@@ -17,7 +17,7 @@ public partial class ArenaPositionLabel : TextureRect {
     public override void _Ready() {
 		Modulate = DimmedColor;
 
-        Cardgame.PlayerSelectedCardInHand += () => {
+        Cardgame.PlayerSelectedCardInHand += (idx) => {
 			var positionTaken = Cardgame.IsPositionOnTableTaken(PositionOnArena);
             var useHighlight = !positionTaken;
             var color = useHighlight ? HighlightedColor : DimmedColor;
@@ -25,7 +25,7 @@ public partial class ArenaPositionLabel : TextureRect {
             Modulate = color;
         };
 
-		Cardgame.PlayerDeselectedCardInHand += () => {
+		Cardgame.PlayerDeselectedCardInHand += (idx) => {
 			Modulate = DimmedColor;
 		};
     }

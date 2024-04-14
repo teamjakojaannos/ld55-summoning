@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://6djvxkt8l1dx"]
+[gd_scene load_steps=3 format=3 uid="uid://6djvxkt8l1dx"]
 
 [ext_resource type="Texture2D" uid="uid://cegsh6sctctnl" path="res://cardgame/scroll.png" id="1_0m5dh"]
+[ext_resource type="Script" path="res://cardgame/InPlaySlot.cs" id="2_r24oe"]
 
 [node name="InPlaySlot" type="TextureRect"]
 self_modulate = Color(0.239216, 0.239216, 0.239216, 0.329412)
 texture = ExtResource("1_0m5dh")
+script = ExtResource("2_r24oe")

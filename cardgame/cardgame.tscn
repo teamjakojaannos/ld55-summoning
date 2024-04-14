@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=11 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
 [ext_resource type="PackedScene" uid="uid://6djvxkt8l1dx" path="res://cardgame/in_play_slot.tscn" id="3_86g1s"]
 [ext_resource type="PackedScene" path="res://cardgame/card_piles.tscn" id="3_kn8vi"]
+[ext_resource type="PackedScene" uid="uid://b750di4b0lclc" path="res://cardgame/in_hand_slot.tscn" id="3_sktvo"]
 [ext_resource type="Texture2D" uid="uid://mleebdkytht4" path="res://ui/keycap.png" id="4_djhqd"]
 [ext_resource type="PackedScene" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
+[ext_resource type="Script" path="res://cardgame/PlayerHand.cs" id="4_v7uiv"]
 [ext_resource type="LabelSettings" uid="uid://us8h47dt3oab" path="res://ui/keycap_label_settings.tres" id="5_0upjc"]
 [ext_resource type="Script" path="res://cardgame/ArenaPositionLabel.cs" id="5_osts6"]
 
@@ -25,22 +27,73 @@ dimmedFontColor = Color(0.2, 0.2, 0.2, 1)
 anchors_preset = 0
 script = ExtResource("2_7df7x")
 
-[node name="EnemyHandPosition" type="Control" parent="."]
+[node name="EnemyHand" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 
-[node name="PlayerHandPosition" type="Control" parent="."]
+[node name="DummyHandSlot" parent="EnemyHand" instance=ExtResource("3_sktvo")]
+layout_mode = 0
+offset_left = -132.13
+offset_right = -68.13
+offset_bottom = 96.0
+
+[node name="DummyHandSlot2" parent="EnemyHand" instance=ExtResource("3_sktvo")]
+layout_mode = 0
+offset_left = -64.13
+offset_right = -0.130005
+offset_bottom = 96.0
+
+[node name="DummyHandSlot3" parent="EnemyHand" instance=ExtResource("3_sktvo")]
+layout_mode = 0
+offset_left = 4.87
+offset_right = 68.87
+offset_bottom = 96.0
+
+[node name="DummyHandSlot4" parent="EnemyHand" instance=ExtResource("3_sktvo")]
+layout_mode = 0
+offset_left = 75.87
+offset_right = 139.87
+offset_bottom = 96.0
+
+[node name="PlayerHand" type="Control" parent="." node_paths=PackedStringArray("Cardgame")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("4_v7uiv")
+Cardgame = NodePath("..")
+
+[node name="DummyHandSlot" parent="PlayerHand" instance=ExtResource("3_sktvo")]
+layout_mode = 0
+offset_left = -121.13
+offset_right = -57.13
+offset_bottom = 96.0
+
+[node name="DummyHandSlot2" parent="PlayerHand" instance=ExtResource("3_sktvo")]
+layout_mode = 0
+offset_left = -59.26
+offset_right = 4.73999
+offset_bottom = 96.0
+
+[node name="DummyHandSlot3" parent="PlayerHand" instance=ExtResource("3_sktvo")]
+layout_mode = 0
+offset_left = 2.73999
+offset_right = 66.74
+offset_bottom = 96.0
+
+[node name="DummyHandSlot4" parent="PlayerHand" instance=ExtResource("3_sktvo")]
+layout_mode = 0
+offset_left = 66.74
+offset_right = 130.74
+offset_bottom = 96.0
 
 [node name="Arena" type="GridContainer" parent="."]
 layout_mode = 1
@@ -110,6 +163,7 @@ offset_right = 47.0
 offset_bottom = 125.0
 texture = ExtResource("4_djhqd")
 script = ExtResource("5_osts6")
+PositionOnArena = 4
 Cardgame = NodePath("../../..")
 HighlightedColor = Color(1, 1, 1, 1)
 DimmedColor = Color(0.2, 0.2, 0.2, 1)
@@ -138,6 +192,7 @@ offset_right = 47.0
 offset_bottom = 125.0
 texture = ExtResource("4_djhqd")
 script = ExtResource("5_osts6")
+PositionOnArena = 5
 Cardgame = NodePath("../../..")
 HighlightedColor = Color(1, 1, 1, 1)
 DimmedColor = Color(0.2, 0.2, 0.2, 1)
