@@ -11,7 +11,8 @@ public partial class Cardgame : Control
     enum Mode
     {
         SelectingCard,
-        SelectingPosition
+        SelectingPosition,
+        WatchingBattle,
     }
 
     private Mode currentMode = Mode.SelectingCard;
@@ -43,6 +44,8 @@ public partial class Cardgame : Control
 
     private readonly IEnemyAI enemyAI = new RandomAI();
 
+    private Button startFightButton;
+
     public override void _Ready()
     {
         playerDeck = CardDecks.PlayerDeck(cardScene);
@@ -51,6 +54,8 @@ public partial class Cardgame : Control
         playerHand = GetNode<Control>("Hand");
         enemyHand = GetNode<Control>("EnemyHand");
         arena = GetNode<Control>("Arena");
+
+        startFightButton = GetNode<Button>("ButtonStart");
 
         var list = new List<(ArenaPosition, string)>()
         {
@@ -85,6 +90,9 @@ public partial class Cardgame : Control
         arenaPositionLabels[ArenaPosition.BotRight] = GetNode<Label>(
             "Arena/NumberLabels/NumberRight"
         );
+
+        // tried connecting this in editor, didn't work for some reason. Let's do it manually then
+        fight.FightRoundEnded += FightRoundEnded;
 
         PlaceCardsInHands();
         UpdateCardLabels();
@@ -156,8 +164,11 @@ public partial class Cardgame : Control
     {
         if (inputEvent.IsActionPressed("esc"))
         {
-            SwitchMode(Mode.SelectingCard);
-            return;
+            if (currentMode == Mode.SelectingPosition)
+            {
+                SwitchMode(Mode.SelectingCard);
+                return;
+            }
         }
 
         var num_keys = new List<string>()
@@ -271,6 +282,9 @@ public partial class Cardgame : Control
             case Mode.SelectingPosition:
                 SetHighlights(toCards: false, toPositions: true);
                 break;
+            case Mode.WatchingBattle:
+                SetHighlights(toCards: false, toPositions: false);
+                break;
         }
     }
 
@@ -315,7 +329,15 @@ public partial class Cardgame : Control
 
     private void StartButtonPressed()
     {
+        SwitchMode(Mode.WatchingBattle);
         fight.StartFight(cardsOnArena);
+        startFightButton.Disabled = true;
+    }
+
+    public void FightRoundEnded()
+    {
+        SwitchMode(Mode.SelectingCard);
+        startFightButton.Disabled = false;
     }
 
     private void PlayAITurn()

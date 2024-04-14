@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using Godot;
 
-public class FightClub
+public partial class FightClub : Control
 {
+    [Signal]
+    public delegate void FightRoundEndedEventHandler();
+
     private readonly List<ArenaPosition> fightOrder =
         new()
         {
@@ -42,7 +45,8 @@ public class FightClub
         var nextTurn = FindNextCardInTurn(cardsOnArena);
         if (nextTurn == null)
         {
-            fightInProgress = false;
+            FightOver();
+
             return;
         }
 
@@ -55,6 +59,12 @@ public class FightClub
         previousCard = attackingCard;
 
         attackingCard.StartAttack(new(targetCard, this));
+    }
+
+    private void FightOver()
+    {
+        fightInProgress = false;
+        EmitSignal(SignalName.FightRoundEnded);
     }
 
     public void CardAttacksTarget(Card attacker, Card target)

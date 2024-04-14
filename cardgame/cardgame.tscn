@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=8 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
+[ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y58rh"]
 load_path = "res://.godot/imported/placeholder.png-a9138d498dab4b0497017c3f706370aa.ctex"
@@ -27,6 +28,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f1vsu")
+normalFontColor = Color(1, 1, 1, 1)
+dimmedFontColor = Color(0.2, 0.2, 0.2, 1)
+
+[node name="FightManager" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("2_7df7x")
 
 [node name="Player" type="TextureRect" parent="."]
 layout_mode = 1
