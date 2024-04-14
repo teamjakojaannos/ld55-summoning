@@ -51,4 +51,32 @@ public partial class CardPiles : Control
         cards.Clear();
         UpdateLabels();
     }
+
+    public void AddCardsAsChildren(Node parentNode)
+    {
+        foreach (var card in drawPile.cards)
+        {
+            parentNode.AddChild(card);
+            card.Visible = false;
+        }
+    }
+
+    public bool DrawPileEmpty()
+    {
+        return drawPile.cards.Count == 0;
+    }
+
+    public void RecycleDiscardPile()
+    {
+        foreach (var card in discardPile)
+        {
+            drawPile.cards.Add(card);
+        }
+
+        discardPile.Clear();
+
+        drawPile.Shuffle();
+
+        UpdateLabels();
+    }
 }

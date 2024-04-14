@@ -54,10 +54,13 @@ public partial class Cardgame : Control
         var pDeck = CardDecks.PlayerDeck(cardScene);
         pDeck.Shuffle();
         playerPiles.SetDeck(pDeck);
+        playerPiles.AddCardsAsChildren(this);
+
         enemyPiles = GetNode<CardPiles>("EnemyPiles");
         var eDeck = CardDecks.EnemyDeck(cardScene);
         eDeck.Shuffle();
         enemyPiles.SetDeck(eDeck);
+        enemyPiles.AddCardsAsChildren(this);
 
         startFightButton = GetNode<Button>("ButtonStart");
 
@@ -111,14 +114,14 @@ public partial class Cardgame : Control
             for (int i = 0; i < playerDrawnCards.Count; i++)
             {
                 var card = playerDrawnCards[i];
+                card.Position = startPos + offset * i;
 
-                var position = startPos + offset * i;
-                card.Position = position;
-
-                AddChild(card);
                 playerCards.Add(card);
+
                 card.SetNumberLabelVisible(true);
                 card.IsPlayersCard = true;
+
+                card.Visible = true;
             }
         }
 
@@ -129,11 +132,22 @@ public partial class Cardgame : Control
             for (int i = 0; i < enemyDrawnCards.Count; i++)
             {
                 var card = enemyDrawnCards[i];
-                var position = startPos + offset * i;
-                card.Position = position;
+                card.Position = startPos + offset * i;
+
                 enemyCards.Add(card);
-                AddChild(card);
+
+                card.Visible = true;
             }
+        }
+
+        if (playerPiles.DrawPileEmpty())
+        {
+            playerPiles.RecycleDiscardPile();
+        }
+
+        if (enemyPiles.DrawPileEmpty())
+        {
+            enemyPiles.RecycleDiscardPile();
         }
 
         UpdateCardLabels();
