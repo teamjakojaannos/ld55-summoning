@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://6djvxkt8l1dx"]
+
+[ext_resource type="Texture2D" uid="uid://cegsh6sctctnl" path="res://cardgame/scroll.png" id="1_0m5dh"]
+
+[node name="InPlaySlot" type="TextureRect"]
+self_modulate = Color(0.239216, 0.239216, 0.239216, 0.329412)
+texture = ExtResource("1_0m5dh")

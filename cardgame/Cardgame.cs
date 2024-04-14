@@ -2,12 +2,10 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Godot;
 
-public partial class Cardgame : Control
-{
+public partial class Cardgame : Control {
     private readonly Dictionary<ArenaPosition, Vector2> arenaPositions = new();
 
-    enum Mode
-    {
+    enum Mode {
         WaitingForAnimation,
         WaitingForAIMoves,
         SelectingCard,
@@ -51,10 +49,19 @@ public partial class Cardgame : Control
     private Timer aiMoveTimer;
     private Timer cardDiscardTimer;
 
-    public override void _Ready()
-    {
-        playerHandPosition = GetNode<Marker2D>("Markers/PlayerHandPosition").Position;
-        enemyHandPosition = GetNode<Marker2D>("Markers/EnemyHandPosition").Position;
+    [Signal]
+    public delegate void PlayerSelectedCardInHandEventHandler();
+
+    [Signal]
+    public delegate void PlayerDeselectedCardInHandEventHandler();
+
+    public bool IsPositionOnTableTaken(ArenaPosition position) {
+        return cardsOnArena.ContainsKey(position);
+    }
+
+    public override void _Ready() {
+        playerHandPosition = GetNode<Control>("PlayerHandPosition").Position;
+        enemyHandPosition = GetNode<Control>("EnemyHandPosition").Position;
 
         playerPiles = GetNode<CardPiles>("PlayerPiles");
         var pDeck = CardDecks.PlayerDeck(cardScene);
@@ -82,22 +89,17 @@ public partial class Cardgame : Control
 
         var list = new List<(ArenaPosition, string)>()
         {
-            (ArenaPosition.TopLeft, "Markers/Arena/TopLeft"),
-            (ArenaPosition.TopMid, "Markers/Arena/TopMid"),
-            (ArenaPosition.TopRight, "Markers/Arena/TopRight"),
-            (ArenaPosition.BotLeft, "Markers/Arena/BotLeft"),
-            (ArenaPosition.BotMid, "Markers/Arena/BotMid"),
-            (ArenaPosition.BotRight, "Markers/Arena/BotRight"),
+            (ArenaPosition.OpponentLeft, "Arena/OpponentLeft"),
+            (ArenaPosition.OpponentMid, "Arena/OpponentMid"),
+            (ArenaPosition.OpponentRight, "Arena/OpponentRight"),
+            (ArenaPosition.PlayerLeft, "Arena/PlayerLeft"),
+            (ArenaPosition.PlayerMid, "Arena/PlayerMid"),
+            (ArenaPosition.PlayerRight, "Arena/PlayerRight"),
         };
 
-        foreach (var (key, name) in list)
-        {
-            arenaPositions[key] = GetNode<Marker2D>(name).Position;
+        foreach (var (key, name) in list) {
+            arenaPositions[key] = GetNode<Control>(name).Position;
         }
-
-        arenaPositionLabels[ArenaPosition.BotLeft] = GetNode<Label>("NumberLabels/NumberLeft");
-        arenaPositionLabels[ArenaPosition.BotMid] = GetNode<Label>("NumberLabels/NumberMid");
-        arenaPositionLabels[ArenaPosition.BotRight] = GetNode<Label>("NumberLabels/NumberRight");
 
         fight.FightRoundEnded += FightRoundEnded;
         fight.SomebodyDied += FightEnded;
@@ -114,14 +116,12 @@ public partial class Cardgame : Control
         SwitchMode(Mode.WaitingForAnimation);
     }
 
-    public void StartCombat()
-    {
+    public void StartCombat() {
         // TODO: check if already started?
         DealCards();
     }
 
-    private void DealCards()
-    {
+    private void DealCards() {
         cardDealTimer.Start();
 
         var playerCardsCount = 5;
@@ -131,8 +131,7 @@ public partial class Cardgame : Control
         var offset = new Vector2(100.0f, 0.0f);
         var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
 
-        for (int i = 0; i < playerDrawnCards.Count; i++)
-        {
+        for (int i = 0; i < playerDrawnCards.Count; i++) {
             var card = playerDrawnCards[i];
             card.MoveInstantlyTo(playerPiles.DrawPilePosition());
             var targetPosition = playerHandPosition + offset * i;
@@ -148,8 +147,7 @@ public partial class Cardgame : Control
 
         var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
 
-        for (int i = 0; i < enemyDrawnCards.Count; i++)
-        {
+        for (int i = 0; i < enemyDrawnCards.Count; i++) {
             var card = enemyDrawnCards[i];
             card.MoveInstantlyTo(enemyPiles.DrawPilePosition());
             var targetPosition = enemyHandPosition + offset * i;
@@ -163,26 +161,21 @@ public partial class Cardgame : Control
         UpdateCardLabels();
     }
 
-    private void CardDealingDone()
-    {
-        foreach (var card in playerCards)
-        {
+    private void CardDealingDone() {
+        foreach (var card in playerCards) {
             card.StopMovement();
         }
 
-        foreach (var card in enemyCards)
-        {
+        foreach (var card in enemyCards) {
             card.StopMovement();
         }
 
-        if (playerPiles.DrawPileEmpty())
-        {
+        if (playerPiles.DrawPileEmpty()) {
             playerPiles.RecycleDiscardPile();
             playerPiles.PlayRecycleAnimation();
         }
 
-        if (enemyPiles.DrawPileEmpty())
-        {
+        if (enemyPiles.DrawPileEmpty()) {
             enemyPiles.RecycleDiscardPile();
             enemyPiles.PlayRecycleAnimation();
         }
@@ -190,22 +183,17 @@ public partial class Cardgame : Control
         PlayAITurn();
     }
 
-    private void UpdateCardLabels()
-    {
-        for (int i = 0; i < playerCards.Count; i++)
-        {
+    private void UpdateCardLabels() {
+        for (int i = 0; i < playerCards.Count; i++) {
             var card = playerCards[i];
             var cardNumber = i + 1;
             card.SetNumberLabelText(cardNumber.ToString());
         }
     }
 
-    public override void _Input(InputEvent inputEvent)
-    {
-        if (inputEvent.IsActionPressed("esc"))
-        {
-            if (currentMode == Mode.SelectingPosition)
-            {
+    public override void _Input(InputEvent inputEvent) {
+        if (inputEvent.IsActionPressed("esc")) {
+            if (currentMode == Mode.SelectingPosition) {
                 SwitchMode(Mode.SelectingCard);
                 return;
             }
@@ -224,18 +212,13 @@ public partial class Cardgame : Control
             "num_9",
         };
 
-        for (int i = 0; i < num_keys.Count; i++)
-        {
+        for (int i = 0; i < num_keys.Count; i++) {
             var key = num_keys[i];
 
-            if (inputEvent.IsActionPressed(key))
-            {
-                if (currentMode == Mode.SelectingCard)
-                {
+            if (inputEvent.IsActionPressed(key)) {
+                if (currentMode == Mode.SelectingCard) {
                     TrySelectCard(i);
-                }
-                else if (currentMode == Mode.SelectingPosition)
-                {
+                } else if (currentMode == Mode.SelectingPosition) {
                     TryPlayCard(i);
                 }
 
@@ -244,10 +227,8 @@ public partial class Cardgame : Control
         }
     }
 
-    private void TrySelectCard(int cardIndex)
-    {
-        if (cardIndex >= playerCards.Count)
-        {
+    private void TrySelectCard(int cardIndex) {
+        if (cardIndex >= playerCards.Count) {
             return;
         }
 
@@ -257,32 +238,28 @@ public partial class Cardgame : Control
         HighlightSelectedCard();
     }
 
-    private void TryPlayCard(int positionIndex)
-    {
+    private void TryPlayCard(int positionIndex) {
         var positions = new List<ArenaPosition>()
         {
-            ArenaPosition.BotLeft,
-            ArenaPosition.BotMid,
-            ArenaPosition.BotRight
+            ArenaPosition.PlayerLeft,
+            ArenaPosition.PlayerMid,
+            ArenaPosition.PlayerRight
         };
 
         var wrongMode = currentMode != Mode.SelectingPosition;
         var tooHighIndex = positionIndex >= positions.Count;
 
-        if (wrongMode || tooHighIndex)
-        {
+        if (wrongMode || tooHighIndex) {
             return;
         }
 
         var position = positions[positionIndex];
         var positionTaken = cardsOnArena.ContainsKey(position);
-        if (positionTaken)
-        {
+        if (positionTaken) {
             return;
         }
 
-        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count)
-        {
+        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count) {
             // we should never end up in here
             SwitchMode(Mode.SelectingCard);
             return;
@@ -300,21 +277,18 @@ public partial class Cardgame : Control
         SwitchMode(Mode.SelectingCard);
     }
 
-    private void AddCardToArena(Card card, ArenaPosition position)
-    {
+    private void AddCardToArena(Card card, ArenaPosition position) {
         var cardMoveTime = 0.5f;
         card.SetNumberLabelVisible(false);
         card.StartMovingTo(arenaPositions[position], cardMoveTime);
         cardsOnArena[position] = card;
     }
 
-    private void SwitchMode(Mode newMode)
-    {
+    private void SwitchMode(Mode newMode) {
         ClearSelectedCardHighlight();
         currentMode = newMode;
 
-        switch (newMode)
-        {
+        switch (newMode) {
             case Mode.SelectingCard:
                 SetHighlights(toCards: true, toPositions: false);
                 break;
@@ -329,10 +303,8 @@ public partial class Cardgame : Control
         }
     }
 
-    private void HighlightSelectedCard()
-    {
-        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count)
-        {
+    private void HighlightSelectedCard() {
+        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count) {
             return;
         }
 
@@ -340,10 +312,8 @@ public partial class Cardgame : Control
         card.SetHighlighted(true);
     }
 
-    private void ClearSelectedCardHighlight()
-    {
-        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count)
-        {
+    private void ClearSelectedCardHighlight() {
+        if (selectedCardIndex == null || selectedCardIndex.Value >= playerCards.Count) {
             return;
         }
 
@@ -351,16 +321,13 @@ public partial class Cardgame : Control
         card.SetHighlighted(false);
     }
 
-    private void SetHighlights(bool toCards, bool toPositions)
-    {
+    private void SetHighlights(bool toCards, bool toPositions) {
         var cardFontColor = toCards ? normalFontColor : dimmedFontColor;
-        foreach (var card in playerCards)
-        {
+        foreach (var card in playerCards) {
             card.SetNumberLabelColor(cardFontColor);
         }
 
-        foreach (var (position, label) in arenaPositionLabels)
-        {
+        foreach (var (position, label) in arenaPositionLabels) {
             var positionTaken = cardsOnArena.ContainsKey(position);
             var useHighlight = toPositions && !positionTaken;
             var positionColor = useHighlight ? normalFontColor : dimmedFontColor;
@@ -368,19 +335,16 @@ public partial class Cardgame : Control
         }
     }
 
-    private void StartButtonPressed()
-    {
+    private void StartButtonPressed() {
         StartRound();
     }
 
-    private void StartRound()
-    {
+    private void StartRound() {
         startFightButton.Disabled = true;
         SwitchMode(Mode.WaitingForAnimation);
 
         // force cards into place if still in transit
-        foreach (var (_, card) in cardsOnArena)
-        {
+        foreach (var (_, card) in cardsOnArena) {
             card.StopMovement();
         }
 
@@ -392,8 +356,7 @@ public partial class Cardgame : Control
         cardDiscardTimer.Start();
     }
 
-    private void CardDiscardDone()
-    {
+    private void CardDiscardDone() {
         // stop movement if they are still in transit
         playerPiles.EndDiscardAnimation();
         enemyPiles.EndDiscardAnimation();
@@ -402,13 +365,11 @@ public partial class Cardgame : Control
         SwitchMode(Mode.WatchingBattle);
     }
 
-    public void FightRoundEnded()
-    {
+    public void FightRoundEnded() {
         DealCards();
     }
 
-    private void PlayAITurn()
-    {
+    private void PlayAITurn() {
         SwitchMode(Mode.WaitingForAIMoves);
 
         var newList = new List<Card>(enemyCards);
@@ -416,11 +377,10 @@ public partial class Cardgame : Control
         var enemyMoves = enemyAI.GetCardsPlacement(
             cardsOnArena.ToImmutableDictionary(),
             newList,
-            new() { ArenaPosition.TopLeft, ArenaPosition.TopMid, ArenaPosition.TopRight }
+            new() { ArenaPosition.OpponentLeft, ArenaPosition.OpponentMid, ArenaPosition.OpponentRight }
         );
 
-        foreach (var (position, card) in enemyMoves)
-        {
+        foreach (var (position, card) in enemyMoves) {
             AddCardToArena(card, position);
             enemyCards.Remove(card);
         }
@@ -428,20 +388,15 @@ public partial class Cardgame : Control
         aiMoveTimer.Start();
     }
 
-    private void AIMovesDone()
-    {
+    private void AIMovesDone() {
         SwitchMode(Mode.SelectingCard);
         startFightButton.Disabled = false;
     }
 
-    private void FightEnded(bool playerDied)
-    {
-        if (playerDied)
-        {
+    private void FightEnded(bool playerDied) {
+        if (playerDied) {
             GD.Print("Player had died! Oh nooooo");
-        }
-        else
-        {
+        } else {
             GD.Print("You killed the enemy, good job!");
         }
     }

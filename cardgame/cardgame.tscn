@@ -1,21 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=9 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
-[ext_resource type="PackedScene" uid="uid://ful315i3d50d" path="res://cardgame/card_piles.tscn" id="3_kn8vi"]
-[ext_resource type="PackedScene" uid="uid://b4ib4pgt8xe23" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ptddr"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_brand"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_16sem"]
+[ext_resource type="PackedScene" uid="uid://6djvxkt8l1dx" path="res://cardgame/in_play_slot.tscn" id="3_86g1s"]
+[ext_resource type="PackedScene" path="res://cardgame/card_piles.tscn" id="3_kn8vi"]
+[ext_resource type="Texture2D" uid="uid://mleebdkytht4" path="res://ui/keycap.png" id="4_djhqd"]
+[ext_resource type="PackedScene" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
+[ext_resource type="LabelSettings" uid="uid://us8h47dt3oab" path="res://ui/keycap_label_settings.tres" id="5_0upjc"]
+[ext_resource type="Script" path="res://cardgame/ArenaPositionLabel.cs" id="5_osts6"]
 
 [node name="Cardgame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1.73999
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f1vsu")
@@ -26,77 +25,133 @@ dimmedFontColor = Color(0.2, 0.2, 0.2, 1)
 anchors_preset = 0
 script = ExtResource("2_7df7x")
 
-[node name="Markers" type="Control" parent="."]
-anchors_preset = 0
-
-[node name="PlayerHandPosition" type="Marker2D" parent="Markers"]
-position = Vector2(340, 480)
-
-[node name="EnemyHandPosition" type="Marker2D" parent="Markers"]
-position = Vector2(340, 20)
-
-[node name="Arena" type="Control" parent="Markers"]
-anchors_preset = 0
-
-[node name="TopLeft" type="Marker2D" parent="Markers/Arena"]
-position = Vector2(420, 175)
-
-[node name="TopMid" type="Marker2D" parent="Markers/Arena"]
-position = Vector2(526, 175)
-
-[node name="TopRight" type="Marker2D" parent="Markers/Arena"]
-position = Vector2(632, 175)
-
-[node name="BotLeft" type="Marker2D" parent="Markers/Arena"]
-position = Vector2(420, 315)
-
-[node name="BotMid" type="Marker2D" parent="Markers/Arena"]
-position = Vector2(526, 315)
-
-[node name="BotRight" type="Marker2D" parent="Markers/Arena"]
-position = Vector2(632, 315)
-
-[node name="NumberLabels" type="Control" parent="."]
+[node name="EnemyHandPosition" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="PlayerHandPosition" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 424.0
-offset_top = -206.0
-offset_right = -419.0
-offset_bottom = -172.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NumberLeft" type="Label" parent="NumberLabels"]
+[node name="Arena" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -98.0
+offset_right = 100.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="OpponentLeft" parent="Arena" instance=ExtResource("3_86g1s")]
+modulate = Color(1, 0.8, 0.8, 1)
+layout_mode = 2
+
+[node name="OpponentMid" parent="Arena" instance=ExtResource("3_86g1s")]
+modulate = Color(1, 0.8, 0.8, 1)
+layout_mode = 2
+
+[node name="OpponentRight" parent="Arena" instance=ExtResource("3_86g1s")]
+modulate = Color(1, 0.8, 0.8, 1)
+layout_mode = 2
+
+[node name="PlayerLeft" parent="Arena" instance=ExtResource("3_86g1s")]
+modulate = Color(0.816667, 0.8, 1, 1)
+layout_mode = 2
+
+[node name="Key" type="TextureRect" parent="Arena/PlayerLeft" node_paths=PackedStringArray("Cardgame")]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 5.0
-offset_right = 80.0
-offset_bottom = 28.0
+offset_left = 15.0
+offset_top = 93.0
+offset_right = 47.0
+offset_bottom = 125.0
+texture = ExtResource("4_djhqd")
+script = ExtResource("5_osts6")
+PositionOnArena = 3
+Cardgame = NodePath("../../..")
+HighlightedColor = Color(1, 1, 1, 1)
+DimmedColor = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Label" type="Label" parent="Arena/PlayerLeft/Key"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "1"
-label_settings = SubResource("LabelSettings_ptddr")
+label_settings = ExtResource("5_0upjc")
 horizontal_alignment = 1
 
-[node name="NumberMid" type="Label" parent="NumberLabels"]
+[node name="PlayerMid" parent="Arena" instance=ExtResource("3_86g1s")]
+modulate = Color(0.816667, 0.8, 1, 1)
+layout_mode = 2
+
+[node name="Key" type="TextureRect" parent="Arena/PlayerMid" node_paths=PackedStringArray("Cardgame")]
 layout_mode = 0
-offset_left = 128.0
-offset_top = 5.0
-offset_right = 168.0
-offset_bottom = 28.0
+offset_left = 15.0
+offset_top = 93.0
+offset_right = 47.0
+offset_bottom = 125.0
+texture = ExtResource("4_djhqd")
+script = ExtResource("5_osts6")
+Cardgame = NodePath("../../..")
+HighlightedColor = Color(1, 1, 1, 1)
+DimmedColor = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Label" type="Label" parent="Arena/PlayerMid/Key"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "2"
-label_settings = SubResource("LabelSettings_brand")
+label_settings = ExtResource("5_0upjc")
 horizontal_alignment = 1
 
-[node name="NumberRight" type="Label" parent="NumberLabels"]
+[node name="PlayerRight" parent="Arena" instance=ExtResource("3_86g1s")]
+modulate = Color(0.816667, 0.8, 1, 1)
+layout_mode = 2
+
+[node name="Key" type="TextureRect" parent="Arena/PlayerRight" node_paths=PackedStringArray("Cardgame")]
 layout_mode = 0
-offset_left = 230.0
-offset_top = 5.0
-offset_right = 270.0
-offset_bottom = 28.0
+offset_left = 15.0
+offset_top = 93.0
+offset_right = 47.0
+offset_bottom = 125.0
+texture = ExtResource("4_djhqd")
+script = ExtResource("5_osts6")
+Cardgame = NodePath("../../..")
+HighlightedColor = Color(1, 1, 1, 1)
+DimmedColor = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Label" type="Label" parent="Arena/PlayerRight/Key"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "3"
-label_settings = SubResource("LabelSettings_16sem")
+label_settings = ExtResource("5_0upjc")
 horizontal_alignment = 1
 
 [node name="ButtonStart" type="Button" parent="."]

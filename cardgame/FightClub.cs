@@ -19,12 +19,12 @@ public partial class FightClub : Control
     private readonly List<ArenaPosition> fightOrder =
         new()
         {
-            ArenaPosition.TopLeft,
-            ArenaPosition.TopMid,
-            ArenaPosition.TopRight,
-            ArenaPosition.BotLeft,
-            ArenaPosition.BotMid,
-            ArenaPosition.BotRight,
+            ArenaPosition.OpponentLeft,
+            ArenaPosition.OpponentMid,
+            ArenaPosition.OpponentRight,
+            ArenaPosition.PlayerLeft,
+            ArenaPosition.PlayerMid,
+            ArenaPosition.PlayerRight,
         };
     private int turnIndex = 0;
 
