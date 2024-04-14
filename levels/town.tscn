@@ -1,52 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=17 format=3 uid="uid://c5uxib0tkhldl"]
 
-[ext_resource type="Texture2D" uid="uid://bmg7yairwg68" path="res://characters/monster/airmonster1/airmonster1idle.png" id="3_1fktf"]
-[ext_resource type="Script" path="res://characters/monster/Monster.cs" id="3_ekxxi"]
-[ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="3_rpfxf"]
+[ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="3_dsww4"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
 [ext_resource type="PackedScene" uid="uid://dkuq61u6l4jg6" path="res://cardgame/cardgame.tscn" id="4_wotui"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="5_6x2e7"]
 [ext_resource type="Texture2D" uid="uid://c0k6gpop4ph3m" path="res://characters/whyisthishere/ruohonleikkuriBATTLE.png" id="5_hh6cj"]
 [ext_resource type="Script" path="res://characters/whyisthishere/esjonnejaujookulmaa.cs" id="6_qxphv"]
 [ext_resource type="Texture2D" uid="uid://cp6u7acwpqojm" path="res://characters/player/placeholder.png" id="7_japg0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eojbw"]
-atlas = ExtResource("3_1fktf")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5weo0"]
-atlas = ExtResource("3_1fktf")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fgt01"]
-atlas = ExtResource("3_1fktf")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nc4t2"]
-atlas = ExtResource("3_1fktf")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_r4hc4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eojbw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5weo0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fgt01")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nc4t2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_cniv6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6thvd"]
 atlas = ExtResource("5_hh6cj")
@@ -129,24 +89,7 @@ position = Vector2(-112, -48)
 Lines = ["Mjäyy", "Oon kissa"]
 Who = 0
 
-[node name="Monster" type="CharacterBody2D" parent="World"]
-position = Vector2(64, 16)
-script = ExtResource("3_ekxxi")
-
-[node name="MoveTimer" type="Timer" parent="World/Monster"]
-wait_time = 5.0
-autostart = true
-
-[node name="EncounterTrigger" parent="World/Monster" instance=ExtResource("3_rpfxf")]
-
-[node name="Sprite" type="AnimatedSprite2D" parent="World/Monster/EncounterTrigger"]
-position = Vector2(0, -16)
-sprite_frames = SubResource("SpriteFrames_r4hc4")
-autoplay = "default"
-frame_progress = 0.486833
-
-[node name="Collider" type="CollisionShape2D" parent="World/Monster"]
-shape = SubResource("CircleShape2D_cniv6")
+[node name="Monster" parent="World" instance=ExtResource("3_dsww4")]
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)

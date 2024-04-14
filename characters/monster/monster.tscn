@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://qe4gr8hr6gkt"]
+
+[ext_resource type="Script" path="res://characters/monster/Monster.cs" id="1_xi6sh"]
+[ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="2_m7uxo"]
+[ext_resource type="Texture2D" uid="uid://bmg7yairwg68" path="res://characters/monster/airmonster1/airmonster1idle.png" id="3_d2pry"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eojbw"]
+atlas = ExtResource("3_d2pry")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5weo0"]
+atlas = ExtResource("3_d2pry")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgt01"]
+atlas = ExtResource("3_d2pry")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc4t2"]
+atlas = ExtResource("3_d2pry")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4hc4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eojbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5weo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgt01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nc4t2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cniv6"]
+
+[node name="Monster" type="CharacterBody2D" node_paths=PackedStringArray("MoveTimer")]
+script = ExtResource("1_xi6sh")
+MoveTimer = NodePath("MoveTimer")
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="EncounterTrigger" parent="." instance=ExtResource("2_m7uxo")]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="EncounterTrigger"]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_r4hc4")
+autoplay = "default"
+frame_progress = 0.64688
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cniv6")
