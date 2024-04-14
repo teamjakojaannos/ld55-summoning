@@ -94,8 +94,7 @@ public partial class Cardgame : Control
         // tried connecting this in editor, didn't work for some reason. Let's do it manually then
         fight.FightRoundEnded += FightRoundEnded;
 
-        PlaceCardsInHands();
-        UpdateCardLabels();
+        DrawCardsToHands();
         SwitchMode(Mode.SelectingCard);
         PlayAITurn();
     }
@@ -117,7 +116,7 @@ public partial class Cardgame : Control
         }
     }
 
-    private void PlaceCardsInHands()
+    private void DrawCardsToHands()
     {
         var playerCardsCount = 5;
         var enemyCardsCount = 5;
@@ -148,6 +147,8 @@ public partial class Cardgame : Control
             enemyCards.Add(card);
             enemyHand.AddChild(card);
         }
+
+        UpdateCardLabels();
     }
 
     private void UpdateCardLabels()
@@ -329,15 +330,31 @@ public partial class Cardgame : Control
 
     private void StartButtonPressed()
     {
+        StartRound();
+    }
+
+    private void StartRound()
+    {
+        startFightButton.Disabled = true;
         SwitchMode(Mode.WatchingBattle);
         fight.StartFight(cardsOnArena);
-        startFightButton.Disabled = true;
+
+        DiscardCardsInHand();
+    }
+
+    private void DiscardCardsInHand()
+    {
+        // TODO
     }
 
     public void FightRoundEnded()
     {
         SwitchMode(Mode.SelectingCard);
         startFightButton.Disabled = false;
+
+        DrawCardsToHands();
+
+        PlayAITurn();
     }
 
     private void PlayAITurn()
