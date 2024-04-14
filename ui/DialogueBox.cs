@@ -5,6 +5,10 @@ using System.Collections.Generic;
 public enum WhoIsSpeaking {
 	Paju,
 	OldWiz,
+	Vellamo,
+	Maahinen,
+	Ilmator,
+	Kokko
 }
 
 public partial class DialogueBox : Control {
@@ -39,6 +43,7 @@ public partial class DialogueBox : Control {
     public void Start(WhoIsSpeaking who, string[] lines) {
 		Paju.Visible = who == WhoIsSpeaking.Paju;
 		OldWiz.Visible = who == WhoIsSpeaking.OldWiz;
+		Vellamo.Visible = who == WhoIsSpeaking.Vellamo;
 
         Lines = new List<string>(lines);
 		Visible = true;

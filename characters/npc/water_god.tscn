@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnqx0kwcw4eq"]
+[gd_scene load_steps=3 format=3 uid="uid://bnqx0kwcw4eq"]
 
 [ext_resource type="Texture2D" uid="uid://c03rpl4qor3b0" path="res://characters/npc/watergodsmall.png" id="1_3v7a7"]
+[ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_1j8v8"]
 
 [node name="WaterGod" type="Node2D"]
 y_sort_enabled = true
@@ -9,3 +10,6 @@ y_sort_enabled = true
 y_sort_enabled = true
 texture = ExtResource("1_3v7a7")
 offset = Vector2(1.71, -16.635)
+
+[node name="DialogueTrigger" parent="." instance=ExtResource("2_1j8v8")]
+position = Vector2(3.48783, -4.69337)
