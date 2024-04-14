@@ -1,17 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=8 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
 [ext_resource type="PackedScene" uid="uid://ful315i3d50d" path="res://cardgame/card_piles.tscn" id="3_kn8vi"]
 [ext_resource type="PackedScene" uid="uid://b4ib4pgt8xe23" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tldo4"]
-draw_center = false
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0.929412, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ptddr"]
 
@@ -34,150 +26,50 @@ dimmedFontColor = Color(0.2, 0.2, 0.2, 1)
 anchors_preset = 0
 script = ExtResource("2_7df7x")
 
-[node name="Hand" type="Control" parent="."]
+[node name="Markers" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="PlayerHandPosition" type="Marker2D" parent="Markers"]
+position = Vector2(340, 480)
+
+[node name="EnemyHandPosition" type="Marker2D" parent="Markers"]
+position = Vector2(340, 20)
+
+[node name="Arena" type="Control" parent="Markers"]
+anchors_preset = 0
+
+[node name="TopLeft" type="Marker2D" parent="Markers/Arena"]
+position = Vector2(420, 175)
+
+[node name="TopMid" type="Marker2D" parent="Markers/Arena"]
+position = Vector2(526, 175)
+
+[node name="TopRight" type="Marker2D" parent="Markers/Arena"]
+position = Vector2(632, 175)
+
+[node name="BotLeft" type="Marker2D" parent="Markers/Arena"]
+position = Vector2(420, 315)
+
+[node name="BotMid" type="Marker2D" parent="Markers/Arena"]
+position = Vector2(526, 315)
+
+[node name="BotRight" type="Marker2D" parent="Markers/Arena"]
+position = Vector2(632, 315)
+
+[node name="NumberLabels" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -155.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="EnemyHand" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -576.0
-offset_top = 40.0
-offset_right = 576.0
-offset_bottom = 168.0
-grow_horizontal = 2
-
-[node name="Arena" type="Control" parent="."]
-anchors_preset = 0
 offset_left = 424.0
-offset_top = 174.0
-offset_right = 733.0
-offset_bottom = 476.0
-
-[node name="Debug" type="Panel" parent="Arena"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tldo4")
-
-[node name="TopLeft" type="Control" parent="Arena"]
-anchors_preset = 0
-offset_right = 96.0
-offset_bottom = 128.0
-
-[node name="Debug" type="Panel" parent="Arena/TopLeft"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tldo4")
-
-[node name="TopMid" type="Control" parent="Arena"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 106.0
-offset_right = 202.0
-offset_bottom = 128.0
-
-[node name="Debug" type="Panel" parent="Arena/TopMid"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tldo4")
-
-[node name="TopRight" type="Control" parent="Arena"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 212.0
-offset_right = 308.0
-offset_bottom = 128.0
-
-[node name="Debug" type="Panel" parent="Arena/TopRight"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tldo4")
-
-[node name="BotLeft" type="Control" parent="Arena"]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 140.0
-offset_right = 96.0
-offset_bottom = 268.0
-
-[node name="Debug" type="Panel" parent="Arena/BotLeft"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tldo4")
-
-[node name="BotMid" type="Control" parent="Arena"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 106.0
-offset_top = 140.0
-offset_right = 202.0
-offset_bottom = 268.0
-
-[node name="Debug" type="Panel" parent="Arena/BotMid"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tldo4")
-
-[node name="BotRight" type="Control" parent="Arena"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 212.0
-offset_top = 140.0
-offset_right = 308.0
-offset_bottom = 268.0
-
-[node name="Debug" type="Panel" parent="Arena/BotRight"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tldo4")
-
-[node name="NumberLabels" type="Control" parent="Arena"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -34.0
+offset_top = -206.0
+offset_right = -419.0
+offset_bottom = -172.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NumberLeft" type="Label" parent="Arena/NumberLabels"]
+[node name="NumberLeft" type="Label" parent="NumberLabels"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 5.0
@@ -187,7 +79,7 @@ text = "1"
 label_settings = SubResource("LabelSettings_ptddr")
 horizontal_alignment = 1
 
-[node name="NumberMid" type="Label" parent="Arena/NumberLabels"]
+[node name="NumberMid" type="Label" parent="NumberLabels"]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 5.0
@@ -197,7 +89,7 @@ text = "2"
 label_settings = SubResource("LabelSettings_brand")
 horizontal_alignment = 1
 
-[node name="NumberRight" type="Label" parent="Arena/NumberLabels"]
+[node name="NumberRight" type="Label" parent="NumberLabels"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 5.0

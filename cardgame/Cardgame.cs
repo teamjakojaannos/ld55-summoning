@@ -4,8 +4,6 @@ using Godot;
 
 public partial class Cardgame : Control
 {
-    private readonly bool DEBUG_MODE = false;
-
     private readonly Dictionary<ArenaPosition, Vector2> arenaPositions = new();
 
     enum Mode
@@ -19,13 +17,11 @@ public partial class Cardgame : Control
     private int? selectedCardIndex = null;
 
     private PackedScene cardScene = GD.Load<PackedScene>("res://cardgame/card.tscn");
-    private Control playerHand;
-    private Control enemyHand;
-
-    private Control arena;
-
     private readonly List<Card> playerCards = new();
     private readonly List<Card> enemyCards = new();
+
+    private Vector2 playerHandPosition;
+    private Vector2 enemyHandPosition;
 
     private CardPiles playerPiles;
     private CardPiles enemyPiles;
@@ -51,14 +47,13 @@ public partial class Cardgame : Control
 
     public override void _Ready()
     {
+        playerHandPosition = GetNode<Marker2D>("Markers/PlayerHandPosition").Position;
+        enemyHandPosition = GetNode<Marker2D>("Markers/EnemyHandPosition").Position;
+
         playerPiles = GetNode<CardPiles>("PlayerPiles");
         playerPiles.SetDeck(CardDecks.PlayerDeck(cardScene));
         enemyPiles = GetNode<CardPiles>("EnemyPiles");
         enemyPiles.SetDeck(CardDecks.EnemyDeck(cardScene));
-
-        playerHand = GetNode<Control>("Hand");
-        enemyHand = GetNode<Control>("EnemyHand");
-        arena = GetNode<Control>("Arena");
 
         startFightButton = GetNode<Button>("ButtonStart");
 
@@ -74,37 +69,22 @@ public partial class Cardgame : Control
 
         var list = new List<(ArenaPosition, string)>()
         {
-            (ArenaPosition.TopLeft, "Arena/TopLeft"),
-            (ArenaPosition.TopMid, "Arena/TopMid"),
-            (ArenaPosition.TopRight, "Arena/TopRight"),
-            (ArenaPosition.BotLeft, "Arena/BotLeft"),
-            (ArenaPosition.BotMid, "Arena/BotMid"),
-            (ArenaPosition.BotRight, "Arena/BotRight"),
+            (ArenaPosition.TopLeft, "Markers/Arena/TopLeft"),
+            (ArenaPosition.TopMid, "Markers/Arena/TopMid"),
+            (ArenaPosition.TopRight, "Markers/Arena/TopRight"),
+            (ArenaPosition.BotLeft, "Markers/Arena/BotLeft"),
+            (ArenaPosition.BotMid, "Markers/Arena/BotMid"),
+            (ArenaPosition.BotRight, "Markers/Arena/BotRight"),
         };
 
         foreach (var (key, name) in list)
         {
-            arenaPositions[key] = GetNode<Control>(name).Position;
+            arenaPositions[key] = GetNode<Marker2D>(name).Position;
         }
 
-        if (DEBUG_MODE)
-        {
-            GD.Print("*********************");
-            GD.Print("* Debug mode is ON! *");
-            GD.Print("*********************");
-        }
-        else
-        {
-            HideDebug(this);
-        }
-
-        arenaPositionLabels[ArenaPosition.BotLeft] = GetNode<Label>(
-            "Arena/NumberLabels/NumberLeft"
-        );
-        arenaPositionLabels[ArenaPosition.BotMid] = GetNode<Label>("Arena/NumberLabels/NumberMid");
-        arenaPositionLabels[ArenaPosition.BotRight] = GetNode<Label>(
-            "Arena/NumberLabels/NumberRight"
-        );
+        arenaPositionLabels[ArenaPosition.BotLeft] = GetNode<Label>("NumberLabels/NumberLeft");
+        arenaPositionLabels[ArenaPosition.BotMid] = GetNode<Label>("NumberLabels/NumberMid");
+        arenaPositionLabels[ArenaPosition.BotRight] = GetNode<Label>("NumberLabels/NumberRight");
 
         fight.FightRoundEnded += FightRoundEnded;
         fight.SomebodyDied += FightEnded;
@@ -114,54 +94,42 @@ public partial class Cardgame : Control
         PlayAITurn();
     }
 
-    private static void HideDebug(Node node)
-    {
-        var children = node.GetChildren(true);
-
-        foreach (var child in children)
-        {
-            var name = child.Name.ToString();
-
-            if (name.StartsWith("Debug") && child is CanvasItem item)
-            {
-                item.Visible = false;
-            }
-
-            HideDebug(child);
-        }
-    }
-
     private void DrawCardsToHands()
     {
         var playerCardsCount = 5;
         var enemyCardsCount = 5;
-        var startPos = new Vector2(400.0f, 0);
+
         var offset = new Vector2(100.0f, 0.0f);
-
-        var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
-
-        for (int i = 0; i < playerDrawnCards.Count; i++)
         {
-            var card = playerDrawnCards[i];
+            var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
 
-            var position = startPos + offset * i;
-            card.Position = position;
+            var startPos = playerHandPosition;
+            for (int i = 0; i < playerDrawnCards.Count; i++)
+            {
+                var card = playerDrawnCards[i];
 
-            playerHand.AddChild(card);
-            playerCards.Add(card);
-            card.SetNumberLabelVisible(true);
-            card.IsPlayersCard = true;
+                var position = startPos + offset * i;
+                card.Position = position;
+
+                AddChild(card);
+                playerCards.Add(card);
+                card.SetNumberLabelVisible(true);
+                card.IsPlayersCard = true;
+            }
         }
 
-        var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
-
-        for (int i = 0; i < enemyDrawnCards.Count; i++)
         {
-            var card = enemyDrawnCards[i];
-            var position = startPos + offset * i;
-            card.Position = position;
-            enemyCards.Add(card);
-            enemyHand.AddChild(card);
+            var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
+
+            var startPos = enemyHandPosition;
+            for (int i = 0; i < enemyDrawnCards.Count; i++)
+            {
+                var card = enemyDrawnCards[i];
+                var position = startPos + offset * i;
+                card.Position = position;
+                enemyCards.Add(card);
+                AddChild(card);
+            }
         }
 
         UpdateCardLabels();
@@ -270,18 +238,16 @@ public partial class Cardgame : Control
         var card = playerCards[cardIndex];
         playerCards.RemoveAt(cardIndex);
 
-        AddCardToArena(card, position, playerHand);
+        AddCardToArena(card, position);
 
         UpdateCardLabels();
 
         SwitchMode(Mode.SelectingCard);
     }
 
-    private void AddCardToArena(Card card, ArenaPosition position, Control previousParent)
+    private void AddCardToArena(Card card, ArenaPosition position)
     {
         card.SetNumberLabelVisible(false);
-        previousParent.RemoveChild(card);
-        arena.AddChild(card);
         card.Position = arenaPositions[position];
         cardsOnArena[position] = card;
     }
@@ -360,8 +326,8 @@ public partial class Cardgame : Control
 
     private void DiscardCardsInHand()
     {
-        playerPiles.DiscardCards(playerCards, playerHand);
-        enemyPiles.DiscardCards(enemyCards, enemyHand);
+        playerPiles.DiscardCards(playerCards);
+        enemyPiles.DiscardCards(enemyCards);
     }
 
     public void FightRoundEnded()
@@ -386,7 +352,7 @@ public partial class Cardgame : Control
 
         foreach (var (position, card) in enemyMoves)
         {
-            AddCardToArena(card, position, enemyHand);
+            AddCardToArena(card, position);
             enemyCards.Remove(card);
         }
     }

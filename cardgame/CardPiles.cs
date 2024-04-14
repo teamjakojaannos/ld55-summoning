@@ -38,12 +38,10 @@ public partial class CardPiles : Control
         return result;
     }
 
-    public void DiscardCards(List<Card> cards, Control parent)
+    public void DiscardCards(List<Card> cards)
     {
         foreach (var card in cards)
         {
-            parent.RemoveChild(card);
-            AddChild(card);
             discardPile.Add(card);
 
             card.Position = new(0, 0);
