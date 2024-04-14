@@ -37,6 +37,7 @@ public class FightClub
     private void PlayNextTurn()
     {
         UnregisterPreviousCard();
+        CleanupDeadCards();
 
         var nextTurn = FindNextCardInTurn(cardsOnArena);
         if (nextTurn == null)
@@ -64,7 +65,15 @@ public class FightClub
         }
         else
         {
-            GD.Print("Minor boom!");
+            target.CurrentHp -= attacker.Damage;
+            if (target.IsDead)
+            {
+                target.PlayDieAnimation();
+            }
+            else
+            {
+                target.PlayHurtAnimation();
+            }
         }
     }
 
@@ -101,5 +110,17 @@ public class FightClub
     {
         turnIndex++;
         PlayNextTurn();
+    }
+
+    private void CleanupDeadCards()
+    {
+        foreach (var (position, card) in cardsOnArena)
+        {
+            if (card.IsDead)
+            {
+                cardsOnArena.Remove(position);
+                card.QueueFree();
+            }
+        }
     }
 }

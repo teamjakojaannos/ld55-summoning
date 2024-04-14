@@ -46,6 +46,10 @@ public partial class Card : Control
         }
     }
 
+    public bool IsDead
+    {
+        get => CurrentHp == 0;
+    }
     private Label hpLabel;
     private Label dmgLabel;
     private Label numberLabel;
@@ -87,7 +91,7 @@ public partial class Card : Control
             return;
         }
 
-        hpLabel.Text = $"HP {CurrentHp}";
+        hpLabel.Text = $"H {CurrentHp}";
         dmgLabel.Text = $"D {Damage}";
     }
 
@@ -144,5 +148,15 @@ public partial class Card : Control
 
         attackInfo.fightManager.CardAttacksTarget(this, attackInfo.target);
         attackInfo = null;
+    }
+
+    public void PlayHurtAnimation()
+    {
+        animation.Play("take_damage");
+    }
+
+    public void PlayDieAnimation()
+    {
+        animation.Play("die");
     }
 }

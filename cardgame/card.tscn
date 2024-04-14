@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbkof1h8cra7f"]
+[gd_scene load_steps=14 format=3 uid="uid://cbkof1h8cra7f"]
 
 [ext_resource type="Script" path="res://cardgame/Card.cs" id="2_3uajd"]
 [ext_resource type="Texture2D" uid="uid://cegsh6sctctnl" path="res://cardgame/scroll.png" id="2_kefqs"]
@@ -13,9 +13,6 @@ font_size = 12
 font_color = Color(0.2, 0.121569, 0.0313726, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_c6hs3"]
-
-[sub_resource type="Animation" id="Animation_esm7l"]
-length = 0.001
 
 [sub_resource type="Animation" id="Animation_0xyqm"]
 resource_name = "attack_animation"
@@ -46,10 +43,106 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_qhaif"]
+resource_name = "take_damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uwi1n"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 100)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_esm7l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ls1"]
 _data = {
 "RESET": SubResource("Animation_esm7l"),
-"attack_animation": SubResource("Animation_0xyqm")
+"attack_animation": SubResource("Animation_0xyqm"),
+"die": SubResource("Animation_uwi1n"),
+"take_damage": SubResource("Animation_qhaif")
 }
 
 [node name="Card" type="Control"]
@@ -63,6 +156,7 @@ script = ExtResource("2_3uajd")
 layout_mode = 2
 offset_right = 96.0
 offset_bottom = 128.0
+pivot_offset = Vector2(48, 64)
 texture = ExtResource("2_kefqs")
 
 [node name="ÖllinNimi" type="Label" parent="Sprite"]
