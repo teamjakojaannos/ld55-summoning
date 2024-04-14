@@ -280,7 +280,7 @@ public partial class Cardgame : Control {
         card.SetNumberLabelVisible(false);
 
         var arenaSlot = arenaSlots[position];
-        card.StartMovingTo(arenaSlot.Position, cardMoveTime);
+        card.StartMovingTo(arenaSlot.GlobalPosition, cardMoveTime);
         arenaSlot.Card = card;
     }
 
