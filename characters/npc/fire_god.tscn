@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://w4adbsvfxqul"]
+
+[ext_resource type="Texture2D" uid="uid://dnkoebad5l3rm" path="res://characters/npc/firegodsmall.png" id="1_xln1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2og54"]
+size = Vector2(13, 5)
+
+[node name="FireGod" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_xln1b")
+offset = Vector2(4.75, -22.385)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_2og54")

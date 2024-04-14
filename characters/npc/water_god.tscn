@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnqx0kwcw4eq"]
+
+[ext_resource type="Texture2D" uid="uid://c03rpl4qor3b0" path="res://characters/npc/watergodsmall.png" id="1_3v7a7"]
+
+[node name="WaterGod" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_3v7a7")
+offset = Vector2(1.71, -16.635)

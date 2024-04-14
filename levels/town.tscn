@@ -129,10 +129,9 @@ position = Vector2(-112, -48)
 Lines = ["Mjäyy", "Oon kissa"]
 Who = 0
 
-[node name="Monster" type="CharacterBody2D" parent="World" node_paths=PackedStringArray("MoveTimer")]
+[node name="Monster" type="CharacterBody2D" parent="World"]
 position = Vector2(64, 16)
 script = ExtResource("3_ekxxi")
-MoveTimer = NodePath("MoveTimer")
 
 [node name="MoveTimer" type="Timer" parent="World/Monster"]
 wait_time = 5.0

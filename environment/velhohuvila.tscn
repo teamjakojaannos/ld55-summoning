@@ -28,4 +28,5 @@ offset = Vector2(43.915, -83.435)
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
 polygon = PackedVector2Array(35, -41, 61, -51, 62, -99, 8, -101, -41, -100, -44, -70, -56, -61, -39, -47, -35, -47, -32, -27, -29, -27, -29, -66, -3, -66, 2, -66, 0, -26, 14, -31)
