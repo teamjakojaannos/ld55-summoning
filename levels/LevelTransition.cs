@@ -5,6 +5,9 @@ public partial class LevelTransition : Area2D {
 	[Export]
 	private string levelName;
 
+	[Export]
+	private string spawnPointName = "PlayerStart";
+
 	public override void _Ready() {
 		if (levelName == null) {
 			GD.PrintErr("You forgor to set level transition's destination level :skull_emoji:");
@@ -23,9 +26,11 @@ public partial class LevelTransition : Area2D {
 
 			Vector2 spawnPoint = new();
 
-			var startNode = levelInstance.FindChild("PlayerStart", true, false);
+			var startNode = levelInstance.FindChild(spawnPointName, true, false);
 			if (startNode != null && startNode is Node2D node2d) {
 				spawnPoint = node2d.Position;
+			} else {
+				GD.PrintErr($"Level {levelInstance.Name} doesn't have a spawn point named '{spawnPointName}', spawning at (0,0).");
 			}
 
 			var gameManager = GetNode<GameManager>("/root/GameManager");
