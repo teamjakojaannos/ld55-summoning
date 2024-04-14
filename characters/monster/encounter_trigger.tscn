@@ -1,18 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj3dl1qo4yw3w"]
+[gd_scene load_steps=3 format=3 uid="uid://cj3dl1qo4yw3w"]
 
 [ext_resource type="Script" path="res://characters/monster/EncounterTrigger.cs" id="1_2tnhf"]
-[ext_resource type="SpriteFrames" uid="uid://drw3rmjddgl1i" path="res://characters/player/player_frames.tres" id="2_oydgc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qekse"]
 radius = 8.0
 
 [node name="EncounterTrigger" type="Area2D"]
 script = ExtResource("1_2tnhf")
-
-[node name="Placeholder" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -19)
-sprite_frames = ExtResource("2_oydgc")
-animation = &"idle"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qekse")

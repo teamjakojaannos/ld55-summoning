@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=19 format=3 uid="uid://c5uxib0tkhldl"]
 
+[ext_resource type="Texture2D" uid="uid://cuehij7c7hxu5" path="res://characters/monster/airmonster1idlestatic.png" id="3_24kxp"]
 [ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="3_rpfxf"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
 [ext_resource type="PackedScene" uid="uid://dkuq61u6l4jg6" path="res://cardgame/cardgame.tscn" id="4_wotui"]
@@ -7,6 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://c0k6gpop4ph3m" path="res://characters/whyisthishere/ruohonleikkuriBATTLE.png" id="5_hh6cj"]
 [ext_resource type="Script" path="res://characters/whyisthishere/esjonnejaujookulmaa.cs" id="6_qxphv"]
 [ext_resource type="Texture2D" uid="uid://cp6u7acwpqojm" path="res://characters/player/placeholder.png" id="7_japg0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4hc4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_24kxp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6thvd"]
 atlas = ExtResource("5_hh6cj")
@@ -86,6 +98,10 @@ layer_0/tile_data = PackedInt32Array(-589835, 1, 0, -524299, 1, 0, -458763, 1, 0
 
 [node name="EncounterTrigger" parent="World" instance=ExtResource("3_rpfxf")]
 position = Vector2(80, 8)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="World/EncounterTrigger"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_r4hc4")
 
 [node name="DialogueTrigger" parent="World" instance=ExtResource("5_6x2e7")]
 position = Vector2(-112, -48)

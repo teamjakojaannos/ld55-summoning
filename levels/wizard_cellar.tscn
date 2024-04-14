@@ -268,7 +268,6 @@ frame = 3
 position = Vector2(-37, 11)
 sprite_frames = SubResource("SpriteFrames_56lg1")
 animation = &"kitty_idle"
-frame_progress = 0.459664
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-37, 31)
