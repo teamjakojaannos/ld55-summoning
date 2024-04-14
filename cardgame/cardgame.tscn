@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y58rh"]
-load_path = "res://.godot/imported/placeholder.png-a9138d498dab4b0497017c3f706370aa.ctex"
+[ext_resource type="PackedScene" uid="uid://ful315i3d50d" path="res://cardgame/card_piles.tscn" id="3_kn8vi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tldo4"]
 draw_center = false
@@ -34,32 +32,6 @@ dimmedFontColor = Color(0.2, 0.2, 0.2, 1)
 [node name="FightManager" type="Control" parent="."]
 anchors_preset = 0
 script = ExtResource("2_7df7x")
-
-[node name="Player" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -100.0
-offset_right = 200.0
-offset_bottom = 100.0
-grow_vertical = 2
-texture = SubResource("CompressedTexture2D_y58rh")
-
-[node name="Opponent" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -100.0
-offset_bottom = 100.0
-grow_horizontal = 0
-grow_vertical = 2
-texture = SubResource("CompressedTexture2D_y58rh")
-flip_h = true
 
 [node name="Hand" type="Control" parent="."]
 layout_mode = 1
@@ -241,5 +213,19 @@ offset_top = 503.0
 offset_right = 1112.0
 offset_bottom = 565.0
 text = "Start round"
+
+[node name="PlayerPiles" parent="." instance=ExtResource("3_kn8vi")]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 375.0
+offset_right = -875.0
+offset_bottom = -151.0
+
+[node name="EnemyPiles" parent="." instance=ExtResource("3_kn8vi")]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 180.0
+offset_right = -875.0
+offset_bottom = -346.0
 
 [connection signal="pressed" from="ButtonStart" to="." method="StartButtonPressed"]

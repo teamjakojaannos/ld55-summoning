@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://ful315i3d50d"]
+
+[ext_resource type="Script" path="res://cardgame/CardPiles.cs" id="1_bjm1w"]
+[ext_resource type="Texture2D" uid="uid://bb7frv1tasqpk" path="res://cardgame/scroll_rolled.png" id="1_s5x5v"]
+
+[node name="Piles" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -895.0
+offset_bottom = -526.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bjm1w")
+
+[node name="SpriteDrawPile" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 65.0
+offset_bottom = 97.0
+texture = ExtResource("1_s5x5v")
+
+[node name="LabelDrawPile" type="Label" parent="."]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 74.0
+offset_bottom = 119.0
+text = "Draw pile"
+
+[node name="SpriteDiscardPile" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 224.0
+offset_bottom = 96.0
+texture = ExtResource("1_s5x5v")
+
+[node name="LabelDiscardPile" type="Label" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 96.0
+offset_right = 251.0
+offset_bottom = 119.0
+text = "Discard pile"
