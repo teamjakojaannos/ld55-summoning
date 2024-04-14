@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbkof1h8cra7f"]
+[gd_scene load_steps=15 format=3 uid="uid://cbkof1h8cra7f"]
 
 [ext_resource type="Script" path="res://cardgame/Card.cs" id="2_3uajd"]
 [ext_resource type="Texture2D" uid="uid://cegsh6sctctnl" path="res://cardgame/scroll.png" id="2_kefqs"]
@@ -137,10 +137,40 @@ tracks/0/keys = {
 "values": [0.0, 0.261799, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_k6gup"]
+resource_name = "attack_animation_upward"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"CardAttacks"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ls1"]
 _data = {
 "RESET": SubResource("Animation_esm7l"),
 "attack_animation": SubResource("Animation_0xyqm"),
+"attack_animation_upward": SubResource("Animation_k6gup"),
 "die": SubResource("Animation_uwi1n"),
 "take_damage": SubResource("Animation_qhaif")
 }

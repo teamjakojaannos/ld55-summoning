@@ -61,6 +61,7 @@ public partial class Card : Control
     private AnimationPlayer animation;
 
     private string attackAnimation = "attack_animation";
+    private string attackAnimationUpward = "attack_animation_upward";
 
     private AttackInfo attackInfo;
 
@@ -77,7 +78,7 @@ public partial class Card : Control
 
         animation.AnimationFinished += (name) =>
         {
-            if (name == attackAnimation)
+            if (name == attackAnimation || name == attackAnimationUpward)
             {
                 EmitSignal(SignalName.AttackAnimationFinished);
             }
@@ -138,7 +139,8 @@ public partial class Card : Control
     public void StartAttack(AttackInfo info)
     {
         attackInfo = info;
-        animation.Play(attackAnimation);
+        var animationName = IsPlayersCard ? attackAnimationUpward : attackAnimation;
+        animation.Play(animationName);
     }
 
     public void CardAttacks()
