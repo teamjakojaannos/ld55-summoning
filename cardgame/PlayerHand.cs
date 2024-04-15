@@ -42,6 +42,8 @@ public partial class PlayerHand : Control {
 			child.QueueFree();
 			RemoveChild(child);
 		}
+
+		Cards.Clear();
 	}
 
 	public void AddCards(List<Card> cards, float cardMoveSpeed) {
