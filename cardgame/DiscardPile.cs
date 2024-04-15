@@ -11,4 +11,12 @@ public partial class DiscardPile : TextureRect {
 		AddChild(card);
 		card.MoveToNewParent(oldPosition, cardMoveSpeed);
 	}
+
+	public void Clear() {
+		foreach (var card in Cards) {
+			card.QueueFree();
+		}
+
+		Cards.Clear();
+	}
 }

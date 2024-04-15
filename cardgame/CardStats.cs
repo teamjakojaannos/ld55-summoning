@@ -50,4 +50,11 @@ public partial class CardStats : Resource {
 		MaxHp = hp;
 		CurrentHp = hp;
 	}
+
+	public CardStats(int hp, int damage, MonsterVariant monsterVariant) {
+		Damage = damage;
+		MaxHp = hp;
+		CurrentHp = hp;
+		MonsterVariant = monsterVariant;
+	}
 }

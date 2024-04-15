@@ -86,6 +86,16 @@ public partial class FightClub : Control {
 	}
 
 	private void SomeoneDied() {
+		foreach (var (position, slot) in arenaSlots) {
+			if (slot.IsFree) {
+				continue;
+			}
+
+			var card = slot.Card;
+			arenaSlots[position].Clear();
+			card.QueueFree();
+		}
+
 		var playerDead = hasDied == Who.Player;
 		ResetStuff();
 		EmitSignal(SignalName.SomebodyDied, playerDead);

@@ -181,6 +181,8 @@ public partial class Cardgame : Control {
 				bool shufflePlayerDeck = true,
 				bool shuffleEnemyDeck = true
 		) {
+		Reset();
+
 		var playerDeck = CreateDeck(playerCardStats);
 		if (shufflePlayerDeck) {
 			playerDeck.Shuffle();

@@ -38,6 +38,8 @@ public partial class CardPiles : Control
 			card.QueueFree();
 		}
 
+        discardPile.Clear();
+
         drawPile = deck;
 
         UpdateLabels();

@@ -194,7 +194,10 @@ public partial class Player : CharacterBody2D {
 		IsInFight = false;
 		Sprite.Visible = true;
 		Frozen = false;
-		// TODO: end musics etc...
+
+		EnterCombatMusic.Stop();
+		CombatMusic.Stop();
+		ExplocationMusic.Play();
 	}
 
 	private void CheckInput(StringName action, InputDirection direction) {
