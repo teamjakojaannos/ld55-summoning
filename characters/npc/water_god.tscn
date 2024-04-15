@@ -13,3 +13,5 @@ offset = Vector2(1.71, -16.635)
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("2_1j8v8")]
 position = Vector2(3.48783, -4.69337)
+Lines = ["terve kiisu"]
+Who = 2

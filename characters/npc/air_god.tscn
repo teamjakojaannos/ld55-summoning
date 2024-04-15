@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://5juhwtj3y1kj"]
+
+[ext_resource type="Texture2D" uid="uid://bu2vmmv5hjonp" path="res://characters/npc/airgodsmall.png" id="1_jdcgq"]
+[ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_mlsec"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b82l0"]
+size = Vector2(13, 5)
+
+[node name="AirGod" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_jdcgq")
+offset = Vector2(-0.915, -29.21)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(0.5, -8.5)
+shape = SubResource("RectangleShape2D_b82l0")
+
+[node name="DialogueTrigger" parent="." instance=ExtResource("2_mlsec")]
+position = Vector2(0, -13)
+Lines = ["mmmm"]
+Who = 5

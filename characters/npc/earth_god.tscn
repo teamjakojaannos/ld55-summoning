@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bauor3cyiwu6i"]
+
+[ext_resource type="Texture2D" uid="uid://dldbencb31aix" path="res://characters/npc/earthgodsmall.png" id="1_ona1q"]
+[ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_6wvjt"]
+
+[node name="EarthGod" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_ona1q")
+
+[node name="DialogueTrigger" parent="." instance=ExtResource("2_6wvjt")]
+position = Vector2(0, 7)
+Lines = ["AUUGH"]
+Who = 4

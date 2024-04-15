@@ -6,9 +6,10 @@ public enum WhoIsSpeaking {
 	Paju,
 	OldWiz,
 	Vellamo,
+	Kokko,
 	Maahinen,
-	Ilmator,
-	Kokko
+	Ilmatar
+
 }
 
 public partial class DialogueBox : Control {
@@ -26,6 +27,18 @@ public partial class DialogueBox : Control {
 	[Export]
 	public TextureRect OldWiz;
 
+	[Export]
+	public TextureRect Vellamo;
+
+	[Export]
+	public TextureRect Kokko;
+
+	[Export]
+	public TextureRect Ilmatar; 
+
+	[Export]
+	public TextureRect Maahinen; 
+
 	public bool IsInProgress;
 
     public override void _Ready() {
@@ -35,7 +48,7 @@ public partial class DialogueBox : Control {
     }
 
     public override void _Process(double delta) {
-		if (Input.IsActionJustPressed("move_up") && IsInProgress) {
+		if (Input.IsActionJustPressed("Interact") && IsInProgress) {
 			NextLine();
 		}
     }
@@ -44,6 +57,9 @@ public partial class DialogueBox : Control {
 		Paju.Visible = who == WhoIsSpeaking.Paju;
 		OldWiz.Visible = who == WhoIsSpeaking.OldWiz;
 		Vellamo.Visible = who == WhoIsSpeaking.Vellamo;
+		Kokko.Visible = who == WhoIsSpeaking.Kokko;
+		Ilmatar.Visible = who == WhoIsSpeaking.Ilmatar;
+		Maahinen.Visible = who == WhoIsSpeaking.Maahinen;
 
         Lines = new List<string>(lines);
 		Visible = true;
