@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=15 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
+[ext_resource type="Texture2D" uid="uid://lbf3t7wvpjkb" path="res://ui/arena-background.png" id="2_t40ri"]
 [ext_resource type="PackedScene" uid="uid://6djvxkt8l1dx" path="res://cardgame/in_play_slot.tscn" id="3_86g1s"]
 [ext_resource type="Script" path="res://cardgame/EnemyHand.cs" id="3_jid7n"]
 [ext_resource type="PackedScene" uid="uid://b750di4b0lclc" path="res://cardgame/in_hand_slot.tscn" id="3_sktvo"]
@@ -31,6 +32,23 @@ CardDiscardSpeed = 10.0
 PlayedCardSpeed = 7.0
 CardDealSpeed = 7.0
 
+[node name="NinePatchRect" type="NinePatchRect" parent="Cardgame"]
+z_index = -2
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 0.25
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+texture = ExtResource("2_t40ri")
+patch_margin_left = 13
+patch_margin_top = 13
+patch_margin_right = 13
+patch_margin_bottom = 13
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
 [node name="FightManager" type="Control" parent="Cardgame"]
 anchors_preset = 0
 script = ExtResource("2_7df7x")
@@ -41,9 +59,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -0.130005
-offset_top = 6.0
+offset_top = 23.0
 offset_right = -0.130005
-offset_bottom = 6.0
+offset_bottom = 23.0
 grow_horizontal = 2
 script = ExtResource("3_jid7n")
 Cardgame = NodePath("..")
@@ -271,9 +289,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
+offset_left = 34.0
 offset_top = 375.0
-offset_right = -875.0
+offset_right = -861.0
 offset_bottom = -151.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -316,9 +334,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
+offset_left = 34.0
 offset_top = 180.0
-offset_right = -875.0
+offset_right = -861.0
 offset_bottom = -346.0
 grow_horizontal = 2
 grow_vertical = 2

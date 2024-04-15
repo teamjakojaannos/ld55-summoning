@@ -1,9 +1,9 @@
 public class AttackInfo
 {
-    public Card target;
+    public InPlaySlot target;
     public FightClub fightManager;
 
-    public AttackInfo(Card target, FightClub fightManager)
+    public AttackInfo(InPlaySlot target, FightClub fightManager)
     {
         this.target = target;
         this.fightManager = fightManager;

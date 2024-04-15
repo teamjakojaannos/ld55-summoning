@@ -87,4 +87,8 @@ public partial class PlayerHand : Control {
 	protected virtual bool AmIPlayer() {
 		return true;
 	}
+
+	public int CardIndex(Card card) {
+		return Cards.IndexOf(card);
+	}
 }

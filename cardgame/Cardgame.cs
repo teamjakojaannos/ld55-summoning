@@ -428,10 +428,11 @@ public partial class Cardgame : Control {
 		);
 
 		foreach (var (position, card) in enemyMoves) {
-			AddCardToArena(card, position);
+			var cardIndex = enemyHand.CardIndex(card);
 
-			// FIXME: is this the same as player playing a card?
+			AddCardToArena(card, position);
 			EnemyCards.Remove(card);
+			enemyHand.PlayCard(cardIndex);
 		}
 
 		aiMoveTimer.Start();

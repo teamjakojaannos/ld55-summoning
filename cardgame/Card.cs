@@ -1,9 +1,6 @@
 using Godot;
 
 public partial class Card : Control {
-	[Signal]
-	public delegate void AttackAnimationFinishedEventHandler();
-
 	private CardStats stats;
 
 	public int MaxHp {
@@ -47,13 +44,7 @@ public partial class Card : Control {
 
 	private bool highlighted = false;
 
-	private AnimationPlayer animation;
-
-	private string attackAnimation = "attack_animation";
-	private string attackAnimationUpward = "attack_animation_upward";
-
-	private AttackInfo attackInfo;
-
+	// TODO: Move to slot
 	public bool IsPlayersCard = false;
 
 	private Vector2 targetPosition;
@@ -75,16 +66,9 @@ public partial class Card : Control {
 		hpLabel = GetNode<Label>("Sprite/HpLabel");
 		dmgLabel = GetNode<Label>("Sprite/DamageLabel");
 		image = GetNode<TextureRect>("Sprite");
-		animation = GetNode<AnimationPlayer>("AnimationPlayer");
 		nameLabel = GetNode<Label>("Sprite/ÖllinNimi");
 		elementSprite = GetNode<TextureRect>("Sprite/Elememtpi");
 		creatureSprite = GetNode<TextureRect>("Sprite/Ölli");
-
-		animation.AnimationFinished += (name) => {
-			if (name == attackAnimation || name == attackAnimationUpward) {
-				EmitSignal(SignalName.AttackAnimationFinished);
-			}
-		};
 
 		MouseEntered += () => {
 			Highlight();
@@ -135,29 +119,6 @@ public partial class Card : Control {
 	public void RemoveHighlight() {
 		targetScale = Vector2.One;
 		ZIndex = 0;
-	}
-
-	public void StartAttack(AttackInfo info) {
-		attackInfo = info;
-		var animationName = IsPlayersCard ? attackAnimationUpward : attackAnimation;
-		animation.Play(animationName);
-	}
-
-	public void CardAttacks() {
-		if (attackInfo == null) {
-			return;
-		}
-
-		attackInfo.fightManager.CardAttacksTarget(this, attackInfo.target, IsPlayersCard);
-		attackInfo = null;
-	}
-
-	public void PlayHurtAnimation() {
-		animation.Play("take_damage");
-	}
-
-	public void PlayDieAnimation() {
-		animation.Play("die");
 	}
 
 	public void MoveInstantlyTo(Vector2 position) {

@@ -32,7 +32,7 @@ public partial class FightClub : Control {
 
 	private HpBar playerHp;
 	private HpBar enemyHp;
-	private Card previousCard;
+	private InPlaySlot previousSlot;
 
 	public void StartFight(
 			Dictionary<ArenaPosition, InPlaySlot> arenaSlots,
@@ -69,15 +69,15 @@ public partial class FightClub : Control {
 			return;
 		}
 
-		var (attackingCard, position) = nextTurn.Value;
+		var (attackingSlot, position) = nextTurn.Value;
 
 		var oppositePosition = position.Opposite();
 		arenaSlots.TryGetValue(oppositePosition, out InPlaySlot targetSlot);
 
-		attackingCard.AttackAnimationFinished += CardFinishedAttackAnimation;
-		previousCard = attackingCard;
+		attackingSlot.AttackAnimationFinished += CardFinishedAttackAnimation;
+		previousSlot = attackingSlot;
 
-		attackingCard.StartAttack(new(targetSlot.Card, this));
+		attackingSlot.StartAttack(new(targetSlot, this));
 	}
 
 	private void RoundOver() {
@@ -109,9 +109,9 @@ public partial class FightClub : Control {
 		hasDied = Who.Nobody;
 	}
 
-	public void CardAttacksTarget(Card attacker, Card target, bool IsPlayersCard) {
-		if (target == null) {
-			var damage = attacker.Damage;
+	public void CardAttacksTarget(InPlaySlot attacker, InPlaySlot target, bool IsPlayersCard) {
+		if (target.IsFree) {
+			var damage = attacker.Card.Damage;
 			var character = IsPlayersCard ? enemyHp : playerHp;
 			character.CurrentHp -= damage;
 
@@ -119,10 +119,10 @@ public partial class FightClub : Control {
 				hasDied = IsPlayersCard ? Who.Enemy : Who.Player;
 			}
 		} else {
-			var damage = CalculateDamage(attacker, target);
+			var damage = CalculateDamage(attacker.Card, target.Card);
 
-			target.CurrentHp -= damage;
-			if (target.IsDead) {
+			target.Card.CurrentHp -= damage;
+			if (target.Card.IsDead) {
 				target.PlayDieAnimation();
 			} else {
 				target.PlayHurtAnimation();
@@ -138,7 +138,7 @@ public partial class FightClub : Control {
 		return Mathf.Max(result, 1);
 	}
 
-	private (Card, ArenaPosition)? FindNextCardInTurn(Dictionary<ArenaPosition, InPlaySlot> arenaSlots) {
+	private (InPlaySlot, ArenaPosition)? FindNextCardInTurn(Dictionary<ArenaPosition, InPlaySlot> arenaSlots) {
 		while (true) {
 			if (turnIndex >= fightOrder.Count) {
 				return null;
@@ -146,7 +146,7 @@ public partial class FightClub : Control {
 
 			var position = fightOrder[turnIndex];
 			if (arenaSlots[position].IsTaken) {
-				return (arenaSlots[position].Card, position);
+				return (arenaSlots[position], position);
 			}
 
 			// no-one on this square, check if the next square in turn has a card
@@ -155,9 +155,9 @@ public partial class FightClub : Control {
 	}
 
 	private void UnregisterPreviousCard() {
-		if (previousCard != null) {
-			previousCard.AttackAnimationFinished -= CardFinishedAttackAnimation;
-			previousCard = null;
+		if (previousSlot != null) {
+			previousSlot.AttackAnimationFinished -= CardFinishedAttackAnimation;
+			previousSlot = null;
 		}
 	}
 

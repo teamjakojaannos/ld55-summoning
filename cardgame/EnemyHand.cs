@@ -1,4 +1,4 @@
-using Godot;
+using System;
 
 public partial class EnemyHand : PlayerHand {
 	protected override void SetupSlot(InHandSlot slot, int index) {
