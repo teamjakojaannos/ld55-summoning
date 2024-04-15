@@ -116,6 +116,7 @@ public partial class Cardgame : Control {
 		enemyPiles = GetNode<CardPiles>("EnemyPiles");
 
 		startFightButton = GetNode<Button>("ButtonStart");
+		startFightButton.Pressed += StartButtonPressed;
 
 		var playerHitpoints = 20;
 		playerHp = GetNode<HpBar>("PlayerHp");
@@ -267,6 +268,11 @@ public partial class Cardgame : Control {
 				}
 				return;
 			}
+		}
+
+		if (inputEvent.IsActionPressed("Interact")) {
+			StartButtonPressed();
+			return;
 		}
 
 		var num_keys = new List<string>()

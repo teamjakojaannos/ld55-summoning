@@ -18,7 +18,7 @@
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
-[node name="Cardgame" type="Control" parent="."]
+[node name="Cardgame" type="Control" parent="." node_paths=PackedStringArray("CardHit", "CardDie", "Denied", "Deal", "PlayCard", "FocusCard")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,6 +32,12 @@ dimmedFontColor = Color(0.2, 0.2, 0.2, 1)
 CardDiscardSpeed = 10.0
 PlayedCardSpeed = 7.0
 CardDealSpeed = 7.0
+CardHit = NodePath("../CardAttack")
+CardDie = NodePath("../CardDie")
+Denied = NodePath("../Denied")
+Deal = NodePath("../Deal")
+PlayCard = NodePath("../PlayCard")
+FocusCard = NodePath("../CardFocus")
 
 [node name="Background" type="NinePatchRect" parent="Cardgame"]
 z_index = -2
@@ -160,6 +166,10 @@ self_modulate = Color(1, 0.8, 0.8, 0.188235)
 layout_mode = 2
 Cardgame = NodePath("../..")
 
+[node name="CardRoot" parent="Cardgame/Arena/OpponentLeft" index="0"]
+offset_right = 1632.0
+offset_bottom = 2176.0
+
 [node name="Key" parent="Cardgame/Arena/OpponentLeft" index="1"]
 visible = false
 
@@ -169,6 +179,10 @@ layout_mode = 2
 PositionOnArena = 1
 Cardgame = NodePath("../..")
 
+[node name="CardRoot" parent="Cardgame/Arena/OpponentMid" index="0"]
+offset_right = 1632.0
+offset_bottom = 2176.0
+
 [node name="Key" parent="Cardgame/Arena/OpponentMid" index="1"]
 visible = false
 
@@ -177,6 +191,10 @@ self_modulate = Color(1, 0.8, 0.8, 0.188235)
 layout_mode = 2
 PositionOnArena = 2
 Cardgame = NodePath("../..")
+
+[node name="CardRoot" parent="Cardgame/Arena/OpponentRight" index="0"]
+offset_right = 1632.0
+offset_bottom = 2176.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentRight" index="1"]
 visible = false
@@ -195,6 +213,10 @@ IsPlayerSlot = true
 PositionOnArena = 4
 Cardgame = NodePath("../..")
 
+[node name="CardRoot" parent="Cardgame/Arena/PlayerMid" index="0"]
+offset_right = 1632.0
+offset_bottom = 2176.0
+
 [node name="Label" parent="Cardgame/Arena/PlayerMid/Key" index="0"]
 text = "2"
 
@@ -204,6 +226,10 @@ layout_mode = 2
 IsPlayerSlot = true
 PositionOnArena = 5
 Cardgame = NodePath("../..")
+
+[node name="CardRoot" parent="Cardgame/Arena/PlayerRight" index="0"]
+offset_right = 1632.0
+offset_bottom = 2176.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerRight/Key" index="0"]
 text = "3"

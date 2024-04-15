@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=32 format=3 uid="uid://c5uxib0tkhldl"]
 
 [ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="3_dsww4"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
@@ -92,6 +92,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ggh71"]
+radius = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6thvd"]
 atlas = ExtResource("5_hh6cj")
@@ -188,6 +191,10 @@ frame_progress = 0.654869
 Lines = ["Wowies!", "Cozy candlesies! uwu"]
 Who = 0
 
+[node name="Collider" parent="World/Pentagrammi/DialogueTrigger" index="0"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_ggh71")
+
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)
 
@@ -207,3 +214,5 @@ position = Vector2(0, -40)
 sprite_frames = SubResource("SpriteFrames_objm1")
 frame_progress = 0.377978
 flip_h = true
+
+[editable path="World/Pentagrammi/DialogueTrigger"]
