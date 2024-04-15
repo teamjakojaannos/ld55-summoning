@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_wliti")
-MaxHp = 4
-Damage = 6
+MaxHp = 5
+Damage = 7
 MonsterVariant = 1

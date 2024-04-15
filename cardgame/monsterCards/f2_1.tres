@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_jgri1")
-MaxHp = 3
-Damage = 3
+MaxHp = 4
+Damage = 2
 MonsterVariant = 5

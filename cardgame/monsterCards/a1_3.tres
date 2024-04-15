@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_kvx5s")
-MaxHp = 6
+MaxHp = 4
 Damage = 7
 MonsterVariant = 0

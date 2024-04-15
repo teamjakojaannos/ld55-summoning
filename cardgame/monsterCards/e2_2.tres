@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_iswy0")
-MaxHp = 5
+MaxHp = 12
 Damage = 3
 MonsterVariant = 3

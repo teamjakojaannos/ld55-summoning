@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_ovfel")
-MaxHp = 2
-Damage = 7
+MaxHp = 4
+Damage = 5
 MonsterVariant = 0
