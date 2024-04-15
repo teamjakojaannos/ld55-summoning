@@ -43,8 +43,8 @@ animations = [{
 }]
 
 [node name="Monster" instance=ExtResource("1_kapw4")]
-MaxHp = 12
-monsterCards = [ExtResource("2_3i5sj"), ExtResource("3_u5y72"), ExtResource("3_u5y72"), ExtResource("4_j0s08"), ExtResource("4_j0s08")]
+MaxHp = 17
+monsterCards = [ExtResource("2_3i5sj"), ExtResource("2_3i5sj"), ExtResource("2_3i5sj"), ExtResource("2_3i5sj"), ExtResource("2_3i5sj"), ExtResource("3_u5y72"), ExtResource("3_u5y72"), ExtResource("3_u5y72"), ExtResource("4_j0s08"), ExtResource("4_j0s08")]
 
 [node name="Sprite" parent="EncounterTrigger" index="1"]
 sprite_frames = SubResource("SpriteFrames_o0uls")
