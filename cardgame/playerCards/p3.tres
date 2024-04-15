@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=2 format=3 uid="uid://b6klmdi3unr4h"]
+
+[ext_resource type="Script" path="res://cardgame/CardStats.cs" id="1_eliis"]
+
+[resource]
+script = ExtResource("1_eliis")
+MaxHp = 12
+Damage = 2
+MonsterVariant = 2

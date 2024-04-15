@@ -1,61 +1,19 @@
-[gd_scene load_steps=32 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=30 format=3 uid="uid://c5uxib0tkhldl"]
 
-[ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="3_dsww4"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
-[ext_resource type="Script" path="res://cardgame/CardStats.cs" id="4_tg825"]
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="5_2h1p3"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="5_6x2e7"]
+[ext_resource type="PackedScene" uid="uid://bcl15ov6fmq8p" path="res://characters/monster/monsterVariants/air_monster_2.tscn" id="5_cj8ru"]
 [ext_resource type="Texture2D" uid="uid://c0k6gpop4ph3m" path="res://characters/whyisthishere/ruohonleikkuriBATTLE.png" id="5_hh6cj"]
+[ext_resource type="PackedScene" uid="uid://b438h6wcn5iil" path="res://characters/monster/monsterVariants/earth_monster_1.tscn" id="6_3mp8o"]
 [ext_resource type="Script" path="res://characters/whyisthishere/esjonnejaujookulmaa.cs" id="6_qxphv"]
 [ext_resource type="Texture2D" uid="uid://cp6u7acwpqojm" path="res://characters/player/placeholder.png" id="7_japg0"]
-
-[sub_resource type="Resource" id="Resource_hft3w"]
-script = ExtResource("4_tg825")
-MaxHp = 1
-Damage = 1
-MonsterVariant = 0
-
-[sub_resource type="Resource" id="Resource_nn5mw"]
-script = ExtResource("4_tg825")
-MaxHp = 1
-Damage = 2
-MonsterVariant = 1
-
-[sub_resource type="Resource" id="Resource_q5u76"]
-script = ExtResource("4_tg825")
-MaxHp = 2
-Damage = 2
-MonsterVariant = 2
-
-[sub_resource type="Resource" id="Resource_hden3"]
-script = ExtResource("4_tg825")
-MaxHp = 2
-Damage = 3
-MonsterVariant = 3
-
-[sub_resource type="Resource" id="Resource_hxm5g"]
-script = ExtResource("4_tg825")
-MaxHp = 3
-Damage = 3
-MonsterVariant = 4
-
-[sub_resource type="Resource" id="Resource_m2jm0"]
-script = ExtResource("4_tg825")
-MaxHp = 3
-Damage = 4
-MonsterVariant = 5
-
-[sub_resource type="Resource" id="Resource_e1gkc"]
-script = ExtResource("4_tg825")
-MaxHp = 4
-Damage = 4
-MonsterVariant = 6
-
-[sub_resource type="Resource" id="Resource_mlvrg"]
-script = ExtResource("4_tg825")
-MaxHp = 4
-Damage = 5
-MonsterVariant = 7
+[ext_resource type="PackedScene" uid="uid://bgn2cbkmywtdg" path="res://characters/monster/monsterVariants/air_monster_1.tscn" id="7_o0b7c"]
+[ext_resource type="PackedScene" uid="uid://d16l1000kpg5i" path="res://characters/monster/monsterVariants/earth_monster_2.tscn" id="7_ouvdb"]
+[ext_resource type="PackedScene" uid="uid://ycpraxqq3scx" path="res://characters/monster/monsterVariants/fire_monster_1.tscn" id="8_l3ikq"]
+[ext_resource type="PackedScene" uid="uid://cwnbtnmrfyd2u" path="res://characters/monster/monsterVariants/fire_monster_2.tscn" id="9_juv44"]
+[ext_resource type="PackedScene" uid="uid://c2l3tvo6jhs5p" path="res://characters/monster/monsterVariants/water_monster_1.tscn" id="10_7i556"]
+[ext_resource type="PackedScene" uid="uid://b7g5tjh5lfr04" path="res://characters/monster/monsterVariants/water_monster_2.tscn" id="11_10bc1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kxqwy"]
 atlas = ExtResource("5_2h1p3")
@@ -177,10 +135,6 @@ position = Vector2(-112, -48)
 Lines = ["Mjäyy", "Oon kissa"]
 Who = 0
 
-[node name="Monster" parent="World" instance=ExtResource("3_dsww4")]
-position = Vector2(112, 0)
-monsterCards = [SubResource("Resource_hft3w"), SubResource("Resource_nn5mw"), SubResource("Resource_q5u76"), SubResource("Resource_hden3"), SubResource("Resource_hxm5g"), SubResource("Resource_m2jm0"), SubResource("Resource_e1gkc"), SubResource("Resource_mlvrg")]
-
 [node name="Pentagrammi" type="AnimatedSprite2D" parent="World"]
 position = Vector2(56, 56)
 sprite_frames = SubResource("SpriteFrames_2714b")
@@ -194,6 +148,30 @@ Who = 0
 [node name="Collider" parent="World/Pentagrammi/DialogueTrigger" index="0"]
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_ggh71")
+
+[node name="AirMonster1" parent="World" instance=ExtResource("7_o0b7c")]
+position = Vector2(65, -100)
+
+[node name="AirMonster2" parent="World" instance=ExtResource("5_cj8ru")]
+position = Vector2(161, -92)
+
+[node name="EarthMonster1" parent="World" instance=ExtResource("6_3mp8o")]
+position = Vector2(310, -98)
+
+[node name="EarthMonster2" parent="World" instance=ExtResource("7_ouvdb")]
+position = Vector2(383, -97)
+
+[node name="FireMonster1" parent="World" instance=ExtResource("8_l3ikq")]
+position = Vector2(47, -283)
+
+[node name="FireMonster2" parent="World" instance=ExtResource("9_juv44")]
+position = Vector2(129, -288)
+
+[node name="WaterMonster1" parent="World" instance=ExtResource("10_7i556")]
+position = Vector2(301, -283)
+
+[node name="WaterMonster2" parent="World" instance=ExtResource("11_10bc1")]
+position = Vector2(371, -284)
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)

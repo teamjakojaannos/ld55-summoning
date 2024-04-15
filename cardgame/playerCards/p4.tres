@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=2 format=3 uid="uid://yb3afo3n054t"]
+
+[ext_resource type="Script" path="res://cardgame/CardStats.cs" id="1_llr2p"]
+
+[resource]
+script = ExtResource("1_llr2p")
+MaxHp = 10
+Damage = 3
+MonsterVariant = 3

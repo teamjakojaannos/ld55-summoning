@@ -8,6 +8,9 @@ public partial class GameManager : Node2D {
 	[Export]
 	public PackedScene PlayerTemplate;
 
+	[Export]
+	public Godot.Collections.Array<CardStats> playerDeck = new();
+
 	private readonly HashSet<string> AutoloadedNodes = new() { "DialogueBox", "GameManager", "CardGameLayer" };
 
 	private bool TransitionInProgress = false;

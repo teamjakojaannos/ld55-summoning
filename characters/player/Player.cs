@@ -181,8 +181,8 @@ public partial class Player : CharacterBody2D {
 				CombatMusic.Play();
 
 				var gameManager = GetNode<GameManager>("/root/GameManager");
-				var playerCards = CardDecks.PlayerDeck();
-				gameManager.StartFight(playerCards, target);
+				var playerCards = gameManager.playerDeck;
+				gameManager.StartFight(playerCards.ToList(), target);
 				Sprite.Visible = false;
 				Frozen = true;
 			}
