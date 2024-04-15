@@ -32,16 +32,6 @@ public partial class Player : CharacterBody2D {
 	[Export]
 	public float HalfFactor = 0.33f;
 
-	[Export]
-	public AudioStreamPlayer CombatMusic;
-
-	[Export]
-	public AudioStreamPlayer EnterCombatMusic;
-
-
-	[Export]
-	public AudioStreamPlayer ExplocationMusic;
-
 	private bool _canInteract = false;
 	public bool CanInteract {
 		get => _canInteract;
@@ -73,7 +63,7 @@ public partial class Player : CharacterBody2D {
 	private float targetFade = 25.0f;
 	private float targetDarkDistanceFactor = 25.0f;
 
-	private bool isTransitioning;
+	public bool isTransitioning;
 
 	public bool IsInFight = false;
 
@@ -99,9 +89,6 @@ public partial class Player : CharacterBody2D {
 
 		fadeSmoothness = FadeSmoothIn;
 		isTransitioning = false;
-		EnterCombatMusic.Stop();
-		ExplocationMusic.Play();
-		CombatMusic.Stop();
 	}
 
 	public override void _EnterTree() {
@@ -172,9 +159,9 @@ public partial class Player : CharacterBody2D {
 		targetDarkDistanceFactor = 0.0f;
 		fadeSmoothness = FadeSmoothIn;
 
-		EnterCombatMusic.Play();
-		ExplocationMusic.Stop();
-		CombatMusic.Stop();
+		var gameManager = GetNode<GameManager>("/root/GameManager");
+		gameManager.StopAllMusic();
+		gameManager.EnterCombatMusic.Play();
 
 		isTransitioning = true;
 
@@ -214,10 +201,10 @@ public partial class Player : CharacterBody2D {
 		inputStack.Clear();
 		Velocity = Vector2.Zero;
 
+		var gameManager = GetNode<GameManager>("/root/GameManager");
 		if (target != null) {
-			EnterCombatMusic.Play();
-			ExplocationMusic.Stop();
-			CombatMusic.Stop();
+			gameManager.StopAllMusic();
+			gameManager.EnterCombatMusic.Play();
 			IsInFight = true;
 		}
 
@@ -229,10 +216,9 @@ public partial class Player : CharacterBody2D {
 			fadeSmoothness = FadeSmoothOut;
 
 			if (target != null) {
-				ExplocationMusic.Stop();
-				CombatMusic.Play();
+				gameManager.StopAllMusic();
+				gameManager.CombatMusic.Play();
 
-				var gameManager = GetNode<GameManager>("/root/GameManager");
 				var playerCards = gameManager.playerDeck;
 				gameManager.StartFight(playerCards.ToList(), target);
 				Sprite.Visible = false;
@@ -248,9 +234,9 @@ public partial class Player : CharacterBody2D {
 	public void DoAfterBattleStuff(bool winner) {
 		Sprite.Visible = true;
 
-		EnterCombatMusic.Stop();
-		CombatMusic.Stop();
-		ExplocationMusic.Play();
+		var gameManager = GetNode<GameManager>("/root/GameManager");
+		gameManager.StopAllMusic();
+		gameManager.ExplocationMusic.Play();
 
 		isInVictoryPose = true;
 
@@ -259,9 +245,7 @@ public partial class Player : CharacterBody2D {
 		} else {
 			lives--;
 			if (lives <= 0) {
-				EnterCombatMusic.Stop();
-				ExplocationMusic.Stop();
-				CombatMusic.Stop();
+				gameManager.StopAllMusic();
 				animationPlayer.Play("die");
 				return;
 			}

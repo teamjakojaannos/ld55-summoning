@@ -1,10 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://t2q6s7oiiali"]
+[gd_scene load_steps=10 format=3 uid="uid://t2q6s7oiiali"]
 
 [ext_resource type="Script" path="res://GameManager.cs" id="1_212tw"]
 [ext_resource type="PackedScene" uid="uid://bab4b1iwllcyj" path="res://characters/player/player.tscn" id="2_epksi"]
-[ext_resource type="Resource" uid="uid://cpr7nq7h3u582" path="res://cardgame/playerCards/p_w1.tres" id="3_fsk1l"]
+[ext_resource type="Resource" path="res://cardgame/playerCards/p_w1.tres" id="3_fsk1l"]
+[ext_resource type="AudioStream" uid="uid://6xjllywvyi6x" path="res://muzak/combattiin.ogg" id="4_tx6kx"]
+[ext_resource type="AudioStream" uid="uid://dtedtwvte6lta" path="res://muzak/seikkailufinal.ogg" id="5_lrak4"]
+[ext_resource type="AudioStream" uid="uid://ccvf00o4chq6g" path="res://muzak/combatjytafinal.ogg" id="6_iut85"]
+[ext_resource type="AudioStream" uid="uid://cxf7yblib3321" path="res://muzak/kirjasto.ogg" id="7_fvhi2"]
+[ext_resource type="AudioStream" uid="uid://bw3ko7e2xanea" path="res://muzak/talobiisi.ogg" id="8_bukpp"]
+[ext_resource type="PackedScene" uid="uid://bojovm4xmfj8y" path="res://ui/scrolls.tscn" id="9_gdxop"]
 
-[node name="GameManager" type="Node2D"]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("CombatMusic", "EnterCombatMusic", "ExplocationMusic", "Kirjastomusa", "Krediittimusa", "ScrollMenu")]
 script = ExtResource("1_212tw")
 PlayerTemplate = ExtResource("2_epksi")
 playerDeck = [ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l")]
+CombatMusic = NodePath("CombatMusic")
+EnterCombatMusic = NodePath("EnterCombat")
+ExplocationMusic = NodePath("ExplorationMusic")
+Kirjastomusa = NodePath("Kirjastomusa")
+Krediittimusa = NodePath("Krediittimusa")
+ScrollMenu = NodePath("Scrolls")
+
+[node name="EnterCombat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tx6kx")
+bus = &"Music"
+
+[node name="ExplorationMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lrak4")
+bus = &"Music"
+
+[node name="CombatMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_iut85")
+bus = &"Music"
+
+[node name="Kirjastomusa" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_fvhi2")
+bus = &"Music"
+
+[node name="Krediittimusa" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bukpp")
+bus = &"Music"
+
+[node name="Scrolls" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" parent="Scrolls" instance=ExtResource("9_gdxop")]

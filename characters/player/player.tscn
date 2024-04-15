@@ -204,7 +204,7 @@ _data = {
 "die": SubResource("Animation_68aet")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic", "InteractIndicator")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "InteractIndicator")]
 y_sort_enabled = true
 script = ExtResource("1_5bvc4")
 MoveSpeed = 120.0
@@ -212,9 +212,6 @@ Sprite = NodePath("Sprite")
 Blackout = NodePath("BlackoutOverlay")
 FadeSmoothOut = 0.01
 FadeSmoothInTime = 4.35
-CombatMusic = NodePath("CombatMusic")
-EnterCombatMusic = NodePath("EnterCombat")
-ExplocationMusic = NodePath("ExplorationMusic")
 InteractIndicator = NodePath("Interact")
 
 [node name="Camera" type="Camera2D" parent="."]

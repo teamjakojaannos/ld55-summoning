@@ -20,6 +20,40 @@ public partial class GameManager : Node2D {
 	private Node previousLevel;
 
 	private CardStats rewardIfYouWin;
+	[Export]
+	public AudioStreamPlayer CombatMusic;
+
+	[Export]
+	public AudioStreamPlayer EnterCombatMusic;
+
+
+	[Export]
+	public AudioStreamPlayer ExplocationMusic;
+
+	[Export]
+	public AudioStreamPlayer Kirjastomusa;
+
+	[Export]
+	public AudioStreamPlayer Krediittimusa;
+
+	[Export]
+	public CanvasLayer ScrollMenu;
+
+	public void StopAllMusic() {
+		CombatMusic.Stop();
+		EnterCombatMusic.Stop();
+		ExplocationMusic.Stop();
+		Kirjastomusa.Stop();
+		Krediittimusa.Stop();
+	}
+
+	public override void _Process(double delta) {
+		var nope = !Player.IsInCinematic && !GetNode<DialogueBox>("/root/DialogueBox/DialogueBox").IsInProgress && !Player.IsInFight;
+		if (Input.IsActionJustPressed("esc") && nope) {
+			ScrollMenu.Visible = !ScrollMenu.Visible;
+		}
+	}
+
 
 	public override void _EnterTree() {
 		var playerNode = GetTree().Root.FindChild("Player", true, false);
@@ -44,6 +78,9 @@ public partial class GameManager : Node2D {
 			} else {
 				GD.PushError("Could not find PlayerStart");
 			}
+
+			StopAllMusic();
+			ExplocationMusic.Play();
 		}
 	}
 
@@ -82,9 +119,14 @@ public partial class GameManager : Node2D {
 
 		TransitionInProgress = false;
 
-		Player.EnterCombatMusic.Stop();
-		Player.ExplocationMusic.Play();
-		Player.CombatMusic.Stop();
+		StopAllMusic();
+		if (newLevel.Name == "WizardCellar") {
+			// Wizard cellar has its own music
+		} else if (newLevel.Name == "Library") {
+			Kirjastomusa.Play();
+		} else {
+			ExplocationMusic.Play();
+		}
 	}
 
 	public void StartFight(List<CardStats> playerCards, EncounterTrigger enemy) {

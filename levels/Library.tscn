@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c65ftkbch86jj"]
+[gd_scene load_steps=15 format=3 uid="uid://bmkagq014unr2"]
 
 [ext_resource type="TileSet" uid="uid://b8jjfq5ljrcrf" path="res://levels/interior_tileset.tres" id="1_snw77"]
 [ext_resource type="Texture2D" uid="uid://b5wrq2gmw83cu" path="res://environment/Interior/kirjahyllypieni1.png" id="2_fqgeo"]

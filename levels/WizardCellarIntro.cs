@@ -31,7 +31,7 @@ public partial class WizardCellarIntro : Node2D {
 		if (gameManager.IntroSeen) {
 			Ritual.Visible = false;
 			Pentagrammi.Visible = true;
-			gameManager.Player.ExplocationMusic.Stop();
+			gameManager.ExplocationMusic.Stop();
 			DedTheme.Play();
 			Ded.Play("ded_idle");
 			Pentagrammi.Play("idle");
@@ -44,9 +44,8 @@ public partial class WizardCellarIntro : Node2D {
 		Player.Sprite.Visible = false;
 		Pentagrammi.Visible = false;
 
-		Player.ExplocationMusic.Play();
-		Player.CombatMusic.Stop();
-		Player.EnterCombatMusic.Stop();
+		gameManager.StopAllMusic();
+		gameManager.ExplocationMusic.Play();
 
 		GetTree().CreateTimer(2.0f).Timeout += () => {
 			StartIntro();
@@ -143,9 +142,8 @@ public partial class WizardCellarIntro : Node2D {
 	private void SecondDialogueFinished() {
 		Dialogue.DialogueFinished -= SecondDialogueFinished;
 
-		Player.ExplocationMusic.Stop();
-		Player.CombatMusic.Stop();
-		Player.EnterCombatMusic.Stop();
+		var gameManager = GetNode<GameManager>("/root/GameManager");
+		gameManager.StopAllMusic();
 
 		GetTree().CreateTimer(1.5f).Timeout += () => {
 			Animation.Play("transformation");
@@ -159,9 +157,8 @@ public partial class WizardCellarIntro : Node2D {
 		Player.Sprite.Visible = true;
 		Ritual.Visible = false;
 
-		Player.ExplocationMusic.Stop();
-		Player.CombatMusic.Stop();
-		Player.EnterCombatMusic.Stop();
+		var gameManager = GetNode<GameManager>("/root/GameManager");
+		gameManager.StopAllMusic();
 		TransformationLoop.Stop();
 		DedTheme.Play();
 
