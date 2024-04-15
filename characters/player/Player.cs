@@ -242,6 +242,10 @@ public partial class Player : CharacterBody2D {
 
 		if (winner) {
 			animationPlayer.Play("battle_victory");
+			GetTree().CreateTimer(1.5f).Timeout += () => {
+				var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
+				dialogue.Start(WhoIsSpeaking.Paju, new string[] { "You found a new scroll!" });
+			};
 		} else {
 			lives--;
 			if (lives <= 0) {
