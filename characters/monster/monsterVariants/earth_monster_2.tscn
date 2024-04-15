@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d16l1000kpg5i"]
+[gd_scene load_steps=11 format=3 uid="uid://d16l1000kpg5i"]
 
 [ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="1_h5ndw"]
+[ext_resource type="Resource" uid="uid://cwj8phf71q02m" path="res://cardgame/monsterCards/e2_1.tres" id="2_ahgsj"]
 [ext_resource type="Texture2D" uid="uid://boumfbx5os65b" path="res://characters/monster/earthmonster2idle.png" id="2_gsks8"]
+[ext_resource type="Resource" uid="uid://c35a7d6ejnae6" path="res://cardgame/monsterCards/e2_2.tres" id="3_gxai6"]
+[ext_resource type="Resource" uid="uid://lifhwsf1w4g8" path="res://cardgame/monsterCards/e2_3.tres" id="4_0hd0o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bt8fu"]
 atlas = ExtResource("2_gsks8")
@@ -40,6 +43,8 @@ animations = [{
 }]
 
 [node name="Monster" instance=ExtResource("1_h5ndw")]
+MaxHp = 26
+monsterCards = [ExtResource("2_ahgsj"), ExtResource("2_ahgsj"), ExtResource("3_gxai6"), ExtResource("3_gxai6"), ExtResource("4_0hd0o"), ExtResource("4_0hd0o")]
 
 [node name="Sprite" parent="EncounterTrigger" index="1"]
 sprite_frames = SubResource("SpriteFrames_r78re")

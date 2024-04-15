@@ -1,5 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgn2cbkmywtdg"]
+[gd_scene load_steps=5 format=3 uid="uid://bgn2cbkmywtdg"]
 
 [ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="1_gvjjx"]
+[ext_resource type="Resource" uid="uid://dew7d6rvnjaf" path="res://cardgame/monsterCards/a1_1.tres" id="2_3ssnc"]
+[ext_resource type="Resource" uid="uid://dc8png6wvse3b" path="res://cardgame/monsterCards/a1_2.tres" id="3_llpou"]
+[ext_resource type="Resource" uid="uid://b4p731484y4aj" path="res://cardgame/monsterCards/a1_3.tres" id="4_u2u45"]
 
 [node name="Monster" instance=ExtResource("1_gvjjx")]
+MaxHp = 10
+monsterCards = [ExtResource("2_3ssnc"), ExtResource("2_3ssnc"), ExtResource("3_llpou"), ExtResource("3_llpou"), ExtResource("4_u2u45")]
