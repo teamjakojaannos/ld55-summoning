@@ -69,6 +69,19 @@ public partial class Cardgame : Control {
 	private Timer aiMoveTimer;
 	private Timer cardDiscardTimer;
 
+	[Export]
+	public AudioStreamPlayer CardHit;
+	[Export]
+	public AudioStreamPlayer CardDie;
+	[Export]
+	public AudioStreamPlayer Denied;
+	[Export]
+	public AudioStreamPlayer Deal;
+	[Export]
+	public AudioStreamPlayer PlayCard;
+	[Export]
+	public AudioStreamPlayer FocusCard;
+
 	[Signal]
 	public delegate void PlayerSelectedCardInHandEventHandler(int cardIndex);
 
@@ -204,6 +217,7 @@ public partial class Cardgame : Control {
 	}
 
 	private void DealCards() {
+		Deal.Play();
 		cardDealTimer.Start();
 
 		var playerCardsCount = 5;
@@ -288,8 +302,14 @@ public partial class Cardgame : Control {
 			return;
 		}
 
+		if (IsPlayerTableFull()) {
+			playerHand.GetChild<InHandSlot>(cardIndex)?.FailPlay();
+			return;
+		}
+
 		SwitchMode(Mode.SelectingPosition);
 
+		FocusCard.Play();
 		selectedCardIndex = cardIndex;
 		HighlightSelectedCard();
 
@@ -314,6 +334,8 @@ public partial class Cardgame : Control {
 		var position = positions[positionIndex];
 		var positionTaken = arenaSlots[position].Card != null;
 		if (positionTaken) {
+			arenaSlots[position].Animation.Play("denied");
+			Denied.Play();
 			return;
 		}
 
@@ -329,6 +351,8 @@ public partial class Cardgame : Control {
 		var card = PlayerCards[cardIndex];
 		PlayerCards.RemoveAt(cardIndex);
 		AddCardToArena(card, position);
+
+		PlayCard.Play();
 
 		playerHand.PlayCard(cardIndex);
 

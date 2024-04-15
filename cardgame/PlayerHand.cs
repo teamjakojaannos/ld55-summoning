@@ -48,7 +48,7 @@ public partial class PlayerHand : Control {
 
 	public void AddCards(List<Card> cards, float cardMoveSpeed) {
 		Reset();
-		bool playersCard = AmIPlayer();
+		bool isPlayer = AmIPlayer();
 
 		var totalWidth = 0.0f;
 		foreach (var card in cards) {
@@ -64,7 +64,7 @@ public partial class PlayerHand : Control {
 			var targetPosition = new Vector2(targetPositionX, 0.0f);
 
 			var slot = SlotTemplate.Instantiate<InHandSlot>();
-			SetupSlot(slot, i);
+			slot.Setup(Cardgame, i, isPlayer);
 			slot.Position = targetPosition;
 			AddChild(slot);
 			slot.AddCardAsChild(card, cardMoveSpeed);
@@ -74,14 +74,9 @@ public partial class PlayerHand : Control {
 
 			Cards.Add(card);
 
-			card.IsPlayersCard = playersCard;
-			card.SetInfoVisible(playersCard);
+			card.SetInfoVisible(isPlayer);
 			card.Visible = true;
 		}
-	}
-
-	protected virtual void SetupSlot(InHandSlot slot, int index) {
-		slot.Setup(Cardgame, index);
 	}
 
 	protected virtual bool AmIPlayer() {

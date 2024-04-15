@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=16 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
@@ -6,14 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://6djvxkt8l1dx" path="res://cardgame/in_play_slot.tscn" id="3_86g1s"]
 [ext_resource type="Script" path="res://cardgame/EnemyHand.cs" id="3_jid7n"]
 [ext_resource type="PackedScene" uid="uid://b750di4b0lclc" path="res://cardgame/in_hand_slot.tscn" id="3_sktvo"]
-[ext_resource type="Texture2D" uid="uid://mleebdkytht4" path="res://ui/keycap.png" id="4_djhqd"]
-[ext_resource type="PackedScene" uid="uid://b4ib4pgt8xe23" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
+[ext_resource type="PackedScene" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
 [ext_resource type="Script" path="res://cardgame/PlayerHand.cs" id="4_v7uiv"]
-[ext_resource type="LabelSettings" uid="uid://dj6vyx82h5teo" path="res://ui/keycap_label_settings.tres" id="5_0upjc"]
-[ext_resource type="Script" path="res://cardgame/ArenaPositionLabel.cs" id="5_osts6"]
 [ext_resource type="Script" path="res://cardgame/CardPiles.cs" id="9_q3ccb"]
 [ext_resource type="Texture2D" uid="uid://bb7frv1tasqpk" path="res://cardgame/scroll_rolled.png" id="10_8r62x"]
 [ext_resource type="Script" path="res://cardgame/DiscardPile.cs" id="11_3ai70"]
+[ext_resource type="AudioStream" uid="uid://pam88fti118p" path="res://sfx/hit1.ogg" id="15_8y1sa"]
+[ext_resource type="AudioStream" uid="uid://c68xakvkgaw5w" path="res://sfx/creat2.ogg" id="15_22bis"]
+[ext_resource type="AudioStream" uid="uid://8q1evkctlpa6" path="res://sfx/hit2.ogg" id="16_ixbog"]
+[ext_resource type="AudioStream" uid="uid://dqj06cq3i67yd" path="res://sfx/no.ogg" id="17_2c05t"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -32,7 +33,7 @@ CardDiscardSpeed = 10.0
 PlayedCardSpeed = 7.0
 CardDealSpeed = 7.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Cardgame"]
+[node name="Background" type="NinePatchRect" parent="Cardgame"]
 z_index = -2
 layout_mode = 1
 anchors_preset = -1
@@ -46,8 +47,6 @@ patch_margin_left = 13
 patch_margin_top = 13
 patch_margin_right = 13
 patch_margin_bottom = 13
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
 
 [node name="FightManager" type="Control" parent="Cardgame"]
 anchors_preset = 0
@@ -102,10 +101,8 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -0.130005
-offset_top = -152.0
-offset_right = -0.130005
-offset_bottom = -152.0
+offset_top = -153.0
+offset_bottom = -153.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("4_v7uiv")
@@ -158,116 +155,58 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 3
 
-[node name="OpponentLeft" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
+[node name="OpponentLeft" parent="Cardgame/Arena" node_paths=PackedStringArray("Cardgame") instance=ExtResource("3_86g1s")]
 self_modulate = Color(1, 0.8, 0.8, 0.188235)
 layout_mode = 2
+Cardgame = NodePath("../..")
 
-[node name="OpponentMid" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
+[node name="Key" parent="Cardgame/Arena/OpponentLeft" index="1"]
+visible = false
+
+[node name="OpponentMid" parent="Cardgame/Arena" node_paths=PackedStringArray("Cardgame") instance=ExtResource("3_86g1s")]
 self_modulate = Color(1, 0.8, 0.8, 0.188235)
 layout_mode = 2
+PositionOnArena = 1
+Cardgame = NodePath("../..")
 
-[node name="OpponentRight" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
+[node name="Key" parent="Cardgame/Arena/OpponentMid" index="1"]
+visible = false
+
+[node name="OpponentRight" parent="Cardgame/Arena" node_paths=PackedStringArray("Cardgame") instance=ExtResource("3_86g1s")]
 self_modulate = Color(1, 0.8, 0.8, 0.188235)
 layout_mode = 2
+PositionOnArena = 2
+Cardgame = NodePath("../..")
 
-[node name="PlayerLeft" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
+[node name="Key" parent="Cardgame/Arena/OpponentRight" index="1"]
+visible = false
+
+[node name="PlayerLeft" parent="Cardgame/Arena" node_paths=PackedStringArray("Cardgame") instance=ExtResource("3_86g1s")]
 self_modulate = Color(0.611765, 0.690196, 1, 0.329412)
 layout_mode = 2
-
-[node name="Key" type="TextureRect" parent="Cardgame/Arena/PlayerLeft" node_paths=PackedStringArray("Cardgame")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -16.0
-offset_top = -17.0
-offset_right = 16.0
-offset_bottom = 15.0
-grow_horizontal = 2
-texture = ExtResource("4_djhqd")
-script = ExtResource("5_osts6")
+IsPlayerSlot = true
 PositionOnArena = 3
-Cardgame = NodePath("../../..")
-HighlightedColor = Color(1, 1, 1, 1)
-DimmedColor = Color(0.2, 0.2, 0.2, 1)
+Cardgame = NodePath("../..")
 
-[node name="Label" type="Label" parent="Cardgame/Arena/PlayerLeft/Key"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "1"
-label_settings = ExtResource("5_0upjc")
-horizontal_alignment = 1
-
-[node name="PlayerMid" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
+[node name="PlayerMid" parent="Cardgame/Arena" node_paths=PackedStringArray("Cardgame") instance=ExtResource("3_86g1s")]
 self_modulate = Color(0.611765, 0.690196, 1, 0.329412)
 layout_mode = 2
-
-[node name="Key" type="TextureRect" parent="Cardgame/Arena/PlayerMid" node_paths=PackedStringArray("Cardgame")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -16.0
-offset_top = -17.0
-offset_right = 16.0
-offset_bottom = 15.0
-grow_horizontal = 2
-texture = ExtResource("4_djhqd")
-script = ExtResource("5_osts6")
+IsPlayerSlot = true
 PositionOnArena = 4
-Cardgame = NodePath("../../..")
-HighlightedColor = Color(1, 1, 1, 1)
-DimmedColor = Color(0.2, 0.2, 0.2, 1)
+Cardgame = NodePath("../..")
 
-[node name="Label" type="Label" parent="Cardgame/Arena/PlayerMid/Key"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label" parent="Cardgame/Arena/PlayerMid/Key" index="0"]
 text = "2"
-label_settings = ExtResource("5_0upjc")
-horizontal_alignment = 1
 
-[node name="PlayerRight" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
+[node name="PlayerRight" parent="Cardgame/Arena" node_paths=PackedStringArray("Cardgame") instance=ExtResource("3_86g1s")]
 self_modulate = Color(0.611765, 0.690196, 1, 0.329412)
 layout_mode = 2
-
-[node name="Key" type="TextureRect" parent="Cardgame/Arena/PlayerRight" node_paths=PackedStringArray("Cardgame")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -16.0
-offset_top = -17.0
-offset_right = 16.0
-offset_bottom = 15.0
-grow_horizontal = 2
-texture = ExtResource("4_djhqd")
-script = ExtResource("5_osts6")
+IsPlayerSlot = true
 PositionOnArena = 5
-Cardgame = NodePath("../../..")
-HighlightedColor = Color(1, 1, 1, 1)
-DimmedColor = Color(0.2, 0.2, 0.2, 1)
+Cardgame = NodePath("../..")
 
-[node name="Label" type="Label" parent="Cardgame/Arena/PlayerRight/Key"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label" parent="Cardgame/Arena/PlayerRight/Key" index="0"]
 text = "3"
-label_settings = ExtResource("5_0upjc")
-horizontal_alignment = 1
 
 [node name="ButtonStart" type="Button" parent="Cardgame"]
 layout_mode = 1
@@ -389,6 +328,7 @@ offset_right = -138.0
 offset_bottom = -381.0
 
 [node name="CardDealTimer" type="Timer" parent="Cardgame"]
+wait_time = 0.75
 one_shot = true
 
 [node name="AIMoveTimer" type="Timer" parent="Cardgame"]
@@ -397,4 +337,34 @@ one_shot = true
 [node name="CardDiscardTimer" type="Timer" parent="Cardgame"]
 one_shot = true
 
-[connection signal="pressed" from="Cardgame/ButtonStart" to="Cardgame" method="StartButtonPressed"]
+[node name="CardAttack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_8y1sa")
+bus = &"SFX"
+
+[node name="PlayCard" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_8y1sa")
+pitch_scale = 4.0
+bus = &"SFX"
+
+[node name="CardDie" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_ixbog")
+bus = &"SFX"
+
+[node name="CardFocus" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_ixbog")
+pitch_scale = 8.0
+bus = &"SFX"
+
+[node name="Denied" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_2c05t")
+bus = &"SFX"
+
+[node name="Deal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_22bis")
+volume_db = -2.143
+
+[editable path="Cardgame/Arena/OpponentLeft"]
+[editable path="Cardgame/Arena/OpponentMid"]
+[editable path="Cardgame/Arena/OpponentRight"]
+[editable path="Cardgame/Arena/PlayerMid"]
+[editable path="Cardgame/Arena/PlayerRight"]

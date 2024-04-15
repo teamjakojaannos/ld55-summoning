@@ -1,6 +1,9 @@
 using Godot;
 
 public partial class InPlaySlot : TextureRect {
+	[Export]
+	public bool IsPlayerSlot;
+
 	public Card Card;
 
 	public bool IsTaken {
@@ -11,9 +14,25 @@ public partial class InPlaySlot : TextureRect {
 		get => !IsTaken;
 	}
 
+
+	[Export]
+	public ArenaPosition PositionOnArena;
+
 	[Export]
 	[ExportCategory("Prewire")]
 	public AnimationPlayer Animation;
+
+	[Export]
+	public Cardgame Cardgame;
+
+	[Export]
+	public Control ArenaPosKey;
+
+	[Export]
+	public Color HighlightedColor;
+
+	[Export]
+	public Color DimmedColor;
 
 	private string attackAnimation = "attack_animation";
 	private string attackAnimationUpward = "attack_animation_upward";
@@ -24,10 +43,26 @@ public partial class InPlaySlot : TextureRect {
 	private AttackInfo attackInfo;
 
 	public override void _Ready() {
+		ArenaPosKey.Visible = IsPlayerSlot;
+
 		Animation.AnimationFinished += (name) => {
 			if (name == attackAnimation || name == attackAnimationUpward) {
 				EmitSignal(SignalName.AttackAnimationFinished);
 			}
+		};
+
+		ArenaPosKey.Modulate = DimmedColor;
+
+        Cardgame.PlayerSelectedCardInHand += (idx) => {
+			var positionTaken = Cardgame.IsPositionOnTableTaken(PositionOnArena);
+            var useHighlight = !positionTaken;
+            var color = useHighlight ? HighlightedColor : DimmedColor;
+
+            ArenaPosKey.Modulate = color;
+        };
+
+		Cardgame.PlayerDeselectedCardInHand += (idx) => {
+			ArenaPosKey.Modulate = DimmedColor;
 		};
 	}
 
@@ -47,7 +82,7 @@ public partial class InPlaySlot : TextureRect {
 	public void StartAttack(AttackInfo attack) {
 		attackInfo = attack;
 
-		var animationName = Card.IsPlayersCard ? attackAnimationUpward : attackAnimation;
+		var animationName = IsPlayerSlot ? attackAnimationUpward : attackAnimation;
 		Animation.Play(animationName);
 	}
 
@@ -56,7 +91,8 @@ public partial class InPlaySlot : TextureRect {
 			return;
 		}
 
-		attackInfo.fightManager.CardAttacksTarget(this, attackInfo.target, Card.IsPlayersCard);
+		attackInfo.fightManager.CardAttacksTarget(this, attackInfo.target, IsPlayerSlot);
+		Cardgame.CardHit.Play();
 		attackInfo = null;
 	}
 
@@ -66,6 +102,7 @@ public partial class InPlaySlot : TextureRect {
 
 	public void PlayDieAnimation() {
 		Animation.Play("die");
+		Cardgame.CardDie.Play();
 	}
 
     public void Clear() {

@@ -44,9 +44,6 @@ public partial class Card : Control {
 
 	private bool highlighted = false;
 
-	// TODO: Move to slot
-	public bool IsPlayersCard = false;
-
 	private Vector2 targetPosition;
 	private Vector2 targetScale = Vector2.One;
 
@@ -112,6 +109,10 @@ public partial class Card : Control {
 	}
 
 	public void Highlight() {
+		if (!IsInfoVisible) {
+			return;
+		}
+
 		targetScale = HighlightZoomFactor * Vector2.One;
 		ZIndex = 1;
 	}
@@ -141,6 +142,10 @@ public partial class Card : Control {
 		GlobalPosition = oldPosition;
 		targetPosition = Vector2.Zero;
 		posLerpFactor = cardMoveSpeed;
+	}
+
+	public bool IsInfoVisible {
+		get => nameLabel.Visible;
 	}
 
 	public void SetInfoVisible(bool visible) {

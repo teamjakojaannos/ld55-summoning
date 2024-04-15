@@ -16,13 +16,19 @@ public partial class InHandSlot : TextureRect {
 	[Export]
 	public Label KeyLabel;
 
+	[Export]
+	public AudioStreamPlayer Denied;
+
+	[Export]
+	public AnimationPlayer Animation;
+
 	private int index = -1;
 
 	public void AddCardAsChild(Card card, float cardMoveSpeed) {
 		var oldPosition = card.GlobalPosition;
-		Card = card;
 		card.GetParent()?.RemoveChild(card);
-		AddChild(card);
+		Card = card;
+		GetNode("./CardRoot").AddChild(card);
 		card.MoveToNewParent(oldPosition, cardMoveSpeed);
 	}
 
@@ -60,6 +66,12 @@ public partial class InHandSlot : TextureRect {
 
 	private void DimOnPlayerNoMoreMoves() {
 		KeyLabel.GetParent<TextureRect>().Modulate = DimmedColor;
+	}
+
+	public void FailPlay() {
+		var color = KeyLabel.GetParent<TextureRect>().Modulate;
+		Animation.Play("denied");
+		Denied.Play();
 	}
 
 	public override void _ExitTree() {

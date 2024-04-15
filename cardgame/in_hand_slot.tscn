@@ -1,13 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://b750di4b0lclc"]
+[gd_scene load_steps=9 format=3 uid="uid://b750di4b0lclc"]
 
 [ext_resource type="Texture2D" uid="uid://cegsh6sctctnl" path="res://cardgame/scroll.png" id="1_70sph"]
 [ext_resource type="Script" path="res://cardgame/InHandSlot.cs" id="1_ep2xi"]
 [ext_resource type="Texture2D" uid="uid://mleebdkytht4" path="res://ui/keycap.png" id="2_2w3xk"]
 [ext_resource type="LabelSettings" uid="uid://dj6vyx82h5teo" path="res://ui/keycap_label_settings.tres" id="4_l6jxu"]
+[ext_resource type="AudioStream" uid="uid://dqj06cq3i67yd" path="res://sfx/no.ogg" id="5_ndmyi"]
 
-[node name="InHandSlot" type="TextureRect" node_paths=PackedStringArray("KeyLabel")]
+[sub_resource type="Animation" id="Animation_gsoj1"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Key:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_as4xk"]
+resource_name = "denied"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Key:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.2, 0.2, 0.2, 1), Color(1, 0.0392157, 0.0392157, 1), Color(0.2, 0.2, 0.2, 1), Color(1, 0.0392157, 0.0392157, 1), Color(0.2, 0.2, 0.2, 1), Color(1, 0.0392157, 0.0392157, 1), Color(0.2, 0.2, 0.2, 1), Color(1, 0.0392157, 0.0392157, 1), Color(0.2, 0.2, 0.2, 1), Color(1, 0.0392157, 0.0392157, 1), Color(0.2, 0.2, 0.2, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nepil"]
+_data = {
+"RESET": SubResource("Animation_gsoj1"),
+"denied": SubResource("Animation_as4xk")
+}
+
+[node name="InHandSlot" type="TextureRect" node_paths=PackedStringArray("KeyLabel", "Denied", "Animation")]
 self_modulate = Color(0, 0, 0, 0.145098)
-custom_minimum_size = Vector2(64, 96)
+custom_minimum_size = Vector2(96, 128)
 offset_right = 96.0
 offset_bottom = 128.0
 texture = ExtResource("1_70sph")
@@ -15,6 +53,20 @@ script = ExtResource("1_ep2xi")
 HighlightedColor = Color(1, 1, 1, 1)
 DimmedColor = Color(0.2, 0.2, 0.2, 1)
 KeyLabel = NodePath("Key/Label")
+Denied = NodePath("Denied")
+Animation = NodePath("AnimationPlayer")
+
+[node name="CardRoot" type="Control" parent="."]
+custom_minimum_size = Vector2(96, 128)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 64)
+
+[node name="Card" parent="CardRoot" instance_placeholder="res://cardgame/card.tscn"]
 
 [node name="Key" type="TextureRect" parent="."]
 layout_mode = 1
@@ -42,3 +94,12 @@ grow_vertical = 2
 text = "0"
 label_settings = ExtResource("4_l6jxu")
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nepil")
+}
+
+[node name="Denied" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ndmyi")
+bus = &"SFX"
