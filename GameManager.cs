@@ -17,7 +17,9 @@ public partial class GameManager : Node2D {
 		var cardgameNode = GetNodeOrNull("/root/Cardgame");
         if (cardgameNode is Cardgame cardgame) {
 			GetTree().CreateTimer(1.5f).Timeout += () => {
-				cardgame.StartCombat();
+				var playerDeck = CardDecks.PlayerDeck();
+				var enemyDeck = CardDecks.EnemyDeck();
+				cardgame.StartCombat(playerDeck, enemyDeck);
 			};
         } else {
             if (playerNode is Player player) {

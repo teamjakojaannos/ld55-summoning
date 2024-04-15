@@ -143,18 +143,18 @@ public partial class Cardgame : Control {
 		return new CardDeck(cards);
 	}
 
-	public void StartCombat() {
-		bool shufflePlayerDeck = true;
-		bool shuffleEnemyDeck = true;
-
-		var playerCardStats = CardDecks.PlayerDeck();
+	public void StartCombat(
+				List<CardStats> playerCardStats,
+				List<CardStats> enemyCardStats,
+				bool shufflePlayerDeck = true,
+				bool shuffleEnemyDeck = true
+		) {
 		var playerDeck = CreateDeck(playerCardStats);
 		if (shufflePlayerDeck) {
 			playerDeck.Shuffle();
 		}
 		playerPiles.SetDeck(playerDeck);
 
-		var enemyCardStats = CardDecks.EnemyDeck();
 		var enemyDeck = CreateDeck(enemyCardStats);
 		if (shuffleEnemyDeck) {
 			enemyDeck.Shuffle();

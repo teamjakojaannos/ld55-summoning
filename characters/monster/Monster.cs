@@ -10,7 +10,13 @@ public partial class Monster : CharacterBody2D {
 	private Vector2 target;
 	private bool isMoving = false;
 
+	[Export]
+	public Godot.Collections.Array<CardStats> monsterCards = new();
+
 	public override void _Ready() {
+		var encounterTrigger = GetNode<EncounterTrigger>("EncounterTrigger");
+		encounterTrigger.cards = monsterCards;
+
 		var currentTileX = Mathf.FloorToInt(GlobalPosition.X / 32);
 		var currentTileY = Mathf.FloorToInt(GlobalPosition.Y / 32);
 		GlobalPosition = new(
@@ -38,9 +44,9 @@ public partial class Monster : CharacterBody2D {
 		};
 	}
 
-    public override void _Process(double delta) {
+	public override void _Process(double delta) {
 		var distance = target - GlobalPosition;
-        var direction = distance.Normalized();
+		var direction = distance.Normalized();
 
 		Velocity = MoveSpeed * direction;
 		bool moveFinished = false;
@@ -64,5 +70,5 @@ public partial class Monster : CharacterBody2D {
 			target = GlobalPosition;
 			isMoving = false;
 		}
-    }
+	}
 }

@@ -1,6 +1,9 @@
-public class CardStats {
-	private int _MaxHp;
+using Godot;
 
+[GlobalClass]
+public partial class CardStats : Resource {
+	private int _MaxHp = 10;
+	[Export]
 	public int MaxHp {
 		get => _MaxHp;
 		set {
@@ -8,7 +11,8 @@ public class CardStats {
 		}
 	}
 
-	private int _CurrentHp;
+	private int _CurrentHp = 10;
+	[Export]
 	public int CurrentHp {
 		get => _CurrentHp;
 		set {
@@ -21,7 +25,8 @@ public class CardStats {
 			_CurrentHp = value;
 		}
 	}
-	private int _Damage;
+	private int _Damage = 1;
+	[Export]
 	public int Damage {
 		get => _Damage;
 		set {
@@ -33,6 +38,7 @@ public class CardStats {
 		get => CurrentHp == 0;
 	}
 
+	public CardStats() { }
 
 	public CardStats(int hp, int damage) {
 		Damage = damage;

@@ -125,7 +125,7 @@ public partial class Player : CharacterBody2D {
     }
 
     // Pass null target to perform only the fade-in-out without any music or level transitions
-    public void StartEncounter(EncounterTrigger target) {
+    public void StartEncounter(EncounterTrigger target, List<CardStats> enemyCards = null) {
 		if (IsInFight) {
 			return;
 		}
@@ -170,7 +170,10 @@ public partial class Player : CharacterBody2D {
                 isTransitioning = false;
                 var cardGameLayer = GetTree().Root.FindChild("CardGameLayer", true, false);
                 var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
-                cardGame.StartCombat();
+				var playerDeck = CardDecks.PlayerDeck();
+				// cards can be null
+				enemyCards ??= new();
+				cardGame.StartCombat(playerDeck, enemyCards);
                 // FIXME: probably not the right place to set this but oh well temp fix
                 IsInFight = true;
             };
