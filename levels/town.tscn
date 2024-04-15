@@ -150,28 +150,28 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_ggh71")
 
 [node name="AirMonster1" parent="World" instance=ExtResource("7_o0b7c")]
-position = Vector2(65, -100)
+position = Vector2(-295, -111)
 
 [node name="AirMonster2" parent="World" instance=ExtResource("5_cj8ru")]
-position = Vector2(161, -92)
+position = Vector2(-297, -221)
 
 [node name="EarthMonster1" parent="World" instance=ExtResource("6_3mp8o")]
-position = Vector2(310, -98)
+position = Vector2(-141, -108)
 
 [node name="EarthMonster2" parent="World" instance=ExtResource("7_ouvdb")]
-position = Vector2(383, -97)
+position = Vector2(-150, -220)
 
 [node name="FireMonster1" parent="World" instance=ExtResource("8_l3ikq")]
-position = Vector2(47, -283)
+position = Vector2(-215, -105)
 
 [node name="FireMonster2" parent="World" instance=ExtResource("9_juv44")]
-position = Vector2(129, -288)
+position = Vector2(-219, -221)
 
 [node name="WaterMonster1" parent="World" instance=ExtResource("10_7i556")]
-position = Vector2(301, -283)
+position = Vector2(-46, -104)
 
 [node name="WaterMonster2" parent="World" instance=ExtResource("11_10bc1")]
-position = Vector2(371, -284)
+position = Vector2(-50, -204)
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)
