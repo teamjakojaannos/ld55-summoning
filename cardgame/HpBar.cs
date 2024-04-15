@@ -56,4 +56,9 @@ public partial class HpBar : Control
     {
         label.Text = $"HP {CurrentHp}";
     }
+
+	public void SetHp(int amount) {
+		MaxHp = amount;
+		CurrentHp = amount;
+	}
 }

@@ -103,7 +103,7 @@ public partial class GameManager : Node2D {
 		cardGame.AddChild(Player);
 
 		var enemyCards = enemy.cards.ToList();
-		cardGame.StartCombat(playerCards, enemyCards);
+		cardGame.StartCombat(playerCards, enemyCards, Player.MaxHp, enemy.MaxHp);
 	}
 
 	private void OnCardGameOver(bool playerWon) {

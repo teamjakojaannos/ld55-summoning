@@ -178,6 +178,8 @@ public partial class Cardgame : Control {
 	public void StartCombat(
 				List<CardStats> playerCardStats,
 				List<CardStats> enemyCardStats,
+				int playerHp,
+				int enemyHp,
 				bool shufflePlayerDeck = true,
 				bool shuffleEnemyDeck = true
 		) {
@@ -194,6 +196,9 @@ public partial class Cardgame : Control {
 			enemyDeck.Shuffle();
 		}
 		enemyPiles.SetDeck(enemyDeck);
+
+		this.playerHp.SetHp(playerHp);
+		this.enemyHp.SetHp(enemyHp);
 
 		DealCards();
 	}

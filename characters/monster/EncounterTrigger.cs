@@ -4,6 +4,9 @@ using Godot;
 public partial class EncounterTrigger : Area2D {
 
 	[Export]
+	public int MaxHp = 20;
+
+	[Export]
 	public Godot.Collections.Array<CardStats> cards = new();
 
 	[Signal]

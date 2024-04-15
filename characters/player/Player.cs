@@ -74,6 +74,9 @@ public partial class Player : CharacterBody2D {
 
 	public bool Frozen = false;
 
+	[Export]
+	public int MaxHp = 20;
+
 	public override void _Ready() {
 		fadeDistance = MaxFade;
 		darkDistanceFactor = MaxFactor;

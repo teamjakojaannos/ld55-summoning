@@ -11,11 +11,15 @@ public partial class Monster : CharacterBody2D {
 	private bool isMoving = false;
 
 	[Export]
+	public int MaxHp = 20;
+
+	[Export]
 	public Godot.Collections.Array<CardStats> monsterCards = new();
 
 	public override void _Ready() {
 		var encounterTrigger = GetNode<EncounterTrigger>("EncounterTrigger");
 		encounterTrigger.cards = monsterCards;
+		encounterTrigger.MaxHp = MaxHp;
 		encounterTrigger.DeleteThisNode += () => {
 			QueueFree();
 		};
