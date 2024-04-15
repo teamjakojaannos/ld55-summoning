@@ -82,6 +82,10 @@ public partial class Player : CharacterBody2D {
 	[Export]
 	public int MaxHp = 20;
 
+	[Export]
+	public int lives = 3;
+
+
 	private AnimationPlayer animationPlayer;
 	private bool isInVictoryPose = false;
 
@@ -253,6 +257,14 @@ public partial class Player : CharacterBody2D {
 		if (winner) {
 			animationPlayer.Play("battle_victory");
 		} else {
+			lives--;
+			if (lives <= 0) {
+				EnterCombatMusic.Stop();
+				ExplocationMusic.Stop();
+				CombatMusic.Stop();
+				animationPlayer.Play("die");
+				return;
+			}
 			animationPlayer.Play("battle_lost");
 		}
 	}
@@ -262,6 +274,10 @@ public partial class Player : CharacterBody2D {
 		IsInFight = false;
 		Frozen = false;
 		inputStack.Clear();
+	}
+
+	private void TeleportToShadowRealm() {
+		StartFadingToBlack();
 	}
 
 	private void CheckInput(StringName action, InputDirection direction) {

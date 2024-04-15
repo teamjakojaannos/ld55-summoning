@@ -153,11 +153,6 @@ public partial class GameManager : Node2D {
 			previousLevel = null;
 
 			Player.DoAfterBattleStuff(playerWon);
-
-			if (!playerWon) {
-				// TODO: teleport to graveyard or something
-				GD.Print("You lost!");
-			}
 		};
 	}
 }
