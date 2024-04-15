@@ -75,12 +75,21 @@ public partial class Cardgame : Control {
 	[Signal]
 	public delegate void PlayerDeselectedCardInHandEventHandler(int cardIndex);
 
+	[Signal]
+	public delegate void PlayerNoMoreMovesEventHandler();
+
 	public Vector2 DrawPilePosition {
 		get => playerPiles.DrawPilePosition();
 	}
 
 	public bool IsPositionOnTableTaken(ArenaPosition position) {
 		return arenaSlots[position].IsTaken;
+	}
+
+	public bool IsPlayerTableFull() {
+		return arenaSlots[ArenaPosition.PlayerLeft].IsTaken
+			&& arenaSlots[ArenaPosition.PlayerMid].IsTaken
+			&& arenaSlots[ArenaPosition.PlayerRight].IsTaken;
 	}
 
 	public override void _Ready() {
@@ -197,6 +206,10 @@ public partial class Cardgame : Control {
 		var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
 
 		enemyHand.AddCards(enemyDrawnCards, CardDealSpeed);
+
+		if (IsPlayerTableFull()) {
+			EmitSignal(nameof(PlayerNoMoreMoves));
+		}
 	}
 
 	private void CardDealingDone() {
@@ -310,6 +323,10 @@ public partial class Cardgame : Control {
 		playerHand.PlayCard(cardIndex);
 
 		SwitchMode(Mode.SelectingCard);
+
+		if (IsPlayerTableFull()) {
+			EmitSignal(nameof(PlayerNoMoreMoves));
+		}
 	}
 
 	private void AddCardToArena(Card card, ArenaPosition position) {

@@ -9,7 +9,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_qk7eb"]
 font = ExtResource("3_abhoh")
-font_size = 12
+font_size = 14
 font_color = Color(0.2, 0.121569, 0.0313726, 1)
 
 [sub_resource type="Animation" id="Animation_esm7l"]
@@ -195,10 +195,10 @@ anchor_left = 0.124
 anchor_top = 0.563
 anchor_right = 0.83
 anchor_bottom = 0.563
-offset_left = 7.096
-offset_top = -4.064
-offset_right = -2.68001
-offset_bottom = 9.936
+offset_left = 2.096
+offset_top = -5.064
+offset_right = 0.32
+offset_bottom = 10.936
 grow_vertical = 0
 text = "Taivaankauhu"
 label_settings = SubResource("LabelSettings_qk7eb")

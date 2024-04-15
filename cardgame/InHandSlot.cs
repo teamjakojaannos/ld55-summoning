@@ -35,6 +35,7 @@ public partial class InHandSlot : TextureRect {
 		Cardgame = cardgame;
 		Cardgame.PlayerSelectedCardInHand += DimOnOtherCardSelected;
 		Cardgame.PlayerDeselectedCardInHand += HighlightOnOtherCardDeselect;
+		Cardgame.PlayerNoMoreMoves += DimOnPlayerNoMoreMoves;
 
 		if (!isPlayerSlot) {
 			KeyLabel.GetParent<CanvasItem>().Visible = false;
@@ -57,10 +58,15 @@ public partial class InHandSlot : TextureRect {
 		KeyLabel.GetParent<TextureRect>().Modulate = HighlightedColor;
 	}
 
+	private void DimOnPlayerNoMoreMoves() {
+		KeyLabel.GetParent<TextureRect>().Modulate = DimmedColor;
+	}
+
 	public override void _ExitTree() {
 		if (Cardgame != null) {
 			Cardgame.PlayerSelectedCardInHand -= DimOnOtherCardSelected;
 			Cardgame.PlayerDeselectedCardInHand -= HighlightOnOtherCardDeselect;
+			Cardgame.PlayerNoMoreMoves -= DimOnPlayerNoMoreMoves;
 		}
 	}
 }

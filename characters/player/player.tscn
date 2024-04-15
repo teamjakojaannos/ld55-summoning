@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bab4b1iwllcyj"]
+[gd_scene load_steps=13 format=3 uid="uid://bab4b1iwllcyj"]
 
 [ext_resource type="Script" path="res://characters/player/Player.cs" id="1_5bvc4"]
 [ext_resource type="SpriteFrames" uid="uid://drw3rmjddgl1i" path="res://characters/player/player_frames.tres" id="2_i5gad"]
 [ext_resource type="Shader" path="res://fadeout.gdshader" id="3_xv0ck"]
 [ext_resource type="Script" path="res://Overlay.cs" id="4_vkyin"]
 [ext_resource type="AudioStream" uid="uid://6xjllywvyi6x" path="res://muzak/combattiin.ogg" id="5_cqvfs"]
+[ext_resource type="Texture2D" uid="uid://mleebdkytht4" path="res://ui/keycap.png" id="5_x6ora"]
 [ext_resource type="AudioStream" uid="uid://vyjdtfu2x8u7" path="res://muzak/seikkailu.ogg" id="6_r4xdn"]
 [ext_resource type="AudioStream" uid="uid://dd128wv6pmpug" path="res://muzak/combatjyta.ogg" id="7_6k6bx"]
 [ext_resource type="Script" path="res://characters/player/InteractArea.cs" id="8_b1013"]
@@ -20,7 +21,7 @@ shader_parameter/darkness_dist_factor = 0.33
 [sub_resource type="CircleShape2D" id="CircleShape2D_ay31u"]
 radius = 16.0312
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic", "InteractIndicator")]
 y_sort_enabled = true
 script = ExtResource("1_5bvc4")
 MoveSpeed = 120.0
@@ -31,6 +32,7 @@ FadeSmoothInTime = 4.35
 CombatMusic = NodePath("CombatMusic")
 EnterCombatMusic = NodePath("EnterCombat")
 ExplocationMusic = NodePath("ExplorationMusic")
+InteractIndicator = NodePath("Interact")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -53,6 +55,17 @@ material = SubResource("ShaderMaterial_82o1f")
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-4000, -4000, 4000, -4000, 4000, 4000, -4000, 4000)
 script = ExtResource("4_vkyin")
+
+[node name="Interact" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-9.53674e-07, -44)
+scale = Vector2(0.21875, 0.21875)
+texture = ExtResource("5_x6ora")
+
+[node name="Polygon2D" type="Polygon2D" parent="Interact"]
+position = Vector2(-9.143, 2.001)
+scale = Vector2(0.745, 0.745)
+polygon = PackedVector2Array(1.90735e-06, -6.13614, 1.90735e-06, 0, 24.5446, 0, 24.5446, -6.13617)
 
 [node name="EnterCombat" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_cqvfs")

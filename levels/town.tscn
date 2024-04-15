@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=32 format=3 uid="uid://c5uxib0tkhldl"]
 
 [ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="3_dsww4"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
 [ext_resource type="Script" path="res://cardgame/CardStats.cs" id="4_tg825"]
 [ext_resource type="PackedScene" uid="uid://dkuq61u6l4jg6" path="res://cardgame/cardgame.tscn" id="4_wotui"]
+[ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="5_2h1p3"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="5_6x2e7"]
 [ext_resource type="Texture2D" uid="uid://c0k6gpop4ph3m" path="res://characters/whyisthishere/ruohonleikkuriBATTLE.png" id="5_hh6cj"]
 [ext_resource type="Script" path="res://characters/whyisthishere/esjonnejaujookulmaa.cs" id="6_qxphv"]
@@ -19,43 +20,79 @@ MonsterVariant = 0
 script = ExtResource("4_tg825")
 MaxHp = 1
 Damage = 2
-MonsterVariant = 1
+MonsterVariant = 0
 
 [sub_resource type="Resource" id="Resource_q5u76"]
 script = ExtResource("4_tg825")
 MaxHp = 2
 Damage = 2
-MonsterVariant = 2
+MonsterVariant = 0
 
 [sub_resource type="Resource" id="Resource_hden3"]
 script = ExtResource("4_tg825")
 MaxHp = 2
 Damage = 3
-MonsterVariant = 3
+MonsterVariant = 0
 
 [sub_resource type="Resource" id="Resource_hxm5g"]
 script = ExtResource("4_tg825")
 MaxHp = 3
 Damage = 3
-MonsterVariant = 4
+MonsterVariant = 0
 
 [sub_resource type="Resource" id="Resource_m2jm0"]
 script = ExtResource("4_tg825")
 MaxHp = 3
 Damage = 4
-MonsterVariant = 5
+MonsterVariant = 0
 
 [sub_resource type="Resource" id="Resource_e1gkc"]
 script = ExtResource("4_tg825")
 MaxHp = 4
 Damage = 4
-MonsterVariant = 6
+MonsterVariant = 0
 
 [sub_resource type="Resource" id="Resource_mlvrg"]
 script = ExtResource("4_tg825")
 MaxHp = 4
 Damage = 5
-MonsterVariant = 7
+MonsterVariant = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxqwy"]
+atlas = ExtResource("5_2h1p3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcr6i"]
+atlas = ExtResource("5_2h1p3")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0a0s"]
+atlas = ExtResource("5_2h1p3")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snixa"]
+atlas = ExtResource("5_2h1p3")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2714b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxqwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcr6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0a0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snixa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6thvd"]
 atlas = ExtResource("5_hh6cj")
@@ -139,7 +176,19 @@ Lines = ["Mjäyy", "Oon kissa"]
 Who = 0
 
 [node name="Monster" parent="World" instance=ExtResource("3_dsww4")]
+position = Vector2(112, 0)
 monsterCards = [SubResource("Resource_hft3w"), SubResource("Resource_nn5mw"), SubResource("Resource_q5u76"), SubResource("Resource_hden3"), SubResource("Resource_hxm5g"), SubResource("Resource_m2jm0"), SubResource("Resource_e1gkc"), SubResource("Resource_mlvrg")]
+
+[node name="Pentagrammi" type="AnimatedSprite2D" parent="World"]
+position = Vector2(56, 56)
+sprite_frames = SubResource("SpriteFrames_2714b")
+autoplay = "default"
+frame_progress = 0.654869
+
+[node name="DialogueTrigger" parent="World/Pentagrammi" instance=ExtResource("5_6x2e7")]
+Lines = ["Wowies!", "Cozy candlesies! uwu"]
+Who = 0
+RequiresInteract = true
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)

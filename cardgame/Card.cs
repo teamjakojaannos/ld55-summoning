@@ -15,14 +15,14 @@ public partial class Card : Control {
 	}
 
 	public int CurrentHp {
-		get => stats.CurrentHp;
+		get => stats?.CurrentHp ?? 1;
 		set {
 			stats.CurrentHp = value;
 			UpdateLabels();
 		}
 	}
 	public int Damage {
-		get => stats.Damage;
+		get => stats?.Damage ?? 1;
 		set {
 			stats.Damage = value;
 			UpdateLabels();
