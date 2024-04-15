@@ -31,6 +31,13 @@ public partial class CardPiles : Control
 
     public void SetDeck(CardDeck deck)
     {
+		// free old pile
+		while (drawPile.cards.Count > 0) {
+			var card = drawPile.cards[0];
+			drawPile.cards.RemoveAt(0);
+			card.QueueFree();
+		}
+
         drawPile = deck;
 
         UpdateLabels();

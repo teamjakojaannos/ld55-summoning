@@ -77,16 +77,7 @@ public partial class Cardgame : Control {
 		enemyHand = GetNode<EnemyHand>("EnemyHand");
 
 		playerPiles = GetNode<CardPiles>("PlayerPiles");
-		var pDeck = CardDecks.PlayerDeck(cardScene);
-		pDeck.Shuffle();
-		playerPiles.SetDeck(pDeck);
-		playerPiles.AddCardsAsChildren(this);
-
 		enemyPiles = GetNode<CardPiles>("EnemyPiles");
-		var eDeck = CardDecks.EnemyDeck(cardScene);
-		eDeck.Shuffle();
-		enemyPiles.SetDeck(eDeck);
-		enemyPiles.AddCardsAsChildren(this);
 
 		startFightButton = GetNode<Button>("ButtonStart");
 
@@ -137,7 +128,23 @@ public partial class Cardgame : Control {
 	}
 
 	public void StartCombat() {
-		// TODO: check if already started?
+		bool shufflePlayerDeck = true;
+		bool shuffleEnemyDeck = true;
+
+		CardDeck playerDeck = CardDecks.PlayerDeck(cardScene);
+		if (shufflePlayerDeck) {
+			playerDeck.Shuffle();
+		}
+		playerPiles.SetDeck(playerDeck);
+		playerPiles.AddCardsAsChildren(this);
+
+		CardDeck enemyDeck = CardDecks.EnemyDeck(cardScene);
+		if (shuffleEnemyDeck) {
+			enemyDeck.Shuffle();
+		}
+		enemyPiles.SetDeck(enemyDeck);
+		enemyPiles.AddCardsAsChildren(this);
+
 		DealCards();
 	}
 
