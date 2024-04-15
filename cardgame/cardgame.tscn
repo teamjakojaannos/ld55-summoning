@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=35 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
@@ -6,15 +6,141 @@
 [ext_resource type="PackedScene" uid="uid://6djvxkt8l1dx" path="res://cardgame/in_play_slot.tscn" id="3_86g1s"]
 [ext_resource type="Script" path="res://cardgame/EnemyHand.cs" id="3_jid7n"]
 [ext_resource type="PackedScene" uid="uid://b750di4b0lclc" path="res://cardgame/in_hand_slot.tscn" id="3_sktvo"]
-[ext_resource type="PackedScene" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
+[ext_resource type="PackedScene" uid="uid://d238wb56q2qnt" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
 [ext_resource type="Script" path="res://cardgame/PlayerHand.cs" id="4_v7uiv"]
 [ext_resource type="Script" path="res://cardgame/CardPiles.cs" id="9_q3ccb"]
 [ext_resource type="Texture2D" uid="uid://bb7frv1tasqpk" path="res://cardgame/scroll_rolled.png" id="10_8r62x"]
 [ext_resource type="Script" path="res://cardgame/DiscardPile.cs" id="11_3ai70"]
+[ext_resource type="Texture2D" uid="uid://ba7wspi71ecnu" path="res://characters/player/player_idle.png" id="11_ohfne"]
+[ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="12_f0rev"]
 [ext_resource type="AudioStream" uid="uid://pam88fti118p" path="res://sfx/hit1.ogg" id="15_8y1sa"]
 [ext_resource type="AudioStream" uid="uid://c68xakvkgaw5w" path="res://sfx/creat2.ogg" id="15_22bis"]
 [ext_resource type="AudioStream" uid="uid://8q1evkctlpa6" path="res://sfx/hit2.ogg" id="16_ixbog"]
 [ext_resource type="AudioStream" uid="uid://dqj06cq3i67yd" path="res://sfx/no.ogg" id="17_2c05t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_copx4"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(0, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lgu1"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(45, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyfoo"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(90, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2s0w"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(135, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whfdu"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(180, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afqgv"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(225, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g84k"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(270, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hgcw"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(315, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1rpc"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(360, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsqkk"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(405, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8kar"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(450, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yre63"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(495, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmn8k"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(540, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sae0u"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(585, 0, 45, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3adm3"]
+atlas = ExtResource("11_ohfne")
+region = Rect2(630, 0, 45, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rsnyp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_copx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lgu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyfoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2s0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whfdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afqgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8g84k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hgcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1rpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsqkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8kar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yre63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmn8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sae0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3adm3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wl7wc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_f0rev")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -167,8 +293,8 @@ layout_mode = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentLeft" index="0"]
-offset_right = 1632.0
-offset_bottom = 2176.0
+offset_right = 1824.0
+offset_bottom = 2432.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentLeft" index="1"]
 visible = false
@@ -180,8 +306,8 @@ PositionOnArena = 1
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentMid" index="0"]
-offset_right = 1632.0
-offset_bottom = 2176.0
+offset_right = 1824.0
+offset_bottom = 2432.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentMid" index="1"]
 visible = false
@@ -193,8 +319,8 @@ PositionOnArena = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentRight" index="0"]
-offset_right = 1632.0
-offset_bottom = 2176.0
+offset_right = 1824.0
+offset_bottom = 2432.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentRight" index="1"]
 visible = false
@@ -214,8 +340,8 @@ PositionOnArena = 4
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerMid" index="0"]
-offset_right = 1632.0
-offset_bottom = 2176.0
+offset_right = 1824.0
+offset_bottom = 2432.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerMid/Key" index="0"]
 text = "2"
@@ -228,8 +354,8 @@ PositionOnArena = 5
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerRight" index="0"]
-offset_right = 1632.0
-offset_bottom = 2176.0
+offset_right = 1824.0
+offset_bottom = 2432.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerRight/Key" index="0"]
 text = "3"
@@ -251,15 +377,14 @@ text = "Start round"
 
 [node name="PlayerPiles" type="Control" parent="Cardgame" node_paths=PackedStringArray("discardPile")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 34.0
-offset_top = 375.0
-offset_right = -861.0
-offset_bottom = -151.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 66.0
+offset_top = -144.0
+offset_right = 321.26
+offset_bottom = -22.0
+grow_vertical = 0
 script = ExtResource("9_q3ccb")
 discardPile = NodePath("DiscardPile")
 
@@ -281,8 +406,8 @@ text = "Draw pile"
 
 [node name="DiscardPile" type="TextureRect" parent="Cardgame/PlayerPiles"]
 layout_mode = 0
-offset_left = 160.0
-offset_right = 224.0
+offset_left = 116.0
+offset_right = 180.0
 offset_bottom = 96.0
 texture = ExtResource("10_8r62x")
 script = ExtResource("11_3ai70")
@@ -294,17 +419,21 @@ offset_right = 91.0
 offset_bottom = 119.0
 text = "Discard pile"
 
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="Cardgame/PlayerPiles"]
+position = Vector2(89, -168)
+scale = Vector2(7.23333, 7.23333)
+sprite_frames = SubResource("SpriteFrames_rsnyp")
+
 [node name="EnemyPiles" type="Control" parent="Cardgame" node_paths=PackedStringArray("discardPile")]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 34.0
-offset_top = 180.0
-offset_right = -861.0
-offset_bottom = -346.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -273.26
+offset_top = 27.0
+offset_right = -54.26
+offset_bottom = 149.0
+grow_horizontal = 0
 script = ExtResource("9_q3ccb")
 discardPile = NodePath("DiscardPile")
 
@@ -326,8 +455,8 @@ text = "Draw pile"
 
 [node name="DiscardPile" type="TextureRect" parent="Cardgame/EnemyPiles"]
 layout_mode = 0
-offset_left = 160.0
-offset_right = 224.0
+offset_left = 124.0
+offset_right = 188.0
 offset_bottom = 96.0
 texture = ExtResource("10_8r62x")
 script = ExtResource("11_3ai70")
@@ -339,19 +468,34 @@ offset_right = 91.0
 offset_bottom = 119.0
 text = "Discard pile"
 
+[node name="EnemySprite" type="AnimatedSprite2D" parent="Cardgame/EnemyPiles"]
+position = Vector2(103, 268)
+scale = Vector2(2.57812, 2.57812)
+sprite_frames = SubResource("SpriteFrames_wl7wc")
+
 [node name="PlayerHp" parent="Cardgame" instance=ExtResource("4_k5w0w")]
 layout_mode = 1
-offset_left = 950.0
-offset_top = 400.0
-offset_right = -138.0
-offset_bottom = -221.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_left = 124.0
+offset_top = -472.0
+offset_right = 186.26
+offset_bottom = -445.0
+grow_horizontal = 1
+grow_vertical = 0
 
 [node name="EnemyHp" parent="Cardgame" instance=ExtResource("4_k5w0w")]
 layout_mode = 1
-offset_left = 950.0
-offset_top = 240.0
-offset_right = -138.0
-offset_bottom = -381.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -207.26
+offset_top = 463.0
+offset_right = -145.0
+offset_bottom = 490.0
+grow_horizontal = 0
+grow_vertical = 1
 
 [node name="CardDealTimer" type="Timer" parent="Cardgame"]
 wait_time = 0.75
