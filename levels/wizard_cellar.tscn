@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ca6oyteg4v0cr" path="res://characters/player/paju_cat.png" id="1_7sev4"]
 [ext_resource type="Script" path="res://levels/WizardCellarIntro.cs" id="1_dg2sj"]
-[ext_resource type="TileSet" uid="uid://deyetstqvid75" path="res://levels/interior.tres" id="2_c6kni"]
+[ext_resource type="TileSet" uid="uid://b8jjfq5ljrcrf" path="res://levels/interior_tileset.tres" id="2_11hmo"]
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="2_wg7nh"]
 [ext_resource type="Texture2D" uid="uid://c7ye3241xlt12" path="res://characters/oldwiz/voi-jumalauta.png" id="5_5dahw"]
 [ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="6_o2b5j"]
@@ -479,7 +479,7 @@ offset_bottom = 3221.0
 color = Color(0, 0, 0, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource("2_c6kni")
+tile_set = ExtResource("2_11hmo")
 format = 2
 layer_0/name = "Base"
 layer_0/tile_data = PackedInt32Array(131077, 65536, 2, 65541, 65536, 2, 5, 65536, 2, -65531, 65536, 2, 131076, 65536, 2, 65540, 65536, 2, 4, 65536, 2, -65532, 65536, 2, 131075, 65536, 2, 65539, 65536, 2, 3, 65536, 2, -65533, 65536, 2, 131074, 65536, 2, 65538, 65536, 2, 2, 65536, 2, -65534, 65536, 2, 131073, 65536, 2, 65537, 65536, 2, 1, 65536, 2, -65535, 65536, 2, 131072, 65536, 2, 65536, 65536, 2, 0, 65536, 2, -65536, 65536, 2, 196607, 65536, 2, 131071, 65536, 2, 65535, 65536, 2, -1, 65536, 2, 196606, 65536, 2, 131070, 65536, 2, 65534, 65536, 2, -2, 65536, 2, 196605, 65536, 2, 131069, 65536, 2, 65533, 65536, 2, -3, 65536, 2, 196604, 65536, 2, 131068, 65536, 2, 65532, 65536, 2, -4, 65536, 2, 196603, 65536, 2, 131067, 65536, 2, 65531, 65536, 2, -5, 65536, 2, -6, 65536, 2, 65530, 65536, 2, 131066, 65536, 2, 196602, 65536, 2, -65542, 65536, 2, -65541, 65536, 2, -65540, 65536, 2, -65539, 65536, 2, -65538, 65536, 2, -65537, 65536, 2, -131072, 65536, 2, -131071, 65536, 2, -131070, 65536, 2, -131069, 65536, 2, -131068, 65536, 2, -131067, 65536, 2, -131078, 65536, 0, -131077, 65536, 0, -131076, 131072, 0, -131075, 65536, 0, -131074, 65536, 0, -131073, 131072, 0, -196608, 131072, 0, -196607, 65536, 0, -196606, 65536, 0, -196605, 131072, 0, -196604, 65536, 0, -196603, 65536, 0, -196614, 0, 1, 65542, 65536, 2, 131078, 65536, 2)
@@ -497,7 +497,6 @@ frame_progress = 0.873928
 position = Vector2(-37, 11)
 sprite_frames = SubResource("SpriteFrames_56lg1")
 animation = &"kitty_idle"
-frame_progress = 0.409648
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-37, 31)
