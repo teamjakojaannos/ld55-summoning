@@ -32,6 +32,11 @@ public partial class Card : Control {
 	public bool IsDead {
 		get => stats.IsDead;
 	}
+
+	public Element Element {
+		get => stats.MonsterVariant.GetElement();
+	}
+
 	private Label nameLabel;
 	private Label hpLabel;
 	private Label dmgLabel;
@@ -188,5 +193,9 @@ public partial class Card : Control {
 	public void SetStats(CardStats stats) {
 		this.stats = stats;
 		UpdateLabels();
+	}
+
+	public string GetMonsterName() {
+		return nameLabel.Text;
 	}
 }
