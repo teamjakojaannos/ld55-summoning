@@ -413,7 +413,9 @@ public partial class Cardgame : Control {
 	}
 
 	private void StartButtonPressed() {
-		StartRound();
+		if (currentMode == Mode.SelectingCard || currentMode == Mode.SelectingPosition) {
+			StartRound();
+		}
 	}
 
 	private void StartRound() {
