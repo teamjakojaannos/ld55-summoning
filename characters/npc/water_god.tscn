@@ -1,14 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnqx0kwcw4eq"]
+[gd_scene load_steps=8 format=3 uid="uid://bnqx0kwcw4eq"]
 
-[ext_resource type="Texture2D" uid="uid://c03rpl4qor3b0" path="res://characters/npc/watergodsmall.png" id="1_3v7a7"]
+[ext_resource type="Texture2D" uid="uid://cbqjboljad53" path="res://characters/npc/watergodidle.png" id="1_jsqi4"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_1j8v8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_si5hl"]
+atlas = ExtResource("1_jsqi4")
+region = Rect2(0, 0, 39, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bc2fi"]
+atlas = ExtResource("1_jsqi4")
+region = Rect2(39, 0, 39, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ifqy"]
+atlas = ExtResource("1_jsqi4")
+region = Rect2(78, 0, 39, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnp5r"]
+atlas = ExtResource("1_jsqi4")
+region = Rect2(117, 0, 39, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xu2s7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_si5hl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bc2fi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ifqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnp5r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="WaterGod" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("1_3v7a7")
+sprite_frames = SubResource("SpriteFrames_xu2s7")
+autoplay = "default"
+frame = 2
+frame_progress = 0.867193
 offset = Vector2(1.71, -16.635)
 
 [node name="DialogueTrigger" parent="." instance=ExtResource("2_1j8v8")]

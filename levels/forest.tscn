@@ -1374,7 +1374,7 @@ height = 44.0
 y_sort_enabled = true
 
 [node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(-1369, -526)
+position = Vector2(200, -731)
 
 [node name="WizardExit" type="Marker2D" parent="."]
 position = Vector2(-1390.42, -589)

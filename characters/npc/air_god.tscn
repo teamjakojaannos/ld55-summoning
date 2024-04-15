@@ -1,7 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://5juhwtj3y1kj"]
+[gd_scene load_steps=9 format=3 uid="uid://5juhwtj3y1kj"]
 
-[ext_resource type="Texture2D" uid="uid://bu2vmmv5hjonp" path="res://characters/npc/airgodsmall.png" id="1_jdcgq"]
+[ext_resource type="Texture2D" uid="uid://chcqhxyotwon2" path="res://characters/npc/airgodidle.png" id="1_aovor"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_mlsec"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eayp2"]
+atlas = ExtResource("1_aovor")
+region = Rect2(0, 0, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ho25"]
+atlas = ExtResource("1_aovor")
+region = Rect2(52, 0, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di70t"]
+atlas = ExtResource("1_aovor")
+region = Rect2(104, 0, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekju4"]
+atlas = ExtResource("1_aovor")
+region = Rect2(156, 0, 52, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4sgxf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eayp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ho25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_di70t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekju4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b82l0"]
 size = Vector2(13, 5)
@@ -9,9 +45,11 @@ size = Vector2(13, 5)
 [node name="AirGod" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("1_jdcgq")
+sprite_frames = SubResource("SpriteFrames_4sgxf")
+autoplay = "default"
+frame_progress = 0.99178
 offset = Vector2(-0.915, -29.21)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
