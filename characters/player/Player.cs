@@ -57,6 +57,8 @@ public partial class Player : CharacterBody2D {
 
     private bool isTransitioning;
 
+    public bool IsInFight = false;
+
     public override void _Ready() {
         fadeDistance = MaxFade;
         darkDistanceFactor = MaxFactor;
@@ -124,6 +126,10 @@ public partial class Player : CharacterBody2D {
 
     // Pass null target to perform only the fade-in-out without any music or level transitions
     public void StartEncounter(EncounterTrigger target) {
+		if (IsInFight) {
+			return;
+		}
+
         Sprite?.Play("blink");
         targetFade = 0.0f;
         targetDarkDistanceFactor = 0.0f;
@@ -165,6 +171,8 @@ public partial class Player : CharacterBody2D {
                 var cardGameLayer = GetTree().Root.FindChild("CardGameLayer", true, false);
                 var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
                 cardGame.StartCombat();
+                // FIXME: probably not the right place to set this but oh well temp fix
+                IsInFight = true;
             };
         };
     }
