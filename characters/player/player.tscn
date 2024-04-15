@@ -21,7 +21,7 @@ shader_parameter/darkness_dist_factor = 0.33
 [sub_resource type="CircleShape2D" id="CircleShape2D_ay31u"]
 radius = 16.0312
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic", "InteractIndicator")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic")]
 y_sort_enabled = true
 script = ExtResource("1_5bvc4")
 MoveSpeed = 120.0
@@ -32,7 +32,6 @@ FadeSmoothInTime = 4.35
 CombatMusic = NodePath("CombatMusic")
 EnterCombatMusic = NodePath("EnterCombat")
 ExplocationMusic = NodePath("ExplorationMusic")
-InteractIndicator = NodePath("Interact")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

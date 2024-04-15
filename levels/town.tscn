@@ -188,7 +188,6 @@ frame_progress = 0.654869
 [node name="DialogueTrigger" parent="World/Pentagrammi" instance=ExtResource("5_6x2e7")]
 Lines = ["Wowies!", "Cozy candlesies! uwu"]
 Who = 0
-RequiresInteract = true
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)

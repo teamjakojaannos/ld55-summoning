@@ -2303,6 +2303,7 @@ shape = SubResource("RectangleShape2D_3fnru")
 position = Vector2(-4, -9)
 Lines = ["Wizard's house"]
 Who = 6
+RequiresInteract = true
 
 [node name="Collider" parent="Kyltti/DialogueTrigger" index="0"]
 position = Vector2(4, 0)
@@ -2323,8 +2324,30 @@ shape = SubResource("RectangleShape2D_oqqp1")
 position = Vector2(-1, -11)
 Lines = ["Great Lake"]
 Who = 6
+RequiresInteract = true
 
 [node name="Collider" parent="Nuolikyltti/DialogueTrigger" index="0"]
+shape = SubResource("CircleShape2D_y18tq")
+
+[node name="Nuolikyltti2" type="Sprite2D" parent="."]
+position = Vector2(-496, -193)
+texture = ExtResource("15_pjny7")
+offset = Vector2(0.415, -10.64)
+flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Nuolikyltti2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nuolikyltti2/StaticBody2D"]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_oqqp1")
+
+[node name="DialogueTrigger" parent="Nuolikyltti2" instance=ExtResource("14_b8thc")]
+position = Vector2(-1, -11)
+Lines = ["Wizard's Well"]
+Who = 6
+RequiresInteract = true
+
+[node name="Collider" parent="Nuolikyltti2/DialogueTrigger" index="0"]
 shape = SubResource("CircleShape2D_y18tq")
 
 [node name="WaterGod" parent="." instance=ExtResource("11_a44cy")]
@@ -2361,3 +2384,4 @@ texture = ExtResource("20_jdre8")
 
 [editable path="Kyltti/DialogueTrigger"]
 [editable path="Nuolikyltti/DialogueTrigger"]
+[editable path="Nuolikyltti2/DialogueTrigger"]
