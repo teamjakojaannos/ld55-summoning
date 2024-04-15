@@ -3002,7 +3002,7 @@ shape = SubResource("RectangleShape2D_oqqp1")
 [node name="DialogueTrigger" parent="Nuolikyltti2" instance=ExtResource("14_b8thc")]
 visible = false
 position = Vector2(-1, -11)
-Lines = ["Wizard's Well"]
+Lines = ["Wizard's Well", "(he's not feeling well, though)"]
 Who = 6
 RequiresInteract = true
 
