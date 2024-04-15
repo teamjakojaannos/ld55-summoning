@@ -44,4 +44,4 @@ bus = &"Music"
 [node name="Scrolls" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Control" parent="Scrolls" instance=ExtResource("9_gdxop")]
+[node name="ScrollMenu" parent="Scrolls" instance=ExtResource("9_gdxop")]

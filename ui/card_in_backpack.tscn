@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://beli78jbb5iqs"]
-
-[ext_resource type="PackedScene" uid="uid://cbkof1h8cra7f" path="res://cardgame/card.tscn" id="1_hc8vp"]
+[gd_scene format=3 uid="uid://beli78jbb5iqs"]
 
 [node name="CardInBackpack" type="Control"]
 custom_minimum_size = Vector2(96, 128)
@@ -10,7 +8,7 @@ offset_right = 96.0
 offset_bottom = 128.0
 scale = Vector2(2, 2)
 
-[node name="Card" parent="." instance=ExtResource("1_hc8vp")]
+[node name="Card" parent="." instance_placeholder="res://cardgame/card.tscn"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

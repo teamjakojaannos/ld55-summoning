@@ -51,6 +51,10 @@ public partial class GameManager : Node2D {
 		var nope = !Player.IsInCinematic && !GetNode<DialogueBox>("/root/DialogueBox/DialogueBox").IsInProgress && !Player.IsInFight;
 		if (Input.IsActionJustPressed("esc") && nope) {
 			ScrollMenu.Visible = !ScrollMenu.Visible;
+
+			if (ScrollMenu.Visible) {
+				ScrollMenu.GetNode<ScrollMenu>("ScrollMenu").SetScrolls(playerDeck);
+			}
 		}
 	}
 
@@ -80,8 +84,12 @@ public partial class GameManager : Node2D {
 			}
 
 			StopAllMusic();
-			ExplocationMusic.Play();
+			CallDeferred(nameof(StartMusic));
 		}
+	}
+
+	public void StartMusic() {
+		ExplocationMusic.Play();
 	}
 
 	public void ChangeToLevel(Node newLevel, Vector2 spawnPosition) {

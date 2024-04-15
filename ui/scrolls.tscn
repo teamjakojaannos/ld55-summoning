@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://bojovm4xmfj8y"]
 
 [ext_resource type="FontFile" uid="uid://c4mu6ad8db5c6" path="res://fonts/ancient-modern-tales/Ancient Modern Tales.otf" id="1_mpy6l"]
+[ext_resource type="Script" path="res://ui/ScrollMenu.cs" id="1_suckh"]
 [ext_resource type="Texture2D" uid="uid://buubtqg2r3j5c" path="res://ui/portraitframeidk.png" id="2_iexh1"]
-[ext_resource type="PackedScene" uid="uid://beli78jbb5iqs" path="res://ui/card_in_backpack.tscn" id="3_b5ak5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_37mb5"]
 font = ExtResource("1_mpy6l")
@@ -88,13 +88,15 @@ VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_k1prr")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlgnw"]
 bg_color = Color(0.765011, 0.627741, 0.521737, 1)
 
-[node name="Control" type="Control"]
+[node name="ScrollMenu" type="Control" node_paths=PackedStringArray("Grid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_suckh")
+Grid = NodePath("Scroll/GridContainer")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -156,81 +158,3 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rlgnw")
 [node name="GridContainer" type="GridContainer" parent="Scroll"]
 layout_mode = 2
 columns = 4
-
-[node name="CardInBackpack" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack2" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack3" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack4" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack5" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack6" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack7" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack8" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack9" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack10" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack11" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack12" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack13" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack14" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack15" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack16" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack17" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack18" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack19" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack20" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack21" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack22" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack23" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack24" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack25" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2
-
-[node name="CardInBackpack26" parent="Scroll/GridContainer" instance=ExtResource("3_b5ak5")]
-layout_mode = 2

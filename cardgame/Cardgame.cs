@@ -167,7 +167,7 @@ public partial class Cardgame : Control {
 		enemyHand.Reset();
 	}
 
-	private CardDeck CreateDeck(List<CardStats> cardStats) {
+	public CardDeck CreateDeck(List<CardStats> cardStats, bool skipTreeModification = false) {
 		var cards = new List<Card>();
 
 		foreach (var stats in cardStats) {
@@ -184,7 +184,9 @@ public partial class Cardgame : Control {
 			card.SetStats(stats);
 
 			card.Visible = false;
-			AddChild(card);
+			if (!skipTreeModification) {
+				AddChild(card);
+			}
 
 			cards.Add(card);
 		}
