@@ -20,10 +20,12 @@ public partial class Cardgame : Control {
     private List<Card> PlayerCards {
         get => playerHand.Cards;
     }
-    private readonly List<Card> enemyCards = new();
+    private List<Card> EnemyCards {
+        get => enemyHand.Cards;
+    }
 
     private PlayerHand playerHand;
-    private Control enemyHand;
+    private EnemyHand enemyHand;
 
     private CardPiles playerPiles;
     private CardPiles enemyPiles;
@@ -72,7 +74,7 @@ public partial class Cardgame : Control {
 
     public override void _Ready() {
         playerHand = GetNode<PlayerHand>("PlayerHand");
-        enemyHand = GetNode<Control>("EnemyHand");
+        enemyHand = GetNode<EnemyHand>("EnemyHand");
 
         playerPiles = GetNode<CardPiles>("PlayerPiles");
         var pDeck = CardDecks.PlayerDeck(cardScene);
@@ -131,6 +133,7 @@ public partial class Cardgame : Control {
 
     public void Reset() {
         playerHand.Reset();
+        enemyHand.Reset();
     }
 
     public void StartCombat() {
@@ -151,6 +154,9 @@ public partial class Cardgame : Control {
 
         var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
 
+        enemyHand.AddCards(enemyDrawnCards, CardDealSpeed);
+
+/*
         for (int i = 0; i < enemyDrawnCards.Count; i++) {
             var card = enemyDrawnCards[i];
             card.MoveInstantlyTo(enemyPiles.DrawPilePosition());
@@ -161,6 +167,7 @@ public partial class Cardgame : Control {
 
             card.Visible = true;
         }
+*/
     }
 
     private void CardDealingDone() {
@@ -168,7 +175,7 @@ public partial class Cardgame : Control {
             card.StopMovement();
         }
 
-        foreach (var card in enemyCards) {
+        foreach (var card in EnemyCards) {
             card.StopMovement();
         }
 
@@ -332,8 +339,9 @@ public partial class Cardgame : Control {
         }
 
         playerPiles.DiscardCards(PlayerCards, CardDiscardSpeed);
-        enemyPiles.DiscardCards(enemyCards, CardDiscardSpeed);
+        enemyPiles.DiscardCards(EnemyCards, CardDiscardSpeed);
         playerHand.Reset();
+        enemyHand.Reset();
 
         cardDiscardTimer.Start();
     }
@@ -354,7 +362,7 @@ public partial class Cardgame : Control {
     private void PlayAITurn() {
         SwitchMode(Mode.WaitingForAIMoves);
 
-        var newList = new List<Card>(enemyCards);
+        var newList = new List<Card>(EnemyCards);
 
         var enemyMoves = enemyAI.GetCardsPlacement(
             arenaSlots.ToImmutableDictionary(),
@@ -364,7 +372,9 @@ public partial class Cardgame : Control {
 
         foreach (var (position, card) in enemyMoves) {
             AddCardToArena(card, position);
-            enemyCards.Remove(card);
+
+            // FIXME: is this the same as player playing a card?
+            EnemyCards.Remove(card);
         }
 
         aiMoveTimer.Start();

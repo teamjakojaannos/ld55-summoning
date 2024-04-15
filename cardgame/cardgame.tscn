@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=14 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
 [ext_resource type="PackedScene" uid="uid://6djvxkt8l1dx" path="res://cardgame/in_play_slot.tscn" id="3_86g1s"]
+[ext_resource type="Script" path="res://cardgame/EnemyHand.cs" id="3_jid7n"]
 [ext_resource type="PackedScene" uid="uid://b750di4b0lclc" path="res://cardgame/in_hand_slot.tscn" id="3_sktvo"]
 [ext_resource type="Texture2D" uid="uid://mleebdkytht4" path="res://ui/keycap.png" id="4_djhqd"]
 [ext_resource type="PackedScene" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
@@ -32,44 +33,47 @@ CardDealSpeed = 7.0
 anchors_preset = 0
 script = ExtResource("2_7df7x")
 
-[node name="EnemyHand" type="Control" parent="."]
+[node name="EnemyHand" type="Control" parent="." node_paths=PackedStringArray("Cardgame")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -0.130005
-offset_top = -35.0
+offset_top = 6.0
 offset_right = -0.130005
-offset_bottom = -35.0
+offset_bottom = 6.0
 grow_horizontal = 2
+script = ExtResource("3_jid7n")
+Cardgame = NodePath("..")
+SlotTemplate = ExtResource("3_sktvo")
 
 [node name="DummyHandSlot" parent="EnemyHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -195.13
-offset_top = 24.0
+offset_top = -9.0
 offset_right = -99.13
-offset_bottom = 152.0
+offset_bottom = 119.0
 
 [node name="DummyHandSlot2" parent="EnemyHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -99.13
-offset_top = 24.0
+offset_top = -9.0
 offset_right = -3.13
-offset_bottom = 152.0
+offset_bottom = 119.0
 
 [node name="DummyHandSlot3" parent="EnemyHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -3.13
-offset_top = 24.0
+offset_top = -9.0
 offset_right = 92.87
-offset_bottom = 152.0
+offset_bottom = 119.0
 
 [node name="DummyHandSlot4" parent="EnemyHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = 92.87
-offset_top = 24.0
+offset_top = -9.0
 offset_right = 188.87
-offset_bottom = 152.0
+offset_bottom = 119.0
 
 [node name="PlayerHand" type="Control" parent="." node_paths=PackedStringArray("Cardgame")]
 layout_mode = 1
@@ -246,11 +250,18 @@ label_settings = ExtResource("5_0upjc")
 horizontal_alignment = 1
 
 [node name="ButtonStart" type="Button" parent="."]
-layout_mode = 0
-offset_left = 953.0
-offset_top = 503.0
-offset_right = 1112.0
-offset_bottom = 565.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -214.26
+offset_top = -119.0
+offset_right = -55.26
+offset_bottom = -57.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "Start round"
 
 [node name="PlayerPiles" type="Control" parent="." node_paths=PackedStringArray("discardPile")]

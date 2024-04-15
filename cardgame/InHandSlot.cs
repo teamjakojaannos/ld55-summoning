@@ -30,11 +30,15 @@ public partial class InHandSlot : TextureRect {
 		KeyLabel.Text = $"{index + 1}";
 	}
 
-	public void Setup(Cardgame cardgame, int index) {
+	public void Setup(Cardgame cardgame, int index, bool isPlayerSlot = true) {
 		SetIndex(index);
 		Cardgame = cardgame;
 		Cardgame.PlayerSelectedCardInHand += DimOnOtherCardSelected;
 		Cardgame.PlayerDeselectedCardInHand += HighlightOnOtherCardDeselect;
+
+		if (!isPlayerSlot) {
+			KeyLabel.GetParent<CanvasItem>().Visible = false;
+		}
 	}
 
 	private void DimOnOtherCardSelected(int cardIndex) {
