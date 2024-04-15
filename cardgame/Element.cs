@@ -40,4 +40,12 @@ public static class ElementExtensions {
 
 		return 1.0f;
 	}
+
+	public static int TurnOrder(this Element element) => element switch {
+		Element.Fire => 4,
+		Element.Earth => 3,
+		Element.Water => 2,
+		Element.Air => 1,
+		_ => 0
+	};
 }

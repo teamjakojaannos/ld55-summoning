@@ -14,7 +14,7 @@ public partial class FightClub : Control {
 	[Signal]
 	public delegate void SomebodyDiedEventHandler(bool playerDied);
 
-	private readonly List<ArenaPosition> fightOrder =
+	private List<ArenaPosition> fightOrder =
 			new()
 			{
 						ArenaPosition.PlayerLeft,
@@ -34,6 +34,8 @@ public partial class FightClub : Control {
 	private HpBar enemyHp;
 	private InPlaySlot previousSlot;
 
+	private RandomNumberGenerator rng = new();
+
 	public void StartFight(
 			Dictionary<ArenaPosition, InPlaySlot> arenaSlots,
 			HpBar playerHp,
@@ -50,7 +52,47 @@ public partial class FightClub : Control {
 		this.playerHp = playerHp;
 		this.enemyHp = enemyHp;
 
+		fightOrder = CalculateTurnOrder();
+
 		PlayNextTurn();
+	}
+
+	private List<ArenaPosition> CalculateTurnOrder() {
+		var result = new List<ArenaPosition>();
+
+		var lanes = new List<(ArenaPosition, ArenaPosition)>(){
+			(ArenaPosition.OpponentLeft,ArenaPosition.PlayerLeft),
+			(ArenaPosition.OpponentMid,ArenaPosition.PlayerMid),
+			(ArenaPosition.OpponentRight,ArenaPosition.PlayerRight),
+		};
+
+		foreach (var (a, b) in lanes) {
+			var slot_a = arenaSlots[a];
+			var slot_b = arenaSlots[b];
+
+			var order_a = slot_a.IsTaken ? slot_a.Card.Element.TurnOrder() : 0;
+			var order_b = slot_b.IsTaken ? slot_b.Card.Element.TurnOrder() : 0;
+
+			bool a_first;
+
+			if (order_a > order_b) {
+				a_first = true;
+			} else if (order_a < order_b) {
+				a_first = false;
+			} else {
+				a_first = rng.RandiRange(0, 1) == 0;
+			}
+
+			if (a_first) {
+				result.Add(a);
+				result.Add(b);
+			} else {
+				result.Add(b);
+				result.Add(a);
+			}
+		}
+
+		return result;
 	}
 
 	private void PlayNextTurn() {
