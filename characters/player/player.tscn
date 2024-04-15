@@ -58,6 +58,7 @@ script = ExtResource("4_vkyin")
 
 [node name="Interact" type="Sprite2D" parent="."]
 visible = false
+z_index = 2
 position = Vector2(-9.53674e-07, -44)
 scale = Vector2(0.21875, 0.21875)
 texture = ExtResource("5_x6ora")

@@ -75,10 +75,8 @@ public partial class DialogueBox : Control {
 	public void NextLine() {
 		if (Lines.Count == 0) {
 			Visible = false;
-			GetTree().CreateTimer(0.25f).Timeout += () => {
-				IsInProgress = false;
-				EmitSignal("DialogueFinished");
-			};
+			IsInProgress = false;
+			EmitSignal("DialogueFinished");
 			return;
 		}
 
