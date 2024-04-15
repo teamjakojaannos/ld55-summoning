@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://c3xalr8g64d1t"]
+[gd_scene load_steps=69 format=3 uid="uid://c3xalr8g64d1t"]
 
 [ext_resource type="Texture2D" uid="uid://dryobx1h7r14w" path="res://environment/tileset2.png" id="1_2nt7k"]
 [ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="1_8m7yw"]
@@ -1366,11 +1366,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_38heh"]
 size = Vector2(20, 6)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0vu0"]
+radius = 9.0
+height = 44.0
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
 [node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(-1114, 356)
+position = Vector2(-1369, -526)
 
 [node name="WizardExit" type="Marker2D" parent="."]
 position = Vector2(-1390.42, -589)
@@ -1491,6 +1495,10 @@ shape = SubResource("RectangleShape2D_acmj4")
 
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="MapCollisions"]
 position = Vector2(-1050.69, -75.9531)
+shape = SubResource("RectangleShape2D_i814u")
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="MapCollisions"]
+position = Vector2(-1318, -142)
 shape = SubResource("RectangleShape2D_i814u")
 
 [node name="CollisionShape2D10" type="CollisionShape2D" parent="MapCollisions"]
@@ -3092,8 +3100,16 @@ position = Vector2(251, -828)
 
 [node name="Kaivo" type="Sprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(-1026, -813)
+position = Vector2(-1027, -760)
 texture = ExtResource("20_jdre8")
+offset = Vector2(0, -49.33)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Kaivo"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kaivo/StaticBody2D"]
+position = Vector2(6, -8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_t0vu0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
