@@ -1,8 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://qe4gr8hr6gkt"]
+[gd_scene load_steps=12 format=3 uid="uid://qe4gr8hr6gkt"]
 
 [ext_resource type="Script" path="res://characters/monster/Monster.cs" id="1_xi6sh"]
 [ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="2_m7uxo"]
+[ext_resource type="Script" path="res://cardgame/CardStats.cs" id="2_qtthi"]
 [ext_resource type="Texture2D" uid="uid://bmg7yairwg68" path="res://characters/monster/airmonster1/airmonster1idle.png" id="3_d2pry"]
+
+[sub_resource type="Resource" id="Resource_b4pmb"]
+script = ExtResource("2_qtthi")
+MaxHp = 10
+Damage = 1
+MonsterVariant = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eojbw"]
 atlas = ExtResource("3_d2pry")
@@ -45,6 +52,7 @@ animations = [{
 [node name="Monster" type="CharacterBody2D" node_paths=PackedStringArray("MoveTimer")]
 script = ExtResource("1_xi6sh")
 MoveTimer = NodePath("MoveTimer")
+monsterCards = [SubResource("Resource_b4pmb")]
 
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 5.0

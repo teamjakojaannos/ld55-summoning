@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2l3tvo6jhs5p"]
+
+[ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="1_eruti"]
+[ext_resource type="Texture2D" uid="uid://bxffvtdeaaq3u" path="res://characters/monster/watermonster1idle.png" id="2_j3tc5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdj3w"]
+atlas = ExtResource("2_j3tc5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpf4u"]
+atlas = ExtResource("2_j3tc5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4p47t"]
+atlas = ExtResource("2_j3tc5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlmn4"]
+atlas = ExtResource("2_j3tc5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yrtk1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdj3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpf4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4p47t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlmn4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Monster" instance=ExtResource("1_eruti")]
+
+[node name="Sprite" parent="EncounterTrigger" index="1"]
+sprite_frames = SubResource("SpriteFrames_yrtk1")
+frame_progress = 0.0
