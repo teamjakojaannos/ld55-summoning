@@ -75,6 +75,10 @@ public partial class GameManager : Node2D {
 		root.AddChild(newLevel);
 
 		TransitionInProgress = false;
+
+		Player.EnterCombatMusic.Stop();
+		Player.ExplocationMusic.Play();
+		Player.CombatMusic.Stop();
 	}
 
 	public void StartFight(List<CardStats> playerCards, EncounterTrigger enemy) {
