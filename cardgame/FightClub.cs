@@ -161,7 +161,7 @@ public partial class FightClub : Control {
 				hasDied = IsPlayersCard ? Who.Enemy : Who.Player;
 			}
 		} else {
-			var damage = CalculateDamage(attacker.Card, target.Card);
+			var damage = attacker.Card.Damage;
 
 			target.Card.CurrentHp -= damage;
 			if (target.Card.IsDead) {
@@ -170,14 +170,6 @@ public partial class FightClub : Control {
 				target.PlayHurtAnimation();
 			}
 		}
-	}
-
-	private static int CalculateDamage(Card attacker, Card target) {
-		int baseDamage = attacker.Damage;
-		float elementMultiplier = attacker.Element.DamageMultiplier(target.Element);
-
-		int result = Mathf.FloorToInt(baseDamage * elementMultiplier);
-		return Mathf.Max(result, 1);
 	}
 
 	private (InPlaySlot, ArenaPosition)? FindNextCardInTurn(Dictionary<ArenaPosition, InPlaySlot> arenaSlots) {
