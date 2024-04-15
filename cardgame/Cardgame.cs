@@ -189,7 +189,7 @@ public partial class Cardgame : Control {
 		return new CardDeck(cards);
 	}
 
-	public void StartCombat(
+	public void PrepareCombat(
 				List<CardStats> playerCardStats,
 				List<CardStats> enemyCardStats,
 				int playerHp,
@@ -213,7 +213,9 @@ public partial class Cardgame : Control {
 
 		this.playerHp.SetHp(playerHp);
 		this.enemyHp.SetHp(enemyHp);
+	}
 
+	public void StartCombat() {
 		DealCards();
 	}
 

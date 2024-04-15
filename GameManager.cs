@@ -102,9 +102,11 @@ public partial class GameManager : Node2D {
 		cardGameLayer.Visible = true;
 		cardGame.AddChild(Player);
 
+		var enemyCards = enemy.cards.ToList();
+		cardGame.PrepareCombat(playerCards, enemyCards, Player.MaxHp, enemy.MaxHp);
+
 		GetTree().CreateTimer(2.0f).Timeout += () => {
-			var enemyCards = enemy.cards.ToList();
-			cardGame.StartCombat(playerCards, enemyCards, Player.MaxHp, enemy.MaxHp);
+			cardGame.StartCombat();
 		};
 	}
 
