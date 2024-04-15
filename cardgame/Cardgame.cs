@@ -127,23 +127,39 @@ public partial class Cardgame : Control {
 		enemyHand.Reset();
 	}
 
+	private CardDeck CreateDeck(List<CardStats> cardStats) {
+		var cards = new List<Card>();
+
+		foreach (var stats in cardStats) {
+			var card = cardScene.Instantiate<Card>();
+			card.SetStats(stats);
+
+			card.Visible = false;
+			AddChild(card);
+
+			cards.Add(card);
+		}
+
+		return new CardDeck(cards);
+	}
+
 	public void StartCombat() {
 		bool shufflePlayerDeck = true;
 		bool shuffleEnemyDeck = true;
 
-		CardDeck playerDeck = CardDecks.PlayerDeck(cardScene);
+		var playerCardStats = CardDecks.PlayerDeck();
+		var playerDeck = CreateDeck(playerCardStats);
 		if (shufflePlayerDeck) {
 			playerDeck.Shuffle();
 		}
 		playerPiles.SetDeck(playerDeck);
-		playerPiles.AddCardsAsChildren(this);
 
-		CardDeck enemyDeck = CardDecks.EnemyDeck(cardScene);
+		var enemyCardStats = CardDecks.EnemyDeck();
+		var enemyDeck = CreateDeck(enemyCardStats);
 		if (shuffleEnemyDeck) {
 			enemyDeck.Shuffle();
 		}
 		enemyPiles.SetDeck(enemyDeck);
-		enemyPiles.AddCardsAsChildren(this);
 
 		DealCards();
 	}

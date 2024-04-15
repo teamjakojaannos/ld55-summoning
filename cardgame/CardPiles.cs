@@ -69,15 +69,6 @@ public partial class CardPiles : Control
         }
     }
 
-    public void AddCardsAsChildren(Node parentNode)
-    {
-        foreach (var card in drawPile.cards)
-        {
-            parentNode.AddChild(card);
-            card.Visible = false;
-        }
-    }
-
     public bool DrawPileEmpty()
     {
         return drawPile.cards.Count == 0;
