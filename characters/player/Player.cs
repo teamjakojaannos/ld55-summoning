@@ -168,14 +168,16 @@ public partial class Player : CharacterBody2D {
 
             GetTree().CreateTimer(FadeSmoothInTime / 2.0f).Timeout += () => {
                 isTransitioning = false;
-                var cardGameLayer = GetTree().Root.FindChild("CardGameLayer", true, false);
-                var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
-				var playerDeck = CardDecks.PlayerDeck();
-				// cards can be null
-				enemyCards ??= new();
-				cardGame.StartCombat(playerDeck, enemyCards);
-                // FIXME: probably not the right place to set this but oh well temp fix
-                IsInFight = true;
+                if (target != null) {
+                    var cardGameLayer = GetTree().Root.FindChild("CardGameLayer", true, false);
+                    var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
+                    var playerDeck = CardDecks.PlayerDeck();
+                    // cards can be null
+                    enemyCards ??= new();
+                    cardGame.StartCombat(playerDeck, enemyCards);
+                    // FIXME: probably not the right place to set this but oh well temp fix
+                    IsInFight = true;
+                }
             };
         };
     }

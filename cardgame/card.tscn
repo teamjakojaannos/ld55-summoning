@@ -177,12 +177,12 @@ _data = {
 layout_mode = 3
 anchors_preset = 0
 offset_right = 96.0
-offset_bottom = 155.0
+offset_bottom = 128.0
 pivot_offset = Vector2(48, 120)
 script = ExtResource("2_3uajd")
 
 [node name="Sprite" type="TextureRect" parent="."]
-layout_mode = 2
+layout_mode = 0
 offset_right = 96.0
 offset_bottom = 128.0
 pivot_offset = Vector2(48, 64)
