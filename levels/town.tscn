@@ -20,43 +20,43 @@ MonsterVariant = 0
 script = ExtResource("4_tg825")
 MaxHp = 1
 Damage = 2
-MonsterVariant = 0
+MonsterVariant = 1
 
 [sub_resource type="Resource" id="Resource_q5u76"]
 script = ExtResource("4_tg825")
 MaxHp = 2
 Damage = 2
-MonsterVariant = 0
+MonsterVariant = 2
 
 [sub_resource type="Resource" id="Resource_hden3"]
 script = ExtResource("4_tg825")
 MaxHp = 2
 Damage = 3
-MonsterVariant = 0
+MonsterVariant = 3
 
 [sub_resource type="Resource" id="Resource_hxm5g"]
 script = ExtResource("4_tg825")
 MaxHp = 3
 Damage = 3
-MonsterVariant = 0
+MonsterVariant = 4
 
 [sub_resource type="Resource" id="Resource_m2jm0"]
 script = ExtResource("4_tg825")
 MaxHp = 3
 Damage = 4
-MonsterVariant = 0
+MonsterVariant = 5
 
 [sub_resource type="Resource" id="Resource_e1gkc"]
 script = ExtResource("4_tg825")
 MaxHp = 4
 Damage = 4
-MonsterVariant = 0
+MonsterVariant = 6
 
 [sub_resource type="Resource" id="Resource_mlvrg"]
 script = ExtResource("4_tg825")
 MaxHp = 4
 Damage = 5
-MonsterVariant = 0
+MonsterVariant = 7
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kxqwy"]
 atlas = ExtResource("5_2h1p3")
