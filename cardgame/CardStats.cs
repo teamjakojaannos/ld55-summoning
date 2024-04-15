@@ -38,6 +38,11 @@ public partial class CardStats : Resource {
 		get => CurrentHp == 0;
 	}
 
+	[Export]
+	public MonsterVariant MonsterVariant {
+		get; set;
+	}
+
 	public CardStats() { }
 
 	public CardStats(int hp, int damage) {

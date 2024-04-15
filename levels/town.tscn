@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=26 format=3 uid="uid://c5uxib0tkhldl"]
 
 [ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="3_dsww4"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
@@ -11,45 +11,59 @@
 
 [sub_resource type="Resource" id="Resource_hft3w"]
 script = ExtResource("4_tg825")
-MaxHp = 5
-CurrentHp = 5
-Damage = 2
+MaxHp = 1
+CurrentHp = 1
+Damage = 1
+Element = 0
 
 [sub_resource type="Resource" id="Resource_nn5mw"]
 script = ExtResource("4_tg825")
-MaxHp = 7
-CurrentHp = 7
-Damage = 3
+MaxHp = 1
+CurrentHp = 1
+Damage = 2
+Element = 0
 
 [sub_resource type="Resource" id="Resource_q5u76"]
 script = ExtResource("4_tg825")
 MaxHp = 2
 CurrentHp = 2
-Damage = 4
+Damage = 2
+Element = 1
 
 [sub_resource type="Resource" id="Resource_hden3"]
 script = ExtResource("4_tg825")
-MaxHp = 5
-CurrentHp = 5
-Damage = 2
+MaxHp = 2
+CurrentHp = 2
+Damage = 3
+Element = 1
 
 [sub_resource type="Resource" id="Resource_hxm5g"]
-script = ExtResource("4_tg825")
-MaxHp = 10
-CurrentHp = 10
-Damage = 2
-
-[sub_resource type="Resource" id="Resource_m2jm0"]
-script = ExtResource("4_tg825")
-MaxHp = 1
-CurrentHp = 1
-Damage = 1
-
-[sub_resource type="Resource" id="Resource_e1gkc"]
 script = ExtResource("4_tg825")
 MaxHp = 3
 CurrentHp = 3
 Damage = 3
+Element = 2
+
+[sub_resource type="Resource" id="Resource_m2jm0"]
+script = ExtResource("4_tg825")
+MaxHp = 3
+CurrentHp = 3
+Damage = 4
+Element = 2
+
+[sub_resource type="Resource" id="Resource_e1gkc"]
+script = ExtResource("4_tg825")
+MaxHp = 4
+CurrentHp = 4
+Damage = 4
+Element = 3
+
+[sub_resource type="Resource" id="Resource_mlvrg"]
+script = ExtResource("4_tg825")
+MaxHp = 4
+CurrentHp = 4
+Damage = 5
+Element = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6thvd"]
 atlas = ExtResource("5_hh6cj")
@@ -133,7 +147,7 @@ Lines = ["Mjäyy", "Oon kissa"]
 Who = 0
 
 [node name="Monster" parent="World" instance=ExtResource("3_dsww4")]
-monsterCards = [SubResource("Resource_hft3w"), SubResource("Resource_nn5mw"), SubResource("Resource_q5u76"), SubResource("Resource_hden3"), SubResource("Resource_hxm5g"), SubResource("Resource_m2jm0"), SubResource("Resource_e1gkc")]
+monsterCards = [SubResource("Resource_hft3w"), SubResource("Resource_nn5mw"), SubResource("Resource_q5u76"), SubResource("Resource_hden3"), SubResource("Resource_hxm5g"), SubResource("Resource_m2jm0"), SubResource("Resource_e1gkc"), SubResource("Resource_mlvrg")]
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)

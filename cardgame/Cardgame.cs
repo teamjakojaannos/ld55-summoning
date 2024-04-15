@@ -16,7 +16,18 @@ public partial class Cardgame : Control {
 	private Mode currentMode = Mode.WaitingForAnimation;
 	private int? selectedCardIndex = null;
 
-	private PackedScene cardScene = GD.Load<PackedScene>("res://cardgame/card.tscn");
+	private PackedScene defaultCardScene = GD.Load<PackedScene>("res://cardgame/card.tscn");
+	private readonly Dictionary<MonsterVariant, PackedScene> cardScenes = new(){
+			{ MonsterVariant.Air1, GD.Load<PackedScene>("res://cardgame/cards/air_card_1.tscn")},
+			{ MonsterVariant.Air2, GD.Load<PackedScene>("res://cardgame/cards/air_card_2.tscn")},
+			{ MonsterVariant.Earth1, GD.Load<PackedScene>("res://cardgame/cards/earth_card_1.tscn")},
+			{ MonsterVariant.Earth2, GD.Load<PackedScene>("res://cardgame/cards/earth_card_2.tscn")},
+			{ MonsterVariant.Fire1, GD.Load<PackedScene>("res://cardgame/cards/fire_card_1.tscn")},
+			{ MonsterVariant.Fire2, GD.Load<PackedScene>("res://cardgame/cards/fire_card_2.tscn")},
+			{ MonsterVariant.Water1, GD.Load<PackedScene>("res://cardgame/cards/water_card_1.tscn")},
+			{ MonsterVariant.Water2, GD.Load<PackedScene>("res://cardgame/cards/water_card_2.tscn")},
+	};
+
 	private List<Card> PlayerCards {
 		get => playerHand.Cards;
 	}
@@ -131,6 +142,15 @@ public partial class Cardgame : Control {
 		var cards = new List<Card>();
 
 		foreach (var stats in cardStats) {
+			PackedScene cardScene;
+
+			if (cardScenes.ContainsKey(stats.MonsterVariant)) {
+				cardScene = cardScenes[stats.MonsterVariant];
+			} else {
+				GD.PrintErr($"Can't find card scene for monster variant {stats.MonsterVariant}");
+				cardScene = defaultCardScene;
+			}
+
 			var card = cardScene.Instantiate<Card>();
 			card.SetStats(stats);
 

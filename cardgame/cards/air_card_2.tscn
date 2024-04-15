@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu77i8s5ug1hv"]
+
+[ext_resource type="PackedScene" uid="uid://cbkof1h8cra7f" path="res://cardgame/card.tscn" id="1_xnfa4"]
+[ext_resource type="Texture2D" uid="uid://mn4n76saarbr" path="res://characters/monster/monsterStaticSprites/airmonster2idlestatic.png" id="2_ema0t"]
+
+[node name="Card" instance=ExtResource("1_xnfa4")]
+
+[node name="ÖllinNimi" parent="Sprite" index="0"]
+text = "Kotolainen"
+
+[node name="Ölli" parent="Sprite" index="4"]
+texture = ExtResource("2_ema0t")

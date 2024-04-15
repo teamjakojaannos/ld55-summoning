@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdmkfjdnnrwl7"]
+
+[ext_resource type="PackedScene" uid="uid://cbkof1h8cra7f" path="res://cardgame/card.tscn" id="1_oopjq"]
+[ext_resource type="Texture2D" uid="uid://deraex2o78656" path="res://cardgame/firesymbol.png" id="2_3blso"]
+[ext_resource type="Texture2D" uid="uid://da5gbotr18o8m" path="res://characters/monster/monsterStaticSprites/firemonster1idlestatic.png" id="3_8vbs7"]
+
+[node name="Card" instance=ExtResource("1_oopjq")]
+
+[node name="ÖllinNimi" parent="Sprite" index="0"]
+text = "Aarni"
+
+[node name="Elememtpi" parent="Sprite" index="3"]
+texture = ExtResource("2_3blso")
+
+[node name="Ölli" parent="Sprite" index="4"]
+texture = ExtResource("3_8vbs7")
