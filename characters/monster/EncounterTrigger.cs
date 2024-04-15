@@ -14,7 +14,7 @@ public partial class EncounterTrigger : Area2D {
 
 			var player = interactArea.Player;
 			var asList = cards.ToList();
-			player.StartEncounter(this, asList);
+			player.StartEncounter(this);
 		};
 	}
 }

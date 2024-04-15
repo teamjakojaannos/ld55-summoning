@@ -1,9 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://c5uxib0tkhldl"]
+[gd_scene load_steps=31 format=3 uid="uid://c5uxib0tkhldl"]
 
 [ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="3_dsww4"]
 [ext_resource type="TileSet" uid="uid://cudexgnwvg0kd" path="res://levels/town_tileset.tres" id="3_tv3g2"]
 [ext_resource type="Script" path="res://cardgame/CardStats.cs" id="4_tg825"]
-[ext_resource type="PackedScene" uid="uid://dkuq61u6l4jg6" path="res://cardgame/cardgame.tscn" id="4_wotui"]
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="5_2h1p3"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="5_6x2e7"]
 [ext_resource type="Texture2D" uid="uid://c0k6gpop4ph3m" path="res://characters/whyisthishere/ruohonleikkuriBATTLE.png" id="5_hh6cj"]
@@ -191,11 +190,6 @@ Who = 0
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-24, -24)
-
-[node name="CardGameLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="Cardgame" parent="CardGameLayer" instance=ExtResource("4_wotui")]
 
 [node name="Placeholder2" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("jonne", "leikkuri")]
 visible = false

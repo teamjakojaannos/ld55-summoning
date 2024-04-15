@@ -78,6 +78,9 @@ public partial class Cardgame : Control {
 	[Signal]
 	public delegate void PlayerNoMoreMovesEventHandler();
 
+	[Signal]
+	public delegate void CardgameOverEventHandler(bool playerWon);
+
 	public Vector2 DrawPilePosition {
 		get => playerPiles.DrawPilePosition();
 	}
@@ -433,10 +436,7 @@ public partial class Cardgame : Control {
 	}
 
 	private void FightEnded(bool playerDied) {
-		if (playerDied) {
-			GD.Print("Player had died! Oh nooooo");
-		} else {
-			GD.Print("You killed the enemy, good job!");
-		}
+		var playerWon = !playerDied;
+		EmitSignal(SignalName.CardgameOver, playerWon);
 	}
 }

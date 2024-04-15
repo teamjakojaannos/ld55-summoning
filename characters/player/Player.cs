@@ -143,7 +143,7 @@ public partial class Player : CharacterBody2D {
 	}
 
 	// Pass null target to perform only the fade-in-out without any music or level transitions
-	public void StartEncounter(EncounterTrigger target, List<CardStats> enemyCards = null) {
+	public void StartEncounter(EncounterTrigger target) {
 		if (IsInFight) {
 			return;
 		}
@@ -159,6 +159,7 @@ public partial class Player : CharacterBody2D {
 			EnterCombatMusic.Play();
 			ExplocationMusic.Stop();
 			CombatMusic.Stop();
+			IsInFight = true;
 		}
 
 		isTransitioning = true; // trans rights are human rights
@@ -172,32 +173,23 @@ public partial class Player : CharacterBody2D {
 				ExplocationMusic.Stop();
 				CombatMusic.Play();
 
-				var cardGameNode = GetTree().Root.FindChild("CardGameLayer", true, false);
-				if (cardGameNode is not CanvasLayer cardGame) {
-					GD.PushError("Could not find card game layer");
-					return;
-				}
-
-				cardGame.Visible = true;
-				// FIXME: assumes all level scene roots are called "Root/World"
-				GetNode<Node2D>("/root/Root/World").Visible = false;
+				var gameManager = GetNode<GameManager>("/root/GameManager");
+				var playerCards = CardDecks.PlayerDeck();
+				var enemyCards = target.cards.ToList();
+				gameManager.StartFight(playerCards, enemyCards);
 				Sprite.Visible = false;
 			}
 
 			GetTree().CreateTimer(FadeSmoothInTime / 2.0f).Timeout += () => {
 				isTransitioning = false;
-				if (target != null) {
-					var cardGameLayer = GetTree().Root.FindChild("CardGameLayer", true, false);
-					var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
-					var playerDeck = CardDecks.PlayerDeck();
-					// cards can be null
-					enemyCards ??= new();
-					cardGame.StartCombat(playerDeck, enemyCards);
-					// FIXME: probably not the right place to set this but oh well temp fix
-					IsInFight = true;
-				}
 			};
 		};
+	}
+
+	public void DoAfterBattleStuff() {
+		IsInFight = false;
+		Sprite.Visible = true;
+		// TODO: end musics etc...
 	}
 
 	private void CheckInput(StringName action, InputDirection direction) {

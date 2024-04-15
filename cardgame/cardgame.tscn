@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://cardgame/EnemyHand.cs" id="3_jid7n"]
 [ext_resource type="PackedScene" uid="uid://b750di4b0lclc" path="res://cardgame/in_hand_slot.tscn" id="3_sktvo"]
 [ext_resource type="Texture2D" uid="uid://mleebdkytht4" path="res://ui/keycap.png" id="4_djhqd"]
-[ext_resource type="PackedScene" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
+[ext_resource type="PackedScene" uid="uid://b4ib4pgt8xe23" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
 [ext_resource type="Script" path="res://cardgame/PlayerHand.cs" id="4_v7uiv"]
 [ext_resource type="LabelSettings" uid="uid://dj6vyx82h5teo" path="res://ui/keycap_label_settings.tres" id="5_0upjc"]
 [ext_resource type="Script" path="res://cardgame/ArenaPositionLabel.cs" id="5_osts6"]
@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://bb7frv1tasqpk" path="res://cardgame/scroll_rolled.png" id="10_8r62x"]
 [ext_resource type="Script" path="res://cardgame/DiscardPile.cs" id="11_3ai70"]
 
-[node name="Cardgame" type="Control"]
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Cardgame" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,11 +31,11 @@ CardDiscardSpeed = 10.0
 PlayedCardSpeed = 7.0
 CardDealSpeed = 7.0
 
-[node name="FightManager" type="Control" parent="."]
+[node name="FightManager" type="Control" parent="Cardgame"]
 anchors_preset = 0
 script = ExtResource("2_7df7x")
 
-[node name="EnemyHand" type="Control" parent="." node_paths=PackedStringArray("Cardgame")]
+[node name="EnemyHand" type="Control" parent="Cardgame" node_paths=PackedStringArray("Cardgame")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -47,35 +49,35 @@ script = ExtResource("3_jid7n")
 Cardgame = NodePath("..")
 SlotTemplate = ExtResource("3_sktvo")
 
-[node name="DummyHandSlot" parent="EnemyHand" instance=ExtResource("3_sktvo")]
+[node name="DummyHandSlot" parent="Cardgame/EnemyHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -195.13
 offset_top = -9.0
 offset_right = -99.13
 offset_bottom = 119.0
 
-[node name="DummyHandSlot2" parent="EnemyHand" instance=ExtResource("3_sktvo")]
+[node name="DummyHandSlot2" parent="Cardgame/EnemyHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -99.13
 offset_top = -9.0
 offset_right = -3.13
 offset_bottom = 119.0
 
-[node name="DummyHandSlot3" parent="EnemyHand" instance=ExtResource("3_sktvo")]
+[node name="DummyHandSlot3" parent="Cardgame/EnemyHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -3.13
 offset_top = -9.0
 offset_right = 92.87
 offset_bottom = 119.0
 
-[node name="DummyHandSlot4" parent="EnemyHand" instance=ExtResource("3_sktvo")]
+[node name="DummyHandSlot4" parent="Cardgame/EnemyHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = 92.87
 offset_top = -9.0
 offset_right = 188.87
 offset_bottom = 119.0
 
-[node name="PlayerHand" type="Control" parent="." node_paths=PackedStringArray("Cardgame")]
+[node name="PlayerHand" type="Control" parent="Cardgame" node_paths=PackedStringArray("Cardgame")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -92,35 +94,35 @@ script = ExtResource("4_v7uiv")
 Cardgame = NodePath("..")
 SlotTemplate = ExtResource("3_sktvo")
 
-[node name="DummyHandSlot" parent="PlayerHand" instance=ExtResource("3_sktvo")]
+[node name="DummyHandSlot" parent="Cardgame/PlayerHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -193.13
 offset_top = -2.0
 offset_right = -97.13
 offset_bottom = 126.0
 
-[node name="DummyHandSlot2" parent="PlayerHand" instance=ExtResource("3_sktvo")]
+[node name="DummyHandSlot2" parent="Cardgame/PlayerHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -96.26
 offset_top = -2.0
 offset_right = -0.259995
 offset_bottom = 126.0
 
-[node name="DummyHandSlot3" parent="PlayerHand" instance=ExtResource("3_sktvo")]
+[node name="DummyHandSlot3" parent="Cardgame/PlayerHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = -2.26001
 offset_top = -2.0
 offset_right = 93.74
 offset_bottom = 126.0
 
-[node name="DummyHandSlot4" parent="PlayerHand" instance=ExtResource("3_sktvo")]
+[node name="DummyHandSlot4" parent="Cardgame/PlayerHand" instance=ExtResource("3_sktvo")]
 layout_mode = 0
 offset_left = 91.74
 offset_top = -2.0
 offset_right = 187.74
 offset_bottom = 126.0
 
-[node name="Arena" type="GridContainer" parent="."]
+[node name="Arena" type="GridContainer" parent="Cardgame"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 8
@@ -138,23 +140,23 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 3
 
-[node name="OpponentLeft" parent="Arena" instance=ExtResource("3_86g1s")]
+[node name="OpponentLeft" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
 self_modulate = Color(1, 0.8, 0.8, 0.188235)
 layout_mode = 2
 
-[node name="OpponentMid" parent="Arena" instance=ExtResource("3_86g1s")]
+[node name="OpponentMid" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
 self_modulate = Color(1, 0.8, 0.8, 0.188235)
 layout_mode = 2
 
-[node name="OpponentRight" parent="Arena" instance=ExtResource("3_86g1s")]
+[node name="OpponentRight" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
 self_modulate = Color(1, 0.8, 0.8, 0.188235)
 layout_mode = 2
 
-[node name="PlayerLeft" parent="Arena" instance=ExtResource("3_86g1s")]
+[node name="PlayerLeft" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
 self_modulate = Color(0.611765, 0.690196, 1, 0.329412)
 layout_mode = 2
 
-[node name="Key" type="TextureRect" parent="Arena/PlayerLeft" node_paths=PackedStringArray("Cardgame")]
+[node name="Key" type="TextureRect" parent="Cardgame/Arena/PlayerLeft" node_paths=PackedStringArray("Cardgame")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -171,7 +173,7 @@ Cardgame = NodePath("../../..")
 HighlightedColor = Color(1, 1, 1, 1)
 DimmedColor = Color(0.2, 0.2, 0.2, 1)
 
-[node name="Label" type="Label" parent="Arena/PlayerLeft/Key"]
+[node name="Label" type="Label" parent="Cardgame/Arena/PlayerLeft/Key"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -183,11 +185,11 @@ text = "1"
 label_settings = ExtResource("5_0upjc")
 horizontal_alignment = 1
 
-[node name="PlayerMid" parent="Arena" instance=ExtResource("3_86g1s")]
+[node name="PlayerMid" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
 self_modulate = Color(0.611765, 0.690196, 1, 0.329412)
 layout_mode = 2
 
-[node name="Key" type="TextureRect" parent="Arena/PlayerMid" node_paths=PackedStringArray("Cardgame")]
+[node name="Key" type="TextureRect" parent="Cardgame/Arena/PlayerMid" node_paths=PackedStringArray("Cardgame")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -204,7 +206,7 @@ Cardgame = NodePath("../../..")
 HighlightedColor = Color(1, 1, 1, 1)
 DimmedColor = Color(0.2, 0.2, 0.2, 1)
 
-[node name="Label" type="Label" parent="Arena/PlayerMid/Key"]
+[node name="Label" type="Label" parent="Cardgame/Arena/PlayerMid/Key"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -216,11 +218,11 @@ text = "2"
 label_settings = ExtResource("5_0upjc")
 horizontal_alignment = 1
 
-[node name="PlayerRight" parent="Arena" instance=ExtResource("3_86g1s")]
+[node name="PlayerRight" parent="Cardgame/Arena" instance=ExtResource("3_86g1s")]
 self_modulate = Color(0.611765, 0.690196, 1, 0.329412)
 layout_mode = 2
 
-[node name="Key" type="TextureRect" parent="Arena/PlayerRight" node_paths=PackedStringArray("Cardgame")]
+[node name="Key" type="TextureRect" parent="Cardgame/Arena/PlayerRight" node_paths=PackedStringArray("Cardgame")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -237,7 +239,7 @@ Cardgame = NodePath("../../..")
 HighlightedColor = Color(1, 1, 1, 1)
 DimmedColor = Color(0.2, 0.2, 0.2, 1)
 
-[node name="Label" type="Label" parent="Arena/PlayerRight/Key"]
+[node name="Label" type="Label" parent="Cardgame/Arena/PlayerRight/Key"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -249,7 +251,7 @@ text = "3"
 label_settings = ExtResource("5_0upjc")
 horizontal_alignment = 1
 
-[node name="ButtonStart" type="Button" parent="."]
+[node name="ButtonStart" type="Button" parent="Cardgame"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -264,7 +266,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Start round"
 
-[node name="PlayerPiles" type="Control" parent="." node_paths=PackedStringArray("discardPile")]
+[node name="PlayerPiles" type="Control" parent="Cardgame" node_paths=PackedStringArray("discardPile")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,7 +280,7 @@ grow_vertical = 2
 script = ExtResource("9_q3ccb")
 discardPile = NodePath("DiscardPile")
 
-[node name="DrawPile" type="TextureRect" parent="PlayerPiles"]
+[node name="DrawPile" type="TextureRect" parent="Cardgame/PlayerPiles"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -286,7 +288,7 @@ offset_right = 65.0
 offset_bottom = 97.0
 texture = ExtResource("10_8r62x")
 
-[node name="Label" type="Label" parent="PlayerPiles/DrawPile"]
+[node name="Label" type="Label" parent="Cardgame/PlayerPiles/DrawPile"]
 layout_mode = 0
 offset_left = -1.0
 offset_top = 95.0
@@ -294,7 +296,7 @@ offset_right = 73.0
 offset_bottom = 118.0
 text = "Draw pile"
 
-[node name="DiscardPile" type="TextureRect" parent="PlayerPiles"]
+[node name="DiscardPile" type="TextureRect" parent="Cardgame/PlayerPiles"]
 layout_mode = 0
 offset_left = 160.0
 offset_right = 224.0
@@ -302,14 +304,14 @@ offset_bottom = 96.0
 texture = ExtResource("10_8r62x")
 script = ExtResource("11_3ai70")
 
-[node name="Label" type="Label" parent="PlayerPiles/DiscardPile"]
+[node name="Label" type="Label" parent="Cardgame/PlayerPiles/DiscardPile"]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 91.0
 offset_bottom = 119.0
 text = "Discard pile"
 
-[node name="EnemyPiles" type="Control" parent="." node_paths=PackedStringArray("discardPile")]
+[node name="EnemyPiles" type="Control" parent="Cardgame" node_paths=PackedStringArray("discardPile")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -323,7 +325,7 @@ grow_vertical = 2
 script = ExtResource("9_q3ccb")
 discardPile = NodePath("DiscardPile")
 
-[node name="DrawPile" type="TextureRect" parent="EnemyPiles"]
+[node name="DrawPile" type="TextureRect" parent="Cardgame/EnemyPiles"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -331,7 +333,7 @@ offset_right = 65.0
 offset_bottom = 97.0
 texture = ExtResource("10_8r62x")
 
-[node name="Label" type="Label" parent="EnemyPiles/DrawPile"]
+[node name="Label" type="Label" parent="Cardgame/EnemyPiles/DrawPile"]
 layout_mode = 0
 offset_left = -1.0
 offset_top = 95.0
@@ -339,7 +341,7 @@ offset_right = 73.0
 offset_bottom = 118.0
 text = "Draw pile"
 
-[node name="DiscardPile" type="TextureRect" parent="EnemyPiles"]
+[node name="DiscardPile" type="TextureRect" parent="Cardgame/EnemyPiles"]
 layout_mode = 0
 offset_left = 160.0
 offset_right = 224.0
@@ -347,34 +349,34 @@ offset_bottom = 96.0
 texture = ExtResource("10_8r62x")
 script = ExtResource("11_3ai70")
 
-[node name="Label" type="Label" parent="EnemyPiles/DiscardPile"]
+[node name="Label" type="Label" parent="Cardgame/EnemyPiles/DiscardPile"]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 91.0
 offset_bottom = 119.0
 text = "Discard pile"
 
-[node name="PlayerHp" parent="." instance=ExtResource("4_k5w0w")]
+[node name="PlayerHp" parent="Cardgame" instance=ExtResource("4_k5w0w")]
 layout_mode = 1
 offset_left = 950.0
 offset_top = 400.0
 offset_right = -138.0
 offset_bottom = -221.0
 
-[node name="EnemyHp" parent="." instance=ExtResource("4_k5w0w")]
+[node name="EnemyHp" parent="Cardgame" instance=ExtResource("4_k5w0w")]
 layout_mode = 1
 offset_left = 950.0
 offset_top = 240.0
 offset_right = -138.0
 offset_bottom = -381.0
 
-[node name="CardDealTimer" type="Timer" parent="."]
+[node name="CardDealTimer" type="Timer" parent="Cardgame"]
 one_shot = true
 
-[node name="AIMoveTimer" type="Timer" parent="."]
+[node name="AIMoveTimer" type="Timer" parent="Cardgame"]
 one_shot = true
 
-[node name="CardDiscardTimer" type="Timer" parent="."]
+[node name="CardDiscardTimer" type="Timer" parent="Cardgame"]
 one_shot = true
 
-[connection signal="pressed" from="ButtonStart" to="." method="StartButtonPressed"]
+[connection signal="pressed" from="Cardgame/ButtonStart" to="Cardgame" method="StartButtonPressed"]
