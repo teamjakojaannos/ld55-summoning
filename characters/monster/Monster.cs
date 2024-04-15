@@ -16,6 +16,9 @@ public partial class Monster : CharacterBody2D {
 	public override void _Ready() {
 		var encounterTrigger = GetNode<EncounterTrigger>("EncounterTrigger");
 		encounterTrigger.cards = monsterCards;
+		encounterTrigger.DeleteThisNode += () => {
+			QueueFree();
+		};
 
 		var currentTileX = Mathf.FloorToInt(GlobalPosition.X / 32);
 		var currentTileY = Mathf.FloorToInt(GlobalPosition.Y / 32);

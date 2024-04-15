@@ -72,6 +72,8 @@ public partial class Player : CharacterBody2D {
 
 	public bool IsInFight = false;
 
+	public bool Frozen = false;
+
 	public override void _Ready() {
 		fadeDistance = MaxFade;
 		darkDistanceFactor = MaxFactor;
@@ -139,7 +141,9 @@ public partial class Player : CharacterBody2D {
 			Sprite.Play("idle");
 		}
 
-		MoveAndSlide();
+		if (!Frozen) {
+			MoveAndSlide();
+		}
 	}
 
 	// Pass null target to perform only the fade-in-out without any music or level transitions
@@ -175,9 +179,9 @@ public partial class Player : CharacterBody2D {
 
 				var gameManager = GetNode<GameManager>("/root/GameManager");
 				var playerCards = CardDecks.PlayerDeck();
-				var enemyCards = target.cards.ToList();
-				gameManager.StartFight(playerCards, enemyCards);
+				gameManager.StartFight(playerCards, target);
 				Sprite.Visible = false;
+				Frozen = true;
 			}
 
 			GetTree().CreateTimer(FadeSmoothInTime / 2.0f).Timeout += () => {
@@ -189,6 +193,7 @@ public partial class Player : CharacterBody2D {
 	public void DoAfterBattleStuff() {
 		IsInFight = false;
 		Sprite.Visible = true;
+		Frozen = false;
 		// TODO: end musics etc...
 	}
 

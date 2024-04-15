@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class GameManager : Node2D {
@@ -73,7 +74,7 @@ public partial class GameManager : Node2D {
 		TransitionInProgress = false;
 	}
 
-	public void StartFight(List<CardStats> playerCards, List<CardStats> enemyCards) {
+	public void StartFight(List<CardStats> playerCards, EncounterTrigger enemy) {
 		var root = GetTree().Root;
 		var children = root.GetChildren();
 		var expectedCount = AutoloadedNodes.Count + 1;
@@ -89,6 +90,8 @@ public partial class GameManager : Node2D {
 			return;
 		}
 
+		enemy.EmitDeleteSignal();
+
 		previousLevel = list[0];
 		previousLevel.RemoveChild(Player);
 		root.RemoveChild(previousLevel);
@@ -99,6 +102,7 @@ public partial class GameManager : Node2D {
 		cardGameLayer.Visible = true;
 		cardGame.AddChild(Player);
 
+		var enemyCards = enemy.cards.ToList();
 		cardGame.StartCombat(playerCards, enemyCards);
 	}
 
