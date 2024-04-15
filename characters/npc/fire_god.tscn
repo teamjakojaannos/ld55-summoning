@@ -1,7 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://w4adbsvfxqul"]
+[gd_scene load_steps=10 format=3 uid="uid://w4adbsvfxqul"]
 
-[ext_resource type="Texture2D" uid="uid://dnkoebad5l3rm" path="res://characters/npc/firegodsmall.png" id="1_xln1b"]
+[ext_resource type="Texture2D" uid="uid://42nftijwoewo" path="res://characters/npc/firegodidle.png" id="1_1yxcd"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_x4iod"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87xqo"]
+atlas = ExtResource("1_1yxcd")
+region = Rect2(0, 0, 39, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2k2f"]
+atlas = ExtResource("1_1yxcd")
+region = Rect2(39, 0, 39, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn2fx"]
+atlas = ExtResource("1_1yxcd")
+region = Rect2(78, 0, 39, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atwrm"]
+atlas = ExtResource("1_1yxcd")
+region = Rect2(117, 0, 39, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2crr"]
+atlas = ExtResource("1_1yxcd")
+region = Rect2(156, 0, 39, 49)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwnus"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87xqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2k2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn2fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atwrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2crr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2og54"]
 size = Vector2(13, 5)
@@ -9,9 +52,12 @@ size = Vector2(13, 5)
 [node name="FireGod" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("1_xln1b")
+sprite_frames = SubResource("SpriteFrames_nwnus")
+autoplay = "default"
+frame = 1
+frame_progress = 0.204692
 offset = Vector2(4.75, -22.385)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]

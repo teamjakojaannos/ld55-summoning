@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5bje8qwvc8xo"]
+
+[ext_resource type="Texture2D" uid="uid://djk0v088yjmpn" path="res://environment/bigtre.png" id="1_5h44i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb28s"]
+size = Vector2(20, 10)
+
+[node name="BigTree" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_5h44i")
+offset = Vector2(0, -30.05)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_kb28s")
