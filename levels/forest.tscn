@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c3xalr8g64d1t"]
+[gd_scene load_steps=39 format=3 uid="uid://c3xalr8g64d1t"]
 
 [ext_resource type="Texture2D" uid="uid://dryobx1h7r14w" path="res://environment/tileset2.png" id="1_2nt7k"]
 [ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="1_8m7yw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bsyb1a152l3ut" path="res://environment/mushroomsA.png" id="4_80rf8"]
 [ext_resource type="Script" path="res://levels/Spawner.cs" id="5_3ak24"]
 [ext_resource type="PackedScene" uid="uid://ssxxapiqqnjo" path="res://environment/tree1.tscn" id="5_tp4x7"]
+[ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="6_3fpt1"]
 [ext_resource type="PackedScene" uid="uid://es6qmyql0xh" path="res://environment/velhohuvila.tscn" id="6_j5qbx"]
 [ext_resource type="Texture2D" uid="uid://0jvabwshdiby" path="res://environment/mokkiportaat.png" id="6_rr3ov"]
 [ext_resource type="PackedScene" uid="uid://bqp4cq41kvl7b" path="res://environment/tree2.tscn" id="7_6kl4l"]
@@ -17,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://bauor3cyiwu6i" path="res://characters/npc/earth_god.tscn" id="13_dymf1"]
 [ext_resource type="Texture2D" uid="uid://53gqgguumyoo" path="res://environment/bonfire.png" id="13_r27wv"]
 [ext_resource type="PackedScene" uid="uid://5juhwtj3y1kj" path="res://characters/npc/air_god.tscn" id="15_vje72"]
-[ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="6_3fpt1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6wo1"]
 texture = ExtResource("1_2nt7k")
