@@ -126,7 +126,13 @@ public partial class Cardgame : Control {
         cardDiscardTimer = GetNode<Timer>("CardDiscardTimer");
         cardDiscardTimer.Timeout += CardDiscardDone;
 
+        Reset();
+
         SwitchMode(Mode.WaitingForAnimation);
+    }
+
+    public void Reset() {
+        playerHand.Reset();
     }
 
     public void StartCombat() {
@@ -143,7 +149,7 @@ public partial class Cardgame : Control {
         var offset = new Vector2(100.0f, 0.0f);
         var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
 
-        playerHand.TakeCards(playerDrawnCards, CardDealSpeed);
+        playerHand.AddCards(playerDrawnCards, CardDealSpeed);
 
         var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
 
@@ -275,8 +281,9 @@ public partial class Cardgame : Control {
         ClearSelectedCardHighlight();
         var card = PlayerCards[cardIndex];
         PlayerCards.RemoveAt(cardIndex);
-
         AddCardToArena(card, position);
+
+        playerHand.PlayCard(cardIndex);
 
         UpdateCardLabels();
 

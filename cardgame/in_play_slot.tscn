@@ -4,5 +4,8 @@
 [ext_resource type="Script" path="res://cardgame/InPlaySlot.cs" id="2_r24oe"]
 
 [node name="InPlaySlot" type="TextureRect"]
+custom_minimum_size = Vector2(96, 128)
+offset_right = 64.0
+offset_bottom = 96.0
 texture = ExtResource("1_0m5dh")
 script = ExtResource("2_r24oe")

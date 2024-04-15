@@ -11,12 +11,41 @@ public partial class PlayerHand : Control {
 
 	public List<Card> Cards = new();
 
-	public void TakeCards(List<Card> cards, float cardMoveSpeed) {
+	public void PlayCard(int index) {
+		var playedSlot = GetChild(index);
+		RemoveChild(playedSlot);
+		playedSlot.QueueFree();
+
+		var totalWidth = 0.0f;
+		for (int i = 0; i < GetChildCount(); ++i) {
+			totalWidth += GetChild<InHandSlot>(i).Size.X;
+		}
+
+		var offsetX = 0.0f;
+		var startX = -totalWidth / 2.0f;
+		for (int i = 0; i < GetChildCount(); ++i) {
+            var slot = GetChild<InHandSlot>(i);
+			slot.SetIndex(i);
+
+            var targetPositionX = startX + offsetX;
+			var targetPosition = new Vector2(targetPositionX, 0.0f);
+
+			slot.Position = targetPosition;
+			var cardWidth = slot.Size.X;
+			offsetX += cardWidth;
+        }
+	}
+
+	public void Reset() {
 		while (GetChildCount() > 0) {
 			var child = GetChild(0);
 			child.QueueFree();
 			RemoveChild(child);
 		}
+	}
+
+	public void AddCards(List<Card> cards, float cardMoveSpeed) {
+		Reset();
 
 		var totalWidth = 0.0f;
 		foreach (var card in cards) {
@@ -34,6 +63,7 @@ public partial class PlayerHand : Control {
 			var slot = SlotTemplate.Instantiate<InHandSlot>();
 			slot.Position = targetPosition;
 			AddChild(slot);
+			slot.SetIndex(i);
 			slot.AddCardAsChild(card, cardMoveSpeed);
 
 			var cardWidth = card.Size.X;
