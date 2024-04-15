@@ -272,6 +272,7 @@ public partial class Cardgame : Control {
 	private void AddCardToArena(Card card, ArenaPosition position) {
 		var arenaSlot = arenaSlots[position];
 		arenaSlot.AddCardAsChild(card, PlayedCardSpeed);
+		card.SetInfoVisible(true);
 	}
 
 	private void SwitchMode(Mode newMode) {

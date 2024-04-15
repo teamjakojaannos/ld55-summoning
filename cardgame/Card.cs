@@ -51,10 +51,13 @@ public partial class Card : Control
     {
         get => CurrentHp == 0;
     }
+    private Label nameLabel;
     private Label hpLabel;
     private Label dmgLabel;
 
     private TextureRect image;
+    private TextureRect elementSprite;
+    private TextureRect creatureSprite;
 
     private bool highlighted = false;
 
@@ -87,6 +90,9 @@ public partial class Card : Control
         dmgLabel = GetNode<Label>("Sprite/DamageLabel");
         image = GetNode<TextureRect>("Sprite");
         animation = GetNode<AnimationPlayer>("AnimationPlayer");
+        nameLabel = GetNode<Label>("Sprite/ÖllinNimi");
+        elementSprite = GetNode<TextureRect>("Sprite/Elememtpi");
+        creatureSprite = GetNode<TextureRect>("Sprite/Ölli");
 
         animation.AnimationFinished += (name) => {
             if (name == attackAnimation || name == attackAnimationUpward)
@@ -197,5 +203,13 @@ public partial class Card : Control
         GlobalPosition = oldPosition;
         targetPosition = Vector2.Zero;
         posLerpFactor = cardMoveSpeed;
+    }
+
+    public void SetInfoVisible(bool visible) {
+        nameLabel.Visible = visible;
+        hpLabel.Visible = visible;
+        dmgLabel.Visible = visible;
+        elementSprite.Visible = visible;
+        creatureSprite.Visible = visible;
     }
 }

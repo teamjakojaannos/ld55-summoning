@@ -73,6 +73,7 @@ public partial class PlayerHand : Control {
 			Cards.Add(card);
 
 			card.IsPlayersCard = playersCard;
+			card.SetInfoVisible(playersCard);
 			card.Visible = true;
 		}
 	}
