@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://Overlay.cs" id="4_vkyin"]
 [ext_resource type="Texture2D" uid="uid://d2jxbgtj8oog" path="res://ui/kysmerkki.png" id="5_a0bcx"]
 [ext_resource type="AudioStream" uid="uid://6xjllywvyi6x" path="res://muzak/combattiin.ogg" id="5_cqvfs"]
-[ext_resource type="AudioStream" uid="uid://vyjdtfu2x8u7" path="res://muzak/seikkailu.ogg" id="6_r4xdn"]
-[ext_resource type="AudioStream" uid="uid://dd128wv6pmpug" path="res://muzak/combatjyta.ogg" id="7_6k6bx"]
+[ext_resource type="AudioStream" uid="uid://dtedtwvte6lta" path="res://muzak/seikkailufinal.ogg" id="7_xnmnr"]
 [ext_resource type="Script" path="res://characters/player/InteractArea.cs" id="8_b1013"]
+[ext_resource type="AudioStream" uid="uid://ccvf00o4chq6g" path="res://muzak/combatjytafinal.ogg" id="8_wx2da"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5oc5c"]
 radius = 6.0
@@ -67,11 +67,11 @@ stream = ExtResource("5_cqvfs")
 bus = &"Music"
 
 [node name="ExplorationMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_r4xdn")
+stream = ExtResource("7_xnmnr")
 bus = &"Music"
 
 [node name="CombatMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_6k6bx")
+stream = ExtResource("8_wx2da")
 bus = &"Music"
 
 [node name="InteractArea" type="Area2D" parent="." node_paths=PackedStringArray("Player")]

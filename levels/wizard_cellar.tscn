@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://k14qken2ftqt"]
+[gd_scene load_steps=37 format=3 uid="uid://k14qken2ftqt"]
 
 [ext_resource type="Texture2D" uid="uid://ca6oyteg4v0cr" path="res://characters/player/paju_cat.png" id="1_7sev4"]
 [ext_resource type="Script" path="res://levels/WizardCellarIntro.cs" id="1_dg2sj"]
@@ -6,7 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="2_wg7nh"]
 [ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="6_o2b5j"]
 [ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="7_qs3lo"]
+[ext_resource type="AudioStream" uid="uid://df6mkvvvokvpb" path="res://muzak/kissatytyksialt.ogg" id="8_b7418"]
 [ext_resource type="Texture2D" uid="uid://cldw4n30xxyni" path="res://characters/oldwiz/ded.png" id="9_1n014"]
+[ext_resource type="AudioStream" uid="uid://bsu5dp2sfulrl" path="res://muzak/kissatytyksi.ogg" id="9_v4svf"]
+[ext_resource type="AudioStream" uid="uid://caynqs05rlu8i" path="res://muzak/victoryroyale.ogg" id="10_i748e"]
+[ext_resource type="AudioStream" uid="uid://bmaaj5xeka3kx" path="res://muzak/velhokuoleetheme.ogg" id="10_kv8cj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnr3e"]
 atlas = ExtResource("2_wg7nh")
@@ -247,11 +251,14 @@ points = PackedVector2Array(0, 0, 1, 2, 2, 0)
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_4s5ro"]
 points = PackedVector2Array(0, 0, 1, 2, 2, 0)
 
-[node name="WizardCellar" type="Node2D" node_paths=PackedStringArray("Animation", "Ritual", "Pentagrammi")]
+[node name="WizardCellar" type="Node2D" node_paths=PackedStringArray("Animation", "Ritual", "Pentagrammi", "TransformationLoop", "VictoryRoyale", "DedTheme")]
 script = ExtResource("1_dg2sj")
 Animation = NodePath("Sequence")
 Ritual = NodePath("KittyTransform")
 Pentagrammi = NodePath("Pentagrammi")
+TransformationLoop = NodePath("Loop")
+VictoryRoyale = NodePath("Victory")
+DedTheme = NodePath("DedTheme2")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_c6kni")
@@ -342,3 +349,19 @@ texture = ExtResource("6_o2b5j")
 position = Vector2(147, 84)
 levelName = "res://levels/forest.tscn"
 spawnPointName = "WizardExit"
+
+[node name="Loop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_b7418")
+bus = &"Music"
+
+[node name="Loop2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_v4svf")
+bus = &"Music"
+
+[node name="Victory" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_i748e")
+bus = &"Music"
+
+[node name="DedTheme2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_kv8cj")
+bus = &"Music"

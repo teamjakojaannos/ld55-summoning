@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=41 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
@@ -13,10 +13,15 @@
 [ext_resource type="Script" path="res://cardgame/DiscardPile.cs" id="11_3ai70"]
 [ext_resource type="Texture2D" uid="uid://ba7wspi71ecnu" path="res://characters/player/player_idle.png" id="11_ohfne"]
 [ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="12_f0rev"]
+[ext_resource type="Texture2D" uid="uid://clajyg6drs8ng" path="res://characters/npc/firegod.png" id="13_lbgen"]
+[ext_resource type="Texture2D" uid="uid://cswkpo2ckfiys" path="res://characters/npc/earthgod.png" id="14_8jllw"]
 [ext_resource type="AudioStream" uid="uid://pam88fti118p" path="res://sfx/hit1.ogg" id="15_8y1sa"]
 [ext_resource type="AudioStream" uid="uid://c68xakvkgaw5w" path="res://sfx/creat2.ogg" id="15_22bis"]
+[ext_resource type="Texture2D" uid="uid://4c8vasjngmun" path="res://characters/npc/airgod.png" id="15_b3ksj"]
 [ext_resource type="AudioStream" uid="uid://8q1evkctlpa6" path="res://sfx/hit2.ogg" id="16_ixbog"]
+[ext_resource type="Texture2D" uid="uid://c14n4wqwxqj5t" path="res://characters/npc/watergod.png" id="16_linoi"]
 [ext_resource type="AudioStream" uid="uid://dqj06cq3i67yd" path="res://sfx/no.ogg" id="17_2c05t"]
+[ext_resource type="Texture2D" uid="uid://c0k6gpop4ph3m" path="res://characters/whyisthishere/ruohonleikkuriBATTLE.png" id="17_by7ab"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_copx4"]
 atlas = ExtResource("11_ohfne")
@@ -131,15 +136,34 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ql22"]
+atlas = ExtResource("17_by7ab")
+region = Rect2(0, 0, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_wl7wc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("12_f0rev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_lbgen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8jllw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_b3ksj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_linoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ql22")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 20.0
 }]
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -293,8 +317,8 @@ layout_mode = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentLeft" index="0"]
-offset_right = 1824.0
-offset_bottom = 2432.0
+offset_right = 1920.0
+offset_bottom = 2560.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentLeft" index="1"]
 visible = false
@@ -306,8 +330,8 @@ PositionOnArena = 1
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentMid" index="0"]
-offset_right = 1824.0
-offset_bottom = 2432.0
+offset_right = 1920.0
+offset_bottom = 2560.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentMid" index="1"]
 visible = false
@@ -319,8 +343,8 @@ PositionOnArena = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentRight" index="0"]
-offset_right = 1824.0
-offset_bottom = 2432.0
+offset_right = 1920.0
+offset_bottom = 2560.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentRight" index="1"]
 visible = false
@@ -340,8 +364,8 @@ PositionOnArena = 4
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerMid" index="0"]
-offset_right = 1824.0
-offset_bottom = 2432.0
+offset_right = 1920.0
+offset_bottom = 2560.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerMid/Key" index="0"]
 text = "2"
@@ -354,8 +378,8 @@ PositionOnArena = 5
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerRight" index="0"]
-offset_right = 1824.0
-offset_bottom = 2432.0
+offset_right = 1920.0
+offset_bottom = 2560.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerRight/Key" index="0"]
 text = "3"
@@ -472,6 +496,7 @@ text = "Discard pile"
 position = Vector2(103, 268)
 scale = Vector2(2.57812, 2.57812)
 sprite_frames = SubResource("SpriteFrames_wl7wc")
+frame_progress = 0.0659155
 
 [node name="PlayerHp" parent="Cardgame" instance=ExtResource("4_k5w0w")]
 layout_mode = 1

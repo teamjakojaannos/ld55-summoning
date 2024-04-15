@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4ib4pgt8xe23"]
+[gd_scene load_steps=4 format=3 uid="uid://d238wb56q2qnt"]
 
 [ext_resource type="Script" path="res://cardgame/HpBar.cs" id="1_hajcy"]
+[ext_resource type="LabelSettings" uid="uid://d4i6c4p5ov570" path="res://cardgame/card_label_settings.tres" id="2_7f0xm"]
+[ext_resource type="Texture2D" uid="uid://dns7biallgvii" path="res://ui/dialogiboxi.png" id="2_io854"]
 
 [node name="HpBar" type="Control"]
 layout_mode = 3
@@ -13,8 +15,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hajcy")
 
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color(0.619608, 0.501961, 0.396078, 1)
+layout_mode = 0
+offset_right = 66.0
+offset_bottom = 24.0
+texture = ExtResource("2_io854")
+region_rect = Rect2(1, 1, 22, 22)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_vertical = 2
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 60.0
+offset_bottom = 24.0
 text = "HP 100"
+label_settings = ExtResource("2_7f0xm")
+horizontal_alignment = 1
