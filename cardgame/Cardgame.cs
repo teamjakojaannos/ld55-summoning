@@ -147,7 +147,6 @@ public partial class Cardgame : Control {
 		var playerCardsCount = 5;
 		var enemyCardsCount = 5;
 
-		var offset = new Vector2(100.0f, 0.0f);
 		var playerDrawnCards = playerPiles.DrawCards(playerCardsCount);
 
 		playerHand.AddCards(playerDrawnCards, CardDealSpeed);
@@ -155,19 +154,6 @@ public partial class Cardgame : Control {
 		var enemyDrawnCards = enemyPiles.DrawCards(enemyCardsCount);
 
 		enemyHand.AddCards(enemyDrawnCards, CardDealSpeed);
-
-		/*
-						for (int i = 0; i < enemyDrawnCards.Count; i++) {
-								var card = enemyDrawnCards[i];
-								card.MoveInstantlyTo(enemyPiles.DrawPilePosition());
-								var targetPosition = enemyHand.Position + offset * i;
-								card.StartMovingTo(targetPosition, CardDealSpeed);
-
-								enemyCards.Add(card);
-
-								card.Visible = true;
-						}
-		*/
 	}
 
 	private void CardDealingDone() {

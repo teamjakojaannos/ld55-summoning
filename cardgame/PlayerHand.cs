@@ -46,6 +46,7 @@ public partial class PlayerHand : Control {
 
 	public void AddCards(List<Card> cards, float cardMoveSpeed) {
 		Reset();
+		bool playersCard = AmIPlayer();
 
 		var totalWidth = 0.0f;
 		foreach (var card in cards) {
@@ -71,12 +72,16 @@ public partial class PlayerHand : Control {
 
 			Cards.Add(card);
 
-			card.IsPlayersCard = true;
+			card.IsPlayersCard = playersCard;
 			card.Visible = true;
 		}
 	}
 
 	protected virtual void SetupSlot(InHandSlot slot, int index) {
 		slot.Setup(Cardgame, index);
+	}
+
+	protected virtual bool AmIPlayer() {
+		return true;
 	}
 }
