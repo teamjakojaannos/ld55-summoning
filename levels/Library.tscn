@@ -1,0 +1,253 @@
+[gd_scene load_steps=15 format=3 uid="uid://c65ftkbch86jj"]
+
+[ext_resource type="TileSet" uid="uid://b8jjfq5ljrcrf" path="res://levels/interior_tileset.tres" id="1_snw77"]
+[ext_resource type="Texture2D" uid="uid://b5wrq2gmw83cu" path="res://environment/Interior/kirjahyllypieni1.png" id="2_fqgeo"]
+[ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="2_pr327"]
+[ext_resource type="Texture2D" uid="uid://dl5q1aqr2uvxp" path="res://environment/Interior/kirjahyllypieni2.png" id="3_pnbg3"]
+[ext_resource type="Texture2D" uid="uid://4qh7k11un2wt" path="res://environment/Interior/kirjahyllyiso.png" id="4_1yfb7"]
+[ext_resource type="Texture2D" uid="uid://by1m2s8vh3bnu" path="res://environment/Interior/huonekasvi1.png" id="5_d2br7"]
+[ext_resource type="Texture2D" uid="uid://cdsmwjy6mwn7o" path="res://environment/Interior/poyta.png" id="7_djcs6"]
+[ext_resource type="Texture2D" uid="uid://dmbdqx0jyxfdk" path="res://environment/Interior/tuoli.png" id="8_3mih1"]
+[ext_resource type="Texture2D" uid="uid://dav67wkeh8i7v" path="res://environment/Interior/book.png" id="9_ftxwa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2qpf"]
+size = Vector2(28, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r3ds"]
+size = Vector2(50, 11)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yksvs"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_laad0"]
+radius = 3.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mucwq"]
+radius = 2.0
+height = 10.0
+
+[node name="Library" type="Node2D"]
+y_sort_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -3
+offset_left = -3963.0
+offset_top = -3396.0
+offset_right = 4650.0
+offset_bottom = 3552.0
+color = Color(0, 0, 0, 1)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_snw77")
+format = 2
+layer_0/name = "Base"
+layer_0/z_index = -2
+layer_0/tile_data = PackedInt32Array(-65543, 65536, 2, -65542, 65536, 2, -65541, 65536, 2, -65540, 65536, 2, -65539, 65536, 2, -65538, 65536, 2, -65537, 65536, 2, -131073, 65536, 2, -196609, 65536, 2, -262146, 65536, 2, -196610, 65536, 2, -131074, 65536, 2, -262145, 65536, 2, -327680, 65536, 2, -327679, 65536, 2, -327678, 65536, 2, -262142, 65536, 2, -196606, 65536, 2, -131070, 65536, 2, -65534, 65536, 2, 2, 65536, 2, -7, 65536, 2, 65529, 65536, 2, 65530, 65536, 2, 65531, 65536, 2, 65532, 65536, 2, 65533, 65536, 2, 65534, 65536, 2, 65535, 65536, 2, 0, 65536, 2, 1, 65536, 2, -131071, 65536, 2, -196607, 65536, 2, -262143, 65536, 2, -262144, 65536, 2, -196608, 65536, 2, -131072, 65536, 2, -1, 65536, 2, -2, 65536, 2, -3, 65536, 2, -4, 65536, 2, -5, 65536, 2, -6, 65536, 2, -65536, 65536, 2, -65535, 65536, 2, 65537, 65536, 2, 65536, 65536, 2)
+layer_1/name = "Walls"
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array(-131079, 65536, 0, -131078, 65536, 0, -131077, 65536, 0, -131076, 131072, 0, -131075, 65536, 0, -262146, 0, 5, -327682, 65536, 0, -393218, 0, 5, -196610, 0, 5, -327681, 65536, 0, -393216, 65536, 0, -393215, 65536, 0, -393214, 65536, 0, -131074, 0, 5, -196615, 0, 5, -196616, 0, 0, -131080, 0, 0, -65544, 0, 0, -8, 0, 0, 65528, 0, 0, -393219, 0, 0, -327683, 0, 0, -262147, 0, 0, 131065, 65536, 3, 131064, 0, 3, 131066, 65536, 3, 131067, 65536, 3, 131068, 65536, 3, 131069, 65536, 3, 131070, 65536, 3, 131071, 131072, 3, 65538, 0, 1, 65539, 65536, 5, -458749, 0, 5, -393213, 0, 5, -327677, 0, 5, -262141, 0, 5, -196605, 0, 5, -131069, 0, 5, -65533, 0, 5, 3, 0, 5, -2, 0, 6)
+
+[node name="PlayerStart" type="Marker2D" parent="."]
+position = Vector2(-36.73, 0)
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(31.275, 11.505)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(85.041, -126.611)
+rotation = 1.5708
+scale = Vector2(0.852545, 0.885773)
+antialiased = true
+polygon = PackedVector2Array(171.797, 23.7544, 171, 96, 225.925, 96, 225.925, 23.7544)
+vertex_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[node name="LevelTransition" parent="." instance=ExtResource("2_pr327")]
+position = Vector2(31, 48)
+levelName = "res://levels/forest.tscn"
+spawnPointName = "LibraryExit"
+
+[node name="LittleBookCase1" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-39, -145)
+texture = ExtResource("2_fqgeo")
+offset = Vector2(0, -24.875)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LittleBookCase1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LittleBookCase1/StaticBody2D"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_o2qpf")
+
+[node name="LittleBookCase3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-36, -75)
+texture = ExtResource("2_fqgeo")
+offset = Vector2(0, -24.875)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LittleBookCase3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LittleBookCase3/StaticBody2D"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_o2qpf")
+
+[node name="LittleBookCase2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(78, -145)
+texture = ExtResource("3_pnbg3")
+offset = Vector2(0, -24.875)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LittleBookCase2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LittleBookCase2/StaticBody2D"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_o2qpf")
+
+[node name="BigBookCase1" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(25, -146)
+texture = ExtResource("4_1yfb7")
+offset = Vector2(0, -24.875)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BigBookCase1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigBookCase1/StaticBody2D"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_0r3ds")
+
+[node name="BigBookCase2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(68, -74)
+texture = ExtResource("4_1yfb7")
+offset = Vector2(0, -24.875)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BigBookCase2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigBookCase2/StaticBody2D"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_0r3ds")
+
+[node name="BigBookCase3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-193, -51)
+texture = ExtResource("4_1yfb7")
+offset = Vector2(0, -24.875)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BigBookCase3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigBookCase3/StaticBody2D"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_0r3ds")
+
+[node name="Houseplant1" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-12, -145)
+texture = ExtResource("5_d2br7")
+offset = Vector2(-1.035, -18.06)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Houseplant1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Houseplant1/StaticBody2D"]
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yksvs")
+
+[node name="Houseplant2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(82, 27)
+texture = ExtResource("5_d2br7")
+offset = Vector2(-1.035, -18.06)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Houseplant2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Houseplant2/StaticBody2D"]
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yksvs")
+
+[node name="Houseplant3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-137, -52)
+texture = ExtResource("5_d2br7")
+offset = Vector2(-1.035, -18.06)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Houseplant3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Houseplant3/StaticBody2D"]
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yksvs")
+
+[node name="Table" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-105, -50)
+texture = ExtResource("7_djcs6")
+offset = Vector2(0.89, -13.745)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Table"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/StaticBody2D"]
+position = Vector2(1, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_laad0")
+
+[node name="Chair" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-81, -52)
+texture = ExtResource("8_3mih1")
+offset = Vector2(-0.03, -5.62)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chair"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chair/StaticBody2D"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mucwq")
+
+[node name="Table2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-143.89, 3.745)
+texture = ExtResource("7_djcs6")
+offset = Vector2(0.89, -13.745)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Table2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table2/StaticBody2D"]
+position = Vector2(1, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_laad0")
+
+[node name="Chair2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-168, 1)
+texture = ExtResource("8_3mih1")
+offset = Vector2(-0.03, -5.62)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chair2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chair2/StaticBody2D"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mucwq")
+
+[node name="Chair3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-117, 2)
+texture = ExtResource("8_3mih1")
+offset = Vector2(-0.03, -5.62)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chair3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chair3/StaticBody2D"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mucwq")
+
+[node name="Kirja" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-105, -48)
+texture = ExtResource("9_ftxwa")
+offset = Vector2(0, -27.035)

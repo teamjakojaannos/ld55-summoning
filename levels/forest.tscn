@@ -1373,13 +1373,21 @@ height = 44.0
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
+[node name="Librarytransition" parent="." instance=ExtResource("1_8m7yw")]
+position = Vector2(-336, -287)
+levelName = "res://levels/Library.tscn"
+spawnPointName = "SpawnPoint"
+
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(200, -731)
 
 [node name="WizardExit" type="Marker2D" parent="."]
 position = Vector2(-1390.42, -589)
 
-[node name="LevelTransition" parent="." instance=ExtResource("1_8m7yw")]
+[node name="LibraryExit" type="Marker2D" parent="."]
+position = Vector2(-336, -265)
+
+[node name="Wizardtransition" parent="." instance=ExtResource("1_8m7yw")]
 position = Vector2(-1391.42, -651)
 levelName = "res://levels/wizard_cellar.tscn"
 spawnPointName = "DoorSpawn"
