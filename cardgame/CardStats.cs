@@ -8,11 +8,11 @@ public partial class CardStats : Resource {
 		get => _MaxHp;
 		set {
 			_MaxHp = value;
+			CurrentHp = value;
 		}
 	}
 
 	private int _CurrentHp = 10;
-	[Export]
 	public int CurrentHp {
 		get => _CurrentHp;
 		set {
