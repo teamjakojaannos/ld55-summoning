@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp54mqr1xevpj"]
+[gd_scene load_steps=13 format=3 uid="uid://bp54mqr1xevpj"]
 
 [ext_resource type="Script" path="res://ui/DialogueBox.cs" id="1_jcw2h"]
+[ext_resource type="Texture2D" uid="uid://7dnjmfj6l4cu" path="res://kyltti.png" id="2_2oloq"]
 [ext_resource type="Texture2D" uid="uid://clajyg6drs8ng" path="res://characters/npc/firegod.png" id="2_dqwjg"]
 [ext_resource type="Texture2D" uid="uid://4c8vasjngmun" path="res://characters/npc/airgod.png" id="2_fowy6"]
 [ext_resource type="Texture2D" uid="uid://biu4fdq50ba8s" path="res://characters/player/paju.png" id="2_jeau3"]
@@ -18,7 +19,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="DialogueBox" type="CanvasLayer"]
 
-[node name="DialogueBox" type="Control" parent="." node_paths=PackedStringArray("Text", "Paju", "OldWiz", "Vellamo", "Kokko", "Ilmatar", "Maahinen")]
+[node name="DialogueBox" type="Control" parent="." node_paths=PackedStringArray("Text", "Paju", "OldWiz", "Vellamo", "Kokko", "Ilmatar", "Maahinen", "Kyltti")]
 z_index = 100
 layout_mode = 3
 anchor_left = 0.1
@@ -35,6 +36,7 @@ Vellamo = NodePath("ColorRect/Vellamo")
 Kokko = NodePath("ColorRect/Kokko")
 Ilmatar = NodePath("ColorRect/Ilmatar")
 Maahinen = NodePath("ColorRect/Maahinen")
+Kyltti = NodePath("ColorRect/Kyltti")
 
 [node name="ColorRect" type="ColorRect" parent="DialogueBox"]
 clip_contents = true
@@ -45,7 +47,18 @@ offset_right = 100.0
 offset_bottom = -8.59998
 color = Color(0.960784, 0.933333, 0.823529, 1)
 
+[node name="Kyltti" type="TextureRect" parent="DialogueBox/ColorRect"]
+clip_contents = true
+layout_mode = 0
+offset_left = 0.799995
+offset_top = 20.0
+offset_right = 96.8
+offset_bottom = 111.0
+texture = ExtResource("2_2oloq")
+stretch_mode = 4
+
 [node name="Maahinen" type="TextureRect" parent="DialogueBox/ColorRect"]
+visible = false
 clip_contents = true
 layout_mode = 0
 offset_left = -35.2
