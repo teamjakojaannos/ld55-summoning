@@ -10,7 +10,8 @@ public enum Element {
 public static class ElementExtensions {
 
 	private static readonly Dictionary<(Element, Element), float> multipliers = new(){
-		{(Element.Water, Element.Fire), 2.0f}
+		{(Element.Water, Element.Fire), 2.0f },
+		{(Element.Water, Element.Earth), 0.5f },
 	};
 
 	public static float DamageMultiplier(this Element attacker, Element defender) {

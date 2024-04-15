@@ -117,8 +117,6 @@ public partial class FightClub : Control {
 			} else {
 				target.PlayHurtAnimation();
 			}
-
-			GD.Print($"{attacker.GetMonsterName()} hit {target.GetMonsterName()} for {damage} damage");
 		}
 	}
 
