@@ -1,10 +1,16 @@
-[gd_scene load_steps=51 format=3 uid="uid://k14qken2ftqt"]
+[gd_scene load_steps=66 format=3 uid="uid://k14qken2ftqt"]
 
 [ext_resource type="Texture2D" uid="uid://ca6oyteg4v0cr" path="res://characters/player/paju_cat.png" id="1_7sev4"]
 [ext_resource type="Script" path="res://levels/WizardCellarIntro.cs" id="1_dg2sj"]
 [ext_resource type="TileSet" uid="uid://b8jjfq5ljrcrf" path="res://levels/interior_tileset.tres" id="2_11hmo"]
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="2_wg7nh"]
+[ext_resource type="Texture2D" uid="uid://4qh7k11un2wt" path="res://environment/Interior/kirjahyllyiso.png" id="3_3x5pj"]
+[ext_resource type="Texture2D" uid="uid://cdsmwjy6mwn7o" path="res://environment/Interior/poyta.png" id="3_uufnx"]
+[ext_resource type="Texture2D" uid="uid://xwknogsvn6hs" path="res://environment/Interior/taikapoyta.png" id="4_lvnty"]
 [ext_resource type="Texture2D" uid="uid://c7ye3241xlt12" path="res://characters/oldwiz/voi-jumalauta.png" id="5_5dahw"]
+[ext_resource type="Texture2D" uid="uid://dmbdqx0jyxfdk" path="res://environment/Interior/tuoli.png" id="5_yixq3"]
+[ext_resource type="Texture2D" uid="uid://dav67wkeh8i7v" path="res://environment/Interior/book.png" id="6_6eht5"]
+[ext_resource type="Texture2D" uid="uid://0kkp2k0rdm1" path="res://environment/Interior/kynttilapoyta.png" id="6_7vyri"]
 [ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="6_o2b5j"]
 [ext_resource type="Texture2D" uid="uid://xvfmssw5t00m" path="res://characters/oldwiz/broyaps.png" id="6_q5j0y"]
 [ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="7_qs3lo"]
@@ -13,6 +19,27 @@
 [ext_resource type="AudioStream" uid="uid://caynqs05rlu8i" path="res://muzak/victoryroyale.ogg" id="10_i748e"]
 [ext_resource type="AudioStream" uid="uid://bmaaj5xeka3kx" path="res://muzak/velhokuoleetheme.ogg" id="10_kv8cj"]
 [ext_resource type="Texture2D" uid="uid://cg06y4sj5alp" path="res://characters/whyisthishere/morkoidle1.png" id="12_6fqvd"]
+[ext_resource type="Texture2D" uid="uid://b5wrq2gmw83cu" path="res://environment/Interior/kirjahyllypieni1.png" id="18_pnmtx"]
+[ext_resource type="Texture2D" uid="uid://by1m2s8vh3bnu" path="res://environment/Interior/huonekasvi1.png" id="19_4w2wq"]
+[ext_resource type="Texture2D" uid="uid://dq4rwp1m3wfuo" path="res://environment/Interior/huonekasvi2.png" id="20_wytub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s331u"]
+size = Vector2(50, 11)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5x5cw"]
+radius = 3.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yrg3g"]
+radius = 2.0
+height = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpoyv"]
+size = Vector2(28, 11)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_08i0v"]
+radius = 3.0
+height = 12.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnr3e"]
 atlas = ExtResource("2_wg7nh")
@@ -446,6 +473,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vied"]
+size = Vector2(32, 45)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tux86"]
 radius = 1.0
 
@@ -459,6 +489,7 @@ points = PackedVector2Array(0, 0, 1, 2, 2, 0)
 points = PackedVector2Array(0, 0, 1, 2, 2, 0)
 
 [node name="WizardCellar" type="Node2D" node_paths=PackedStringArray("Animation", "Ritual", "Pentagrammi", "TransformationLoop", "VictoryRoyale", "DedTheme", "Ded")]
+y_sort_enabled = true
 script = ExtResource("1_dg2sj")
 Animation = NodePath("Sequence")
 Ritual = NodePath("KittyTransform")
@@ -469,6 +500,7 @@ DedTheme = NodePath("DedTheme2")
 Ded = NodePath("Ded")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = -3
 offset_left = -4185.0
 offset_top = -3727.0
 offset_right = 4428.0
@@ -479,12 +511,176 @@ color = Color(0, 0, 0, 1)
 tile_set = ExtResource("2_11hmo")
 format = 2
 layer_0/name = "Base"
+layer_0/z_index = -3
 layer_0/tile_data = PackedInt32Array(131077, 65536, 2, 65541, 65536, 2, 5, 65536, 2, -65531, 65536, 2, 131076, 65536, 2, 65540, 65536, 2, 4, 65536, 2, -65532, 65536, 2, 131075, 65536, 2, 65539, 65536, 2, 3, 65536, 2, -65533, 65536, 2, 131074, 65536, 2, 65538, 65536, 2, 2, 65536, 2, -65534, 65536, 2, 131073, 65536, 2, 65537, 65536, 2, 1, 65536, 2, -65535, 65536, 2, 131072, 65536, 2, 65536, 65536, 2, 0, 65536, 2, -65536, 65536, 2, 196607, 65536, 2, 131071, 65536, 2, 65535, 65536, 2, -1, 65536, 2, 196606, 65536, 2, 131070, 65536, 2, 65534, 65536, 2, -2, 65536, 2, 196605, 65536, 2, 131069, 65536, 2, 65533, 65536, 2, -3, 65536, 2, 196604, 65536, 2, 131068, 65536, 2, 65532, 65536, 2, -4, 65536, 2, 196603, 65536, 2, 131067, 65536, 2, 65531, 65536, 2, -5, 65536, 2, -6, 65536, 2, 65530, 65536, 2, 131066, 65536, 2, 196602, 65536, 2, -65542, 65536, 2, -65541, 65536, 2, -65540, 65536, 2, -65539, 65536, 2, -65538, 65536, 2, -65537, 65536, 2, -131072, 65536, 2, -131071, 65536, 2, -131070, 65536, 2, -131069, 65536, 2, -131068, 65536, 2, -131067, 65536, 2, -131078, 65536, 0, -131077, 65536, 0, -131076, 131072, 0, -131075, 65536, 0, -131074, 65536, 0, -131073, 131072, 0, -196608, 131072, 0, -196607, 65536, 0, -196606, 65536, 0, -196605, 131072, 0, -196604, 65536, 0, -196603, 65536, 0, -196614, 0, 1, 65542, 65536, 2, 131078, 65536, 2)
 layer_1/name = "WallTrims"
-layer_1/tile_data = PackedInt32Array(-196614, 0, 1, -262139, 131072, 3, -196603, 0, 0, -131067, 0, 0, -65531, 0, 0, -131078, 0, 5, -65542, 0, 5, -6, 0, 5, 65530, 0, 5, 131066, 0, 5, 196602, 0, 2, 131076, 65536, 131075, 131075, 65536, 131075, 131074, 65536, 131075, 131073, 65536, 131075, 131072, 65536, 131075, 196607, 65536, 131075, 196606, 65536, 131075, 196605, 65536, 131075, 196604, 65536, 131075, 196603, 65536, 131075, 5, 0, 0, 65541, 0, 3, 131077, 65536, 131075, 65542, 65536, 3, 131078, 65536, 131075, -4, 0, 6, 65532, 0, 6, 131068, 0, 6)
+layer_1/z_index = -2
+layer_1/tile_data = PackedInt32Array(-196614, 0, 1, -262139, 131072, 3, -196603, 0, 0, -131067, 0, 0, -65531, 0, 0, -131078, 0, 5, -65542, 0, 5, -6, 0, 5, 65530, 0, 5, 131066, 0, 5, 196602, 0, 2, 131076, 65536, 131075, 131075, 65536, 131075, 131074, 65536, 131075, 131073, 65536, 131075, 131072, 65536, 131075, 196607, 65536, 131075, 196606, 65536, 131075, 196605, 65536, 131075, 196603, 65536, 131075, 5, 0, 0, 65541, 0, 3, 131077, 65536, 131075, 65542, 65536, 3, 131078, 65536, 131075, 196604, 65536, 131075, 65539, 0, 6)
+
+[node name="BigBookCase1" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(66, -52)
+texture = ExtResource("3_3x5pj")
+offset = Vector2(0, -24.875)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BigBookCase1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigBookCase1/StaticBody2D"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_s331u")
+
+[node name="Table" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(141.535, -47.4399)
+texture = ExtResource("3_uufnx")
+offset = Vector2(0.89, -13.745)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Table"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/StaticBody2D"]
+position = Vector2(1, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5x5cw")
+
+[node name="MagicTable" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -11)
+texture = ExtResource("4_lvnty")
+offset = Vector2(0.89, -13.745)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MagicTable"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagicTable/StaticBody2D"]
+position = Vector2(1, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5x5cw")
+
+[node name="Candle Table" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-131, 0)
+texture = ExtResource("6_7vyri")
+offset = Vector2(0.89, -13.745)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Candle Table"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Candle Table/StaticBody2D"]
+position = Vector2(1, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5x5cw")
+
+[node name="Chair" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(165.535, -49.4399)
+texture = ExtResource("5_yixq3")
+offset = Vector2(-0.03, -5.62)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chair"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chair/StaticBody2D"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yrg3g")
+
+[node name="Chair2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(145, -36)
+texture = ExtResource("5_yixq3")
+offset = Vector2(-0.03, -5.62)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chair2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chair2/StaticBody2D"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yrg3g")
+
+[node name="Chair4" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-111, 7)
+texture = ExtResource("5_yixq3")
+offset = Vector2(-0.03, -5.62)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chair4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chair4/StaticBody2D"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yrg3g")
+
+[node name="Chair3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(120, -51)
+texture = ExtResource("5_yixq3")
+offset = Vector2(-0.03, -5.62)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chair3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chair3/StaticBody2D"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yrg3g")
+
+[node name="Kirja" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(141.535, -45.4399)
+texture = ExtResource("6_6eht5")
+offset = Vector2(0, -27.035)
+
+[node name="LittleBookCase1" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-160, -53)
+texture = ExtResource("18_pnmtx")
+offset = Vector2(0, -24.875)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LittleBookCase1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LittleBookCase1/StaticBody2D"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_bpoyv")
+
+[node name="Houseplant3" type="Sprite2D" parent="LittleBookCase1"]
+y_sort_enabled = true
+position = Vector2(31, 3)
+texture = ExtResource("19_4w2wq")
+offset = Vector2(-1.035, -18.06)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LittleBookCase1/Houseplant3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LittleBookCase1/Houseplant3/StaticBody2D"]
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_08i0v")
+
+[node name="Houseplant4" type="Sprite2D" parent="LittleBookCase1"]
+y_sort_enabled = true
+position = Vector2(214, 39)
+texture = ExtResource("20_wytub")
+offset = Vector2(-1.035, -18.06)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LittleBookCase1/Houseplant4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LittleBookCase1/Houseplant4/StaticBody2D"]
+position = Vector2(-1, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_08i0v")
+
+[node name="Houseplant5" type="Sprite2D" parent="LittleBookCase1"]
+y_sort_enabled = true
+position = Vector2(-1, 135)
+texture = ExtResource("20_wytub")
+offset = Vector2(-1.035, -18.06)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LittleBookCase1/Houseplant5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LittleBookCase1/Houseplant5/StaticBody2D"]
+position = Vector2(-1, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_08i0v")
 
 [node name="Pentagrammi" type="AnimatedSprite2D" parent="."]
 visible = false
+z_index = -1
+y_sort_enabled = true
 position = Vector2(-34, 25)
 sprite_frames = SubResource("SpriteFrames_nblap")
 animation = &"idle"
@@ -492,6 +688,7 @@ autoplay = "idle"
 frame_progress = 0.8177
 
 [node name="KittyTransform" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(-37, 11)
 sprite_frames = SubResource("SpriteFrames_56lg1")
 animation = &"transformation"
@@ -508,11 +705,18 @@ libraries = {
 }
 
 [node name="Ded" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(48, 8)
 sprite_frames = SubResource("SpriteFrames_l0ebj")
 animation = &"ded"
 autoplay = "speak"
 flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ded"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ded/StaticBody2D"]
+position = Vector2(-13, 5.5)
+shape = SubResource("RectangleShape2D_8vied")
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false

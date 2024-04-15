@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://l5d67pw0lc4u"]
+
+[ext_resource type="Texture2D" uid="uid://bl4mwo3rseobc" path="res://characters/npc/librarian_idle.png" id="1_3qj6y"]
+[ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_nfwda"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b524n"]
+atlas = ExtResource("1_3qj6y")
+region = Rect2(0, 0, 18, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0flj"]
+atlas = ExtResource("1_3qj6y")
+region = Rect2(18, 0, 18, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkjsc"]
+atlas = ExtResource("1_3qj6y")
+region = Rect2(36, 0, 18, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4bv7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b524n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0flj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkjsc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gab1y"]
+size = Vector2(13, 6)
+
+[node name="Librarian" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k4bv7")
+autoplay = "default"
+frame_progress = 0.306409
+offset = Vector2(0, -17.14)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/StaticBody2D"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_gab1y")
+
+[node name="DialogueTrigger" parent="." instance=ExtResource("2_nfwda")]
+position = Vector2(1, -13)
+Who = 8
+RequiresInteract = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmkagq014unr2"]
+[gd_scene load_steps=16 format=3 uid="uid://c65ftkbch86jj"]
 
 [ext_resource type="TileSet" uid="uid://b8jjfq5ljrcrf" path="res://levels/interior_tileset.tres" id="1_snw77"]
 [ext_resource type="Texture2D" uid="uid://b5wrq2gmw83cu" path="res://environment/Interior/kirjahyllypieni1.png" id="2_fqgeo"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cdsmwjy6mwn7o" path="res://environment/Interior/poyta.png" id="7_djcs6"]
 [ext_resource type="Texture2D" uid="uid://dmbdqx0jyxfdk" path="res://environment/Interior/tuoli.png" id="8_3mih1"]
 [ext_resource type="Texture2D" uid="uid://dav67wkeh8i7v" path="res://environment/Interior/book.png" id="9_ftxwa"]
+[ext_resource type="PackedScene" uid="uid://l5d67pw0lc4u" path="res://characters/npc/librarian.tscn" id="10_slhsr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2qpf"]
 size = Vector2(28, 11)
@@ -251,3 +252,12 @@ y_sort_enabled = true
 position = Vector2(-105, -48)
 texture = ExtResource("9_ftxwa")
 offset = Vector2(0, -27.035)
+
+[node name="Librarian" parent="." instance=ExtResource("10_slhsr")]
+position = Vector2(-19, 24)
+
+[node name="DialogueTrigger" parent="Librarian" index="1"]
+Lines = ["Hello dear", "Welcome to our little town library!", "You can learn about the world here", "You can learn about the gods, the  summons, and everything else!"]
+Who = 8
+
+[editable path="Librarian"]
