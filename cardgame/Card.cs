@@ -157,7 +157,7 @@ public partial class Card : Control {
 	}
 
 	public void SetStats(CardStats stats) {
-		this.stats = stats;
+		this.stats = stats.Clone();
 		UpdateLabels();
 	}
 

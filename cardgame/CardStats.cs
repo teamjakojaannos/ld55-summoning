@@ -57,4 +57,8 @@ public partial class CardStats : Resource {
 		CurrentHp = hp;
 		MonsterVariant = monsterVariant;
 	}
+
+	public CardStats Clone() {
+		return new CardStats(MaxHp, Damage, MonsterVariant);
+	}
 }
