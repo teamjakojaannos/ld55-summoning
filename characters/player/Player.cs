@@ -56,7 +56,6 @@ public partial class Player : CharacterBody2D {
 		get => _isInCinematic;
 		set {
 			_isInCinematic = value;
-			inputStack.Clear();
 		}
 	}
 
