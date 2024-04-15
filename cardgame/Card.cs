@@ -53,7 +53,6 @@ public partial class Card : Control
     }
     private Label hpLabel;
     private Label dmgLabel;
-    private Label numberLabel;
 
     private TextureRect image;
 
@@ -69,24 +68,39 @@ public partial class Card : Control
     public bool IsPlayersCard = false;
 
     private Vector2 targetPosition;
+    private Vector2 targetScale = Vector2.One;
 
     private float posLerpFactor = 10.0f;
 
-    public override void _Ready()
-    {
+    [Export]
+    [ExportCategory("Highlight")]
+    public float HighlightZoomFactor = 2.0f;
+
+    [Export]
+    public float HighlightZoomInSpeed = 20.0f;
+
+    [Export]
+    public float RemoveHighlightZoomOutSpeed = 50.0f;
+
+    public override void _Ready() {
         hpLabel = GetNode<Label>("Sprite/HpLabel");
         dmgLabel = GetNode<Label>("Sprite/DamageLabel");
-        numberLabel = GetNode<Label>("NumberKey");
-        numberLabel.Visible = false;
         image = GetNode<TextureRect>("Sprite");
         animation = GetNode<AnimationPlayer>("AnimationPlayer");
 
-        animation.AnimationFinished += (name) =>
-        {
+        animation.AnimationFinished += (name) => {
             if (name == attackAnimation || name == attackAnimationUpward)
             {
                 EmitSignal(SignalName.AttackAnimationFinished);
             }
+        };
+
+        MouseEntered += () => {
+            Highlight();
+        };
+
+        MouseExited += () => {
+            RemoveHighlight();
         };
 
         targetPosition = Vector2.Zero;
@@ -96,12 +110,12 @@ public partial class Card : Control
 
     public override void _Process(double delta) {
         Position = Position.Lerp(targetPosition, (float)delta * posLerpFactor);
+        Scale = Scale.Lerp(targetScale, (float)delta * HighlightZoomInSpeed);
     }
 
     public void UpdateLabels()
     {
-        if (hpLabel == null || dmgLabel == null || numberLabel == null)
-        {
+        if (hpLabel == null || dmgLabel == null) {
             return;
         }
 
@@ -117,34 +131,22 @@ public partial class Card : Control
             return;
         }
 
-        var highlightOffset = new Vector2(0, -10.0f);
-
         this.highlighted = highlighted;
-        if (highlighted)
-        {
-            // add highlight
-            image.Position += highlightOffset;
-        }
-        else
-        {
-            // remove highlight
-            image.Position -= highlightOffset;
+        if (highlighted) {
+            Highlight();
+        } else {
+            RemoveHighlight();
         }
     }
 
-    public void SetNumberLabelColor(Color color)
-    {
-        numberLabel.LabelSettings.FontColor = color;
+    public void Highlight() {
+        targetScale = HighlightZoomFactor * Vector2.One;
+        ZIndex = 1;
     }
 
-    public void SetNumberLabelText(string text)
-    {
-        numberLabel.Text = text;
-    }
-
-    public void SetNumberLabelVisible(bool visible)
-    {
-        numberLabel.Visible = visible;
+    public void RemoveHighlight() {
+        targetScale = Vector2.One;
+        ZIndex = 0;
     }
 
     public void StartAttack(AttackInfo info)

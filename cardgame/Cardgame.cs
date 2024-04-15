@@ -28,8 +28,6 @@ public partial class Cardgame : Control {
     private CardPiles playerPiles;
     private CardPiles enemyPiles;
 
-    private readonly Dictionary<ArenaPosition, Label> arenaPositionLabels = new();
-
     [Export]
     public Color normalFontColor;
 
@@ -163,8 +161,6 @@ public partial class Cardgame : Control {
 
             card.Visible = true;
         }
-
-        UpdateCardLabels();
     }
 
     private void CardDealingDone() {
@@ -187,14 +183,6 @@ public partial class Cardgame : Control {
         }
 
         PlayAITurn();
-    }
-
-    private void UpdateCardLabels() {
-        for (int i = 0; i < PlayerCards.Count; i++) {
-            var card = PlayerCards[i];
-            var cardNumber = i + 1;
-            card.SetNumberLabelText(cardNumber.ToString());
-        }
     }
 
     public override void _Input(InputEvent inputEvent) {
@@ -285,14 +273,10 @@ public partial class Cardgame : Control {
 
         playerHand.PlayCard(cardIndex);
 
-        UpdateCardLabels();
-
         SwitchMode(Mode.SelectingCard);
     }
 
     private void AddCardToArena(Card card, ArenaPosition position) {
-        card.SetNumberLabelVisible(false);
-
         var arenaSlot = arenaSlots[position];
         arenaSlot.AddCardAsChild(card, PlayedCardSpeed);
     }
@@ -303,15 +287,15 @@ public partial class Cardgame : Control {
 
         switch (newMode) {
             case Mode.SelectingCard:
-                SetHighlights(toCards: true, toPositions: false);
+                //SetHighlights(toCards: true, toPositions: false);
                 break;
             case Mode.SelectingPosition:
-                SetHighlights(toCards: false, toPositions: true);
+                //SetHighlights(toCards: false, toPositions: true);
                 break;
             case Mode.WatchingBattle:
             case Mode.WaitingForAnimation:
             case Mode.WaitingForAIMoves:
-                SetHighlights(toCards: false, toPositions: false);
+                //SetHighlights(toCards: false, toPositions: false);
                 break;
         }
     }
@@ -334,20 +318,6 @@ public partial class Cardgame : Control {
         card.SetHighlighted(false);
     }
 
-    private void SetHighlights(bool toCards, bool toPositions) {
-        var cardFontColor = toCards ? normalFontColor : dimmedFontColor;
-        foreach (var card in PlayerCards) {
-            card.SetNumberLabelColor(cardFontColor);
-        }
-
-        foreach (var (position, label) in arenaPositionLabels) {
-            var positionTaken = IsPositionOnTableTaken(position);
-            var useHighlight = toPositions && !positionTaken;
-            var positionColor = useHighlight ? normalFontColor : dimmedFontColor;
-            label.LabelSettings.FontColor = positionColor;
-        }
-    }
-
     private void StartButtonPressed() {
         StartRound();
     }
@@ -363,6 +333,7 @@ public partial class Cardgame : Control {
 
         playerPiles.DiscardCards(PlayerCards, CardDiscardSpeed);
         enemyPiles.DiscardCards(enemyCards, CardDiscardSpeed);
+        playerHand.Reset();
 
         cardDiscardTimer.Start();
     }

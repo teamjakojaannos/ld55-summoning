@@ -12,6 +12,8 @@ offset_right = 96.0
 offset_bottom = 128.0
 texture = ExtResource("1_70sph")
 script = ExtResource("1_ep2xi")
+HighlightedColor = Color(1, 1, 1, 1)
+DimmedColor = Color(0.2, 0.2, 0.2, 1)
 KeyLabel = NodePath("Key/Label")
 
 [node name="Key" type="TextureRect" parent="."]

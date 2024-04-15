@@ -61,9 +61,9 @@ public partial class PlayerHand : Control {
 			var targetPosition = new Vector2(targetPositionX, 0.0f);
 
 			var slot = SlotTemplate.Instantiate<InHandSlot>();
+			slot.Setup(Cardgame, i);
 			slot.Position = targetPosition;
 			AddChild(slot);
-			slot.SetIndex(i);
 			slot.AddCardAsChild(card, cardMoveSpeed);
 
 			var cardWidth = card.Size.X;
@@ -71,9 +71,7 @@ public partial class PlayerHand : Control {
 
             Cards.Add(card);
 
-            card.SetNumberLabelVisible(true);
             card.IsPlayersCard = true;
-
             card.Visible = true;
         }
 	}
