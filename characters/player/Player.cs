@@ -28,6 +28,11 @@ public partial class Player : CharacterBody2D {
 	public float MaxFactor = 10.0f;
 
 	[Export]
+	public float HalfFade = 75.0f;
+	[Export]
+	public float HalfFactor = 0.33f;
+
+	[Export]
 	public AudioStreamPlayer CombatMusic;
 
 	[Export]
@@ -147,6 +152,34 @@ public partial class Player : CharacterBody2D {
 		if (!Frozen) {
 			MoveAndSlide();
 		}
+	}
+
+	public void FadeInIntro() {
+		targetFade = 0.0f;
+		targetDarkDistanceFactor = 0.0f;
+		fadeSmoothness = FadeSmoothIn;
+
+		EnterCombatMusic.Play();
+		ExplocationMusic.Stop();
+		CombatMusic.Stop();
+
+		isTransitioning = true;
+
+		GetTree().CreateTimer(FadeSmoothInTime).Timeout += () => {
+			targetFade = HalfFade;
+			targetDarkDistanceFactor = HalfFactor;
+			fadeSmoothness = FadeSmoothIn;
+
+			GetTree().CreateTimer(FadeSmoothInTime / 2.0f).Timeout += () => {
+				isTransitioning = false;
+			};
+		};
+	}
+
+	public void FullyFadeOut() {
+		targetFade = MaxFade;
+		targetDarkDistanceFactor = MaxFactor;
+		fadeSmoothness = FadeSmoothOut;
 	}
 
 	// Pass null target to perform only the fade-in-out without any music or level transitions

@@ -62,10 +62,7 @@ public partial class WizardCellarIntro : Node2D {
 		Dialogue.DialogueFinished -= FirstDialogueFinished;
 
 
-		Player.ExplocationMusic.Stop();
-		Player.CombatMusic.Stop();
-		Player.EnterCombatMusic.Play();
-		Player.StartEncounter(null); // HACK: null encounter skips level transition
+		Player.FadeInIntro();
 
 		GetTree().CreateTimer(3.0f).Timeout += () => {
 			Pentagrammi.Visible = true;
@@ -109,6 +106,7 @@ public partial class WizardCellarIntro : Node2D {
 
 		TransformationLoop.Stop();
 		VictoryRoyale.Play();
+		Player.FullyFadeOut();
 
 		Dialogue.DialogueFinished += IntroFinished;
 		Dialogue.Start(WhoIsSpeaking.Paju, new string[] {
