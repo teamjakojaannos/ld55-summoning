@@ -241,6 +241,8 @@ public partial class Cardgame : Control {
 
 		enemyHand.AddCards(enemyDrawnCards, CardDealSpeed);
 
+		RecycleIfNeeded();
+
 		if (IsPlayerTableFull()) {
 			EmitSignal(nameof(PlayerNoMoreMoves));
 		}
@@ -255,17 +257,25 @@ public partial class Cardgame : Control {
 			card.StopMovement();
 		}
 
+		RecycleIfNeeded();
+
+		PlayAITurn();
+	}
+
+	private bool RecycleIfNeeded() {
+		var recycled = false;
 		if (playerPiles.DrawPileEmpty()) {
 			playerPiles.RecycleDiscardPile();
 			playerPiles.PlayRecycleAnimation();
+			recycled = true;
 		}
 
 		if (enemyPiles.DrawPileEmpty()) {
 			enemyPiles.RecycleDiscardPile();
 			enemyPiles.PlayRecycleAnimation();
+			recycled = true;
 		}
-
-		PlayAITurn();
+		return recycled;
 	}
 
 	public override void _Input(InputEvent inputEvent) {
@@ -454,7 +464,17 @@ public partial class Cardgame : Control {
 	}
 
 	public void FightRoundEnded() {
-		DealCards();
+		var recycled = RecycleIfNeeded();
+		// FIXME: recycled is true when decks are empty, causing a small delay
+
+		if (recycled) {
+			// wait for recycle animation to finish
+			GetTree().CreateTimer(1.5f).Timeout += () => {
+				DealCards();
+			};
+		} else {
+			DealCards();
+		}
 	}
 
 	private void PlayAITurn() {
