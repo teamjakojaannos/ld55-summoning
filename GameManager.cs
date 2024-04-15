@@ -122,29 +122,34 @@ public partial class GameManager : Node2D {
 	}
 
 	private void OnCardGameOver(bool playerWon) {
+		Player.StartFadingToBlack();
+		GetTree().CreateTimer(2.5f).Timeout += () => {
+			Player.FullyFadeOut();
 
-		var cardGameLayer = GetTree().Root.GetNode<CanvasLayer>("CardGameLayer");
-		var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
 
-		cardGameLayer.Visible = false;
-		cardGame.RemoveChild(Player);
+			var cardGameLayer = GetTree().Root.GetNode<CanvasLayer>("CardGameLayer");
+			var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
 
-		if (previousLevel == null) {
-			GD.Print("Something went wrong, level reference is null.");
-			return;
-		}
+			cardGameLayer.Visible = false;
+			cardGame.RemoveChild(Player);
 
-		var root = GetTree().Root;
-		root.AddChild(previousLevel);
-		previousLevel.AddChild(Player);
+			if (previousLevel == null) {
+				GD.Print("Something went wrong, level reference is null.");
+				return;
+			}
 
-		previousLevel = null;
+			var root = GetTree().Root;
+			root.AddChild(previousLevel);
+			previousLevel.AddChild(Player);
 
-		Player.DoAfterBattleStuff();
+			previousLevel = null;
 
-		if (!playerWon) {
-			// TODO: teleport to graveyard or something
-			GD.Print("You lost!");
-		}
+			Player.DoAfterBattleStuff(playerWon);
+
+			if (!playerWon) {
+				// TODO: teleport to graveyard or something
+				GD.Print("You lost!");
+			}
+		};
 	}
 }

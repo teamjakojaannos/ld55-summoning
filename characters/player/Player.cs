@@ -82,7 +82,12 @@ public partial class Player : CharacterBody2D {
 	[Export]
 	public int MaxHp = 20;
 
+	private AnimationPlayer animationPlayer;
+	private bool isInVictoryPose = false;
+
 	public override void _Ready() {
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
 		fadeDistance = MaxFade;
 		darkDistanceFactor = MaxFactor;
 		targetFade = fadeDistance;
@@ -116,6 +121,10 @@ public partial class Player : CharacterBody2D {
 
 			(Blackout.Material as ShaderMaterial)?.SetShaderParameter("bright_dist", fadeDistance);
 			(Blackout.Material as ShaderMaterial)?.SetShaderParameter("darkness_dist_factor", darkDistanceFactor);
+		}
+
+		if (isInVictoryPose) {
+			return;
 		}
 
 		Vector2I inputDirection = inputStack.Count == 0 ? Vector2I.Zero : InputDirectionAsVector(inputStack[0]);
@@ -176,6 +185,12 @@ public partial class Player : CharacterBody2D {
 		};
 	}
 
+	public void StartFadingToBlack() {
+		targetFade = 0.0f;
+		targetDarkDistanceFactor = 0.0f;
+		fadeSmoothness = FadeSmoothIn;
+	}
+
 	public void FullyFadeOut() {
 		targetFade = MaxFade;
 		targetDarkDistanceFactor = MaxFactor;
@@ -226,14 +241,27 @@ public partial class Player : CharacterBody2D {
 		};
 	}
 
-	public void DoAfterBattleStuff() {
-		IsInFight = false;
+	public void DoAfterBattleStuff(bool winner) {
 		Sprite.Visible = true;
-		Frozen = false;
 
 		EnterCombatMusic.Stop();
 		CombatMusic.Stop();
 		ExplocationMusic.Play();
+
+		isInVictoryPose = true;
+
+		if (winner) {
+			animationPlayer.Play("battle_victory");
+		} else {
+			animationPlayer.Play("battle_lost");
+		}
+	}
+
+	private void Unfreeze() {
+		isInVictoryPose = false;
+		IsInFight = false;
+		Frozen = false;
+		inputStack.Clear();
 	}
 
 	private void CheckInput(StringName action, InputDirection direction) {

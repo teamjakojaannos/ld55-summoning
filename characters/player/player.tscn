@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bab4b1iwllcyj"]
+[gd_scene load_steps=20 format=3 uid="uid://bab4b1iwllcyj"]
 
 [ext_resource type="Script" path="res://characters/player/Player.cs" id="1_5bvc4"]
 [ext_resource type="SpriteFrames" uid="uid://drw3rmjddgl1i" path="res://characters/player/player_frames.tres" id="2_i5gad"]
+[ext_resource type="Texture2D" uid="uid://bb7frv1tasqpk" path="res://cardgame/scroll_rolled.png" id="3_xcfng"]
 [ext_resource type="Shader" path="res://fadeout.gdshader" id="3_xv0ck"]
 [ext_resource type="Script" path="res://Overlay.cs" id="4_vkyin"]
 [ext_resource type="Texture2D" uid="uid://d2jxbgtj8oog" path="res://ui/kysmerkki.png" id="5_a0bcx"]
@@ -43,6 +44,111 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_ay31u"]
 radius = 16.0312
 
+[sub_resource type="Animation" id="Animation_2qy7m"]
+resource_name = "battle_victory"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Scroll:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hold_item"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Unfreeze"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fgpjy"]
+resource_name = "battle_lost"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Unfreeze"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qyqea"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Scroll:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpyr4"]
+_data = {
+"RESET": SubResource("Animation_qyqea"),
+"battle_lost": SubResource("Animation_fgpjy"),
+"battle_victory": SubResource("Animation_2qy7m")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Blackout", "CombatMusic", "EnterCombatMusic", "ExplocationMusic", "InteractIndicator")]
 y_sort_enabled = true
 script = ExtResource("1_5bvc4")
@@ -64,6 +170,12 @@ texture_filter = 1
 sprite_frames = ExtResource("2_i5gad")
 animation = &"hold_item"
 offset = Vector2(0, -21.09)
+
+[node name="Scroll" type="Sprite2D" parent="Sprite"]
+visible = false
+position = Vector2(11, -19)
+scale = Vector2(0.0859375, 0.0859375)
+texture = ExtResource("3_xcfng")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
@@ -112,3 +224,8 @@ Player = NodePath("..")
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_ay31u")
 debug_color = Color(0.588235, 0.54902, 0.0431373, 0.207843)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xpyr4")
+}
