@@ -1,17 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://t2q6s7oiiali"]
+[gd_scene load_steps=4 format=3 uid="uid://t2q6s7oiiali"]
 
 [ext_resource type="Script" path="res://GameManager.cs" id="1_212tw"]
 [ext_resource type="PackedScene" uid="uid://bab4b1iwllcyj" path="res://characters/player/player.tscn" id="2_epksi"]
-[ext_resource type="Resource" uid="uid://b5u08dgcr65p7" path="res://cardgame/playerCards/p1.tres" id="3_07tqd"]
-[ext_resource type="Resource" uid="uid://xduwspwcxtv5" path="res://cardgame/playerCards/p2.tres" id="4_gm0xb"]
-[ext_resource type="Resource" uid="uid://b6klmdi3unr4h" path="res://cardgame/playerCards/p3.tres" id="5_idfqr"]
-[ext_resource type="Resource" uid="uid://yb3afo3n054t" path="res://cardgame/playerCards/p4.tres" id="6_uxb4s"]
-[ext_resource type="Resource" uid="uid://dc4n6o67vr6ht" path="res://cardgame/playerCards/p5.tres" id="7_mgx7p"]
-[ext_resource type="Resource" uid="uid://cmvojptmj5dfn" path="res://cardgame/playerCards/p6.tres" id="8_xlm7o"]
-[ext_resource type="Resource" uid="uid://cpr7nq7h3u582" path="res://cardgame/playerCards/p7.tres" id="9_ablmm"]
-[ext_resource type="Resource" uid="uid://ckp66eemlhiy8" path="res://cardgame/playerCards/p8.tres" id="10_tw8ah"]
+[ext_resource type="Resource" uid="uid://cpr7nq7h3u582" path="res://cardgame/playerCards/p_w1.tres" id="3_fsk1l"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_212tw")
 PlayerTemplate = ExtResource("2_epksi")
-playerDeck = [ExtResource("3_07tqd"), ExtResource("3_07tqd"), ExtResource("4_gm0xb"), ExtResource("4_gm0xb"), ExtResource("5_idfqr"), ExtResource("6_uxb4s"), ExtResource("7_mgx7p"), ExtResource("7_mgx7p"), ExtResource("8_xlm7o"), ExtResource("9_ablmm"), ExtResource("9_ablmm"), ExtResource("10_tw8ah")]
+playerDeck = [ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l")]
