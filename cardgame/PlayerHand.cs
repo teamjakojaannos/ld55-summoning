@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public partial class PlayerHand : Control {
 	[Export]
 	[ExportCategory("Prewire")]
-    public Cardgame Cardgame;
+	public Cardgame Cardgame;
 
 	[Export]
 	public PackedScene SlotTemplate;
@@ -24,16 +24,16 @@ public partial class PlayerHand : Control {
 		var offsetX = 0.0f;
 		var startX = -totalWidth / 2.0f;
 		for (int i = 0; i < GetChildCount(); ++i) {
-            var slot = GetChild<InHandSlot>(i);
+			var slot = GetChild<InHandSlot>(i);
 			slot.SetIndex(i);
 
-            var targetPositionX = startX + offsetX;
+			var targetPositionX = startX + offsetX;
 			var targetPosition = new Vector2(targetPositionX, 0.0f);
 
 			slot.Position = targetPosition;
 			var cardWidth = slot.Size.X;
 			offsetX += cardWidth;
-        }
+		}
 	}
 
 	public void Reset() {
@@ -55,9 +55,9 @@ public partial class PlayerHand : Control {
 		var offsetX = 0.0f;
 		var startX = -totalWidth / 2.0f;
 		for (int i = 0; i < cards.Count; i++) {
-            var card = cards[i];
+			var card = cards[i];
 
-            var targetPositionX = startX + offsetX;
+			var targetPositionX = startX + offsetX;
 			var targetPosition = new Vector2(targetPositionX, 0.0f);
 
 			var slot = SlotTemplate.Instantiate<InHandSlot>();
@@ -69,11 +69,11 @@ public partial class PlayerHand : Control {
 			var cardWidth = card.Size.X;
 			offsetX += cardWidth;
 
-            Cards.Add(card);
+			Cards.Add(card);
 
-            card.IsPlayersCard = true;
-            card.Visible = true;
-        }
+			card.IsPlayersCard = true;
+			card.Visible = true;
+		}
 	}
 
 	protected virtual void SetupSlot(InHandSlot slot, int index) {
