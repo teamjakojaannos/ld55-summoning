@@ -9,8 +9,8 @@ public enum WhoIsSpeaking {
 	Kokko,
 	Maahinen,
 	Ilmatar,
-	Kyltti
-
+	Kyltti,
+	Kitty
 }
 
 public partial class DialogueBox : Control {
@@ -41,7 +41,10 @@ public partial class DialogueBox : Control {
 	public TextureRect Maahinen; 
 
 	[Export]
-	public TextureRect Kyltti; 
+	public TextureRect Kyltti;
+
+	[Export]
+	public TextureRect Kitty; 
 
 	public bool IsInProgress;
 
@@ -65,6 +68,7 @@ public partial class DialogueBox : Control {
 		Ilmatar.Visible = who == WhoIsSpeaking.Ilmatar;
 		Maahinen.Visible = who == WhoIsSpeaking.Maahinen;
 		Kyltti.Visible = who == WhoIsSpeaking.Kyltti;
+		Kitty.Visible = who == WhoIsSpeaking.Kitty;
 
         Lines = new List<string>(lines);
 		Visible = true;

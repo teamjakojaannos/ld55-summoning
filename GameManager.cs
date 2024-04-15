@@ -114,7 +114,7 @@ public partial class GameManager : Node2D {
 		cardGame.AddChild(Player);
 
 		var enemyCards = enemy.cards.ToList();
-		cardGame.PrepareCombat(playerCards, enemyCards, Player.MaxHp, enemy.MaxHp);
+		cardGame.PrepareCombat(playerCards, enemyCards, Player.MaxHp, enemy.MaxHp, enemy.GetNode<AnimatedSprite2D>("Sprite"));
 
 		GetTree().CreateTimer(2.0f).Timeout += () => {
 			cardGame.StartCombat();

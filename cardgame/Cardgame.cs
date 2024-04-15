@@ -42,6 +42,9 @@ public partial class Cardgame : Control {
 	private CardPiles enemyPiles;
 
 	[Export]
+	public AnimatedSprite2D EnemySprite;
+
+	[Export]
 	public Color normalFontColor;
 
 	[Export]
@@ -194,6 +197,7 @@ public partial class Cardgame : Control {
 				List<CardStats> enemyCardStats,
 				int playerHp,
 				int enemyHp,
+				AnimatedSprite2D enemySprite,
 				bool shufflePlayerDeck = true,
 				bool shuffleEnemyDeck = true
 		) {
@@ -213,6 +217,9 @@ public partial class Cardgame : Control {
 
 		this.playerHp.SetHp(playerHp);
 		this.enemyHp.SetHp(enemyHp);
+
+		EnemySprite.SpriteFrames = enemySprite.SpriteFrames;
+		EnemySprite.Play("default");
 	}
 
 	public void StartCombat() {

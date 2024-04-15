@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=40 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://bb7frv1tasqpk" path="res://cardgame/scroll_rolled.png" id="10_8r62x"]
 [ext_resource type="Script" path="res://cardgame/DiscardPile.cs" id="11_3ai70"]
 [ext_resource type="Texture2D" uid="uid://ba7wspi71ecnu" path="res://characters/player/player_idle.png" id="11_ohfne"]
-[ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="12_f0rev"]
 [ext_resource type="Texture2D" uid="uid://clajyg6drs8ng" path="res://characters/npc/firegod.png" id="13_lbgen"]
 [ext_resource type="Texture2D" uid="uid://cswkpo2ckfiys" path="res://characters/npc/earthgod.png" id="14_8jllw"]
 [ext_resource type="AudioStream" uid="uid://pam88fti118p" path="res://sfx/hit1.ogg" id="15_8y1sa"]
@@ -144,9 +143,6 @@ region = Rect2(0, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_f0rev")
-}, {
-"duration": 1.0,
 "texture": ExtResource("13_lbgen")
 }, {
 "duration": 1.0,
@@ -168,7 +164,7 @@ animations = [{
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
-[node name="Cardgame" type="Control" parent="." node_paths=PackedStringArray("CardHit", "CardDie", "Denied", "Deal", "PlayCard", "FocusCard")]
+[node name="Cardgame" type="Control" parent="." node_paths=PackedStringArray("EnemySprite", "CardHit", "CardDie", "Denied", "Deal", "PlayCard", "FocusCard")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,6 +173,7 @@ offset_right = -1.73999
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f1vsu")
+EnemySprite = NodePath("EnemyPiles/EnemySprite")
 normalFontColor = Color(1, 1, 1, 1)
 dimmedFontColor = Color(0.2, 0.2, 0.2, 1)
 CardDiscardSpeed = 10.0
@@ -317,8 +314,8 @@ layout_mode = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentLeft" index="0"]
-offset_right = 1920.0
-offset_bottom = 2560.0
+offset_right = 2400.0
+offset_bottom = 3200.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentLeft" index="1"]
 visible = false
@@ -330,8 +327,8 @@ PositionOnArena = 1
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentMid" index="0"]
-offset_right = 1920.0
-offset_bottom = 2560.0
+offset_right = 2400.0
+offset_bottom = 3200.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentMid" index="1"]
 visible = false
@@ -343,8 +340,8 @@ PositionOnArena = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentRight" index="0"]
-offset_right = 1920.0
-offset_bottom = 2560.0
+offset_right = 2400.0
+offset_bottom = 3200.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentRight" index="1"]
 visible = false
@@ -364,8 +361,8 @@ PositionOnArena = 4
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerMid" index="0"]
-offset_right = 1920.0
-offset_bottom = 2560.0
+offset_right = 2400.0
+offset_bottom = 3200.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerMid/Key" index="0"]
 text = "2"
@@ -378,8 +375,8 @@ PositionOnArena = 5
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerRight" index="0"]
-offset_right = 1920.0
-offset_bottom = 2560.0
+offset_right = 2400.0
+offset_bottom = 3200.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerRight/Key" index="0"]
 text = "3"
@@ -444,8 +441,8 @@ offset_bottom = 119.0
 text = "Discard pile"
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Cardgame/PlayerPiles"]
-position = Vector2(89, -168)
-scale = Vector2(7.23333, 7.23333)
+position = Vector2(91, -66.625)
+scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_rsnyp")
 
 [node name="EnemyPiles" type="Control" parent="Cardgame" node_paths=PackedStringArray("discardPile")]
@@ -493,8 +490,8 @@ offset_bottom = 119.0
 text = "Discard pile"
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="Cardgame/EnemyPiles"]
-position = Vector2(103, 268)
-scale = Vector2(2.57812, 2.57812)
+position = Vector2(100, 332)
+scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_wl7wc")
 frame_progress = 0.0659155
 
@@ -504,9 +501,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
 offset_left = 124.0
-offset_top = -472.0
+offset_top = -293.0
 offset_right = 186.26
-offset_bottom = -445.0
+offset_bottom = -266.0
 grow_horizontal = 1
 grow_vertical = 0
 

@@ -325,12 +325,9 @@ tracks/6/path = NodePath("Ded")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(10),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"ded", 1.0, false],
-"method": &"play"
-}]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/7/type = "method"
 tracks/7/imported = false
@@ -491,12 +488,13 @@ visible = false
 position = Vector2(-34, 25)
 sprite_frames = SubResource("SpriteFrames_nblap")
 animation = &"idle"
-frame_progress = 0.873928
+autoplay = "idle"
+frame_progress = 0.8177
 
 [node name="KittyTransform" type="AnimatedSprite2D" parent="."]
 position = Vector2(-37, 11)
 sprite_frames = SubResource("SpriteFrames_56lg1")
-animation = &"kitty_idle"
+animation = &"transformation"
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-37, 31)
@@ -600,7 +598,7 @@ offset_left = -4182.0
 offset_top = -3714.0
 offset_right = 4431.0
 offset_bottom = 3234.0
-color = Color(0.709804, 0, 0.529412, 0.635294)
+color = Color(0.141176, 0, 0, 0.654902)
 
 [node name="Flashbang2" type="Node2D" parent="."]
 visible = false
