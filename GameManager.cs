@@ -5,6 +5,8 @@ using Godot;
 public partial class GameManager : Node2D {
 	public Player Player;
 
+	public bool IntroSeen = false;
+
 	[Export]
 	public PackedScene PlayerTemplate;
 
@@ -47,6 +49,8 @@ public partial class GameManager : Node2D {
 		if (TransitionInProgress) {
 			return;
 		}
+
+		IntroSeen = true;
 
 		var root = GetTree().Root;
 		var children = root.GetChildren();

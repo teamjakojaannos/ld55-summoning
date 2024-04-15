@@ -22,8 +22,22 @@ public partial class WizardCellarIntro : Node2D {
 	[Export]
 	public AudioStreamPlayer DedTheme;
 
+	[Export]
+	public AnimatedSprite2D Ded;
+
 
     public override void _Ready() {
+		var gameManager = GetNode<GameManager>("/root/GameManager");
+		if (gameManager.IntroSeen) {
+			Ritual.Visible = false;
+			Pentagrammi.Visible = true;
+			gameManager.Player.ExplocationMusic.Stop();
+			DedTheme.Play();
+			Ded.Play("ded_idle");
+			Pentagrammi.Play("idle");
+			return;
+		}
+
         Animation.Play("kitty_idle");
 		
         Player.IsInCinematic = true;
@@ -104,10 +118,6 @@ public partial class WizardCellarIntro : Node2D {
 		Player.Sprite.Visible = true;
 		Ritual.Visible = false;
 
-		TransformationLoop.Stop();
-		VictoryRoyale.Play();
-		Player.FullyFadeOut();
-
 		Dialogue.DialogueFinished += IntroFinished;
 		Dialogue.Start(WhoIsSpeaking.Paju, new string[] {
 			"Aha! Much better! =^w^="
@@ -122,5 +132,11 @@ public partial class WizardCellarIntro : Node2D {
 		Player.CombatMusic.Stop();
 		Player.EnterCombatMusic.Stop();
 		DedTheme.Play();
+	}
+
+	public void RemoveBlackout() {
+		TransformationLoop.Stop();
+		VictoryRoyale.Play();
+		Player.FullyFadeOut();
 	}
 }

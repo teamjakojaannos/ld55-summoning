@@ -1,16 +1,18 @@
-[gd_scene load_steps=37 format=3 uid="uid://k14qken2ftqt"]
+[gd_scene load_steps=51 format=3 uid="uid://k14qken2ftqt"]
 
 [ext_resource type="Texture2D" uid="uid://ca6oyteg4v0cr" path="res://characters/player/paju_cat.png" id="1_7sev4"]
 [ext_resource type="Script" path="res://levels/WizardCellarIntro.cs" id="1_dg2sj"]
 [ext_resource type="TileSet" uid="uid://deyetstqvid75" path="res://levels/interior.tres" id="2_c6kni"]
 [ext_resource type="Texture2D" uid="uid://d23e5kr0t5p04" path="res://rituals/pentagrammi.png" id="2_wg7nh"]
+[ext_resource type="Texture2D" uid="uid://c7ye3241xlt12" path="res://characters/oldwiz/voi-jumalauta.png" id="5_5dahw"]
 [ext_resource type="Texture2D" uid="uid://qymu5odbkhqq" path="res://characters/whyisthishere/placeholder.png" id="6_o2b5j"]
+[ext_resource type="Texture2D" uid="uid://xvfmssw5t00m" path="res://characters/oldwiz/broyaps.png" id="6_q5j0y"]
 [ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="7_qs3lo"]
 [ext_resource type="AudioStream" uid="uid://df6mkvvvokvpb" path="res://muzak/kissatytyksialt.ogg" id="8_b7418"]
-[ext_resource type="Texture2D" uid="uid://cldw4n30xxyni" path="res://characters/oldwiz/ded.png" id="9_1n014"]
 [ext_resource type="AudioStream" uid="uid://bsu5dp2sfulrl" path="res://muzak/kissatytyksi.ogg" id="9_v4svf"]
 [ext_resource type="AudioStream" uid="uid://caynqs05rlu8i" path="res://muzak/victoryroyale.ogg" id="10_i748e"]
 [ext_resource type="AudioStream" uid="uid://bmaaj5xeka3kx" path="res://muzak/velhokuoleetheme.ogg" id="10_kv8cj"]
+[ext_resource type="Texture2D" uid="uid://cg06y4sj5alp" path="res://characters/whyisthishere/morkoidle1.png" id="12_6fqvd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnr3e"]
 atlas = ExtResource("2_wg7nh")
@@ -164,6 +166,54 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flashbang2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flashbang:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Ded:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ded"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Ded:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_wo1g2"]
 length = 0.666667
@@ -195,6 +245,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_cidmi"]
 length = 11.0
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -231,6 +282,70 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flashbang:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2, 2.15, 3.9, 4, 4.9, 5.15, 7.75, 7.95, 8.15, 8.3, 9.45, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flashbang:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 8.25, 9.45, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.141176, 0, 0, 0.654902), Color(0.141176, 0, 0, 0.654902), Color(0.709804, 0, 0.529412, 0.635294), Color(0.709804, 0, 0.529412, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Flashbang2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5.05, 5.2, 5.35, 5.5, 6, 6.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Ded")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(10),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"ded", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(9.45),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"RemoveBlackout"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ux4k"]
 _data = {
@@ -238,6 +353,101 @@ _data = {
 "kitty_idle": SubResource("Animation_wo1g2"),
 "transformation": SubResource("Animation_cidmi")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wggly"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(0, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijc6b"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(67, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng2rx"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(134, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4bm6"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(201, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m13uc"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(268, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4k5v"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(335, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i13dg"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(402, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30v1v"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(469, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akjua"]
+atlas = ExtResource("5_5dahw")
+region = Rect2(469, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra2kb"]
+atlas = ExtResource("6_q5j0y")
+region = Rect2(0, 0, 67, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m61oj"]
+atlas = ExtResource("6_q5j0y")
+region = Rect2(67, 0, 67, 63)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l0ebj"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_wggly")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_ijc6b")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_ng2rx")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_x4bm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m13uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4k5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i13dg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30v1v")
+}],
+"loop": false,
+"name": &"ded",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akjua")
+}],
+"loop": true,
+"name": &"ded_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ra2kb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m61oj")
+}],
+"loop": true,
+"name": &"speak",
+"speed": 2.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tux86"]
 radius = 1.0
@@ -251,7 +461,7 @@ points = PackedVector2Array(0, 0, 1, 2, 2, 0)
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_4s5ro"]
 points = PackedVector2Array(0, 0, 1, 2, 2, 0)
 
-[node name="WizardCellar" type="Node2D" node_paths=PackedStringArray("Animation", "Ritual", "Pentagrammi", "TransformationLoop", "VictoryRoyale", "DedTheme")]
+[node name="WizardCellar" type="Node2D" node_paths=PackedStringArray("Animation", "Ritual", "Pentagrammi", "TransformationLoop", "VictoryRoyale", "DedTheme", "Ded")]
 script = ExtResource("1_dg2sj")
 Animation = NodePath("Sequence")
 Ritual = NodePath("KittyTransform")
@@ -259,38 +469,52 @@ Pentagrammi = NodePath("Pentagrammi")
 TransformationLoop = NodePath("Loop")
 VictoryRoyale = NodePath("Victory")
 DedTheme = NodePath("DedTheme2")
+Ded = NodePath("Ded")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -4185.0
+offset_top = -3727.0
+offset_right = 4428.0
+offset_bottom = 3221.0
+color = Color(0, 0, 0, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_c6kni")
 format = 2
-layer_0/tile_data = PackedInt32Array(196613, 1, 65540, 131077, 1, 3, 65541, 1, 3, 5, 1, 3, -65531, 1, 3, -131067, 1, 3, -196603, 1, 3, 196612, 131073, 3, 131076, 131073, 5, 65540, 65537, 5, 4, 131073, 6, -65532, 131073, 5, -131068, 131073, 6, -196604, 131073, 6, 196611, 65537, 3, 131075, 131073, 6, 65539, 131073, 5, 3, 131073, 6, -65533, 65537, 6, -131069, 131073, 5, -196605, 65537, 6, 196610, 131073, 2, 131074, 131073, 5, 65538, 65537, 5, 2, 65537, 6, -65534, 131073, 6, -131070, 65537, 5, -196606, 131073, 6, 196609, 65537, 3, 131073, 65537, 5, 65537, 131073, 5, 1, 65537, 6, -65535, 65537, 6, -131071, 65537, 5, -196607, 65537, 5, 196608, 65537, 3, 131072, 65537, 6, 65536, 131073, 5, 0, 65537, 6, -65536, 65537, 6, -131072, 131073, 5, -196608, 65537, 5, 262143, 65537, 2, 196607, 65537, 6, 131071, 65537, 6, 65535, 131073, 6, -1, 65537, 5, -65537, 131073, 5, -131073, 65537, 5, 262142, 131073, 2, 196606, 131073, 5, 131070, 131073, 5, 65534, 65537, 5, -2, 65537, 6, -65538, 131073, 6, -131074, 131073, 6, 262141, 131073, 2, 196605, 65537, 6, 131069, 65537, 6, 65533, 65537, 5, -3, 65537, 6, -65539, 65537, 5, -131075, 131073, 6, 262140, 65537, 3, 196604, 65537, 6, 131068, 131073, 5, 65532, 65537, 5, -4, 65537, 5, -65540, 65537, 6, -131076, 131073, 5, 262139, 65537, 2, 196603, 65537, 5, 131067, 65537, 6, 65531, 65537, 5, -5, 65537, 6, -65541, 131073, 5, -131077, 131073, 5, -262139, 1, 65538, -262140, 131073, 2, -262141, 131073, 2, -262142, 131073, 2, -262143, 131073, 2, -262144, 131073, 2, -196609, 131073, 2, -196610, 65537, 2, -196611, 131073, 2, -196612, 131073, 3, -196613, 131073, 2, -196614, 1, 2, -131078, 1, 3, -65542, 1, 3, -6, 1, 3, 65530, 1, 3, 131066, 1, 3, 196602, 1, 3, 262138, 1, 4)
+layer_0/name = "Base"
+layer_0/tile_data = PackedInt32Array(131077, 65536, 2, 65541, 65536, 2, 5, 65536, 2, -65531, 65536, 2, 131076, 65536, 2, 65540, 65536, 2, 4, 65536, 2, -65532, 65536, 2, 131075, 65536, 2, 65539, 65536, 2, 3, 65536, 2, -65533, 65536, 2, 131074, 65536, 2, 65538, 65536, 2, 2, 65536, 2, -65534, 65536, 2, 131073, 65536, 2, 65537, 65536, 2, 1, 65536, 2, -65535, 65536, 2, 131072, 65536, 2, 65536, 65536, 2, 0, 65536, 2, -65536, 65536, 2, 196607, 65536, 2, 131071, 65536, 2, 65535, 65536, 2, -1, 65536, 2, 196606, 65536, 2, 131070, 65536, 2, 65534, 65536, 2, -2, 65536, 2, 196605, 65536, 2, 131069, 65536, 2, 65533, 65536, 2, -3, 65536, 2, 196604, 65536, 2, 131068, 65536, 2, 65532, 65536, 2, -4, 65536, 2, 196603, 65536, 2, 131067, 65536, 2, 65531, 65536, 2, -5, 65536, 2, -6, 65536, 2, 65530, 65536, 2, 131066, 65536, 2, 196602, 65536, 2, -65542, 65536, 2, -65541, 65536, 2, -65540, 65536, 2, -65539, 65536, 2, -65538, 65536, 2, -65537, 65536, 2, -131072, 65536, 2, -131071, 65536, 2, -131070, 65536, 2, -131069, 65536, 2, -131068, 65536, 2, -131067, 65536, 2, -131078, 65536, 0, -131077, 65536, 0, -131076, 131072, 0, -131075, 65536, 0, -131074, 65536, 0, -131073, 131072, 0, -196608, 131072, 0, -196607, 65536, 0, -196606, 65536, 0, -196605, 131072, 0, -196604, 65536, 0, -196603, 65536, 0, -196614, 0, 1, 65542, 65536, 2, 131078, 65536, 2)
+layer_1/name = "WallTrims"
+layer_1/tile_data = PackedInt32Array(-196614, 0, 1, -262139, 131072, 3, -196603, 0, 0, -131067, 0, 0, -65531, 0, 0, -131078, 0, 5, -65542, 0, 5, -6, 0, 5, 65530, 0, 5, 131066, 0, 5, 196602, 0, 2, 131076, 65536, 131075, 131075, 65536, 131075, 131074, 65536, 131075, 131073, 65536, 131075, 131072, 65536, 131075, 196607, 65536, 131075, 196606, 65536, 131075, 196605, 65536, 131075, 196604, 65536, 131075, 196603, 65536, 131075, 5, 0, 0, 65541, 0, 3, 131077, 65536, 131075, 65542, 65536, 3, 131078, 65536, 131075, -4, 0, 6, 65532, 0, 6, 131068, 0, 6)
 
 [node name="Pentagrammi" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(-34, 25)
 sprite_frames = SubResource("SpriteFrames_nblap")
 animation = &"idle"
-frame = 3
+frame_progress = 0.873928
 
 [node name="KittyTransform" type="AnimatedSprite2D" parent="."]
 position = Vector2(-37, 11)
 sprite_frames = SubResource("SpriteFrames_56lg1")
 animation = &"kitty_idle"
+frame_progress = 0.409648
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(-37, 31)
 
 [node name="DoorSpawn" type="Marker2D" parent="."]
-position = Vector2(140, 48)
+position = Vector2(176, 64)
 
 [node name="Sequence" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_7ux4k")
 }
 
-[node name="Ded" type="Sprite2D" parent="."]
-position = Vector2(34, 5.25)
-texture = ExtResource("9_1n014")
+[node name="Ded" type="AnimatedSprite2D" parent="."]
+position = Vector2(48, 8)
+sprite_frames = SubResource("SpriteFrames_l0ebj")
+animation = &"ded"
+autoplay = "speak"
 flip_h = true
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -346,7 +570,7 @@ scale = Vector2(1.37981, 1.58809)
 texture = ExtResource("6_o2b5j")
 
 [node name="LevelTransition" parent="." instance=ExtResource("7_qs3lo")]
-position = Vector2(147, 84)
+position = Vector2(216, 64)
 levelName = "res://levels/forest.tscn"
 spawnPointName = "WizardExit"
 
@@ -365,3 +589,67 @@ bus = &"Music"
 [node name="DedTheme2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_kv8cj")
 bus = &"Music"
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+antialiased = true
+polygon = PackedVector2Array(192, 32, 171, 96, 224, 96, 224, 32)
+vertex_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[node name="Flashbang" type="ColorRect" parent="."]
+visible = false
+offset_left = -4182.0
+offset_top = -3714.0
+offset_right = 4431.0
+offset_bottom = 3234.0
+color = Color(0.709804, 0, 0.529412, 0.635294)
+
+[node name="Flashbang2" type="Node2D" parent="."]
+visible = false
+
+[node name="Morkoidle1" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(1, 4)
+texture = ExtResource("12_6fqvd")
+
+[node name="Morkoidle7" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(-11, -8)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("12_6fqvd")
+
+[node name="Morkoidle8" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(-1, 45)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("12_6fqvd")
+
+[node name="Morkoidle9" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(18, 40)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("12_6fqvd")
+
+[node name="Morkoidle4" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(14, -10)
+scale = Vector2(1.53125, 1.53125)
+texture = ExtResource("12_6fqvd")
+
+[node name="Morkoidle2" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(-70, 19)
+scale = Vector2(0.78125, 0.78125)
+texture = ExtResource("12_6fqvd")
+flip_h = true
+
+[node name="Morkoidle5" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(-79.25, 2.25)
+scale = Vector2(0.828125, 0.828125)
+texture = ExtResource("12_6fqvd")
+flip_h = true
+
+[node name="Morkoidle6" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(-94, 17)
+scale = Vector2(1.07031, 1.07031)
+texture = ExtResource("12_6fqvd")
+flip_h = true
+
+[node name="Morkoidle3" type="Sprite2D" parent="Flashbang2"]
+position = Vector2(-60, -8)
+scale = Vector2(0.859375, 0.859375)
+texture = ExtResource("12_6fqvd")
+flip_h = true
