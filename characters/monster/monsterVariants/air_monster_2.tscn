@@ -45,6 +45,9 @@ animations = [{
 [node name="Monster" instance=ExtResource("1_vyvgf")]
 MaxHp = 15
 monsterCards = [ExtResource("2_hxto2"), ExtResource("3_qpdeo"), ExtResource("3_qpdeo"), ExtResource("3_qpdeo"), ExtResource("4_vahit"), ExtResource("4_vahit"), ExtResource("4_vahit"), ExtResource("4_vahit")]
+commonDrop = ExtResource("2_hxto2")
+rareDrop = ExtResource("3_qpdeo")
+legendaryDrop = ExtResource("4_vahit")
 
 [node name="Sprite" parent="EncounterTrigger" index="1"]
 sprite_frames = SubResource("SpriteFrames_7qkjv")

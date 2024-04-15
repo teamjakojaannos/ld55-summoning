@@ -19,6 +19,8 @@ public partial class GameManager : Node2D {
 
 	private Node previousLevel;
 
+	private CardStats rewardIfYouWin;
+
 	public override void _EnterTree() {
 		var playerNode = GetTree().Root.FindChild("Player", true, false);
 
@@ -115,6 +117,7 @@ public partial class GameManager : Node2D {
 
 		var enemyCards = enemy.cards.ToList();
 		cardGame.PrepareCombat(playerCards, enemyCards, Player.MaxHp, enemy.MaxHp, enemy.GetNode<AnimatedSprite2D>("Sprite"));
+		rewardIfYouWin = enemy.drops.GenerateDrop();
 
 		GetTree().CreateTimer(2.0f).Timeout += () => {
 			cardGame.StartCombat();
@@ -123,6 +126,11 @@ public partial class GameManager : Node2D {
 
 	private void OnCardGameOver(bool playerWon) {
 		Player.StartFadingToBlack();
+		if (rewardIfYouWin != null && playerWon) {
+			playerDeck.Add(rewardIfYouWin);
+			rewardIfYouWin = null;
+		}
+
 		GetTree().CreateTimer(2.5f).Timeout += () => {
 			Player.FullyFadeOut();
 

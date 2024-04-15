@@ -16,10 +16,18 @@ public partial class Monster : CharacterBody2D {
 	[Export]
 	public Godot.Collections.Array<CardStats> monsterCards = new();
 
+	[Export]
+	public CardStats commonDrop;
+	[Export]
+	public CardStats rareDrop;
+	[Export]
+	public CardStats legendaryDrop;
+
 	public override void _Ready() {
 		var encounterTrigger = GetNode<EncounterTrigger>("EncounterTrigger");
 		encounterTrigger.cards = monsterCards;
 		encounterTrigger.MaxHp = MaxHp;
+		encounterTrigger.drops = new(commonDrop, rareDrop, legendaryDrop);
 		encounterTrigger.DeleteThisNode += () => {
 			QueueFree();
 		};

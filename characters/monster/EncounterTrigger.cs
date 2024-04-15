@@ -12,6 +12,8 @@ public partial class EncounterTrigger : Area2D {
 	[Signal]
 	public delegate void DeleteThisNodeEventHandler();
 
+	public MonsterDrops drops;
+
 	public override void _Ready() {
 		AreaEntered += (other) => {
 			if (other is not InteractArea interactArea) {

@@ -8,3 +8,6 @@
 [node name="Monster" instance=ExtResource("1_gvjjx")]
 MaxHp = 10
 monsterCards = [ExtResource("2_3ssnc"), ExtResource("2_3ssnc"), ExtResource("3_llpou"), ExtResource("4_u2u45"), ExtResource("4_u2u45")]
+commonDrop = ExtResource("2_3ssnc")
+rareDrop = ExtResource("3_llpou")
+legendaryDrop = ExtResource("4_u2u45")
