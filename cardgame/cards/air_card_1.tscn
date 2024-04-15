@@ -5,5 +5,4 @@
 [node name="Card" instance=ExtResource("1_lboqs")]
 
 [node name="ÖllinNimi" parent="Sprite" index="0"]
-text = "Rahko
-"
+text = "Rahko"
