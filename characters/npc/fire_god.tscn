@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://w4adbsvfxqul"]
+[gd_scene load_steps=14 format=3 uid="uid://w4adbsvfxqul"]
 
 [ext_resource type="Texture2D" uid="uid://42nftijwoewo" path="res://characters/npc/firegodidle.png" id="1_1yxcd"]
 [ext_resource type="Script" path="res://characters/npc/GodTrigger.cs" id="1_mp54g"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_x4iod"]
 [ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="3_falae"]
+[ext_resource type="Resource" uid="uid://dw7ig425ru2pa" path="res://cardgame/godCards/g_f1.tres" id="4_cwguk"]
+[ext_resource type="Resource" uid="uid://bjqy7ldvh7l7q" path="res://cardgame/godCards/g_f2.tres" id="5_hwpb3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87xqo"]
 atlas = ExtResource("1_1yxcd")
@@ -61,19 +63,21 @@ DummyEncounterTrigger = NodePath("EncounterTrigger")
 [node name="AfterPlayerHasWonDialogueTrigger" parent="." instance=ExtResource("2_x4iod")]
 visible = false
 position = Vector2(0, 7)
-Lines = ["(You've already beaten this god)"]
+Lines = [" Wait, what do you mean I lost? Ive never lost! You gotta be cheating with some magic codes or something!"]
 Who = 3
 RequiresInteract = true
 
 [node name="PreCombatDialogueTrigger" parent="." instance=ExtResource("2_x4iod")]
 position = Vector2(0, 7)
-Lines = ["TODO"]
+Lines = ["Hey you little creature, come here", " I bet you are one of the watery creatures with that squishy body of yours", "Yeah you are here to extinguish my flames, my soul, my fire!", " Jealous ones arent you? ", " Seeing this peak performance of superior element must leave you feeling small", " Well, you know what! Ive been waiting for you,  I'm not afraid, give me all you got!!! "]
 Who = 3
 
 [node name="EncounterTrigger" parent="." instance=ExtResource("3_falae")]
 position = Vector2(0, 8)
 collision_layer = 0
 collision_mask = 0
+MaxHp = 25
+cards = [ExtResource("4_cwguk"), ExtResource("4_cwguk"), ExtResource("4_cwguk"), ExtResource("5_hwpb3"), ExtResource("5_hwpb3"), ExtResource("5_hwpb3")]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="EncounterTrigger"]
 y_sort_enabled = true
