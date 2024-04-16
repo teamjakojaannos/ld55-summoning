@@ -206,6 +206,11 @@ public partial class GameManager : Node2D {
 
 			var root = GetTree().Root;
 			root.AddChild(previousLevel);
+
+			if (!playerWon && CurrentlyFightingGod != null) {
+				Player.Position = CurrentlyFightingGod.playerSpawnIfTheyDie.Position;
+			}
+
 			previousLevel.AddChild(Player);
 
 			previousLevel = null;

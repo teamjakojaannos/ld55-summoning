@@ -11,6 +11,9 @@ public partial class GodTrigger : Node2D
 	[Export]
 	public EncounterTrigger DummyEncounterTrigger;
 
+	[Export]
+	public Marker2D playerSpawnIfTheyDie;
+
 	public override void _Ready() {
 		PreCombatDialogue.DialogueFinished += () => {
 			var player = GetNode<GameManager>("/root/GameManager").Player;

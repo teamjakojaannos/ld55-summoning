@@ -3110,14 +3110,17 @@ RequiresInteract = true
 [node name="Collider" parent="Nuolikyltti5/DialogueTrigger" index="0"]
 shape = SubResource("CircleShape2D_y18tq")
 
-[node name="WaterGod" parent="." instance=ExtResource("11_a44cy")]
+[node name="WaterGod" parent="." node_paths=PackedStringArray("playerSpawnIfTheyDie") instance=ExtResource("11_a44cy")]
 position = Vector2(443, -237)
+playerSpawnIfTheyDie = NodePath("../WaterFallback")
 
-[node name="EarthGod" parent="." instance=ExtResource("13_dymf1")]
+[node name="EarthGod" parent="." node_paths=PackedStringArray("playerSpawnIfTheyDie") instance=ExtResource("13_dymf1")]
 position = Vector2(-1296, 304)
+playerSpawnIfTheyDie = NodePath("../EarthFallback")
 
-[node name="FireGod" parent="." instance=ExtResource("12_7gd85")]
+[node name="FireGod" parent="." node_paths=PackedStringArray("playerSpawnIfTheyDie") instance=ExtResource("12_7gd85")]
 position = Vector2(90.045, 191.15)
+playerSpawnIfTheyDie = NodePath("../FireFallback")
 
 [node name="Bonfire" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -3134,8 +3137,9 @@ offset = Vector2(-0.045, -17.15)
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_38heh")
 
-[node name="AirGod" parent="." instance=ExtResource("15_vje72")]
+[node name="AirGod" parent="." node_paths=PackedStringArray("playerSpawnIfTheyDie") instance=ExtResource("15_vje72")]
 position = Vector2(251, -828)
+playerSpawnIfTheyDie = NodePath("../AirFallback")
 
 [node name="Kaivo" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -3276,6 +3280,18 @@ position = Vector2(-673, -158)
 
 [node name="Monster37" parent="." instance=ExtResource("34_ovx32")]
 position = Vector2(333, -738)
+
+[node name="FireFallback" type="Marker2D" parent="."]
+position = Vector2(26, 239)
+
+[node name="AirFallback" type="Marker2D" parent="."]
+position = Vector2(212, -737)
+
+[node name="WaterFallback" type="Marker2D" parent="."]
+position = Vector2(345, -239)
+
+[node name="EarthFallback" type="Marker2D" parent="."]
+position = Vector2(-1213, 347)
 
 [editable path="Kyltti/DialogueTrigger"]
 [editable path="Kyltti2/DialogueTrigger"]
