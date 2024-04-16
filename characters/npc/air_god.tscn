@@ -56,13 +56,13 @@ DummyEncounterTrigger = NodePath("EncounterTrigger")
 [node name="AfterPlayerHasWonDialogueTrigger" parent="." instance=ExtResource("2_mlsec")]
 visible = false
 position = Vector2(0, 7)
-Lines = ["(You've already beaten this god)"]
+Lines = ["I can't say I am surprised...", "I was never the best fighter after all...", "Good luck on the rest of your journey..."]
 Who = 5
 RequiresInteract = true
 
 [node name="PreCombatDialogueTrigger" parent="." instance=ExtResource("2_mlsec")]
 position = Vector2(0, 7)
-Lines = ["TODO"]
+Lines = ["...", "...Who are you?", "...The winds did not warn me about your arrival", "...I do not have time to deal with you", "...I need to be alone", "...always", "...But since you are not leaving I guess I have no choice but to fight you"]
 Who = 5
 
 [node name="EncounterTrigger" parent="." instance=ExtResource("3_w1ogv")]

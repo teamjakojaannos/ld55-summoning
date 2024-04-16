@@ -63,13 +63,13 @@ DummyEncounterTrigger = NodePath("EncounterTrigger")
 [node name="AfterPlayerHasWonDialogueTrigger" parent="." instance=ExtResource("2_x4iod")]
 visible = false
 position = Vector2(0, 7)
-Lines = ["(You've already beaten this god)"]
+Lines = [" Wait, what do you mean I lost? Ive never lost! You gotta be cheating with some magic codes or something!"]
 Who = 3
 RequiresInteract = true
 
 [node name="PreCombatDialogueTrigger" parent="." instance=ExtResource("2_x4iod")]
 position = Vector2(0, 7)
-Lines = ["TODO"]
+Lines = ["Hey you little creature, come here", " I bet you are one of the watery creatures with that squishy body of yours", "Yeah you are here to extinguish my flames, my soul, my fire!", " Jealous ones arent you? ", " Seeing this peak performance of superior element must leave you feeling small", " Well, you know what! Ive been waiting for you,  I'm not afraid, give me all you got!!! "]
 Who = 3
 
 [node name="EncounterTrigger" parent="." instance=ExtResource("3_falae")]

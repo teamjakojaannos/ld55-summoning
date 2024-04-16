@@ -103,7 +103,7 @@ position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_o2qpf")
 
 [node name="DialogueTrigger" parent="LittleBookCase3" instance=ExtResource("4_kwluq")]
-position = Vector2(0, -5)
+position = Vector2(-10, 4)
 Lines = ["Here's a book about gods!", "\"Our world has four elements symbolized by the fours gods\"", "\"God of Fire, Kokko\"", "\"God of Earth, Maahinen\"", "\"God of Air, Ilmatar\"", "\"God of Water, Vellamo\"", "Pretty cool!"]
 Who = 0
 RequiresInteract = true
@@ -133,7 +133,7 @@ position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_0r3ds")
 
 [node name="DialogueTrigger" parent="BigBookCase1" instance=ExtResource("4_kwluq")]
-position = Vector2(-4, -2)
+position = Vector2(2, 0)
 Lines = ["Here is a book about summon battling!", "\"In our world powerful wizards and gods fight by summoning creatures\"", "\"Opponents choose 3 summons to go against each other\"", "\"Each summon battles against the summon on the opposite side of the board\"", "\"If summons loses all it's health, it gets discarded. A new summon can be put on its place on the board\"", "\"If there is no summons to be put on the board, the person will lose their own health\"", "wow! I love summon fighting!"]
 Who = 0
 RequiresInteract = true
@@ -151,7 +151,7 @@ position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_0r3ds")
 
 [node name="DialogueTrigger" parent="BigBookCase2" instance=ExtResource("4_kwluq")]
-position = Vector2(0, -2)
+position = Vector2(-1, 23)
 Lines = ["Here is a book about elements!", "\"All the elements have their unique strenghts and weaknesses\"", "\"Fire is fierce but burns out quickly\"", "[Fire summons tend to have low HP, medium damage and high initiative]", "\"Earth is sturdy but lacks in raw power\"", "[Earth summons tend to have high HP, low damage and medium initiative]", "\"Water is balanced, but lacks special traits\"", "[Water summons tend to have medium HP, medium damage and medium initiative]", "\"Air can make a stormy gust, but its delicate\"", "[Air summons tend to have low HP, high damage and low initiative]", "I want to master all the elements!"]
 Who = 0
 RequiresInteract = true
@@ -167,6 +167,11 @@ offset = Vector2(0, -24.875)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BigBookCase3/StaticBody2D"]
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_0r3ds")
+
+[node name="DialogueTrigger" parent="BigBookCase3" instance=ExtResource("4_kwluq")]
+Lines = ["Here is a book about some less well known gods!", "\"Not much is known about the elder gods except their names\"", "\"Toilari, Lassi, Minjaux, Noodle, Mäyräkissa, Alex\"", "Wow! I wonder who they are?"]
+Who = 0
+RequiresInteract = true
 
 [node name="Houseplant1" type="Sprite2D" parent="."]
 y_sort_enabled = true

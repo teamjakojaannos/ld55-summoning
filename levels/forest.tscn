@@ -1414,7 +1414,7 @@ levelName = "res://levels/Library.tscn"
 spawnPointName = "SpawnPoint"
 
 [node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(-1357, -463)
+position = Vector2(-456, -192)
 
 [node name="WizardExit" type="Marker2D" parent="."]
 position = Vector2(-1390.42, -589)

@@ -53,13 +53,13 @@ DummyEncounterTrigger = NodePath("EncounterTrigger")
 [node name="AfterPlayerHasWonDialogueTrigger" parent="." instance=ExtResource("2_6wvjt")]
 visible = false
 position = Vector2(0, 7)
-Lines = ["(You've already beaten this god)"]
+Lines = [" Oh no, why.. How could this little two-booted creature with nothing but a few pieces of paper defeat me?"]
 Who = 4
 RequiresInteract = true
 
 [node name="PreCombatDialogueTrigger" parent="." instance=ExtResource("2_6wvjt")]
 position = Vector2(0, 7)
-Lines = ["TODO"]
+Lines = ["The ground hears two boots approaching.", "Wait. You are not Kokko...", "He likes to use his pathetic demons to burn my flora", "Setting up wildfires just to boost his ego, and collect the ashes...", "MY ashes, from my land!", "Anyway... you are also disturbing my land. Prepare to die!"]
 Who = 4
 
 [node name="EncounterTrigger" parent="." instance=ExtResource("4_dkln8")]

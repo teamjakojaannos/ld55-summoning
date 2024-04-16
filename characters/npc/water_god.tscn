@@ -53,13 +53,13 @@ DummyEncounterTrigger = NodePath("EncounterTrigger")
 [node name="AfterPlayerHasWonDialogueTrigger" parent="." instance=ExtResource("2_1j8v8")]
 visible = false
 position = Vector2(0, 7)
-Lines = ["(You've already beaten this god)"]
+Lines = ["No, this cant be possible... I am a disgrace.. to lose to this hideous creature.. Aaaah!"]
 Who = 2
 RequiresInteract = true
 
 [node name="PreCombatDialogueTrigger" parent="." instance=ExtResource("2_1j8v8")]
 position = Vector2(0, 7)
-Lines = ["TODO"]
+Lines = ["Who dares to approach me? Me, the fairest of them all. ", " Bow before me mortal one! Or are you just one of the Maahinens little minions,  who is trying to disturb my waters... ", "You and your water-splashing are ruining my beautiful image!"]
 Who = 2
 
 [node name="EncounterTrigger" parent="." instance=ExtResource("4_hjsiu")]
