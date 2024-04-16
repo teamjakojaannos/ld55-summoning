@@ -271,6 +271,14 @@ public partial class Player : CharacterBody2D {
 				return;
 			}
 			animationPlayer.Play("battle_lost");
+			GetTree().CreateTimer(1.0f).Timeout += () => {
+				var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
+				var line = lives == 1
+				? "Ouch, I can't take much more hits"
+				: "Ouch, that hurt";
+				dialogue.Start(WhoIsSpeaking.Paju, new string[] { line });
+			};
+
 		}
 	}
 
