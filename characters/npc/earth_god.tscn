@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bauor3cyiwu6i"]
+[gd_scene load_steps=10 format=3 uid="uid://bauor3cyiwu6i"]
 
+[ext_resource type="Script" path="res://characters/npc/GodTrigger.cs" id="1_adcii"]
 [ext_resource type="Texture2D" uid="uid://dybh08k3amvgw" path="res://characters/npc/earthgodidle.png" id="1_mwdt5"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_6wvjt"]
+[ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="4_dkln8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejnlc"]
 atlas = ExtResource("1_mwdt5")
@@ -39,19 +41,37 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="EarthGod" type="Node2D"]
+[node name="EarthGod" type="Node2D" node_paths=PackedStringArray("PreCombatDialogue", "PostCombatDialogue", "DummyEncounterTrigger")]
 y_sort_enabled = true
+script = ExtResource("1_adcii")
+PreCombatDialogue = NodePath("PreCombatDialogueTrigger")
+PostCombatDialogue = NodePath("AfterPlayerHasWonDialogueTrigger")
+DummyEncounterTrigger = NodePath("EncounterTrigger")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AfterPlayerHasWonDialogueTrigger" parent="." instance=ExtResource("2_6wvjt")]
+visible = false
+position = Vector2(0, 7)
+Lines = ["(You've already beaten this god)"]
+Who = 4
+RequiresInteract = true
+
+[node name="PreCombatDialogueTrigger" parent="." instance=ExtResource("2_6wvjt")]
+position = Vector2(0, 7)
+Lines = ["TODO"]
+Who = 4
+
+[node name="EncounterTrigger" parent="." instance=ExtResource("4_dkln8")]
+position = Vector2(0, 8)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="EncounterTrigger"]
 y_sort_enabled = true
-position = Vector2(-1, 32)
+position = Vector2(-1, 24)
 sprite_frames = SubResource("SpriteFrames_2jft2")
 autoplay = "default"
 frame = 2
 frame_progress = 0.0497505
 offset = Vector2(0, -29.315)
 
-[node name="DialogueTrigger" parent="." instance=ExtResource("2_6wvjt")]
-position = Vector2(0, 7)
-Lines = ["AUUGH"]
-Who = 4
+[editable path="EncounterTrigger"]

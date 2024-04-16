@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -12,6 +13,8 @@ public partial class GameManager : Node2D {
 
 	[Export]
 	public Godot.Collections.Array<CardStats> playerDeck = new();
+
+	public List<WhoIsSpeaking> godsBeaten = new();
 
 	private readonly HashSet<string> AutoloadedNodes = new() { "DialogueBox", "GameManager", "CardGameLayer" };
 
@@ -38,6 +41,7 @@ public partial class GameManager : Node2D {
 
 	[Export]
 	public CanvasLayer ScrollMenu;
+	public GodTrigger CurrentlyFightingGod;
 
 	public void StopAllMusic() {
 		CombatMusic.Stop();
@@ -167,7 +171,7 @@ public partial class GameManager : Node2D {
 
 		var enemyCards = enemy.cards.ToList();
 		cardGame.PrepareCombat(playerCards, enemyCards, Player.MaxHp, enemy.MaxHp, enemy.GetNode<AnimatedSprite2D>("Sprite"));
-		rewardIfYouWin = enemy.drops.GenerateDrop();
+		rewardIfYouWin = enemy.drops?.GenerateDrop();
 
 		GetTree().CreateTimer(2.0f).Timeout += () => {
 			cardGame.StartCombat();
@@ -204,5 +208,15 @@ public partial class GameManager : Node2D {
 
 			Player.DoAfterBattleStuff(playerWon);
 		};
+	}
+
+	public void WinGame() {
+		GetNode<DialogueBox>("/root/DialogueBox/DialogueBox").Start(WhoIsSpeaking.Kyltti, new string[] {
+			"Olet viineri.",
+			"I mean",
+			"You win!",
+			"...",
+			"Thanks for playing!"
+		});
 	}
 }

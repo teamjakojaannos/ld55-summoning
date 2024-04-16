@@ -14,8 +14,15 @@ public partial class DialogueTrigger : Area2D {
 	private bool playerInRange = false;
 	private bool playerHasLeft = false;
 
+	[Signal]
+	public delegate void DialogueFinishedEventHandler();
+
 	public override void _Ready() {
 		AreaEntered += (other) => {
+			if (!Visible) {
+				return;
+			}
+
 			if (other is not InteractArea interactArea) {
 				return;
 			}
@@ -35,10 +42,14 @@ public partial class DialogueTrigger : Area2D {
 
 			player.IsInCinematic = true;
 
-			dialogue.DialogueFinished += DialogueFinished;
+			dialogue.DialogueFinished += OnDialogueFinished;
 		};
 
 		AreaExited += (other) => {
+			if (!Visible) {
+				return;
+			}
+
 			if (other is not InteractArea interactArea) {
 				return;
 			}
@@ -55,6 +66,10 @@ public partial class DialogueTrigger : Area2D {
 	}
 
 	public override void _Process(double delta) {
+		if (!Visible) {
+			return;
+		}
+
 		if (!playerHasLeft) {
 			return;
 		}
@@ -71,15 +86,17 @@ public partial class DialogueTrigger : Area2D {
 			player.IsInCinematic = true;
 			playerHasLeft = false;
 
-			dialogue.DialogueFinished += DialogueFinished;
+			dialogue.DialogueFinished += OnDialogueFinished;
 		}
 	}
 
-	private void DialogueFinished() {
+	private void OnDialogueFinished() {
 		var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
-		dialogue.DialogueFinished -= DialogueFinished;
+		dialogue.DialogueFinished -= OnDialogueFinished;
 
 		var player = GetNode<GameManager>("/root/GameManager").Player;
 		player.IsInCinematic = false;
+
+		EmitSignal(nameof(DialogueFinished));
 	}
 }

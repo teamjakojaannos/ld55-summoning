@@ -189,7 +189,7 @@ public partial class Player : CharacterBody2D {
 	}
 
 	// Pass null target to perform only the fade-in-out without any music or level transitions
-	public void StartEncounter(EncounterTrigger target) {
+	public void StartEncounter(EncounterTrigger target, GodTrigger god = null) {
 		if (IsInFight) {
 			return;
 		}
@@ -220,6 +220,7 @@ public partial class Player : CharacterBody2D {
 				gameManager.CombatMusic.Play();
 
 				var playerCards = gameManager.playerDeck;
+				gameManager.CurrentlyFightingGod = god;
 				gameManager.StartFight(playerCards.ToList(), target);
 				Sprite.Visible = false;
 				Frozen = true;
@@ -241,10 +242,26 @@ public partial class Player : CharacterBody2D {
 		isInVictoryPose = true;
 
 		if (winner) {
-			animationPlayer.Play("battle_victory");
+			if (gameManager.CurrentlyFightingGod != null) {
+				animationPlayer.Play("battle_victory");
+			}
+
 			GetTree().CreateTimer(1.5f).Timeout += () => {
-				var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
-				dialogue.Start(WhoIsSpeaking.Paju, new string[] { "You found a new scroll!" });
+				if (gameManager.CurrentlyFightingGod != null) {
+					var god = gameManager.CurrentlyFightingGod;
+					god.PreCombatDialogue.Visible = false;
+					god.PostCombatDialogue.Visible = true;
+					gameManager.godsBeaten.Add(god.PreCombatDialogue.Who);
+
+					GD.Print($"Won god {god.PreCombatDialogue.Who}");
+					gameManager.CurrentlyFightingGod = null;
+					if (gameManager.godsBeaten.Count >= 1) {
+						gameManager.WinGame();
+					}
+				} else {
+					var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
+					dialogue.Start(WhoIsSpeaking.Paju, new string[] { "You found a new scroll!" });
+				}
 			};
 		} else {
 			lives--;
