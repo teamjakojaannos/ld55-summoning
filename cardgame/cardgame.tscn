@@ -329,8 +329,8 @@ layout_mode = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentLeft" index="0"]
-offset_right = 2784.0
-offset_bottom = 3712.0
+offset_right = 2880.0
+offset_bottom = 3840.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentLeft" index="1"]
 visible = false
@@ -342,8 +342,8 @@ PositionOnArena = 1
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentMid" index="0"]
-offset_right = 2784.0
-offset_bottom = 3712.0
+offset_right = 2880.0
+offset_bottom = 3840.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentMid" index="1"]
 visible = false
@@ -355,8 +355,8 @@ PositionOnArena = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentRight" index="0"]
-offset_right = 2784.0
-offset_bottom = 3712.0
+offset_right = 2880.0
+offset_bottom = 3840.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentRight" index="1"]
 visible = false
@@ -376,8 +376,8 @@ PositionOnArena = 4
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerMid" index="0"]
-offset_right = 288.0
-offset_bottom = 384.0
+offset_right = 384.0
+offset_bottom = 512.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerMid/Key" index="0"]
 text = "2"
@@ -390,8 +390,8 @@ PositionOnArena = 5
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerRight" index="0"]
-offset_right = 288.0
-offset_bottom = 384.0
+offset_right = 384.0
+offset_bottom = 512.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerRight/Key" index="0"]
 text = "3"

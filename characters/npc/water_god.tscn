@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnqx0kwcw4eq"]
+[gd_scene load_steps=10 format=3 uid="uid://bnqx0kwcw4eq"]
 
 [ext_resource type="Texture2D" uid="uid://cbqjboljad53" path="res://characters/npc/watergodidle.png" id="1_jsqi4"]
 [ext_resource type="Script" path="res://characters/npc/GodTrigger.cs" id="1_pob7i"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_1j8v8"]
 [ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="4_hjsiu"]
-[ext_resource type="Resource" uid="uid://cykj0w1c35eln" path="res://cardgame/godCards/g_w1.tres" id="4_o4nm3"]
-[ext_resource type="Resource" uid="uid://dxp6k7v1t50le" path="res://cardgame/godCards/g_w2.tres" id="5_3p5py"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_si5hl"]
 atlas = ExtResource("1_jsqi4")
@@ -53,21 +51,19 @@ DummyEncounterTrigger = NodePath("EncounterTrigger")
 [node name="AfterPlayerHasWonDialogueTrigger" parent="." instance=ExtResource("2_1j8v8")]
 visible = false
 position = Vector2(0, 7)
-Lines = ["No, this cant be possible... I am a disgrace.. to lose to this hideous creature.. Aaaah!"]
+Lines = ["(You've already beaten this god)"]
 Who = 2
 RequiresInteract = true
 
 [node name="PreCombatDialogueTrigger" parent="." instance=ExtResource("2_1j8v8")]
 position = Vector2(0, 7)
-Lines = ["Who dares to approach me? Me, the fairest of them all. ", " Bow before me mortal one! Or are you just one of the Maahinens little minions,  who is trying to disturb my waters... ", "You and your water-splashing are ruining my beautiful image!"]
+Lines = ["TODO"]
 Who = 2
 
 [node name="EncounterTrigger" parent="." instance=ExtResource("4_hjsiu")]
 position = Vector2(0, 8)
 collision_layer = 0
 collision_mask = 0
-MaxHp = 28
-cards = [ExtResource("4_o4nm3"), ExtResource("4_o4nm3"), ExtResource("4_o4nm3"), ExtResource("4_o4nm3"), ExtResource("5_3p5py"), ExtResource("5_3p5py"), ExtResource("5_3p5py"), ExtResource("5_3p5py")]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="EncounterTrigger"]
 y_sort_enabled = true

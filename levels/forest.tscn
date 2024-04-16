@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://53gqgguumyoo" path="res://environment/bonfire.png" id="13_r27wv"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="14_b8thc"]
 [ext_resource type="Texture2D" uid="uid://da6rvmbhx1c8a" path="res://environment/Nuolikyltti.png" id="15_pjny7"]
-[ext_resource type="PackedScene" uid="uid://b5bje8qwvc8xo" path="res://environment/big_tree.tscn" id="15_r804x"]
+[ext_resource type="PackedScene" path="res://environment/big_tree.tscn" id="15_r804x"]
 [ext_resource type="PackedScene" uid="uid://5juhwtj3y1kj" path="res://characters/npc/air_god.tscn" id="15_vje72"]
 [ext_resource type="Texture2D" uid="uid://dq0lgtu8wbv6t" path="res://environment/kyltti2.png" id="19_quahr"]
 [ext_resource type="Texture2D" uid="uid://kvykmlmufgit" path="res://environment/kaivo2.png" id="20_jdre8"]
@@ -3041,7 +3041,6 @@ position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_oqqp1")
 
 [node name="DialogueTrigger" parent="Nuolikyltti2" instance=ExtResource("14_b8thc")]
-visible = false
 position = Vector2(-1, -11)
 Lines = ["Wizard's Well", "(he's not feeling well, though)"]
 Who = 6
@@ -3103,7 +3102,6 @@ position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_oqqp1")
 
 [node name="DialogueTrigger" parent="Nuolikyltti5" instance=ExtResource("14_b8thc")]
-visible = false
 position = Vector2(-1, -11)
 Lines = ["Town"]
 Who = 6
