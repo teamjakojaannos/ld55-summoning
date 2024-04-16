@@ -5,8 +5,8 @@ public class MonsterDrops {
 	public CardStats rareDrop;
 	public CardStats legendaryDrop;
 
-	public const int legendaryDropChance = 5;
-	public const int rareDropChance = 20;
+	public const int legendaryDropChance = 25;
+	public const int rareDropChance = 50;
 
 	private RandomNumberGenerator rng = new();
 
