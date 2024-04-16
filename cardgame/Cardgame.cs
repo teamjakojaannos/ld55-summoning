@@ -269,13 +269,14 @@ public partial class Cardgame : Control {
 		if (playerPiles.DrawPileEmpty()) {
 			playerPiles.RecycleDiscardPile();
 			playerPiles.PlayRecycleAnimation();
-			recycled = true;
+			// if pile is empty, there was nothing to recycle
+			recycled = !playerPiles.DrawPileEmpty();
 		}
 
 		if (enemyPiles.DrawPileEmpty()) {
 			enemyPiles.RecycleDiscardPile();
 			enemyPiles.PlayRecycleAnimation();
-			recycled = true;
+			recycled = recycled || !enemyPiles.DrawPileEmpty();
 		}
 		return recycled;
 	}
@@ -467,7 +468,6 @@ public partial class Cardgame : Control {
 
 	public void FightRoundEnded() {
 		var recycled = RecycleIfNeeded();
-		// FIXME: recycled is true when decks are empty, causing a small delay
 
 		if (recycled) {
 			// wait for recycle animation to finish
