@@ -245,6 +245,7 @@ public partial class Player : CharacterBody2D {
 			if (gameManager.CurrentlyFightingGod == null) {
 				animationPlayer.Play("battle_victory");
 			} else {
+				Unfreeze();
 				var god = gameManager.CurrentlyFightingGod;
 				god.PreCombatDialogue.Visible = false;
 				god.PostCombatDialogue.Visible = true;
