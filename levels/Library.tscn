@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c65ftkbch86jj"]
+[gd_scene load_steps=18 format=3 uid="uid://c65ftkbch86jj"]
 
 [ext_resource type="TileSet" uid="uid://b8jjfq5ljrcrf" path="res://levels/interior_tileset.tres" id="1_snw77"]
 [ext_resource type="Texture2D" uid="uid://b5wrq2gmw83cu" path="res://environment/Interior/kirjahyllypieni1.png" id="2_fqgeo"]
@@ -10,7 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://cdsmwjy6mwn7o" path="res://environment/Interior/poyta.png" id="7_djcs6"]
 [ext_resource type="Texture2D" uid="uid://dmbdqx0jyxfdk" path="res://environment/Interior/tuoli.png" id="8_3mih1"]
 [ext_resource type="Texture2D" uid="uid://dav67wkeh8i7v" path="res://environment/Interior/book.png" id="9_ftxwa"]
-[ext_resource type="PackedScene" uid="uid://l5d67pw0lc4u" path="res://characters/npc/librarian.tscn" id="10_slhsr"]
+[ext_resource type="PackedScene" path="res://characters/npc/librarian.tscn" id="10_slhsr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m10i4"]
+size = Vector2(64, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2qpf"]
 size = Vector2(28, 11)
@@ -71,6 +74,10 @@ vertex_colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1)
 position = Vector2(31, 48)
 levelName = "res://levels/forest.tscn"
 spawnPointName = "LibraryExit"
+
+[node name="CollisionShape2D" parent="LevelTransition" index="0"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_m10i4")
 
 [node name="LittleBookCase1" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -289,4 +296,5 @@ position = Vector2(-19, 24)
 [node name="DialogueTrigger" parent="Librarian" index="1"]
 Lines = ["Hello dear", "Welcome to our little town library!", "You can learn about the world here", "You can learn about the gods, the  summons, and everything else!"]
 
+[editable path="LevelTransition"]
 [editable path="Librarian"]
