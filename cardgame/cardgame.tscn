@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dkuq61u6l4jg6"]
+[gd_scene load_steps=50 format=3 uid="uid://dkuq61u6l4jg6"]
 
 [ext_resource type="Script" path="res://cardgame/Cardgame.cs" id="1_f1vsu"]
 [ext_resource type="Script" path="res://cardgame/FightClub.cs" id="2_7df7x"]
@@ -8,11 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://b750di4b0lclc" path="res://cardgame/in_hand_slot.tscn" id="3_sktvo"]
 [ext_resource type="PackedScene" uid="uid://d238wb56q2qnt" path="res://cardgame/hp_bar.tscn" id="4_k5w0w"]
 [ext_resource type="Script" path="res://cardgame/PlayerHand.cs" id="4_v7uiv"]
+[ext_resource type="FontFile" uid="uid://b1fn2ohqk5gyo" path="res://fonts/pixel/Pixel NES.otf" id="8_ci87r"]
+[ext_resource type="Texture2D" uid="uid://bwald3g3ahv2e" path="res://ui/bigbutton.png" id="9_nt2kp"]
 [ext_resource type="Script" path="res://cardgame/CardPiles.cs" id="9_q3ccb"]
 [ext_resource type="Texture2D" uid="uid://bb7frv1tasqpk" path="res://cardgame/scroll_rolled.png" id="10_8r62x"]
+[ext_resource type="Script" path="res://cardgame/ASD.cs" id="10_hik4v"]
 [ext_resource type="Script" path="res://cardgame/DiscardPile.cs" id="11_3ai70"]
 [ext_resource type="Texture2D" uid="uid://ba7wspi71ecnu" path="res://characters/player/player_idle.png" id="11_ohfne"]
+[ext_resource type="Texture2D" uid="uid://bx7q0xqrdf4k7" path="res://ui/Battlescreen_backround.png" id="11_rjchk"]
 [ext_resource type="Texture2D" uid="uid://clajyg6drs8ng" path="res://characters/npc/firegod.png" id="13_lbgen"]
+[ext_resource type="Texture2D" uid="uid://byjrpqu6fl3qx" path="res://ui/Battlescreen_backround_big.png" id="13_x7d3e"]
 [ext_resource type="Texture2D" uid="uid://cswkpo2ckfiys" path="res://characters/npc/earthgod.png" id="14_8jllw"]
 [ext_resource type="AudioStream" uid="uid://pam88fti118p" path="res://sfx/hit1.ogg" id="15_8y1sa"]
 [ext_resource type="AudioStream" uid="uid://c68xakvkgaw5w" path="res://sfx/creat2.ogg" id="15_22bis"]
@@ -21,6 +26,16 @@
 [ext_resource type="Texture2D" uid="uid://c14n4wqwxqj5t" path="res://characters/npc/watergod.png" id="16_linoi"]
 [ext_resource type="AudioStream" uid="uid://dqj06cq3i67yd" path="res://sfx/no.ogg" id="17_2c05t"]
 [ext_resource type="Texture2D" uid="uid://c0k6gpop4ph3m" path="res://characters/whyisthishere/ruohonleikkuriBATTLE.png" id="17_by7ab"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6gjxi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmys3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iubnx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fpqb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkv83"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_copx4"]
 atlas = ExtResource("11_ohfne")
@@ -314,8 +329,8 @@ layout_mode = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentLeft" index="0"]
-offset_right = 2496.0
-offset_bottom = 3328.0
+offset_right = 2784.0
+offset_bottom = 3712.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentLeft" index="1"]
 visible = false
@@ -327,8 +342,8 @@ PositionOnArena = 1
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentMid" index="0"]
-offset_right = 2496.0
-offset_bottom = 3328.0
+offset_right = 2784.0
+offset_bottom = 3712.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentMid" index="1"]
 visible = false
@@ -340,8 +355,8 @@ PositionOnArena = 2
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/OpponentRight" index="0"]
-offset_right = 2496.0
-offset_bottom = 3328.0
+offset_right = 2784.0
+offset_bottom = 3712.0
 
 [node name="Key" parent="Cardgame/Arena/OpponentRight" index="1"]
 visible = false
@@ -361,8 +376,8 @@ PositionOnArena = 4
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerMid" index="0"]
-offset_right = 2496.0
-offset_bottom = 3328.0
+offset_right = 288.0
+offset_bottom = 384.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerMid/Key" index="0"]
 text = "2"
@@ -375,8 +390,8 @@ PositionOnArena = 5
 Cardgame = NodePath("../..")
 
 [node name="CardRoot" parent="Cardgame/Arena/PlayerRight" index="0"]
-offset_right = 2496.0
-offset_bottom = 3328.0
+offset_right = 288.0
+offset_bottom = 384.0
 
 [node name="Label" parent="Cardgame/Arena/PlayerRight/Key" index="0"]
 text = "3"
@@ -388,13 +403,33 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -214.26
-offset_top = -119.0
-offset_right = -55.26
-offset_bottom = -57.0
+offset_left = -236.26
+offset_top = -118.0
+offset_right = -77.26
+offset_bottom = -56.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_type_variation = &"FlatButton"
+theme_override_fonts/font = ExtResource("8_ci87r")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6gjxi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dmys3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iubnx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2fpqb")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tkv83")
 text = "Start round"
+
+[node name="TextureRect" type="TextureRect" parent="Cardgame/ButtonStart"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -10.0
+offset_top = -2.0
+offset_right = 79.0
+offset_bottom = 38.0
+scale = Vector2(2, 2)
+texture = ExtResource("9_nt2kp")
+script = ExtResource("10_hik4v")
+HoverColor = Color(0, 0.568627, 0, 1)
+DefaultColor = Color(1, 1, 1, 1)
 
 [node name="PlayerPiles" type="Control" parent="Cardgame" node_paths=PackedStringArray("discardPile")]
 layout_mode = 1
@@ -440,8 +475,13 @@ offset_right = 91.0
 offset_bottom = 119.0
 text = "Discard pile"
 
+[node name="BattlescreenBackround" type="Sprite2D" parent="Cardgame/PlayerPiles"]
+position = Vector2(87, -68)
+scale = Vector2(2, 2)
+texture = ExtResource("11_rjchk")
+
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Cardgame/PlayerPiles"]
-position = Vector2(91, -66.625)
+position = Vector2(87.25, -133.625)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_rsnyp")
 
@@ -489,8 +529,13 @@ offset_right = 91.0
 offset_bottom = 119.0
 text = "Discard pile"
 
+[node name="BattlescreenBackroundBig" type="Sprite2D" parent="Cardgame/EnemyPiles"]
+position = Vector2(116, 402)
+scale = Vector2(2, 2)
+texture = ExtResource("13_x7d3e")
+
 [node name="EnemySprite" type="AnimatedSprite2D" parent="Cardgame/EnemyPiles"]
-position = Vector2(100, 332)
+position = Vector2(113, 317)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_wl7wc")
 frame_progress = 0.0659155
@@ -500,10 +545,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
-offset_left = 124.0
-offset_top = -293.0
-offset_right = 186.26
-offset_bottom = -266.0
+offset_left = 120.25
+offset_top = -360.0
+offset_right = 182.51
+offset_bottom = -333.0
 grow_horizontal = 1
 grow_vertical = 0
 
@@ -512,10 +557,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_bottom = 0.0
-offset_left = -207.26
-offset_top = 463.0
-offset_right = -145.0
-offset_bottom = 490.0
+offset_left = -196.26
+offset_top = 222.0
+offset_right = -134.0
+offset_bottom = 249.0
 grow_horizontal = 0
 grow_vertical = 1
 

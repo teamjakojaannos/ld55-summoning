@@ -193,7 +193,6 @@ public partial class GameManager : Node2D {
 		GetTree().CreateTimer(2.5f).Timeout += () => {
 			Player.FullyFadeOut();
 
-
 			var cardGameLayer = GetTree().Root.GetNode<CanvasLayer>("CardGameLayer");
 			var cardGame = cardGameLayer.GetNode<Cardgame>("Cardgame");
 
@@ -229,10 +228,19 @@ public partial class GameManager : Node2D {
 	}
 
 	private void StartCredits() {
+		Player.GetParent().RemoveChild(Player);
+		Credits.AddChild(Player);
+
+		var rootChildren = GetTree().Root.GetChildren();
+		foreach (var child in rootChildren) {
+			if (!AutoloadedNodes.Contains(child.Name)) {
+				GetTree().Root.RemoveChild(child);
+			}
+		}
+
 		StopAllMusic();
 		Krediittimusa.Play();
 		Player.StartFadingToBlack();
-
 
 		GetTree().CreateTimer(2.5f).Timeout += () => {
 			Player.FullyFadeOut();

@@ -242,21 +242,24 @@ public partial class Player : CharacterBody2D {
 		isInVictoryPose = true;
 
 		if (winner) {
-			if (gameManager.CurrentlyFightingGod != null) {
+			if (gameManager.CurrentlyFightingGod == null) {
 				animationPlayer.Play("battle_victory");
+			} else {
+				var god = gameManager.CurrentlyFightingGod;
+				god.PreCombatDialogue.Visible = false;
+				god.PostCombatDialogue.Visible = true;
+				gameManager.godsBeaten.Add(god.PreCombatDialogue.Who);
+
+				GD.Print($"Won god {god.PreCombatDialogue.Who}");
 			}
 
 			GetTree().CreateTimer(1.5f).Timeout += () => {
 				if (gameManager.CurrentlyFightingGod != null) {
-					var god = gameManager.CurrentlyFightingGod;
-					god.PreCombatDialogue.Visible = false;
-					god.PostCombatDialogue.Visible = true;
-					gameManager.godsBeaten.Add(god.PreCombatDialogue.Who);
-
-					GD.Print($"Won god {god.PreCombatDialogue.Who}");
+					
 					gameManager.CurrentlyFightingGod = null;
 					if (gameManager.godsBeaten.Count >= 4) {
 						gameManager.WinGame();
+						return;
 					}
 				} else {
 					var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
