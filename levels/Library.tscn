@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c65ftkbch86jj"]
+[gd_scene load_steps=17 format=3 uid="uid://c65ftkbch86jj"]
 
 [ext_resource type="TileSet" uid="uid://b8jjfq5ljrcrf" path="res://levels/interior_tileset.tres" id="1_snw77"]
 [ext_resource type="Texture2D" uid="uid://b5wrq2gmw83cu" path="res://environment/Interior/kirjahyllypieni1.png" id="2_fqgeo"]
 [ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="2_pr327"]
 [ext_resource type="Texture2D" uid="uid://dl5q1aqr2uvxp" path="res://environment/Interior/kirjahyllypieni2.png" id="3_pnbg3"]
 [ext_resource type="Texture2D" uid="uid://4qh7k11un2wt" path="res://environment/Interior/kirjahyllyiso.png" id="4_1yfb7"]
+[ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="4_kwluq"]
 [ext_resource type="Texture2D" uid="uid://by1m2s8vh3bnu" path="res://environment/Interior/huonekasvi1.png" id="5_d2br7"]
 [ext_resource type="Texture2D" uid="uid://cdsmwjy6mwn7o" path="res://environment/Interior/poyta.png" id="7_djcs6"]
 [ext_resource type="Texture2D" uid="uid://dmbdqx0jyxfdk" path="res://environment/Interior/tuoli.png" id="8_3mih1"]
@@ -83,6 +84,12 @@ offset = Vector2(0, -24.875)
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_o2qpf")
 
+[node name="DialogueTrigger" parent="LittleBookCase1" instance=ExtResource("4_kwluq")]
+position = Vector2(-16, -4)
+Lines = ["There seems to a magazine stashed under the shelf", "I wonder what this is!", "....", "What is this kind of magazine doing in a library!?"]
+Who = 0
+RequiresInteract = true
+
 [node name="LittleBookCase3" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-36, -75)
@@ -94,6 +101,12 @@ offset = Vector2(0, -24.875)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LittleBookCase3/StaticBody2D"]
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_o2qpf")
+
+[node name="DialogueTrigger" parent="LittleBookCase3" instance=ExtResource("4_kwluq")]
+position = Vector2(0, -5)
+Lines = ["Here's a book about gods!", "\"Our world has four elements symbolized by the fours gods\"", "\"God of Fire, Kokko\"", "\"God of Earth, Maahinen\"", "\"God of Air, Ilmatar\"", "\"God of Water, Vellamo\"", "Pretty cool!"]
+Who = 0
+RequiresInteract = true
 
 [node name="LittleBookCase2" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -119,6 +132,12 @@ offset = Vector2(0, -24.875)
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_0r3ds")
 
+[node name="DialogueTrigger" parent="BigBookCase1" instance=ExtResource("4_kwluq")]
+position = Vector2(-4, -2)
+Lines = ["Here is a book about summon battling!", "\"In our world powerful wizards and gods fight by summoning creatures\"", "\"Opponents choose 3 summons to go against each other\"", "\"Each summon battles against the summon on the opposite side of the board\"", "\"If summons loses all it's health, it gets discarded. A new summon can be put on its place on the board\"", "\"If there is no summons to be put on the board, the person will lose their own health\"", "wow! I love summon fighting!"]
+Who = 0
+RequiresInteract = true
+
 [node name="BigBookCase2" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(68, -74)
@@ -130,6 +149,12 @@ offset = Vector2(0, -24.875)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BigBookCase2/StaticBody2D"]
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_0r3ds")
+
+[node name="DialogueTrigger" parent="BigBookCase2" instance=ExtResource("4_kwluq")]
+position = Vector2(0, -2)
+Lines = ["Here is a book about elements!", "\"All the elements have their unique strenghts and weaknesses\"", "\"Fire is fierce but burns out quickly\"", "[Fire summons tend to have low HP, medium damage and high initiative]", "\"Earth is sturdy but lacks in raw power\"", "[Earth summons tend to have high HP, low damage and medium initiative]", "\"Water is balanced, but lacks special traits\"", "[Water summons tend to have medium HP, medium damage and medium initiative]", "\"Air can make a stormy gust, but its delicate\"", "[Air summons tend to have low HP, high damage and low initiative]", "I want to master all the elements!"]
+Who = 0
+RequiresInteract = true
 
 [node name="BigBookCase3" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -258,6 +283,5 @@ position = Vector2(-19, 24)
 
 [node name="DialogueTrigger" parent="Librarian" index="1"]
 Lines = ["Hello dear", "Welcome to our little town library!", "You can learn about the world here", "You can learn about the gods, the  summons, and everything else!"]
-Who = 8
 
 [editable path="Librarian"]

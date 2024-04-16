@@ -1,13 +1,11 @@
-[gd_scene load_steps=69 format=3 uid="uid://c3xalr8g64d1t"]
+[gd_scene load_steps=79 format=3 uid="uid://c3xalr8g64d1t"]
 
 [ext_resource type="Texture2D" uid="uid://dryobx1h7r14w" path="res://environment/tileset2.png" id="1_2nt7k"]
 [ext_resource type="PackedScene" uid="uid://dpstbyal6uhyp" path="res://levels/level_transition.tscn" id="1_8m7yw"]
 [ext_resource type="Texture2D" uid="uid://b7x6ay4f8qio6" path="res://environment/bushA.png" id="2_x0lmx"]
 [ext_resource type="Texture2D" uid="uid://brll1ljnrs4x1" path="res://environment/stoneA.png" id="3_mavkx"]
 [ext_resource type="Texture2D" uid="uid://bsyb1a152l3ut" path="res://environment/mushroomsA.png" id="4_80rf8"]
-[ext_resource type="Script" path="res://levels/Spawner.cs" id="5_3ak24"]
 [ext_resource type="PackedScene" uid="uid://ssxxapiqqnjo" path="res://environment/tree1.tscn" id="5_tp4x7"]
-[ext_resource type="PackedScene" uid="uid://qe4gr8hr6gkt" path="res://characters/monster/monster.tscn" id="6_3fpt1"]
 [ext_resource type="PackedScene" uid="uid://es6qmyql0xh" path="res://environment/velhohuvila.tscn" id="6_j5qbx"]
 [ext_resource type="Texture2D" uid="uid://0jvabwshdiby" path="res://environment/mokkiportaat.png" id="6_rr3ov"]
 [ext_resource type="PackedScene" uid="uid://bqp4cq41kvl7b" path="res://environment/tree2.tscn" id="7_6kl4l"]
@@ -27,7 +25,15 @@
 [ext_resource type="PackedScene" uid="uid://5juhwtj3y1kj" path="res://characters/npc/air_god.tscn" id="15_vje72"]
 [ext_resource type="Texture2D" uid="uid://dq0lgtu8wbv6t" path="res://environment/kyltti2.png" id="19_quahr"]
 [ext_resource type="Texture2D" uid="uid://kvykmlmufgit" path="res://environment/kaivo2.png" id="20_jdre8"]
+[ext_resource type="PackedScene" uid="uid://bgn2cbkmywtdg" path="res://characters/monster/monsterVariants/air_monster_1.tscn" id="27_ehj3h"]
+[ext_resource type="PackedScene" uid="uid://c2l3tvo6jhs5p" path="res://characters/monster/monsterVariants/water_monster_1.tscn" id="27_k54jj"]
 [ext_resource type="Texture2D" uid="uid://1rvykycki0xy" path="res://environment/vesiputous_moment.png" id="28_l01a1"]
+[ext_resource type="PackedScene" uid="uid://ycpraxqq3scx" path="res://characters/monster/monsterVariants/fire_monster_1.tscn" id="29_ruoo1"]
+[ext_resource type="PackedScene" uid="uid://b438h6wcn5iil" path="res://characters/monster/monsterVariants/earth_monster_1.tscn" id="30_f8uuq"]
+[ext_resource type="PackedScene" uid="uid://d16l1000kpg5i" path="res://characters/monster/monsterVariants/earth_monster_2.tscn" id="31_sn2lw"]
+[ext_resource type="PackedScene" uid="uid://cwnbtnmrfyd2u" path="res://characters/monster/monsterVariants/fire_monster_2.tscn" id="32_r7mbr"]
+[ext_resource type="PackedScene" uid="uid://b7g5tjh5lfr04" path="res://characters/monster/monsterVariants/water_monster_2.tscn" id="33_qi1xf"]
+[ext_resource type="PackedScene" uid="uid://bcl15ov6fmq8p" path="res://characters/monster/monsterVariants/air_monster_2.tscn" id="34_ovx32"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6wo1"]
 texture = ExtResource("1_2nt7k")
@@ -1370,6 +1376,35 @@ size = Vector2(20, 6)
 radius = 9.0
 height = 44.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_o32vw"]
+atlas = ExtResource("28_l01a1")
+region = Rect2(0, 0, 198, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrtsp"]
+atlas = ExtResource("28_l01a1")
+region = Rect2(198, 0, 198, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il1gk"]
+atlas = ExtResource("28_l01a1")
+region = Rect2(396, 0, 198, 140)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_njfmp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o32vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrtsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il1gk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
@@ -1379,7 +1414,7 @@ levelName = "res://levels/Library.tscn"
 spawnPointName = "SpawnPoint"
 
 [node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(200, -731)
+position = Vector2(-1357, -463)
 
 [node name="WizardExit" type="Marker2D" parent="."]
 position = Vector2(-1390.42, -589)
@@ -1405,8 +1440,6 @@ layer_1/tile_data = PackedInt32Array(-65539, 327680, 5, -65540, 262144, 1, 65528
 layer_2/name = "EnvObjects"
 layer_2/y_sort_enabled = true
 layer_2/tile_data = PackedInt32Array(-786442, 4, 0, -655365, 4, 0, -589832, 5, 0, -393218, 5, 0, -327677, 5, 0, -917501, 5, 0, -458765, 5, 0, -720906, 3, 0, -786445, 3, 0, -786439, 3, 0, -983040, 3, 0, -327688, 3, 0, -851965, 2, 0, -524297, 2, 0, -589830, 2, 0, -983043, 5, 0, -983041, 5, 0, -1048578, 4, 0, -983044, 4, 0, -917507, 4, 0, -1048574, 4, 0, -1114111, 5, 0, -589829, 1, 0, -327685, 1, 0, -327681, 1, 0, -655362, 1, 0, -262142, 1, 0, -851983, 2, 0, -458772, 2, 0, -1114127, 3, 0, -1048583, 3, 0, -262169, 3, 0, -393238, 3, 0, -720907, 1, 0, -196623, 1, 0, -589821, 1, 0, -458747, 1, 0, -327673, 1, 0, -524290, 2, 0, -655355, 2, 0, -393212, 2, 0, -196610, 2, 0, -262144, 3, 0, -458753, 3, 0, -655351, 3, 0, -458742, 3, 0, -458745, 3, 0, -327670, 3, 0, -262139, 3, 0, -327679, 3, 0, -262136, 2, 0, -1376249, 1, 0, -1376255, 1, 0, -1310723, 1, 0, -1507330, 1, 0, -1769460, 1, 0, -1638386, 1, 0, -1441778, 1, 0, -1114105, 1, 0, -1048567, 1, 0, -1114099, 1, 0, -589815, 1, 0, -262135, 1, 0, -786431, 1, 0, -851969, 1, 0, -1114117, 1, 0, -1048586, 1, 0, -1048589, 1, 0, -1376258, 2, 0, -1310725, 2, 0, -1835009, 2, 0, -1900532, 2, 0, -1769458, 2, 0, -1507313, 2, 0, -1376243, 2, 0, -1376247, 2, 0, -1179649, 2, 0, -1048579, 2, 0, -1245189, 3, 0, -1900533, 3, 0, -1441775, 3, 0, -1376241, 3, 0, -1310708, 3, 0, -1245175, 3, 0, -1048564, 3, 0, -1114098, 3, 0, -786426, 3, 0, -1703935, 1, 0, -1572856, 1, 0, -1703926, 1, 0, -1835007, 3, 0, -1834998, 3, 0, -1507320, 3, 0, -1638390, 3, 0, -1638396, 3, 0, 393179, 1, 0, 458718, 1, 0, 393184, 1, 0, 196575, 1, 0, 196579, 1, 0, 196583, 1, 0, -25, 1, 0, -196630, 1, 0, -327700, 1, 0, 786412, 1, 0, 917489, 1, 0, 917492, 1, 0, 983029, 1, 0, 851961, 1, 0, 917496, 1, 0, 1048569, 1, 0, 786406, 1, 0, 786403, 1, 0, 524255, 1, 0, 851936, 1, 0, 720866, 1, 0, 655333, 1, 0, 720874, 1, 0, 393196, 1, 0, 131049, 1, 0, 393180, 2, 0, 131037, 2, 0, 196577, 2, 0, 327651, 2, 0, 655332, 2, 0, 786405, 2, 0, 786409, 2, 0, 851947, 2, 0, 786414, 2, 0, 983020, 2, 0, 983025, 2, 0, 917487, 2, 0, 983027, 2, 0, 851937, 2, 0, 917469, 2, 0, 983008, 2, 0, 917476, 2, 0, 655327, 2, 0, 196580, 3, 0, 262119, 3, 0, 458729, 3, 0, 589797, 3, 0, 720871, 3, 0, 720875, 3, 0, 917474, 3, 0, 917468, 3, 0, 458715, 3, 0, 65500, 3, 0, 393182, 3, 0, 327648, 3, 0, 786398, 3, 0, 786402, 3, 0, 393212, 1, 0, 262143, 1, 0, -65536, 1, 0, -131077, 1, 0, -65546, 1, 0, 65528, 1, 0, 262129, 1, 0, -65555, 1, 0, 393202, 1, 0, 524274, 1, 0, 524278, 1, 0, 720884, 1, 0, 786416, 1, 0, 786425, 1, 0, 589829, 1, 0, 65545, 1, 0, 196620, 1, 0, 327692, 1, 0, 327688, 1, 0, 589835, 1, 0, 589824, 1, 0, 589817, 1, 0, 262139, 2, 0, 131064, 2, 0, -196614, 2, 0, -131087, 2, 0, -65557, 2, 0, -196631, 2, 0, -327705, 2, 0, -65560, 2, 0, 196582, 2, 0, 393197, 2, 0, 327663, 2, 0, 262130, 2, 0, 393204, 2, 0, 524268, 2, 0, 720881, 2, 0, 720885, 2, 0, 786419, 2, 0, 786424, 2, 0, 655356, 2, 0, 65533, 2, 0, -1, 2, 0, -65532, 2, 0, 131077, 2, 0, 327689, 2, 0, 11, 2, 0, 131086, 2, 0, 393227, 2, 0, 524299, 2, 0, 524294, 2, 0, 655368, 2, 0, 327679, 2, 0, 262137, 3, 0, -9, 3, 0, -65542, 3, 0, 65531, 3, 0, 65521, 3, 0, 589805, 3, 0, 458736, 3, 0, 589812, 3, 0, 458741, 3, 0, 655343, 3, 0, 786420, 3, 0, 720887, 3, 0, 589816, 3, 0, 262147, 3, 0, 196608, 3, 0, -65533, 3, 0, 7, 3, 0, 13, 3, 0, 65550, 3, 0, 262158, 3, 0, 393229, 3, 0, 655371, 3, 0, 589831, 3, 0, 589828, 3, 0, 327686, 3, 0, 589826, 3, 0, 655355, 3, 0, 524285, 3, 0, 393215, 3, 0, 196606, 3, 0, 65538, 3, 0, -1703974, 1, 0, -1638441, 1, 0, -1507375, 1, 0, -1638444, 1, 0, -1376302, 1, 0, -1179695, 1, 0, -983088, 1, 0, -917554, 1, 0, -786482, 1, 0, -655403, 1, 0, -589862, 1, 0, -655399, 1, 0, -983078, 1, 0, -917549, 1, 0, -917537, 1, 0, -655392, 1, 0, -983069, 1, 0, -1245215, 1, 0, -1572895, 1, 0, -1835038, 1, 0, -1835043, 1, 0, -1703971, 1, 0, -1441819, 1, 0, -1572890, 1, 0, -1703958, 1, 0, -1769491, 1, 0, -1507349, 1, 0, -1376275, 1, 0, -1245204, 1, 0, -1245207, 1, 0, -1245210, 1, 0, -1114138, 1, 0, -720920, 1, 0, -917525, 1, 0, -1048593, 1, 0, -851985, 1, 0, -393232, 1, 0, -393239, 1, 0, -1048622, 1, 0, -1245230, 2, 0, -1179691, 2, 0, -852012, 2, 0, -983087, 2, 0, -1507369, 2, 0, -1572909, 2, 0, -1703976, 2, 0, -1703979, 2, 0, -1835045, 2, 0, -1638437, 2, 0, -1572898, 2, 0, -1638429, 2, 0, -1572891, 2, 0, -1441821, 2, 0, -1507352, 2, 0, -1572885, 2, 0, -1441811, 2, 0, -1310737, 2, 0, -1703953, 2, 0, -1703959, 2, 0, -1179669, 2, 0, -1048602, 2, 0, -1179678, 2, 0, -1245212, 2, 0, -1114141, 2, 0, -983072, 2, 0, -655393, 2, 0, -786470, 2, 0, -720937, 2, 0, -393257, 2, 0, -458796, 2, 0, -458786, 2, 0, -393244, 2, 0, -720923, 3, 0, -458770, 2, 0, -458760, 2, 0, -589834, 2, 0, -1245198, 2, 0, -1114147, 3, 0, -1507365, 3, 0, -1572894, 3, 0, -1572888, 3, 0, -1572883, 3, 0, -1245201, 3, 0, -1245203, 3, 0, -1245209, 3, 0, -1310748, 3, 0, -1114143, 3, 0, -1310756, 3, 0, -1572903, 3, 0, -1441839, 3, 0, -1703978, 3, 0, -917553, 3, 0, -655406, 3, 0, -393255, 3, 0, -655400, 3, 0, -720932, 3, 0, -589860, 3, 0, -524320, 3, 0, -917531, 3, 0, -655375, 3, 0, -786458, 2, 0, -1310760, 1, 0, 65498, 1, 0, 589788, 1, 0, 917461, 1, 0, 917466, 1, 0, 720852, 2, 0, 524252, 2, 0, 720860, 2, 0, 917464, 2, 0, 720853, 3, 0, 131030, 3, 0, 327644, 3, 0, 655321, 3, 0, 655318, 3, 0, 589787, 3, 0, 917463, 3, 0, 851925, 3, 0)
-script = ExtResource("5_3ak24")
-SpawnPool = [ExtResource("6_3fpt1")]
 
 [node name="collisions" type="StaticBody2D" parent="."]
 visible = false
@@ -3119,11 +3152,132 @@ position = Vector2(6, -8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_t0vu0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Vesiputous" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-1265, 295)
-texture = ExtResource("28_l01a1")
+sprite_frames = SubResource("SpriteFrames_njfmp")
+autoplay = "default"
+frame_progress = 0.319419
 offset = Vector2(-6.2, -63.955)
+
+[node name="Summonit" type="Node2D" parent="."]
+
+[node name="Monster2" parent="Summonit" instance=ExtResource("27_k54jj")]
+position = Vector2(-993, -728)
+
+[node name="Monster" parent="Summonit" instance=ExtResource("27_ehj3h")]
+position = Vector2(-929, -332)
+
+[node name="Monster" parent="." instance=ExtResource("27_ehj3h")]
+position = Vector2(115, -744)
+
+[node name="Monster2" parent="." instance=ExtResource("27_ehj3h")]
+position = Vector2(243, -619)
+
+[node name="Monster3" parent="." instance=ExtResource("27_ehj3h")]
+position = Vector2(154, -812)
+
+[node name="Monster4" parent="." instance=ExtResource("29_ruoo1")]
+position = Vector2(11, 147)
+
+[node name="Monster5" parent="." instance=ExtResource("29_ruoo1")]
+position = Vector2(-187, 45)
+
+[node name="Monster6" parent="." instance=ExtResource("29_ruoo1")]
+position = Vector2(-180, 226)
+
+[node name="Monster7" parent="." instance=ExtResource("30_f8uuq")]
+position = Vector2(-1152, 311)
+
+[node name="Monster8" parent="." instance=ExtResource("30_f8uuq")]
+position = Vector2(-1119, 170)
+
+[node name="Monster9" parent="." instance=ExtResource("30_f8uuq")]
+position = Vector2(-971, 355)
+
+[node name="Monster10" parent="." instance=ExtResource("31_sn2lw")]
+position = Vector2(-1271, 378)
+
+[node name="Monster11" parent="." instance=ExtResource("30_f8uuq")]
+position = Vector2(-685, 86)
+
+[node name="Monster12" parent="." instance=ExtResource("30_f8uuq")]
+position = Vector2(-548, 30)
+
+[node name="Monster13" parent="." instance=ExtResource("31_sn2lw")]
+position = Vector2(-474, 236)
+
+[node name="Monster14" parent="." instance=ExtResource("32_r7mbr")]
+position = Vector2(115, 35)
+
+[node name="Monster15" parent="." instance=ExtResource("32_r7mbr")]
+position = Vector2(343, 101)
+
+[node name="Monster16" parent="." instance=ExtResource("32_r7mbr")]
+position = Vector2(-356, 237)
+
+[node name="Monster17" parent="." instance=ExtResource("27_k54jj")]
+position = Vector2(102, -142)
+
+[node name="Monster18" parent="." instance=ExtResource("27_k54jj")]
+position = Vector2(-673, 216)
+
+[node name="Monster19" parent="." instance=ExtResource("27_k54jj")]
+position = Vector2(-944, 146)
+
+[node name="Monster20" parent="." instance=ExtResource("27_k54jj")]
+position = Vector2(-143, -255)
+
+[node name="Monster21" parent="." instance=ExtResource("27_k54jj")]
+position = Vector2(-106, -438)
+
+[node name="Monster22" parent="." instance=ExtResource("33_qi1xf")]
+position = Vector2(291, -331)
+
+[node name="Monster23" parent="." instance=ExtResource("33_qi1xf")]
+position = Vector2(452, -731)
+
+[node name="Monster24" parent="." instance=ExtResource("33_qi1xf")]
+position = Vector2(351, -629)
+
+[node name="Monster25" parent="." instance=ExtResource("31_sn2lw")]
+position = Vector2(-882, 391)
+
+[node name="Monster26" parent="." instance=ExtResource("31_sn2lw")]
+position = Vector2(-720, 334)
+
+[node name="Monster27" parent="." instance=ExtResource("34_ovx32")]
+position = Vector2(9, -797)
+
+[node name="Monster28" parent="." instance=ExtResource("34_ovx32")]
+position = Vector2(228, -889)
+
+[node name="Monster29" parent="." instance=ExtResource("27_ehj3h")]
+position = Vector2(68, -573)
+
+[node name="Monster30" parent="." instance=ExtResource("27_ehj3h")]
+position = Vector2(99, -460)
+
+[node name="Monster31" parent="." instance=ExtResource("27_ehj3h")]
+position = Vector2(35, -317)
+
+[node name="Monster32" parent="." instance=ExtResource("29_ruoo1")]
+position = Vector2(-487, 71)
+
+[node name="Monster33" parent="." instance=ExtResource("29_ruoo1")]
+position = Vector2(-883, -521)
+
+[node name="Monster34" parent="." instance=ExtResource("27_k54jj")]
+position = Vector2(-1172, -367)
+
+[node name="Monster35" parent="." instance=ExtResource("30_f8uuq")]
+position = Vector2(-532, -467)
+
+[node name="Monster36" parent="." instance=ExtResource("30_f8uuq")]
+position = Vector2(-673, -158)
+
+[node name="Monster37" parent="." instance=ExtResource("34_ovx32")]
+position = Vector2(333, -738)
 
 [editable path="Kyltti/DialogueTrigger"]
 [editable path="Kyltti2/DialogueTrigger"]
