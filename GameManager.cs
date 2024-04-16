@@ -43,6 +43,9 @@ public partial class GameManager : Node2D {
 	public CanvasLayer ScrollMenu;
 	public GodTrigger CurrentlyFightingGod;
 
+	[Export]
+	public CanvasLayer Credits;
+
 	public void StopAllMusic() {
 		CombatMusic.Stop();
 		EnterCombatMusic.Stop();
@@ -64,6 +67,8 @@ public partial class GameManager : Node2D {
 
 
 	public override void _EnterTree() {
+		Credits.Visible = false;
+
 		var playerNode = GetTree().Root.FindChild("Player", true, false);
 
 		var cardGameLayer = GetTree().Root.GetNode<CanvasLayer>("CardGameLayer");
@@ -211,12 +216,27 @@ public partial class GameManager : Node2D {
 	}
 
 	public void WinGame() {
-		GetNode<DialogueBox>("/root/DialogueBox/DialogueBox").Start(WhoIsSpeaking.Kyltti, new string[] {
+		var dialogue = GetNode<DialogueBox>("/root/DialogueBox/DialogueBox");
+
+		dialogue.DialogueFinished += StartCredits;
+		dialogue.Start(WhoIsSpeaking.Kyltti, new string[] {
 			"Olet viineri.",
 			"I mean",
 			"You win!",
 			"...",
 			"Thanks for playing!"
 		});
+	}
+
+	private void StartCredits() {
+		StopAllMusic();
+		Krediittimusa.Play();
+		Player.StartFadingToBlack();
+
+
+		GetTree().CreateTimer(2.5f).Timeout += () => {
+			Player.FullyFadeOut();
+			Credits.Visible = true;
+		};
 	}
 }

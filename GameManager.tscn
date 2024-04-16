@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://t2q6s7oiiali"]
+[gd_scene load_steps=11 format=3 uid="uid://t2q6s7oiiali"]
 
 [ext_resource type="Script" path="res://GameManager.cs" id="1_212tw"]
 [ext_resource type="PackedScene" uid="uid://bab4b1iwllcyj" path="res://characters/player/player.tscn" id="2_epksi"]
@@ -9,8 +9,9 @@
 [ext_resource type="AudioStream" uid="uid://cxf7yblib3321" path="res://muzak/kirjasto.ogg" id="7_fvhi2"]
 [ext_resource type="AudioStream" uid="uid://bw3ko7e2xanea" path="res://muzak/talobiisi.ogg" id="8_bukpp"]
 [ext_resource type="PackedScene" uid="uid://bojovm4xmfj8y" path="res://ui/scrolls.tscn" id="9_gdxop"]
+[ext_resource type="Texture2D" uid="uid://pugqiq0xnyh0" path="res://ui/LD55gredits.png" id="10_mp1rf"]
 
-[node name="GameManager" type="Node2D" node_paths=PackedStringArray("CombatMusic", "EnterCombatMusic", "ExplocationMusic", "Kirjastomusa", "Krediittimusa", "ScrollMenu")]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("CombatMusic", "EnterCombatMusic", "ExplocationMusic", "Kirjastomusa", "Krediittimusa", "ScrollMenu", "Credits")]
 script = ExtResource("1_212tw")
 PlayerTemplate = ExtResource("2_epksi")
 playerDeck = [ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l"), ExtResource("3_fsk1l")]
@@ -20,6 +21,7 @@ ExplocationMusic = NodePath("ExplorationMusic")
 Kirjastomusa = NodePath("Kirjastomusa")
 Krediittimusa = NodePath("Krediittimusa")
 ScrollMenu = NodePath("Scrolls")
+Credits = NodePath("Credits")
 
 [node name="EnterCombat" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_tx6kx")
@@ -45,3 +47,22 @@ bus = &"Music"
 visible = false
 
 [node name="ScrollMenu" parent="Scrolls" instance=ExtResource("9_gdxop")]
+
+[node name="Credits" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Credits"]
+offset_left = -4282.0
+offset_top = -4472.0
+offset_right = 5952.0
+offset_bottom = 3380.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Credits"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_mp1rf")
+expand_mode = 2
+stretch_mode = 5
