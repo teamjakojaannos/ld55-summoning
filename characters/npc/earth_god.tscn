@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bauor3cyiwu6i"]
+[gd_scene load_steps=12 format=3 uid="uid://bauor3cyiwu6i"]
 
 [ext_resource type="Script" path="res://characters/npc/GodTrigger.cs" id="1_adcii"]
 [ext_resource type="Texture2D" uid="uid://dybh08k3amvgw" path="res://characters/npc/earthgodidle.png" id="1_mwdt5"]
 [ext_resource type="PackedScene" uid="uid://cr8gkgetd02cc" path="res://characters/npc/dialogue_trigger.tscn" id="2_6wvjt"]
+[ext_resource type="Resource" uid="uid://dok5kh46u2bqv" path="res://cardgame/godCards/g_e1.tres" id="4_3uimy"]
 [ext_resource type="PackedScene" uid="uid://cj3dl1qo4yw3w" path="res://characters/monster/encounter_trigger.tscn" id="4_dkln8"]
+[ext_resource type="Resource" uid="uid://bdfe7748rp37m" path="res://cardgame/godCards/g_e2.tres" id="5_i06a3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejnlc"]
 atlas = ExtResource("1_mwdt5")
@@ -64,6 +66,8 @@ Who = 4
 position = Vector2(0, 8)
 collision_layer = 0
 collision_mask = 0
+MaxHp = 40
+cards = [ExtResource("4_3uimy"), ExtResource("4_3uimy"), ExtResource("4_3uimy"), ExtResource("4_3uimy"), ExtResource("5_i06a3"), ExtResource("5_i06a3"), ExtResource("5_i06a3")]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="EncounterTrigger"]
 y_sort_enabled = true
