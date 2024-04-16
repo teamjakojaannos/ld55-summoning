@@ -255,7 +255,7 @@ public partial class Player : CharacterBody2D {
 
 					GD.Print($"Won god {god.PreCombatDialogue.Who}");
 					gameManager.CurrentlyFightingGod = null;
-					if (gameManager.godsBeaten.Count >= 1) {
+					if (gameManager.godsBeaten.Count >= 4) {
 						gameManager.WinGame();
 					}
 				} else {
