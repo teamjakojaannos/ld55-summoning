@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://GameManager.cs" id="1_212tw"]
 [ext_resource type="PackedScene" uid="uid://bab4b1iwllcyj" path="res://characters/player/player.tscn" id="2_epksi"]
-[ext_resource type="Resource" path="res://cardgame/playerCards/p_w1.tres" id="3_fsk1l"]
+[ext_resource type="Resource" uid="uid://cpr7nq7h3u582" path="res://cardgame/playerCards/p_w1.tres" id="3_fsk1l"]
 [ext_resource type="AudioStream" uid="uid://6xjllywvyi6x" path="res://muzak/combattiin.ogg" id="4_tx6kx"]
 [ext_resource type="AudioStream" uid="uid://dtedtwvte6lta" path="res://muzak/seikkailufinal.ogg" id="5_lrak4"]
 [ext_resource type="AudioStream" uid="uid://ccvf00o4chq6g" path="res://muzak/combatjytafinal.ogg" id="6_iut85"]
@@ -49,6 +49,7 @@ visible = false
 [node name="ScrollMenu" parent="Scrolls" instance=ExtResource("9_gdxop")]
 
 [node name="Credits" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Credits"]
 offset_left = -4282.0
